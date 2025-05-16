@@ -1,19 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.iftm.sistemanossolar.model.pessoa;
 
-/**
- *
- * @author jhonn
- */
+import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
+
 public abstract class Pessoa {
     private String nome;
     private String telefone;
     private Tipo tipo;
     private String email;
-    private String identificacao = null;
+    private String identificacao;
+    private Endereco endereco;
 
     public Pessoa(String nome, String telefone, Tipo tipo) {
         this.nome = nome;
@@ -52,6 +47,21 @@ public abstract class Pessoa {
     public void setIdentificacao(String identificacao) {
         this.identificacao = identificacao;
     }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
     
-    
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
 }
