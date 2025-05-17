@@ -6,6 +6,7 @@ public abstract class Pessoa {
     private String nome;
     private String telefone;
     private TipoPessoa tipoPessoa;
+    private TipoPessoa tipoPessoa;
     private String email;
     private String identificacao;
     private Endereco endereco;
