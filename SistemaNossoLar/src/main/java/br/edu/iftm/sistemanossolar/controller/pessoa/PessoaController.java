@@ -10,4 +10,5 @@ public class PessoaController {
     public boolean cadastrarCliente(Cliente cliente, Tipo tipo){
         return pessoaDAO.cadastrarCliente(cliente, tipo);
     }
+
 }
