@@ -7,14 +7,28 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
 public class Pedido {
     private Cliente cliente;
     private Integer quantMarmita;
-    private boolean status;
+    private StatusPedido status;
     private String observacao;
+    private LocalDate dataPedido;
     private LocalDate dataEntrega;
 
-    public Pedido(Cliente cliente, Integer quantMarmita, boolean status) {
+    public Pedido(Cliente cliente, Integer quantMarmita, StatusPedido status, LocalDate dataPedido) {
         this.cliente = cliente;
         this.quantMarmita = quantMarmita;
-        this.status = false;
+        this.status = status;
+        this.dataPedido = dataPedido;
+    }
+
+    public enum StatusPedido {
+        PENDENTE, FINALIZADO, CANCELADO;
+        public static StatusPedido fromString(String status) {
+            for (StatusPedido s : StatusPedido.values()) {
+                if (s.name().equalsIgnoreCase(status)) {
+                    return s;
+                }
+            }
+            throw new IllegalArgumentException("Status inválido: " + status);
+        }
     }
 
     public Cliente getCliente() {
@@ -33,11 +47,11 @@ public class Pedido {
         this.quantMarmita = quantMarmita;
     }
 
-    public boolean isStatus() {
+    public StatusPedido getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(StatusPedido status) {
         this.status = status;
     }
 
@@ -47,6 +61,14 @@ public class Pedido {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public LocalDate getDataPedido() {
+        return dataPedido;
+    }
+    
+    public void setDataPedido(LocalDate dataPedido) {
+        this.dataPedido = dataPedido;
     }
 
     public LocalDate getDataEntrega() {

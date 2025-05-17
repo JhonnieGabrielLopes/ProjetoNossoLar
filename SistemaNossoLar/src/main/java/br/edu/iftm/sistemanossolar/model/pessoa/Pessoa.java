@@ -9,11 +9,17 @@ public abstract class Pessoa {
     private String email;
     private String identificacao;
     private Endereco endereco;
+    private String observacao;
 
     public Pessoa(String nome, String telefone, Endereco endereco) {
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
+    }
+    
+    public Pessoa(String nome, String telefone) {
+        this.nome = nome;
+        this.telefone = telefone;
     }
 
     public enum TipoPessoa {
@@ -71,5 +77,13 @@ public abstract class Pessoa {
 
     public TipoPessoa getTipoPessoa() {
         return tipoPessoa;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 }
