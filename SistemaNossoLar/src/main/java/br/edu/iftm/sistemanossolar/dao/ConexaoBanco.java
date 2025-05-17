@@ -23,7 +23,7 @@ public class ConexaoBanco {
             PASSWORD = login.getProperty("db.password");
             
         } catch (Exception e) {
-            throw new RuntimeException("Erro! Não foi possivel obter os dados para conexão ao Banco de Dados", e);
+            throw new RuntimeException("Erro! Não foi possivel obter os dados para conexão ao Banco de Dados\n", e);
         }
     }
 
@@ -32,7 +32,7 @@ public class ConexaoBanco {
             System.out.println("Conectando ao Banco de Dados...");
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
-            throw new RuntimeException("Erro! Não foi possivel se conectar ao Banco de Dados", e);
+            throw new RuntimeException("Erro! Não foi possivel se conectar ao Banco de Dados\n", e);
         }
     } 
 

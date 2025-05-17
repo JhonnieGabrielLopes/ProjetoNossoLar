@@ -10,9 +10,11 @@
         <maven.compiler.release>23</maven.compiler.release>
         <exec.mainClass>br.edu.iftm.sistemanossolar.SistemaNossoLar</exec.mainClass>
     </properties>
-    <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>9.3.0</version>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    </dependencies>
 </project>
