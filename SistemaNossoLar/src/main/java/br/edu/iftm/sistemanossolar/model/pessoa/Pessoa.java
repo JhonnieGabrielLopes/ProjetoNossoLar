@@ -5,15 +5,28 @@ import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 public abstract class Pessoa {
     private String nome;
     private String telefone;
-    private Tipo tipo;
+    private TipoPessoa tipoPessoa;
     private String email;
     private String identificacao;
     private Endereco endereco;
 
-    public Pessoa(String nome, String telefone, Tipo tipo) {
+    public Pessoa(String nome, String telefone, Endereco endereco) {
         this.nome = nome;
         this.telefone = telefone;
-        this.tipo = tipo;
+        this.endereco = endereco;
+    }
+
+    public enum TipoPessoa {
+        FISICA,
+        JURIDICA;
+        public static TipoPessoa fromString(String var) {
+            if (var==null)return null;
+            try {
+                return TipoPessoa.valueOf(var.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
     }
 
     public String getNome() {
@@ -47,14 +60,6 @@ public abstract class Pessoa {
     public void setIdentificacao(String identificacao) {
         this.identificacao = identificacao;
     }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
     
     public Endereco getEndereco() {
         return endereco;
@@ -64,4 +69,7 @@ public abstract class Pessoa {
         this.endereco = endereco;
     }
 
+    public TipoPessoa getTipoPessoa() {
+        return tipoPessoa;
+    }
 }
