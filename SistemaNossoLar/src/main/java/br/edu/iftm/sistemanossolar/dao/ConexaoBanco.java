@@ -35,5 +35,4 @@ public class ConexaoBanco {
             throw new RuntimeException("Erro! Não foi possivel se conectar ao Banco de Dados\n", e);
         }
     } 
-
 }
