@@ -20,7 +20,9 @@ public class Pedido {
     }
 
     public enum StatusPedido {
-        PENDENTE, FINALIZADO, CANCELADO;
+        PENDENTE, 
+        FINALIZADO, 
+        CANCELADO;
         public static StatusPedido fromString(String status) {
             for (StatusPedido s : StatusPedido.values()) {
                 if (s.name().equalsIgnoreCase(status)) {
@@ -66,7 +68,7 @@ public class Pedido {
     public LocalDate getDataPedido() {
         return dataPedido;
     }
-    
+
     public void setDataPedido(LocalDate dataPedido) {
         this.dataPedido = dataPedido;
     }
