@@ -34,6 +34,6 @@ public class ConexaoBanco {
         } catch (SQLException e) {
             throw new RuntimeException("Erro! Não foi possivel se conectar ao Banco de Dados", e);
         }
-    }
+    } 
 
 }
