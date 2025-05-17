@@ -3,7 +3,7 @@ package br.edu.iftm.sistemanossolar;
 import java.sql.Connection;
 import java.util.Scanner;
 
-import br.edu.iftm.sistemanossolar.controller.PessoaController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.dao.ConexaoBanco;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;

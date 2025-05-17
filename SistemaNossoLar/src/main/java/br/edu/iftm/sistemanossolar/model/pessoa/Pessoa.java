@@ -60,7 +60,7 @@ public abstract class Pessoa {
     public void setIdentificacao(String identificacao) {
         this.identificacao = identificacao;
     }
-
+    
     public Endereco getEndereco() {
         return endereco;
     }

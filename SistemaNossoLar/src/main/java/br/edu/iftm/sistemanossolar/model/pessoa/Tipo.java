@@ -10,4 +10,4 @@ public class Tipo {
     public String getDescricao() {
         return descricao;
     }
-    }
+}
