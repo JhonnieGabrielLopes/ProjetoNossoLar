@@ -62,7 +62,7 @@ public class SistemaNossoLar {
                 Cliente cliente = new Cliente(nomeCliente, telefone, endereco, nomePaciente, dias);
                 Tipo tipo = new Tipo("Cliente");
                 
-                if (pessoaController.cadastrarCliente(cliente, tipo)) {
+                if (pessoaController.cadastrarPessoa(cliente, tipo)) {
                     System.out.println("Cliente cadastrado com sucesso!");
                 }else {
                     System.out.println("Erro ao cadastrar cliente.");
