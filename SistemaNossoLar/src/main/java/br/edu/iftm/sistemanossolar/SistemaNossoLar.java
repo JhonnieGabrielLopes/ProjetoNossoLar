@@ -1,4 +1,4 @@
-package br.edu.iftm.sistemanossolar.view;
+package br.edu.iftm.sistemanossolar;
 
 import java.sql.Connection;
 

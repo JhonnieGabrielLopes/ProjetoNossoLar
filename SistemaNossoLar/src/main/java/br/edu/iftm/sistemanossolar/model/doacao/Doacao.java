@@ -2,8 +2,8 @@ package br.edu.iftm.sistemanossolar.model.doacao;
 
 import java.time.LocalDate;
 
+import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
-import br.edu.iftm.sistemanossolar.model.pessoa.doador.Doador;
 
 public class Doacao {
     private Doador doador;

@@ -1,7 +1,4 @@
-package br.edu.iftm.sistemanossolar.model.pessoa.cliente;
-
-import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
+package br.edu.iftm.sistemanossolar.model.pessoa;
 
 public class Cliente extends Pessoa {
     private String paciente;

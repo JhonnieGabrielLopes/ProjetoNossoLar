@@ -2,7 +2,7 @@ package br.edu.iftm.sistemanossolar.model.pedido;
 
 import java.time.LocalDate;
 
-import br.edu.iftm.sistemanossolar.model.pessoa.cliente.Cliente;
+import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
 
 public class Pedido {
     private Cliente cliente;
