@@ -3,7 +3,7 @@ package br.edu.iftm.sistemanossolar;
 import java.sql.Connection;
 import java.util.Scanner;
 
-import br.edu.iftm.sistemanossolar.dao.ConexaoBanco;
+import br.edu.iftm.sistemanossolar.dao.ConexaoDAO;
 
 import br.edu.iftm.sistemanossolar.view.Metodos;
 
@@ -16,7 +16,7 @@ public class SistemaNossoLar {
 
     public static void main(String[] args) {
         System.out.println("\n[" + AZUL + "INF" + RESET + "] SistemaNossoLar | main - Iniciando sistema...");
-        try (Connection conexao = ConexaoBanco.getConnection()) {
+        try (Connection conexao = ConexaoDAO.getConnection()) {
             System.out.println("[" + VERDE + "INF" + RESET + "] SistemaNossoLar | main - Conexão estabelecida com o Banco de Dados");
             Metodos metodos = new Metodos(conexao);
             boolean controle = true;

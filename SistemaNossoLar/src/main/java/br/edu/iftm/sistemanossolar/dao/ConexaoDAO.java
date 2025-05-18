@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.io.InputStream;
 
-public class ConexaoBanco {
+public class ConexaoDAO {
     public static final String RESET = "\u001B[0m";
     public static final String VERMELHO = "\u001B[31m";
     public static final String AMARELO = "\u001B[33m";
@@ -17,7 +17,7 @@ public class ConexaoBanco {
     private static Connection conexao;
 
     static {
-        try (InputStream dados = ConexaoBanco.class
+        try (InputStream dados = ConexaoDAO.class
                 .getClassLoader()
                 .getResourceAsStream("config.properties")) {
 
