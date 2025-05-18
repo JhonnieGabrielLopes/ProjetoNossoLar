@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.iftm.sistemanossolar.dao.endereco.CidadeDAO;
 import br.edu.iftm.sistemanossolar.dao.endereco.EnderecoDAO;
 
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
+import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
@@ -132,4 +135,57 @@ public class PessoaDAO {
         }
     }
 
+    public Pessoa buscarPessoaPorId(int id) {
+        String sql = "SELECT * FROM usuario WHERE id = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("assistido") != null) {
+                    return new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("telefone")
+                    );
+                } else {
+                    return new Doador(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("telefone")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Pessoa> listarPessoas() {
+        List<Pessoa> pessoas = new ArrayList<>();
+        String sql = "SELECT * FROM usuario";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("assistido") != null) {
+                    Cliente cliente = new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("telefone")
+                    );
+                    pessoas.add(cliente);
+                } else {
+                    Doador doador = new Doador(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("telefone")
+                    );
+                    pessoas.add(doador);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pessoas;
+    }
 }
