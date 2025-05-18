@@ -10,6 +10,7 @@ public class ConexaoBanco {
     private static String URL;
     private static String USER;
     private static String PASSWORD;
+    private static Connection conexao;
 
     static {
         try (InputStream dados = ConexaoBanco.class
@@ -23,16 +24,16 @@ public class ConexaoBanco {
             PASSWORD = login.getProperty("db.password");
             
         } catch (Exception e) {
-            throw new RuntimeException("Erro! Não foi possivel obter os dados para conexão ao Banco de Dados\n", e);
+            throw new RuntimeException("[ERR] ConexaoBanco | getConnection - Não foi possivel obter os dados para conectar no Banco de Dados\n", e);
         }
     }
 
-    public static Connection getConnection() {
-        try {
-            System.out.println("Conectando ao Banco de Dados...");
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro! Não foi possivel se conectar ao Banco de Dados\n", e);
+    public static synchronized Connection getConnection() throws SQLException {
+        if (conexao == null || conexao.isClosed()) {
+            System.out.println("[ALR] ConexaoBanco | getConnection - Conectando ao Banco de Dados...");
+            conexao = DriverManager.getConnection(URL, USER, PASSWORD);
         }
-    } 
+        return conexao;
+    }
+
 }

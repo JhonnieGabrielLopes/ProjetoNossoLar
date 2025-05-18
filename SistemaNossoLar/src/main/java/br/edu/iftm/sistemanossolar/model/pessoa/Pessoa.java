@@ -25,13 +25,17 @@ public abstract class Pessoa {
     public enum TipoPessoa {
         FISICA,
         JURIDICA;
-        public static TipoPessoa fromString(String var) {
-            if (var==null)return null;
+        public static TipoPessoa fromString(String opcao) {
+
+            if (opcao==null) return null;
+
             try {
-                return TipoPessoa.valueOf(var.toUpperCase());
+                return TipoPessoa.valueOf(opcao.toUpperCase());
+
             } catch (IllegalArgumentException e) {
                 return null;
             }
+
         }
     }
 
@@ -77,6 +81,10 @@ public abstract class Pessoa {
 
     public TipoPessoa getTipoPessoa() {
         return tipoPessoa;
+    }
+
+    public void setTipoPessoa(TipoPessoa tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
     }
 
     public String getObservacao() {

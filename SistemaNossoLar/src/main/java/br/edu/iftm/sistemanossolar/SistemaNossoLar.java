@@ -3,135 +3,76 @@ package br.edu.iftm.sistemanossolar;
 import java.sql.Connection;
 import java.util.Scanner;
 
-import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
-import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
-import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.dao.ConexaoBanco;
-import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
-import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
-import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
+
+import br.edu.iftm.sistemanossolar.view.Metodos;
 
 public class SistemaNossoLar {
-    private static PessoaController pessoaController = new PessoaController();
-    private static EnderecoController enderecoController = new EnderecoController();
-    private static CidadeController cidadeController = new CidadeController();
-
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello World!");
-        Connection conn = ConexaoBanco.getConnection();
-        if (conn != null) {
-            System.out.println("Conexão estabelecida com sucesso!");
-        } else {
-            System.out.println("Falha ao estabelecer conexão.");
-        }
+        try (Connection conexao = ConexaoBanco.getConnection()) {
+            Metodos metodos = new Metodos(conexao);
+            boolean controle = true;
+            Scanner scan = new Scanner(System.in);
 
-        System.out.println("Selecione uma opção:");
-        System.out.println("1 - Cadastrar cliente");
-        System.out.println("2 - Cadastrar endereço");
-        System.out.println("3 - Cadastrar cidade");
+            do {
+                metodos.menuPrincipal();
+                int opcao = scan.nextInt();
+                scan.nextLine();
 
-        int opcao = in.nextInt();
-        in.nextLine();
+                switch (opcao) {
+                    case 1:
+                        System.out.println("[ALR] SistemaNossoLar | main - Cadastro de usuario");
 
-        switch (opcao) {
-            case 1:
-                System.out.println("Cadastrar cliente");
-                System.out.println("Digite o nome do cliente:");
-                String nomeCliente = in.nextLine();
+                        if (metodos.cadastrarUsuario(scan)) {
+                            System.out.println("[ALR] SistemaNossoLar | main - Usuário cadastrado");
+                        } else {
+                            System.out.println("[ALR] SistemaNossoLar | main - Usuário não cadastrado");
+                        }
 
-                System.out.println("Digite o telefone do cliente:");
-                String telefone = in.nextLine();
+                        controle = false;
+                        break;
 
-                System.out.println("Digite o nome do paciente:");
-                String nomePaciente = in.nextLine();
+                    case 2:
+                        System.out.println("[ALR] SistemaNossoLar | main - Cadastro de endereço");
 
-                System.out.println("Digite a previsão de dias:");
-                int dias = in.nextInt();
-                in.nextLine();
+                        if (metodos.cadastrarEndereco(scan)) {
+                            System.out.println("[ALR] SistemaNossoLar | main - Endereço cadastrado");
+                        } else {
+                            System.out.println("[ALR] SistemaNossoLar | main - Endereço não cadastrado");
 
-                System.out.println("Digite o nome da cidade:");
-                String cidade = in.nextLine();
+                        }
 
-                System.out.println("Digite o estado da cidade:");
-                String uf = in.nextLine();
+                        controle = false;
+                        break;
 
-                Cidade cidadeObj = new Cidade(cidade, uf);
-                Endereco endereco = new Endereco(cidadeObj);
-                Cliente cliente = new Cliente(nomeCliente, telefone, endereco, nomePaciente, dias);
-                Tipo tipo = new Tipo("Cliente");
-                
-                if (pessoaController.cadastrarPessoa(cliente, tipo)) {
-                    System.out.println("Cliente cadastrado com sucesso!");
-                }else {
-                    System.out.println("Erro ao cadastrar cliente.");
+                    case 3:
+                        System.out.println("[ALR] SistemaNossoLar | main - Cadastro de cidade");
+
+                        if (metodos.cadastrarCidade(scan)) {
+                            System.out.println("[ALR] SistemaNossoLar | main - Cidade cadastrada");
+                        } else {
+                            System.out.println("[ALR] SistemaNossoLar | main - Cidade não cadastrada");
+                        }
+
+                        controle = false;
+                        break;
+
+                    case 4:
+                        System.out.println("[ALR] SistemaNossoLar | main - Fechando sistema");
+                        controle = true;
+                        break;
+
+                    default:
+                        controle = false;
+                        System.out.println("[ALR] SistemaNossoLar | main - Opção inválida.");
+                        break;
                 }
+            } while (!controle);
 
-                break;
-            case 2:
-                System.out.println("Cadastrar endereço");
-                System.out.println("Digite o CEP:");
-                String cep = in.nextLine();
-
-                System.out.println("Digite o nome da cidade:");
-                String nomeCidade = in.nextLine();
-
-                System.out.println("Digite o estado da cidade:");
-                String estado = in.nextLine();
-
-                Cidade cidadeTemp = new Cidade(nomeCidade, estado);
-
-                System.out.println("Digite o nome da rua:");
-                String rua = in.nextLine();
-
-                System.out.println("Digite o número:");
-                int numero = in.nextInt();
-                in.nextLine();
-
-                System.out.println("Digite o bairro:");
-                String bairro = in.nextLine();
-
-                System.out.println("Digite o complemento:");
-                String complemento = in.nextLine();
-
-                Endereco novoEndereco = new Endereco(rua, numero, bairro, cep, complemento, cidadeTemp);
-
-                if (enderecoController.cadastrarEndereco(novoEndereco, cidadeTemp)) {
-                    System.out.println("Endereço cadastrado com sucesso!");
-                } else {
-                    System.out.println("Erro ao cadastrar endereço.");
-                }
-
-                break;
-            case 3:
-                System.out.println("Cadastrar cidade");
-                System.out.println("Digite o nome da cidade:");
-                String nomeCidadeCadastro = in.nextLine();
-
-                System.out.println("Digite o estado da cidade:");
-                String estadoCadastro = in.nextLine();
-
-                Cidade novaCidade = new Cidade(nomeCidadeCadastro, estadoCadastro);
-                
-                if (cidadeController.existeCidade(novaCidade)) {
-                    System.out.println("Cidade já cadastrada.");
-                    break;
-                } else {
-                    cidadeController.cadastrarCidade(novaCidade);
-                }
-
-                break;
-            default:
-                System.out.println("Opção inválida.");
-                break;
-        }
-
-        in.close();
-        try {
-            conn.close();
         } catch (Exception e) {
+            System.err.println("[ERR] SistemaNossoLar | main - Erro na conexão com o Banco de Dados.");
             e.printStackTrace();
         }
     }
+
 }
