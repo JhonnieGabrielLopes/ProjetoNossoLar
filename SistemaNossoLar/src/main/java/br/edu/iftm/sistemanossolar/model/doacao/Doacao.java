@@ -1,13 +1,14 @@
 package br.edu.iftm.sistemanossolar.model.doacao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 public class Doacao {
     private Doador doador;
-    private Produto produto;
+    private List<Produto> produto;
     private Tipo tipo;
     private LocalDate dataDoacao;
     private String observacao;
@@ -28,11 +29,11 @@ public class Doacao {
         this.doador = doador;
     }
 
-    public Produto getProduto() {
+    public List<Produto> getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(List<Produto> produto) {
         this.produto = produto;
     }
 
