@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 
 public class PedidoDAO {
+    public static final String RESET = "\u001B[0m";
+    public static final String VERMELHO = "\u001B[31m";
+    public static final String AMARELO = "\u001B[33m";
+
     private final Connection conexaoBanco;
 
     public PedidoDAO(Connection conexao) {
@@ -13,9 +17,9 @@ public class PedidoDAO {
     }
 
     public boolean cadastrarPedido(Pedido pedido) {
-        System.out.println("[ALR] PedidoDAO | cadastrarPedido - Cadastrando pedido");
+        System.out.println("[" + AMARELO + "ALR" + RESET + "] PedidoDAO | cadastrarPedido - Cadastrando pedido");
         String sql = "INSERT INTO pedido (pessoa, quantidade, status, observacao, dataPedido, dataEntrega) VALUES (?, ?, ?, ?, ?, ?)";
-        
+
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setInt(1, pedido.getCliente().getId());
             stmt.setInt(2, pedido.getQuantMarmita());
@@ -24,11 +28,11 @@ public class PedidoDAO {
             stmt.setDate(5, java.sql.Date.valueOf(pedido.getDataPedido()));
             stmt.setDate(6, java.sql.Date.valueOf(pedido.getDataEntrega()));
             stmt.executeUpdate();
-            System.out.println("[ALR] PedidoDAO | cadastrarPedido - Pedido cadastrado");
+            System.out.println("[" + AMARELO + "ALR" + RESET + "] PedidoDAO | cadastrarPedido - Pedido cadastrado");
             return true;
 
         } catch (Exception e) {
-            System.out.println("[ERR] PedidoDAO | cadastrarPedido - Pedido não cadastrado");
+            System.out.println("[" + VERMELHO + "ERR" + RESET + "] PedidoDAO | cadastrarPedido - Pedido não cadastrado");
             e.printStackTrace();
             return false;
         }

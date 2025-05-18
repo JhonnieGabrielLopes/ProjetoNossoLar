@@ -15,6 +15,10 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 public class PessoaDAO {
+    public static final String RESET = "\u001B[0m";
+    public static final String VERMELHO = "\u001B[31m";
+    public static final String AMARELO = "\u001B[33m";
+
     private final Connection conexaoBanco;
     private static CidadeDAO cidadeDAO;
     private static EnderecoDAO enderecoDAO;
@@ -27,18 +31,26 @@ public class PessoaDAO {
         tipoDAO = new TipoDAO(conexao);
     }
 
-    public boolean cadastrarPessoa(Pessoa pessoa, Tipo tipo) throws SQLException  {
-        System.out.println("[ALR] PessoaDAO | cadastrarPessoa - Iniciando cadastro do Usuario");
-        
+    public boolean cadastrarPessoa(Pessoa pessoa, Tipo tipo) throws SQLException {
+        System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Iniciando cadastro do Usuario");
+
         Cidade cidadeTemp = pessoa.getEndereco().getCidade();
 
         if (!cidadeDAO.existeCidade(cidadeTemp)) {
-            cidadeDAO.cadastrarCidade(cidadeTemp);
+            cidadeDAO.cadastrarCidade(cidadeTemp);    
         }
 
         Integer idCidade = cidadeDAO.buscarIdCidade(cidadeTemp);
         Integer idEndereco = enderecoDAO.buscarIdEndereco(idCidade);
-        Integer idTipo = tipoDAO.buscarIdTipo(tipo.getDescricao());
+
+        Integer idTipo = null;
+        if (!tipoDAO.existeTipo(tipo.getDescricao())) {
+            tipoDAO.cadastrarTipo(
+                    tipo.getDescricao().substring(0, 1).toUpperCase() + tipo.getDescricao().substring(1).toLowerCase());
+            idTipo = tipoDAO.buscarIdTipo(tipo.getDescricao());
+        } else {
+            idTipo = tipoDAO.buscarIdTipo(tipo.getDescricao());
+        }
 
         String sql = "INSERT INTO usuario (nome, telefone, endereco, assistido, previsaoQtdDias, tipoPessoa, email, identificacao, observacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -79,43 +91,42 @@ public class PessoaDAO {
                 stmt.setNull(9, Types.VARCHAR);
             }
             stmt.executeUpdate();
-            System.out.println("[ALR] PessoaDAO | cadastrarPessoa - Usuario cadastrado");
+            System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Usuario cadastrado");
 
-            System.out.println("[ALR] PessoaDAO | cadastrarPessoa - Obtendo ID do Usuario");
+            System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Obtendo ID do Usuario");
             Integer idUsu = null;
             try (ResultSet rs = stmt.getGeneratedKeys()) {
 
                 if (rs.next()) {
-                    System.out.println("[ALR] PessoaDAO | cadastrarPessoa - ID do usuário obtido");
+                    System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - ID do usuário obtido");
                     idUsu = rs.getInt(1);
                 } else {
-                    System.out.println("[ALR] PessoaDAO | cadastrarPessoa - ID do usuário não obtido");
+                    System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - ID do usuário não obtido");
                 }
             } catch (SQLException e) {
-                System.out.println("[ERR] PessoaDAO | cadastrarPessoa - Erro ao obter ID do usuário");
+                System.out.println("[" + VERMELHO + "ERR" + RESET + "] PessoaDAO | cadastrarPessoa - Erro ao obter ID do usuário");
                 e.getMessage();
             }
 
-            System.out.println("[ALR] PessoaDAO | cadastrarPessoa - Cadastrando relação Tipo/Usuario");
-            if (idUsu!=null) { 
+            System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Cadastrando relação Tipo/Usuario");
+            if (idUsu != null) {
 
                 sql = "INSERT INTO usuariotipo (usuario, tipoUsuario) VALUES (?, ?)";
                 try (PreparedStatement stmtUserTipo = conexaoBanco.prepareStatement(sql)) {
                     stmtUserTipo.setInt(1, idUsu);
                     stmtUserTipo.setInt(2, idTipo);
                     stmtUserTipo.executeUpdate();
-                    System.out.println("[ALR] PessoaDAO | cadastrarPessoa - Relação Tipo/Usuario cadastrada");
-                }
-                catch (SQLException e) {
-                    System.out.println("[ERR] PessoaDAO | cadastrarPessoa - Erro ao cadastrar relação Tipo/Usuario");
+                    System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Relação Tipo/Usuario cadastrada");
+                } catch (SQLException e) {
+                    System.out.println("[" + VERMELHO + "ERR" + RESET + "] PessoaDAO | cadastrarPessoa - Erro ao cadastrar relação Tipo/Usuario");
                     e.getMessage();
                 }
             }
 
             return true;
-            
+
         } catch (Exception e) {
-            System.out.println("[ERR] PessoaDAO | cadastrarPessoa - Usuario ou Relação Tipo/Usuario não cadastrada");
+            System.out.println("[" + VERMELHO + "ERR" + RESET + "] PessoaDAO | cadastrarPessoa - Usuario ou Relação Tipo/Usuario não cadastrada");
             e.printStackTrace();
             return false;
         }

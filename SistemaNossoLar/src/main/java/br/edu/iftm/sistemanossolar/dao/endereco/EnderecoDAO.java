@@ -9,6 +9,10 @@ import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 
 public class EnderecoDAO {
+    public static final String RESET = "\u001B[0m";
+    public static final String VERMELHO = "\u001B[31m";
+    public static final String AMARELO = "\u001B[33m";
+    
     private final Connection conexaoBanco;
     private CidadeDAO cidadeDAO;
 
@@ -18,9 +22,12 @@ public class EnderecoDAO {
     }
 
     public boolean cadastrarEndereco(Endereco endereco, Cidade cidadeTemp) throws SQLException {
-        System.out.println("[ALR] EnderecoDAO | cadastrarEndereco - Iniciando cadastro do endereço");
+        System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | cadastrarEndereco - Iniciando cadastro do endereço");
 
-        cidadeDAO.cadastrarCidade(cidadeTemp);
+        if (!cidadeDAO.existeCidade(cidadeTemp)) {
+            cidadeDAO.cadastrarCidade(cidadeTemp);
+        }
+
         Integer idCidade = cidadeDAO.buscarIdCidade(cidadeTemp);
     
         String sql = "INSERT INTO endereco (cidade, cep, logradouro, numero, bairro, complemento) VALUES (?, ?, ?, ?, ?, ?)";
@@ -33,18 +40,18 @@ public class EnderecoDAO {
             stmt.setString(5, endereco.getBairro());
             stmt.setString(6, endereco.getComplemento());
             stmt.executeUpdate();
-            System.out.println("[ALR] EnderecoDAO | cadastrarEndereco - Endereço cadastrado");
+            System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | cadastrarEndereco - Endereço cadastrado");
             return true;
 
         } catch (Exception e) {
-            System.out.println("[ERR] EnderecoDAO | cadastrarEndereco - Endereço não cadastrado");
+            System.out.println("[" + VERMELHO + "ERR" + RESET + "] EnderecoDAO | cadastrarEndereco - Endereço não cadastrado");
             e.printStackTrace();
             return false;
         }
     }
 
     public Integer buscarIdEndereco(int idCidade) throws SQLException  {
-        System.out.println("[ALR] EnderecoDAO | buscarIdEndereco - Iniciando busca do ID do endereço");
+        System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarIdEndereco - Iniciando busca do ID do endereço");
 
         String sql = "SELECT id FROM endereco WHERE cidade = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
@@ -52,15 +59,15 @@ public class EnderecoDAO {
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                System.out.println("[ALR] EnderecoDAO | buscarIdEndereco - ID do endereço encontrado.");
+                System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarIdEndereco - ID do endereço encontrado");
                 return rs.getInt("id");
             } else {
-                System.out.println("[ALR] EnderecoDAO | buscarIdEndereco - ID do endereço não encontrado.");
+                System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarIdEndereco - ID do endereço não encontrado");
                 return null;
             }
 
         } catch (Exception e) {
-            System.out.println("[ERR] EnderecoDAO | buscarIdEndereco - Erro ao buscar o ID do endereço.");
+            System.out.println("[" + VERMELHO + "ERR" + RESET + "] EnderecoDAO | buscarIdEndereco - Erro ao buscar o ID do endereço");
             e.printStackTrace();
             return null;
         }

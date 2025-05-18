@@ -71,7 +71,6 @@ public class Metodos {
         String observacao = scan.nextLine();
 
         Cidade cidadeObj = new Cidade(cidade, uf);
-        cidadeController.cadastrarCidade(cidadeObj);
 
         Endereco endereco = new Endereco(cidadeObj);
 
@@ -132,11 +131,15 @@ public class Metodos {
 
         Cidade novaCidade = new Cidade(nomeCidade, estado);
         
-        if (cidadeController.cadastrarCidade(novaCidade)) {
-            return true;
-        } else {
-            return false;
+        if (!cidadeController.existeCidade(novaCidade)) {
+            if (cidadeController.cadastrarCidade(novaCidade)) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        
+        return false;
     }
     
 }
