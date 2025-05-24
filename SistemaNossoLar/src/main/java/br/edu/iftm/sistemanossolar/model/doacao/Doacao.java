@@ -15,6 +15,10 @@ public class Doacao {
     private Double valor;
     private byte[] anexo;
 
+    public Doacao() {
+        
+    }
+
     public Doacao(Doador doador, Tipo tipo, LocalDate dataDoacao) {
         this.doador = doador;
         this.tipo = tipo;

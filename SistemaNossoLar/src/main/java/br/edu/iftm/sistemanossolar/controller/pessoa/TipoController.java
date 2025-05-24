@@ -13,20 +13,21 @@ public class TipoController {
         this.tipoDAO = new TipoDAO(conexao);
     }
 
-    public boolean cadastrarTipo(Tipo tipo)  throws SQLException {
+    public boolean cadastrarTipo(Tipo tipo, String tabela)  throws SQLException {
         String tipoConvert = tipo.getDescricao();
         tipoConvert= tipoConvert.substring(0, 1).toUpperCase() + tipoConvert.substring(1).toLowerCase();
-        return tipoDAO.cadastrarTipo(tipoConvert);
+        return tipoDAO.cadastrarTipo(tipoConvert, tabela);
+
     }
 
-    public boolean existeTipo(String tipo)  throws SQLException {
+    public boolean existeTipo(String tipo, String tabela)  throws SQLException {
         String tipoConvert = tipo.substring(0, 1).toUpperCase() + tipo.substring(1).toLowerCase();
-        return tipoDAO.existeTipo(tipoConvert);
+        return tipoDAO.existeTipo(tipoConvert, tabela);
     }
 
-    public Integer buscarIdTipo(String tipo)  throws SQLException {
+    public Integer buscarIdTipo(String tipo, String tabela)  throws SQLException {
         String tipoConvert = tipo.substring(0, 1).toUpperCase() + tipo.substring(1).toLowerCase();
-        return tipoDAO.buscarIdTipo(tipoConvert);
+        return tipoDAO.buscarIdTipo(tipoConvert, tabela);
     }
     
 }

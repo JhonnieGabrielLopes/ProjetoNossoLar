@@ -1,14 +1,19 @@
 package br.edu.iftm.sistemanossolar.model.doacao;
 
+import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
+
 public class Produto {
     private String nome;
     private Integer quantidade;
-    private String tipo;
+    private Tipo tipo;
 
-    public Produto(String nome, Integer quantidade, String tipo) {
+    public Produto(String nome, Integer quantidade, Tipo tipo) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.tipo = tipo;
+    }
+
+    public Produto() {
     }
 
     public String getNome() {
@@ -27,11 +32,11 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public String getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 
