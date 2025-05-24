@@ -3,6 +3,7 @@ package br.edu.iftm.sistemanossolar.model.pessoa;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 
 public abstract class Pessoa {
+    private int id;
     private String nome;
     private String telefone;
     private TipoPessoa tipoPessoa;
@@ -18,6 +19,12 @@ public abstract class Pessoa {
     }
     
     public Pessoa(String nome, String telefone) {
+        this.nome = nome;
+        this.telefone = telefone;
+    }
+
+    public Pessoa(int id, String nome, String telefone) {
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
     }
@@ -93,5 +100,9 @@ public abstract class Pessoa {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public int getId() {
+        return id;
     }
 }

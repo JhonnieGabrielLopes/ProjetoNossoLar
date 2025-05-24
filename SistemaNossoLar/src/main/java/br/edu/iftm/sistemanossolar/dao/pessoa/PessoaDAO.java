@@ -21,9 +21,6 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PessoaDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
 
     private final Connection conexaoBanco;
     private static CidadeController cidadeController;
@@ -139,7 +136,7 @@ public class PessoaDAO {
         }
     }
 
-    public Pessoa buscarPessoaPorId(int id) {
+    public Pessoa buscarPessoaPorId(int id) throws SQLException {
         String sql = "SELECT * FROM usuario WHERE id = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -165,31 +162,46 @@ public class PessoaDAO {
         return null;
     }
 
-    public List<Pessoa> listarPessoas() {
+    public List<Pessoa> listarPessoas(String tipo) throws SQLException {
+        log.registrarLog(1, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Consultando Usuários do tipo "+ tipo);
         List<Pessoa> pessoas = new ArrayList<>();
-        String sql = "SELECT * FROM usuario";
+        int id = tipoController.buscarIdTipo(tipo, "tipousuario");
+
+        String sql = "SELECT us.id, us.nome, us.telefone FROM usuario us JOIN usuariotipo ut WHERE us.id = ut.usuario AND ut.tipoUsuario = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
+
+            int i= 0;
             while (rs.next()) {
-                if (rs.getString("assistido") != null) {
-                    Cliente cliente = new Cliente(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("telefone")
-                    );
-                    pessoas.add(cliente);
-                } else {
+                if (tipo.equals("Doador")) {
                     Doador doador = new Doador(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("telefone")
-                    );
+                        rs.getInt("id"), 
+                        rs.getString("nome"), 
+                        rs.getString("telefone"));
                     pessoas.add(doador);
+                } else {
+                    Cliente cliente = new Cliente(
+                        rs.getInt("id"), 
+                        rs.getString("nome"), 
+                        rs.getString("telefone"));
+                    pessoas.add(cliente);
                 }
+            i++;
+            log.registrarLog(2, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Usuário "+ rs.getString("nome") +" encontrado");
             }
+
+            if (i > 0) {
+                log.registrarLog(2, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Foram encontrados "+ i +" usuários");
+            } else {
+                log.registrarLog(3, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Nenhum usuário encontrado");   
+            }
+            
         } catch (SQLException e) {
+            log.registrarLog(4, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Erro ao consultar os Usuários");
             e.printStackTrace();
         }
         return pessoas;
     }
+
 }

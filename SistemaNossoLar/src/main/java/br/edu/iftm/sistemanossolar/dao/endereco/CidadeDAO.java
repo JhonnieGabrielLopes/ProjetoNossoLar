@@ -9,9 +9,6 @@ import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class CidadeDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
     
     private final Connection conexaoBanco;
 

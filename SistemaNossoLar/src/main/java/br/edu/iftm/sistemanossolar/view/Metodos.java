@@ -18,6 +18,7 @@ import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
 
@@ -202,7 +203,9 @@ public class Metodos {
 
     public boolean cadastrarDoacao(Scanner scan) throws SQLException {
         System.out.println("Selecione o Doador (código):");
-        pessoaController.listarPessoas();
+        for (int i = 0; i < pessoaController.listarPessoas("doador").size(); i++) {
+            System.out.println((i+1) + " - " + pessoaController.listarPessoas("Doador").get(i).getNome());
+        }
         int idDoador = scan.nextInt();
         scan.nextLine();
 
@@ -240,11 +243,20 @@ public class Metodos {
 
         Tipo tipoDoa = new Tipo(tipoDoacao);
 
-        Doador doador = (Doador)pessoaController.buscarPessoaPorId(idDoador);
+        System.out.println(pessoaController.buscarPessoaPorId(idDoador).getNome());
 
+        Pessoa usuario = pessoaController.buscarPessoaPorId(idDoador);
+
+        Doador doador = null;
+        if (usuario instanceof Doador) {
+            doador = (Doador) usuario;
+        }
+        
         Doacao doacao = new Doacao(doador, tipoDoa, dataDoacao);
         doacao.setValor(valor);
         doacao.setProduto(produtos);
+
+
 
         return false;
     }

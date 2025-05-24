@@ -10,9 +10,6 @@ import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 import java.io.InputStream;
 
 public class ConexaoDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
 
     static RegistrosLog log = new RegistrosLog();
 

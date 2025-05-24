@@ -7,9 +7,6 @@ import java.sql.ResultSet;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class TipoDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
 
     RegistrosLog log = new RegistrosLog();
 

@@ -7,9 +7,6 @@ import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PedidoDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
 
     private final Connection conexaoBanco;
 

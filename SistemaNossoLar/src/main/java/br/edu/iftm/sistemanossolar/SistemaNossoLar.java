@@ -9,11 +9,6 @@ import br.edu.iftm.sistemanossolar.view.Metodos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class SistemaNossoLar {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String VERDE = "\u001B[32m";
-    public static final String AMARELO = "\u001B[33m";
-    public static final String AZUL = "\u001B[34m";
 
     static RegistrosLog log = new RegistrosLog();
 
@@ -90,7 +85,6 @@ public class SistemaNossoLar {
 
         } catch (Exception e) {
             log.registrarLog(4, "SistemaNossoLar", "main", "", "Erro ao conectar com o Banco de Dados");
-            System.err.println("[" + VERMELHO + "ERR" + RESET + "] SistemaNossoLar | main - Erro na conexão com o Banco de Dados.");
             e.printStackTrace();
         }
     }

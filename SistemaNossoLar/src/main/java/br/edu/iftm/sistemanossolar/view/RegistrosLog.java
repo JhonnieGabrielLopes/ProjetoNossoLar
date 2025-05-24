@@ -10,12 +10,12 @@ public class RegistrosLog {
     public static final String AZUL = "\u001B[34m";
     public static final String VERDE = "\u001B[32m";
     public static final String CINZA = "\u001B[30m";
-    
-    LocalDateTime dataHora = LocalDateTime.now();
-    DateTimeFormatter dataHoraFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-    String momento = CINZA+dataHora.format(dataHoraFormat)+RESET;
 
     public String registrarLog(int tipo, String arquivo, String metodo, String tabela, String mensagem) {
+        LocalDateTime dataHora = LocalDateTime.now();
+        DateTimeFormatter dataHoraFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String momento = CINZA+dataHora.format(dataHoraFormat)+RESET;
+        
         String tipoMensagem = null;
         switch (tipo) {
             case 1:
@@ -32,7 +32,6 @@ public class RegistrosLog {
             default:
                 break;
         }
-
         System.out.println("[" + momento + "]" +" [" + tipoMensagem + "] " + arquivo + " | " + tabela + " | " + metodo + " - " + mensagem);
         return null;
     }
