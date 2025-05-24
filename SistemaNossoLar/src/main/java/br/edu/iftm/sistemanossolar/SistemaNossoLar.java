@@ -66,6 +66,15 @@ public class SistemaNossoLar {
 
                         controle = false;
                         break;
+                    
+                    case 4:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Doação");
+
+                        if (metodos.cadastrarDoacao(scan)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Doação cadastrada");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Doação não cadastrada");
+                        }
 
                     case 26:
                         log.registrarLog(1, "SistemaNossoLar", "main", "", "Encerrando o sistema");
