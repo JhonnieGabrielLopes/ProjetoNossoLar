@@ -50,7 +50,7 @@ public class PessoaDAO {
 
         Integer idTipo = null;
         if (!tipoController.existeTipo(tipo.getDescricao(), "tipousuario")) {
-            tipoController.cadastrarTipo(tipo, "tipousuario");
+            tipoController.cadastrarTipo(tipo.getDescricao(), "tipousuario");
             idTipo = tipoController.buscarIdTipo(tipo.getDescricao(), "tipousuario");
         } else {
             idTipo = tipoController.buscarIdTipo(tipo.getDescricao(), "tipousuario");

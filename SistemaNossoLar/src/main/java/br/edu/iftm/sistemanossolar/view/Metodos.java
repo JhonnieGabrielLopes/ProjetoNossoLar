@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
-import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
@@ -27,6 +28,8 @@ public class Metodos {
     private static CidadeController cidadeController;
     private static PessoaController pessoaController;
     private static ProdutoController produtoController;
+    private static TipoController tipoController;
+    private static DoacaoController doacaoController;
 
     RegistrosLog registrarLog = new RegistrosLog();
 
@@ -34,6 +37,9 @@ public class Metodos {
         enderecoController = new EnderecoController(conexao);
         cidadeController = new CidadeController(conexao);
         pessoaController = new PessoaController(conexao);
+        produtoController = new ProdutoController(conexao);
+        tipoController = new TipoController(conexao);
+        doacaoController = new DoacaoController(conexao);
     }
 
     public void menuPrincipal() {
@@ -175,11 +181,10 @@ public class Metodos {
         return false;
     }
 
-    public Produto cadastrarProduto(Scanner scan) throws SQLException {
-        int qtdProd = 0;
+    public boolean cadastrarProduto(Scanner scan, Produto novoProduto) throws SQLException {
+        
         String tipoProduto = null;
         String nomeProduto = null;
-        Produto novoProduto = new Produto();
 
         System.out.println("Digite o Tipo do produto:");
         tipoProduto = scan.nextLine();
@@ -188,17 +193,14 @@ public class Metodos {
         System.out.println("Digite o nome do Produto:");
         nomeProduto = scan.nextLine();
 
-        System.out.println("Digite a quantidade do Produto:");
-        qtdProd = scan.nextInt();
-        scan.nextLine();
-        
         novoProduto.setTipo(tipoProd);
         novoProduto.setNome(nomeProduto);
-        novoProduto.setQuantidade(qtdProd);
 
-        produtoController.cadastrarProduto(novoProduto);
-
-        return novoProduto;
+        if (produtoController.cadastrarProduto(novoProduto)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean cadastrarDoacao(Scanner scan) throws SQLException {
@@ -215,25 +217,34 @@ public class Metodos {
         System.out.println("Digite o valor doado:");
         double valor = scan.nextDouble();
         
+        Produto produto = new Produto();
         List<Produto> produtos = new ArrayList<Produto>();
 
         boolean controle = false;
         int numProduto = 1;
         int opc = 0;
-        while (!controle) {
-            System.out.println("Deseja inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
+        System.out.println("Incluir produto? 1-Sim / 2-Não");
+        opc = scan.nextInt();
+        scan.nextLine();
+        if (opc == 1) {
+            while (!controle) {
+            System.out.println("Inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
             opc = scan.nextInt();
             scan.nextLine();
 
             if (opc == 2) {
                 controle = true;
-            } else {
-                produtos.add(cadastrarProduto(scan));
+            } else if (cadastrarProduto(scan, produto)) {
+                System.out.println("Digite a quantidade do Produto:");
+                produto.setQuantidade(scan.nextInt());
+                scan.nextLine();
 
+                produtos.add(produto);
                 numProduto++;
                 controle = false;
             }
-        }      
+            } 
+        }
 
         System.out.println("Digite a data da doação (ex. 22/05/2025):");
         String data = scan.nextLine();
@@ -246,18 +257,44 @@ public class Metodos {
         System.out.println(pessoaController.buscarPessoaPorId(idDoador).getNome());
 
         Pessoa usuario = pessoaController.buscarPessoaPorId(idDoador);
-
-        Doador doador = null;
-        if (usuario instanceof Doador) {
-            doador = (Doador) usuario;
-        }
         
-        Doacao doacao = new Doacao(doador, tipoDoa, dataDoacao);
+        Doacao doacao = new Doacao(usuario, tipoDoa, dataDoacao);
         doacao.setValor(valor);
         doacao.setProduto(produtos);
 
+        if (doacaoController.cadastrarDoacao(doacao)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    public boolean cadastrarTipo(Scanner scan, int tipoSel) throws SQLException {
+        System.out.println("Digite a descrição do Tipo: ");
+        Tipo tipo = new Tipo(scan.nextLine());
 
+        switch (tipoSel) {
+            case 1:
+                if (tipoController.cadastrarTipo(tipo.getDescricao(), "tipousuario")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 2:
+                if (tipoController.cadastrarTipo(tipo.getDescricao(), "tipoproduto")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 3:
+                if (tipoController.cadastrarTipo(tipo.getDescricao(), "tipodoacao")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            default:
+                break;
+        }
         return false;
     }
     

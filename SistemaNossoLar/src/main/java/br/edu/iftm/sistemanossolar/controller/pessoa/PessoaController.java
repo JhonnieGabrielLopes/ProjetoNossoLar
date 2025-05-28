@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.edu.iftm.sistemanossolar.dao.pessoa.PessoaDAO;
-import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 

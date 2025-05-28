@@ -17,9 +17,9 @@ public class TipoDAO {
     }
 
     public boolean cadastrarTipo(String tipo, String tabela) {
-        log.registrarLog(1, "TipoDAO", "cadastrarTipo", tabela, "Cadastrando o Tipo");
+        log.registrarLog(1, "TipoDAO", "cadastrarTipo", tabela, "Cadastrando o Tipo "+ tipo);
 
-        String sql = "INSERT INTO "+ tabela +" tipo VALUES (?)";
+        String sql = "INSERT INTO "+ tabela +" (tipo) VALUES (?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setString(1, tipo);
             stmt.executeUpdate();
@@ -34,7 +34,7 @@ public class TipoDAO {
     }
 
     public boolean existeTipo(String tipo, String tabela) {
-        log.registrarLog(1, "TipoDAO", "existeTipo", tabela, "Verificando se o Tipo existe");
+        log.registrarLog(1, "TipoDAO", "existeTipo", tabela, "Verificando se o Tipo "+ tipo +" existe");
 
         String sql = "SELECT * FROM "+ tabela +" WHERE tipo = (?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
@@ -56,7 +56,7 @@ public class TipoDAO {
     }
 
     public Integer buscarIdTipo(String tipo, String tabela) {
-        log.registrarLog(1, "TipoDAO", "buscarIdTipo", tabela, "Buscando o ID do Tipo");
+        log.registrarLog(1, "TipoDAO", "buscarIdTipo", tabela, "Buscando o ID do Tipo "+tipo);
 
         String sql = "SELECT id FROM "+ tabela +" WHERE tipo = (?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {

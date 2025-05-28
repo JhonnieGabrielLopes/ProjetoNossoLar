@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import br.edu.iftm.sistemanossolar.dao.ConexaoDAO;
-
+import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.view.Metodos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
@@ -70,6 +70,47 @@ public class SistemaNossoLar {
                         } else {
                             log.registrarLog(3, "SistemaNossoLar", "main", "", "Doação não cadastrada");
                         }
+                        break;
+
+                    case 6:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Produto");
+
+                        if (metodos.cadastrarProduto(scan, new Produto())) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Produto cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Produto não cadastrado");
+                        }
+                        break;
+
+                    case 7:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Tipo Usuário");
+
+                        if (metodos.cadastrarTipo(scan, 1)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Tipo Usuário cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Tipo Usuário não cadastrado");
+                        }
+                        break;
+
+                    case 8:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Tipo Doação");
+
+                        if (metodos.cadastrarTipo(scan, 3)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Tipo Doação cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Tipo Doação não cadastrado");
+                        }
+                        break;
+
+                    case 9:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Tipo Produto");
+
+                        if (metodos.cadastrarTipo(scan, 2)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Tipo Produto cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Tipo Produto não cadastrado");
+                        }
+                        break;
 
                     case 26:
                         log.registrarLog(1, "SistemaNossoLar", "main", "", "Encerrando o sistema");

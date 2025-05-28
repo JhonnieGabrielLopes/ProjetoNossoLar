@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import br.edu.iftm.sistemanossolar.dao.pessoa.TipoDAO;
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 public class TipoController {
     private TipoDAO tipoDAO;
@@ -13,10 +12,9 @@ public class TipoController {
         this.tipoDAO = new TipoDAO(conexao);
     }
 
-    public boolean cadastrarTipo(Tipo tipo, String tabela)  throws SQLException {
-        String tipoConvert = tipo.getDescricao();
-        tipoConvert= tipoConvert.substring(0, 1).toUpperCase() + tipoConvert.substring(1).toLowerCase();
-        return tipoDAO.cadastrarTipo(tipoConvert, tabela);
+    public boolean cadastrarTipo(String tipo, String tabela)  throws SQLException {
+        tipo= tipo.substring(0, 1).toUpperCase() + tipo.substring(1).toLowerCase();
+        return tipoDAO.cadastrarTipo(tipo, tabela);
 
     }
 
