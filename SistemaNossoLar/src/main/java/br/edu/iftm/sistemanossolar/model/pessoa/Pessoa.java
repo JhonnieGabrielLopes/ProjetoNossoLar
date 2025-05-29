@@ -11,16 +11,26 @@ public abstract class Pessoa {
     private Endereco endereco;
     private String observacao;
 
-    public Pessoa(String nome, String telefone, Endereco endereco) {
+    public Pessoa(String nome, String telefone, Endereco endereco) { // construtor usado para cadastrar cliente e doador
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
     }
     
-    public Pessoa(String nome, String telefone) {
+    public Pessoa(String nome, String telefone) { // construtor usado para listar e selecionar clientes e doadores em registro de pedido e doação
         this.nome = nome;
         this.telefone = telefone;
     }
+    // construtor usado para pegar o registro completo de usuário para jogar na tela de alterar usuário
+    public Pessoa(String nome, String telefone, TipoPessoa tipoPessoa, String email, String identificacao, Endereco endereco, String observacao) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.tipoPessoa = tipoPessoa;
+        this.email = email;
+        this.identificacao = identificacao;
+        this.endereco = endereco;
+        this.observacao = observacao;
+    } 
 
     public enum TipoPessoa {
         FISICA,

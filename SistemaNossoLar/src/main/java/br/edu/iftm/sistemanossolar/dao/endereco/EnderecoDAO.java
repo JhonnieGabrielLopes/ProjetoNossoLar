@@ -73,4 +73,33 @@ public class EnderecoDAO {
         }
     }
 
+    public Endereco buscarEnderecoPorId(int id) throws SQLException {
+        System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarEnderecoPorId - Iniciando busca do endereço por ID");
+
+        String sql = "SELECT * FROM endereco WHERE id = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarEnderecoPorId - Endereço encontrado");
+                return new Endereco(
+                    rs.getString("logradouro"),
+                    rs.getInt("numero"),
+                    rs.getString("bairro"),
+                    rs.getString("cep"),
+                    rs.getString("complemento"),
+                    cidadeDAO.buscarCidadePorId(rs.getInt("cidade"))
+                );
+            } else {
+                System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarEnderecoPorId - Endereço não encontrado");
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("[" + VERMELHO + "ERR" + RESET + "] EnderecoDAO | buscarEnderecoPorId - Erro ao buscar o endereço por ID");
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

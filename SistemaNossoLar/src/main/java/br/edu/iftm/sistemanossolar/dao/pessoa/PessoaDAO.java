@@ -16,6 +16,7 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
 
 public class PessoaDAO {
     public static final String RESET = "\u001B[0m";
@@ -161,7 +162,7 @@ public class PessoaDAO {
         return null;
     }
 
-    public List<Pessoa> listarPessoas() {
+    public List<Pessoa> listarPessoas() { //para selecionar na tela de cadastro de pedidos e doações
         List<Pessoa> pessoas = new ArrayList<>();
         String sql = "SELECT * FROM usuario";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
@@ -187,5 +188,43 @@ public class PessoaDAO {
             e.printStackTrace();
         }
         return pessoas;
+    }
+
+    public Pessoa exibirPessoa(int id){
+        String sql = "SELECT * FROM usuario where id = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("assistido") != null) {
+                    return new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("telefone"),
+                        TipoPessoa.valueOf(rs.getString("tipoPessoa")),
+                        rs.getString("email"),
+                        rs.getString("identificacao"),
+                        enderecoDAO.buscarEnderecoPorId(rs.getInt("endereco")),
+                        rs.getString("observacao"),
+                        rs.getString("assistido"),
+                        rs.getInt("previsaoQtdDias")
+                    );
+                } else {
+                    return new Doador(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("telefone"),
+                        TipoPessoa.valueOf(rs.getString("tipoPessoa")),
+                        rs.getString("email"),
+                        rs.getString("identificacao"),
+                        enderecoDAO.buscarEnderecoPorId(rs.getInt("endereco")),
+                        rs.getString("observacao")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

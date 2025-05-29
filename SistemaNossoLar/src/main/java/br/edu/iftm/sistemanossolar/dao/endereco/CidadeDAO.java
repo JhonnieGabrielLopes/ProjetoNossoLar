@@ -85,4 +85,27 @@ public class CidadeDAO {
 
     }
 
+    public Cidade buscarCidadePorId(int id){
+        String sql = "SELECT * FROM cidade WHERE id = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("[" + AMARELO + "ALR" + RESET + "] CidadeDAO | buscarCidadePorId - Cidade encontrada");
+                return new Cidade(
+                    rs.getString("nome"),
+                    rs.getString("uf")
+                );
+            } else {
+                System.out.println("[" + AMARELO + "ALR" + RESET + "] CidadeDAO | buscarCidadePorId - Cidade não encontrada");
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("[" + VERMELHO + "ERR" + RESET + "] CidadeDAO | buscarCidadePorId - Erro ao buscar cidade por ID");
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

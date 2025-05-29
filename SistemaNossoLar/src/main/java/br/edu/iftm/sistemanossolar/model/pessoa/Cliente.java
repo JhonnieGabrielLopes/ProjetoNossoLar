@@ -17,6 +17,13 @@ public class Cliente extends Pessoa {
         super(nome, telefone);
         this.id = id;
     }
+    
+    public Cliente(int id, String nome, String telefone, TipoPessoa tipoPessoa, String email, String identificacao, Endereco endereco, String observacao, String paciente, int previsaoQtdDias) {
+        super(nome, telefone, tipoPessoa, email, identificacao, endereco, observacao);
+        this.id = id;
+        this.paciente = paciente;
+        this.previsaoQtdDias = previsaoQtdDias;
+    }
 
     public String getPaciente() {
         return paciente;
