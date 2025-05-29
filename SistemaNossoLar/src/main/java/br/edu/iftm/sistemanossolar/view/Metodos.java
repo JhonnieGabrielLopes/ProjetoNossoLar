@@ -228,21 +228,21 @@ public class Metodos {
         scan.nextLine();
         if (opc == 1) {
             while (!controle) {
-            System.out.println("Inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
-            opc = scan.nextInt();
-            scan.nextLine();
-
-            if (opc == 2) {
-                controle = true;
-            } else if (cadastrarProduto(scan, produto)) {
-                System.out.println("Digite a quantidade do Produto:");
-                produto.setQuantidade(scan.nextInt());
+                System.out.println("Inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
+                opc = scan.nextInt();
                 scan.nextLine();
 
-                produtos.add(produto);
-                numProduto++;
-                controle = false;
-            }
+                if (opc == 2) {
+                    controle = true;
+                } else if (cadastrarProduto(scan, produto)) {
+                    System.out.println("Digite a quantidade do Produto:");
+                    produto.setQuantidade(scan.nextInt());
+                    scan.nextLine();
+
+                    produtos.add(produto);
+                    numProduto++;
+                    controle = false;
+                }
             } 
         }
 

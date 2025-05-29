@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 
 import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
@@ -59,21 +61,25 @@ public class DoacaoDAO {
                 }
                 
                 if (idDoa != null) {
-                    for (Produto produto : doacao.getProduto()) {
+                    List<Produto> temp = doacao.getProduto();
+                    Iterator<Produto> iter = temp.iterator();
+                    while (iter.hasNext()) {
+                        Produto prodTemp = iter.next();
                         log.registrarLog(1, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Cadastrando a relação do Produto/Doação");
-
                         sql = "INSERT INTO produtodoacao (doacao, produto, quantidade) VALUES (?, ?, ?)";
                         try (PreparedStatement stmtUserTipo = conexaoBanco.prepareStatement(sql)) {
                             stmtUserTipo.setInt(1, idDoa);
-                            stmtUserTipo.setInt(2, produto.getId());
-                            stmtUserTipo.setInt(3, produto.getQuantidade());
+                            stmtUserTipo.setInt(2, prodTemp.getId());
+                            stmtUserTipo.setInt(3, prodTemp.getQuantidade());
                             stmtUserTipo.executeUpdate();
                             log.registrarLog(2, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Relação do Produto/Doação cadastrada");
                         } catch (SQLException e) {
                             log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Erro ao cadastrar relação do Produto/Doação");
                             e.getMessage();
-                        }
+                        
                     }
+                    }
+                    
                 }
             }
 
