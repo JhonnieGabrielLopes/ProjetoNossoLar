@@ -65,6 +65,7 @@ public class DoacaoDAO {
                     Iterator<Produto> iter = temp.iterator();
                     while (iter.hasNext()) {
                         Produto prodTemp = iter.next();
+                        System.out.println("Produto: " + prodTemp.getNome() + ", Quantidade: " + prodTemp.getQuantidade() + ", ID: " + prodTemp.getId());
                         log.registrarLog(1, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Cadastrando a relação do Produto/Doação");
                         sql = "INSERT INTO produtodoacao (doacao, produto, quantidade) VALUES (?, ?, ?)";
                         try (PreparedStatement stmtUserTipo = conexaoBanco.prepareStatement(sql)) {
@@ -76,10 +77,8 @@ public class DoacaoDAO {
                         } catch (SQLException e) {
                             log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Erro ao cadastrar relação do Produto/Doação");
                             e.getMessage();
-                        
+                        }
                     }
-                    }
-                    
                 }
             }
 

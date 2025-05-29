@@ -217,7 +217,6 @@ public class Metodos {
         System.out.println("Digite o valor doado:");
         double valor = scan.nextDouble();
         
-        Produto produto = new Produto();
         List<Produto> produtos = new ArrayList<Produto>();
 
         boolean controle = false;
@@ -228,6 +227,7 @@ public class Metodos {
         scan.nextLine();
         if (opc == 1) {
             while (!controle) {
+                Produto produto = new Produto();
                 System.out.println("Inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
                 opc = scan.nextInt();
                 scan.nextLine();
