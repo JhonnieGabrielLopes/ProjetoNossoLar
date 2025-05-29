@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import br.edu.iftm.sistemanossolar.view.RegistrosLog;
+
 import java.io.InputStream;
 
 public class ConexaoDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
+
+    static RegistrosLog log = new RegistrosLog();
 
     private static String URL;
     private static String USER;
@@ -28,13 +30,14 @@ public class ConexaoDAO {
             PASSWORD = login.getProperty("db.password");
 
         } catch (Exception e) {
-            throw new RuntimeException("[" + VERMELHO + "ERR" + RESET + "] ConexaoBanco | getConnection - Não foi possivel obter os dados para conectar no Banco de Dados\n", e);
+            log.registrarLog(4, "ConexaoDAO", "getConnection", "", "Não foi possivel obter os dados para conectar no Banco de Dados");
+            throw new RuntimeException(e);
         }
     }
 
     public static synchronized Connection getConnection() throws SQLException {
         if (conexao == null || conexao.isClosed()) {
-            System.out.println("[" + AMARELO + "ALR" + RESET + "] ConexaoBanco | getConnection - Conectando ao Banco de Dados...");
+            log.registrarLog(1, "ConexaoDAO", "getConnection", "", "Conectando ao Banco de Dados");
             conexao = DriverManager.getConnection(URL, USER, PASSWORD);
         }
         return conexao;

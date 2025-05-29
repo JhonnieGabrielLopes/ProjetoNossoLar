@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import br.edu.iftm.sistemanossolar.dao.pessoa.TipoDAO;
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 public class TipoController {
     private TipoDAO tipoDAO;
@@ -13,20 +12,20 @@ public class TipoController {
         this.tipoDAO = new TipoDAO(conexao);
     }
 
-    public boolean cadastrarTipo(Tipo tipo)  throws SQLException {
-        String tipoConvert = tipo.getDescricao();
-        tipoConvert= tipoConvert.substring(0, 1).toUpperCase() + tipoConvert.substring(1).toLowerCase();
-        return tipoDAO.cadastrarTipo(tipoConvert);
+    public boolean cadastrarTipo(String tipo, String tabela)  throws SQLException {
+        tipo= tipo.substring(0, 1).toUpperCase() + tipo.substring(1).toLowerCase();
+        return tipoDAO.cadastrarTipo(tipo, tabela);
+
     }
 
-    public boolean existeTipo(String tipo)  throws SQLException {
+    public boolean existeTipo(String tipo, String tabela)  throws SQLException {
         String tipoConvert = tipo.substring(0, 1).toUpperCase() + tipo.substring(1).toLowerCase();
-        return tipoDAO.existeTipo(tipoConvert);
+        return tipoDAO.existeTipo(tipoConvert, tabela);
     }
 
-    public Integer buscarIdTipo(String tipo)  throws SQLException {
+    public Integer buscarIdTipo(String tipo, String tabela)  throws SQLException {
         String tipoConvert = tipo.substring(0, 1).toUpperCase() + tipo.substring(1).toLowerCase();
-        return tipoDAO.buscarIdTipo(tipoConvert);
+        return tipoDAO.buscarIdTipo(tipoConvert, tabela);
     }
     
 }

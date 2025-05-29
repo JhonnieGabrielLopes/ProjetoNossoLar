@@ -23,7 +23,8 @@ public class PessoaController {
         return pessoaDAO.buscarPessoaPorId(id);
     }
 
-    public List<Pessoa> listarPessoas() throws SQLException {
-        return pessoaDAO.listarPessoas();
+    public List<Pessoa> listarPessoas(String tipo) throws SQLException {
+        return pessoaDAO.listarPessoas(tipo);
     }
+
 }
