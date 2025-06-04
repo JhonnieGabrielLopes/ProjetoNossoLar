@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Recibo</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .recibo-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10mm;
+            margin: 20mm auto;
+            max-width: 190mm; /* largura útil dentro de uma A4 com margens */
+        }
+
+        .recibo {
+            width: 90mm; /* cerca de metade da largura útil */
+            border: 1px solid #000;
+            border-radius: 5mm;
+            padding: 10mm;
+            box-sizing: border-box;
+        }
+
+        .cabecalho {
+            text-align: center;
+            margin-bottom: 5mm;
+        }
+
+        .cabecalho h1 {
+            font-size: 12pt;
+            margin: 2mm 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 12pt;
+            margin-bottom: 5mm;
+        }
+
+        .assinatura {
+            margin-top: 10mm;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        p {
+            margin: 3mm 0;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="recibo-container">
+        <div class="recibo">
+            <div class="cabecalho">
+                <h1>CASA DE APOIO NOSSO LAR</h1>
+                <p>Apoio e Assistência a Pessoas em Tratamento!</p>
+                <p>CNPJ: 08.687.825/0001-38 - Lei de Utilidade Pública Municipal nº 3845 de 26/Março/2007</p>
+                <p>Lei Utilidade Pública Estadual nº 21826 de 18/Novembro/2015</p>
+                <p><strong>(34) 99882-1617</strong></p>
+                <p>Rua 20 c/ 3 e 5 nº 196 - Centro - ITUIUTABA - MG - CEP 38300-074</p>
+            </div>
+
+            <h2>RECIBO</h2>
+            <p>Recebi(emos) do Sr.(a) <strong>{{nome}}</strong></p>
+            <p>A importância de <strong>{{valor}}</strong></p>
+            <p>Referente donativo para as obras de Promoção Humana e Social.</p>
+            <p>Ituiutaba-MG, <strong>{{data}}</strong></p>
+            <p class="assinatura">Presidente: Greice Riza</p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -13,9 +13,8 @@ import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
 
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
-import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
-import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
@@ -61,15 +60,8 @@ public class PessoaDAO {
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getTelefone());
             stmt.setInt(3, idEndereco);
-
-            if (pessoa instanceof Cliente) {
-                Cliente cliente = (Cliente) pessoa;
-                stmt.setString(4, cliente.getPaciente());
-                stmt.setInt(5, cliente.getPrevisaoQtdDias());
-            } else {
-                stmt.setNull(4, Types.VARCHAR);
-                stmt.setNull(5, Types.INTEGER);
-            }
+            stmt.setString(4, pessoa.getPaciente());
+            stmt.setInt(5, pessoa.getPrevisaoDias());
 
             if (pessoa.getTipoPessoa() != null) {
                 stmt.setString(6, pessoa.getTipoPessoa().name());
@@ -142,24 +134,23 @@ public class PessoaDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                if (rs.getString("assistido") != null) {
-                    return new Cliente(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("telefone")
-                    );
-                } else {
-                    return new Doador(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("telefone")
-                    );
-                }
+                Pessoa pessoa = new Pessoa(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    TipoPessoa.valueOf(rs.getString("tipopessoa")),
+                    rs.getString("identificacao"),
+                    rs.getString("assistido"),
+                    rs.getInt("previsaoqtddias"),
+                    rs.getString("telefone"),
+                    rs.getInt("endereco"),
+                    rs.getString("email"),
+                    rs.getString("observacao"));
+                return pessoa;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new Pessoa();
     }
 
     public List<Pessoa> listarPessoas(String tipo) throws SQLException {
@@ -174,21 +165,13 @@ public class PessoaDAO {
 
             int i= 0;
             while (rs.next()) {
-                if (tipo.equals("Doador")) {
-                    Doador doador = new Doador(
-                        rs.getInt("id"), 
-                        rs.getString("nome"), 
-                        rs.getString("telefone"));
-                    pessoas.add(doador);
-                } else {
-                    Cliente cliente = new Cliente(
-                        rs.getInt("id"), 
-                        rs.getString("nome"), 
-                        rs.getString("telefone"));
-                    pessoas.add(cliente);
-                }
-            i++;
-            log.registrarLog(2, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Usuário "+ rs.getString("nome") +" encontrado");
+                Pessoa pessoa = new Pessoa(
+                    rs.getInt("id"), 
+                    rs.getString("nome"), 
+                    rs.getString("telefone"));
+                pessoas.add(pessoa);
+                i++;
+                log.registrarLog(2, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Usuário "+ rs.getString("nome") +" encontrado");
             }
 
             if (i > 0) {

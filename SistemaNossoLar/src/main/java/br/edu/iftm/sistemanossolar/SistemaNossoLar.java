@@ -72,6 +72,16 @@ public class SistemaNossoLar {
                         }
                         break;
 
+                    case 5:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Pedido");
+
+                        if (metodos.cadastrarPedido(scan)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Pedido cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Pedido não cadastrado");
+                        }
+                        break;
+
                     case 6:
                         log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Produto");
 

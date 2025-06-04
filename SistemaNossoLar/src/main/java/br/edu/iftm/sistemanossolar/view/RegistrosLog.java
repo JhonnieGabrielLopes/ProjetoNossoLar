@@ -9,7 +9,7 @@ public class RegistrosLog {
     public static final String AMARELO = "\u001B[33m";
     public static final String AZUL = "\u001B[34m";
     public static final String VERDE = "\u001B[32m";
-    public static final String CINZA = "\u001B[30m";
+    public static final String CINZA = "\u001B[27m";
 
     public String registrarLog(int tipo, String arquivo, String metodo, String tabela, String mensagem) {
         LocalDateTime dataHora = LocalDateTime.now();
