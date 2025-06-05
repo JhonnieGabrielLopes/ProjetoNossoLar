@@ -19,14 +19,13 @@ public class PedidoDAO {
     public boolean cadastrarPedido(Pedido pedido) {
         log.registrarLog(1, "PedidoDAO", "cadastrarPedido", "pedido", "Cadastrando o Pedido do Usuário "+ pedido.getCliente().getNome());
 
-        String sql = "INSERT INTO pedido (pessoa, quantidade, status, observacao, dataPedido, dataEntrega) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pedido (pessoa, quantidade, status, observacao, dataPedido) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setInt(1, pedido.getCliente().getId());
             stmt.setInt(2, pedido.getQuantMarmita());
             stmt.setString(3, pedido.getStatus().name());
             stmt.setString(4, pedido.getObservacao());
             stmt.setDate(5, java.sql.Date.valueOf(pedido.getDataPedido()));
-            stmt.setDate(6, java.sql.Date.valueOf(pedido.getDataEntrega()));
             stmt.executeUpdate();
 
             log.registrarLog(2, "PedidoDAO", "cadastrarPedido", "pedido", "Pedido cadastrado");

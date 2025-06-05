@@ -1,5 +1,9 @@
 package br.edu.iftm.sistemanossolar.view;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -8,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.xhtmlrenderer.pdf.ITextRenderer;
+
+import br.edu.iftm.sistemanossolar.controller.PedidoController;
+import br.edu.iftm.sistemanossolar.controller.Relatorio;
 import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
@@ -18,7 +26,8 @@ import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
-import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
+import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
+import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
@@ -30,8 +39,9 @@ public class Metodos {
     private static ProdutoController produtoController;
     private static TipoController tipoController;
     private static DoacaoController doacaoController;
+    private static PedidoController pedidoController;
 
-    RegistrosLog registrarLog = new RegistrosLog();
+    RegistrosLog log = new RegistrosLog();
 
     public Metodos(Connection conexao) {
         enderecoController = new EnderecoController(conexao);
@@ -40,6 +50,7 @@ public class Metodos {
         produtoController = new ProdutoController(conexao);
         tipoController = new TipoController(conexao);
         doacaoController = new DoacaoController(conexao);
+        pedidoController = new PedidoController(conexao);
     }
 
     public void menuPrincipal() {
@@ -115,7 +126,7 @@ public class Metodos {
 
         Tipo tipo = new Tipo(tipoUsu);
 
-        Cliente cliente = new Cliente(nomeCliente, telefone, endereco, nomePaciente, qtdDias);
+        Pessoa cliente = new Pessoa(nomeCliente, telefone, endereco, nomePaciente, qtdDias);
         cliente.setTipoPessoa(TipoPessoa.fromString(tipoPess));
         cliente.setIdentificacao(cpf);
         cliente.setEmail(email);
@@ -203,10 +214,10 @@ public class Metodos {
         }
     }
 
-    public boolean cadastrarDoacao(Scanner scan) throws SQLException {
+    public boolean cadastrarDoacao(Scanner scan) throws SQLException, IOException {
         System.out.println("Selecione o Doador (código):");
         for (int i = 0; i < pessoaController.listarPessoas("doador").size(); i++) {
-            System.out.println((i+1) + " - " + pessoaController.listarPessoas("Doador").get(i).getNome());
+            System.out.println((pessoaController.listarPessoas("Doador").get(i).getId()) + " - " + pessoaController.listarPessoas("Doador").get(i).getNome());
         }
         int idDoador = scan.nextInt();
         scan.nextLine();
@@ -254,19 +265,65 @@ public class Metodos {
 
         Tipo tipoDoa = new Tipo(tipoDoacao);
 
-        System.out.println(pessoaController.buscarPessoaPorId(idDoador).getNome());
-
-        Pessoa usuario = pessoaController.buscarPessoaPorId(idDoador);
+        Pessoa doador = pessoaController.buscarPessoaPorId(idDoador);
         
-        Doacao doacao = new Doacao(usuario, tipoDoa, dataDoacao);
+        Doacao doacao = new Doacao(doador, tipoDoa, dataDoacao);
         doacao.setValor(valor);
         doacao.setProduto(produtos);
+
+        System.out.println("Deseja imprimir o relatorio? 1-Sim / 2-Não");
+        opc = scan.nextInt();
+        scan.nextLine();
+
+        if (opc == 1) {
+            gerarRelatorioDoacao(doacao);
+        }
 
         if (doacaoController.cadastrarDoacao(doacao)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean cadastrarPedido(Scanner scan) throws SQLException {
+        System.out.println("Selecione o Cliente (código): ");
+        int qtdCliAss = 0;
+        for (int i = 0; i < pessoaController.listarPessoas("Cliente").size(); i++) {
+            System.out.println((qtdCliAss+1) + " - " + pessoaController.listarPessoas("Cliente").get(i).getNome());
+            qtdCliAss ++;
+        }
+        for (int i = 0; i < pessoaController.listarPessoas("Assistente").size(); i++) {
+            System.out.println((qtdCliAss+1) + " - " + pessoaController.listarPessoas("Assistente").get(i).getNome());
+            qtdCliAss ++;
+        }
+        int idCliente = scan.nextInt();
+        scan.nextLine();
+
+        System.out.println("Digite a quantidade de marmitas: ");
+        int qtdMarmitas = scan.nextInt();
+        scan.nextLine();
+
+        System.out.println("Digite a data do pedido (ex. 22/05/2025):");
+        String data = scan.nextLine();
+
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataPedido = LocalDate.parse(data, dataFormat);
+
+        System.out.println("Observação: ");
+        String observacao = scan.nextLine();
+
+        Pessoa cliente = pessoaController.buscarPessoaPorId(idCliente);
+
+        Pedido pedido = new Pedido(cliente, qtdMarmitas, StatusPedido.PENDENTE, dataPedido);
+        pedido.setObservacao(observacao);
+
+        if (pedidoController.cadastrarPedido(pedido)) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public boolean cadastrarTipo(Scanner scan, int tipoSel) throws SQLException {
@@ -296,6 +353,44 @@ public class Metodos {
                 break;
         }
         return false;
+    }
+
+    public void gerarRelatorioDoacao(Doacao doacao) throws IOException {
+        log.registrarLog(1, "Metodos", "gerarRelatorioDoacao", "", "Gerando recibo da Doação");
+        
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String data = doacao.getDataDoacao().format(formatador);
+
+        String template = Relatorio.carregarTemplate();
+        String templatePreenchido = template
+            .replace("{{nome}}", doacao.getDoador().getNome())
+            .replace("{{valor}}", String.format("R$ %.2f", doacao.getValor()))
+            .replace("{{data}}", data);
+        try {
+            new File("recibos").mkdirs();
+            String arquivo = "recibos/Doacao_" + doacao.getDoador().getNome() + ".pdf";
+            gerarPDF(templatePreenchido, arquivo);
+            log.registrarLog(2, "Metodos", "gerarRelatorioDoacao", "", "Recibo gerado em: "+ arquivo);
+        } catch (IOException e) {
+            log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void gerarPDF(String templatePreenchido, String arquivo) throws IOException {
+        log.registrarLog(1, "Metodos", "gerarPDF", "", "Gerando arquivo PDF");
+        
+        try (OutputStream os = new FileOutputStream(arquivo)) {
+            ITextRenderer renderer = new ITextRenderer();       
+            renderer.setDocumentFromString(templatePreenchido);
+            renderer.layout();
+            renderer.createPDF(os);
+            log.registrarLog(2, "Metodos", "gerarPDF", "", "Arquivo PDF gerado");
+        } catch (Exception e) { 
+            log.registrarLog(4, "Metodos", "gerarPDF", "", "Arquivo PDF não foi gerado");
+            throw new IOException(e.getMessage(), e);
+        }
     }
     
 }
