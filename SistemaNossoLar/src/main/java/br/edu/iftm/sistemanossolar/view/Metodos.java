@@ -134,7 +134,7 @@ public class Metodos {
 
         if (pessoaController.cadastrarPessoa(cliente, tipo)) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -180,7 +180,7 @@ public class Metodos {
         String estado = scan.nextLine();
 
         Cidade novaCidade = new Cidade(nomeCidade, estado);
-        
+
         if (!cidadeController.existeCidade(novaCidade)) {
             if (cidadeController.cadastrarCidade(novaCidade)) {
                 return true;
@@ -188,12 +188,12 @@ public class Metodos {
                 return false;
             }
         }
-        
+
         return false;
     }
 
     public boolean cadastrarProduto(Scanner scan, Produto novoProduto) throws SQLException {
-        
+
         String tipoProduto = null;
         String nomeProduto = null;
 
@@ -217,7 +217,8 @@ public class Metodos {
     public boolean cadastrarDoacao(Scanner scan) throws SQLException, IOException {
         System.out.println("Selecione o Doador (código):");
         for (int i = 0; i < pessoaController.listarPessoas("doador").size(); i++) {
-            System.out.println((pessoaController.listarPessoas("Doador").get(i).getId()) + " - " + pessoaController.listarPessoas("Doador").get(i).getNome());
+            System.out.println((pessoaController.listarPessoas("Doador").get(i).getId()) + " - "
+                    + pessoaController.listarPessoas("Doador").get(i).getNome());
         }
         int idDoador = scan.nextInt();
         scan.nextLine();
@@ -227,7 +228,7 @@ public class Metodos {
 
         System.out.println("Digite o valor doado:");
         double valor = scan.nextDouble();
-        
+
         List<Produto> produtos = new ArrayList<Produto>();
 
         boolean controle = false;
@@ -254,7 +255,7 @@ public class Metodos {
                     numProduto++;
                     controle = false;
                 }
-            } 
+            }
         }
 
         System.out.println("Digite a data da doação (ex. 22/05/2025):");
@@ -266,20 +267,20 @@ public class Metodos {
         Tipo tipoDoa = new Tipo(tipoDoacao);
 
         Pessoa doador = pessoaController.buscarPessoaPorId(idDoador);
-        
+
         Doacao doacao = new Doacao(doador, tipoDoa, dataDoacao);
         doacao.setValor(valor);
         doacao.setProduto(produtos);
 
-        System.out.println("Deseja imprimir o relatorio? 1-Sim / 2-Não");
-        opc = scan.nextInt();
-        scan.nextLine();
-
-        if (opc == 1) {
-            gerarRelatorioDoacao(doacao);
-        }
-
         if (doacaoController.cadastrarDoacao(doacao)) {
+            System.out.println("Deseja imprimir o relatorio? 1-Sim / 2-Não");
+            opc = scan.nextInt();
+            scan.nextLine();
+
+            if (opc == 1) {
+                gerarRelatorioDoacao(doacao);
+            }
+
             return true;
         } else {
             return false;
@@ -290,12 +291,12 @@ public class Metodos {
         System.out.println("Selecione o Cliente (código): ");
         int qtdCliAss = 0;
         for (int i = 0; i < pessoaController.listarPessoas("Cliente").size(); i++) {
-            System.out.println((qtdCliAss+1) + " - " + pessoaController.listarPessoas("Cliente").get(i).getNome());
-            qtdCliAss ++;
+            System.out.println((qtdCliAss + 1) + " - " + pessoaController.listarPessoas("Cliente").get(i).getNome());
+            qtdCliAss++;
         }
         for (int i = 0; i < pessoaController.listarPessoas("Assistente").size(); i++) {
-            System.out.println((qtdCliAss+1) + " - " + pessoaController.listarPessoas("Assistente").get(i).getNome());
-            qtdCliAss ++;
+            System.out.println((qtdCliAss + 1) + " - " + pessoaController.listarPessoas("Assistente").get(i).getNome());
+            qtdCliAss++;
         }
         int idCliente = scan.nextInt();
         scan.nextLine();
@@ -357,40 +358,79 @@ public class Metodos {
 
     public void gerarRelatorioDoacao(Doacao doacao) throws IOException {
         log.registrarLog(1, "Metodos", "gerarRelatorioDoacao", "", "Gerando recibo da Doação");
-        
+
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String data = doacao.getDataDoacao().format(formatador);
 
-        String template = Relatorio.carregarTemplate();
-        String templatePreenchido = template
-            .replace("{{nome}}", doacao.getDoador().getNome())
-            .replace("{{valor}}", String.format("R$ %.2f", doacao.getValor()))
-            .replace("{{data}}", data);
-        try {
-            new File("recibos").mkdirs();
-            String arquivo = "recibos/Doacao_" + doacao.getDoador().getNome() + ".pdf";
-            gerarPDF(templatePreenchido, arquivo);
-            log.registrarLog(2, "Metodos", "gerarRelatorioDoacao", "", "Recibo gerado em: "+ arquivo);
-        } catch (IOException e) {
-            log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
-            System.err.println(e.getMessage());
-            e.printStackTrace();
+        if (doacao.getProduto().isEmpty()) {
+            String template = Relatorio.templateDoacaoDinheiro();
+            String templatePreenchido = template
+                .replace("{{codigo}}", doacao.getId().toString())
+                .replace("{{nome}}", doacao.getDoador().getNome())
+                .replace("{{valor}}", String.format("R$ %.2f", doacao.getValor()))
+                .replace("{{data}}", data);
+            try {
+                new File("Recibos/Doacao").mkdirs();
+                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome()+ ".pdf";
+                gerarPDF(templatePreenchido, arquivo);
+                log.registrarLog(2, "Metodos", "gerarRelatorioDoacao", "", "Recibo gerado em: " + arquivo);
+            } catch (IOException e) {
+                log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
+                System.err.println(e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            String template = Relatorio.templateDoacaoProduto(); // Certifique-se de que retorna o HTML acima
+
+            // Construindo a lista de produtos em HTML
+            StringBuilder produtosHtml = new StringBuilder();
+            int qtdProd = 1;
+            for (Produto produto : doacao.getProduto()) { // Supondo que getProdutos() retorna a lista
+                produtosHtml.append("<div class='item'>")
+                            .append("<span class='item-tipo'> Item "+ qtdProd +" - ").append(produto.getTipo().getDescricao()).append(" - </span>")
+                            .append("<span class='item-descricao'>").append(produto.getNome()).append(" - </span>")
+                            .append("<span class='item-quantidade'>").append(produto.getQuantidade()).append(" un</span>")
+                            .append("</div>");
+                qtdProd++;
+            }
+
+            // Substituindo os placeholders
+            String templatePreenchido = template
+                .replace("{{codigo}}", doacao.getId().toString())
+                .replace("{{nome}}", doacao.getDoador().getNome())
+                .replace("{{produtos}}", produtosHtml.toString()) // Insere a lista formatada
+                .replace("{{data}}", data);
+
+            // Geração do PDF (mantenha o restante do seu código)
+            try {
+                new File("Recibos").mkdirs();
+                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome()+ ".pdf";
+                gerarPDF(templatePreenchido, arquivo);
+                log.registrarLog(2, "Metodos", "gerarRelatorioDoacao", "", "Recibo gerado em: " + arquivo);
+            } catch (IOException e) {
+                log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
+                System.err.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
+
+        
+        
     }
 
     private void gerarPDF(String templatePreenchido, String arquivo) throws IOException {
         log.registrarLog(1, "Metodos", "gerarPDF", "", "Gerando arquivo PDF");
-        
+
         try (OutputStream os = new FileOutputStream(arquivo)) {
-            ITextRenderer renderer = new ITextRenderer();       
+            ITextRenderer renderer = new ITextRenderer();
             renderer.setDocumentFromString(templatePreenchido);
             renderer.layout();
             renderer.createPDF(os);
             log.registrarLog(2, "Metodos", "gerarPDF", "", "Arquivo PDF gerado");
-        } catch (Exception e) { 
+        } catch (Exception e) {
             log.registrarLog(4, "Metodos", "gerarPDF", "", "Arquivo PDF não foi gerado");
             throw new IOException(e.getMessage(), e);
         }
     }
-    
+
 }
