@@ -7,6 +7,7 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 public class Doacao {
+    private Integer id;
     private Pessoa doador;
     private List<Produto> produto;
     private Tipo tipo;
@@ -23,6 +24,14 @@ public class Doacao {
         this.doador = doador;
         this.tipo = tipo;
         this.dataDoacao = dataDoacao;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Pessoa getDoador() {

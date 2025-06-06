@@ -52,6 +52,7 @@ public class DoacaoDAO {
                     if (rs.next()) {
                         log.registrarLog(2, "DoacaoDAO", "cadastrarDoacao", "doacao", "ID da Doação obtido");
                         idDoa = rs.getInt(1);
+                        doacao.setId(idDoa);
                     } else {
                         log.registrarLog(3, "DoacaoDAO", "cadastrarDoacao", "doacao", "ID da Doação não obtido");
                     }
@@ -66,7 +67,7 @@ public class DoacaoDAO {
                     while (iter.hasNext()) {
                         Produto prodTemp = iter.next();
                         log.registrarLog(1, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Cadastrando a relação do Produto/Doação");
-                        
+
                         sql = "INSERT INTO produtodoacao (doacao, produto, quantidade) VALUES (?, ?, ?)";
                         try (PreparedStatement stmtUserTipo = conexaoBanco.prepareStatement(sql)) {
                             stmtUserTipo.setInt(1, idDoa);
