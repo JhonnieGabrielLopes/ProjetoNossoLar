@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 
 public class Pedido {
+    private Integer id;
     private Pessoa cliente;
     private Integer quantMarmita;
     private StatusPedido status;
@@ -79,6 +80,14 @@ public class Pedido {
 
     public void setDataEntrega(LocalDate dataEntrega) {
         this.dataEntrega = dataEntrega;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }

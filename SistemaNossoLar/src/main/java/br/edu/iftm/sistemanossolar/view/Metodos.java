@@ -20,6 +20,7 @@ import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.PacienteController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
@@ -28,6 +29,8 @@ import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
+import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
+import br.edu.iftm.sistemanossolar.model.pessoa.Paciente.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
@@ -40,6 +43,7 @@ public class Metodos {
     private static TipoController tipoController;
     private static DoacaoController doacaoController;
     private static PedidoController pedidoController;
+    private static PacienteController pacienteController;
 
     RegistrosLog log = new RegistrosLog();
 
@@ -51,6 +55,7 @@ public class Metodos {
         tipoController = new TipoController(conexao);
         doacaoController = new DoacaoController(conexao);
         pedidoController = new PedidoController(conexao);
+        pacienteController = new PacienteController(conexao);
     }
 
     public void menuPrincipal() {
@@ -92,7 +97,7 @@ public class Metodos {
         System.out.println("Digite o Tipo do usuario:");
         String tipoUsu = scan.nextLine();
 
-        System.out.println("Digite o tipo de pessoa (FISICA ou JURIDICA):");
+        System.out.println("Digite o tipo da pessoa (FISICA ou JURIDICA):");
         String tipoPess = scan.nextLine();
 
         System.out.println("Digite o CPF do usuario:");
@@ -104,12 +109,29 @@ public class Metodos {
         System.out.println("Digite o email do usuario:");
         String email = scan.nextLine();
 
-        System.out.println("Digite o nome do paciente:");
-        String nomePaciente = scan.nextLine();
+        Paciente paciente = new Paciente();
 
-        System.out.println("Digite a previsão de dias:");
-        int qtdDias = scan.nextInt();
-        scan.nextLine();
+        if (tipoUsu.equalsIgnoreCase("Cliente") || tipoUsu.equalsIgnoreCase("Assistente")) {
+            System.out.println("Digite o Local:");
+            String localPaci = scan.nextLine();
+            paciente.setLocal(Local.fromString(localPaci));
+
+            if (tipoUsu.equalsIgnoreCase("Cliente")) {
+                System.out.println("Digite o nome do paciente:");
+                String nomePaciente = scan.nextLine();
+
+                System.out.println("Digite a previsão de dias:");
+                int qtdDias = scan.nextInt();
+                scan.nextLine();
+
+                paciente.setNome(nomePaciente);
+                paciente.setPrevisaoDias(qtdDias);
+
+            } else if (tipoUsu.equalsIgnoreCase("Assistente")) {
+                paciente.setNome("N/A");
+                paciente.setPrevisaoDias(0);
+            }
+        }
 
         System.out.println("Digite o nome da cidade:");
         String cidade = scan.nextLine();
@@ -126,13 +148,13 @@ public class Metodos {
 
         Tipo tipo = new Tipo(tipoUsu);
 
-        Pessoa cliente = new Pessoa(nomeCliente, telefone, endereco, nomePaciente, qtdDias);
+        Pessoa cliente = new Pessoa(nomeCliente, telefone, endereco);
         cliente.setTipoPessoa(TipoPessoa.fromString(tipoPess));
         cliente.setIdentificacao(cpf);
         cliente.setEmail(email);
         cliente.setObservacao(observacao);
 
-        if (pessoaController.cadastrarPessoa(cliente, tipo)) {
+        if (pessoaController.cadastrarPessoa(cliente, tipo, paciente)) {
             return true;
         } else {
             return false;
@@ -287,7 +309,7 @@ public class Metodos {
         }
     }
 
-    public boolean cadastrarPedido(Scanner scan) throws SQLException {
+    public boolean cadastrarPedido(Scanner scan) throws SQLException, IOException {
         System.out.println("Selecione o Cliente (código): ");
         int qtdCliAss = 0;
         for (int i = 0; i < pessoaController.listarPessoas("Cliente").size(); i++) {
@@ -320,6 +342,14 @@ public class Metodos {
         pedido.setObservacao(observacao);
 
         if (pedidoController.cadastrarPedido(pedido)) {
+            System.out.println("Deseja imprimir o relatorio? 1-Sim / 2-Não");
+            int opc = scan.nextInt();
+            scan.nextLine();
+
+            if (opc == 1) {
+                gerarRelatorioPedido(pedido);
+            }
+
             return true;
         } else {
             return false;
@@ -360,7 +390,6 @@ public class Metodos {
         log.registrarLog(1, "Metodos", "gerarRelatorioDoacao", "", "Gerando recibo da Doação");
 
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String data = doacao.getDataDoacao().format(formatador);
 
         if (doacao.getProduto().isEmpty()) {
             String template = Relatorio.templateDoacaoDinheiro();
@@ -368,7 +397,7 @@ public class Metodos {
                 .replace("{{codigo}}", doacao.getId().toString())
                 .replace("{{nome}}", doacao.getDoador().getNome())
                 .replace("{{valor}}", String.format("R$ %.2f", doacao.getValor()))
-                .replace("{{data}}", data);
+                .replace("{{data}}", doacao.getDataDoacao().format(formatador));
             try {
                 new File("Recibos/Doacao").mkdirs();
                 String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome()+ ".pdf";
@@ -380,12 +409,11 @@ public class Metodos {
                 e.printStackTrace();
             }
         } else {
-            String template = Relatorio.templateDoacaoProduto(); // Certifique-se de que retorna o HTML acima
+            String template = Relatorio.templateDoacaoProduto();
 
-            // Construindo a lista de produtos em HTML
             StringBuilder produtosHtml = new StringBuilder();
             int qtdProd = 1;
-            for (Produto produto : doacao.getProduto()) { // Supondo que getProdutos() retorna a lista
+            for (Produto produto : doacao.getProduto()) {
                 produtosHtml.append("<div class='item'>")
                             .append("<span class='item-tipo'> Item "+ qtdProd +" - ").append(produto.getTipo().getDescricao()).append(" - </span>")
                             .append("<span class='item-descricao'>").append(produto.getNome()).append(" - </span>")
@@ -394,14 +422,12 @@ public class Metodos {
                 qtdProd++;
             }
 
-            // Substituindo os placeholders
             String templatePreenchido = template
                 .replace("{{codigo}}", doacao.getId().toString())
                 .replace("{{nome}}", doacao.getDoador().getNome())
-                .replace("{{produtos}}", produtosHtml.toString()) // Insere a lista formatada
-                .replace("{{data}}", data);
+                .replace("{{produtos}}", produtosHtml.toString())
+                .replace("{{data}}", doacao.getDataDoacao().format(formatador));
 
-            // Geração do PDF (mantenha o restante do seu código)
             try {
                 new File("Recibos").mkdirs();
                 String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome()+ ".pdf";
@@ -413,8 +439,35 @@ public class Metodos {
                 e.printStackTrace();
             }
         }
-
         
+    }
+
+    public void gerarRelatorioPedido(Pedido pedido) throws IOException {
+        log.registrarLog(1, "Metodos", "gerarRelatorioPedido", "", "Gerando recibo da Abertura do Pedido");
+
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        String template = Relatorio.templateAberturaPedido();
+
+        String templatePreenchido = template
+            .replace("{{local}}", pedido.getCliente().getPaciente().getLocal().name())
+            .replace("{{dataPedido}}", pedido.getDataPedido().format(formatador))
+            //.replace("{{tipo}}", pedido.getCliente().getTipoPessoa().name()) Pensar em como obter o tipo do usuario
+            .replace("{{nome}}", pedido.getCliente().getNome())
+            .replace("{{paciente}}", pedido.getCliente().getPaciente().getNome())
+            .replace("{{quantidades}}", pedido.getQuantMarmita().toString())
+            .replace("{{observacao}}", pedido.getObservacao());
+
+        try {
+            new File("Recibos").mkdirs();
+            String arquivo = "Recibos/Pedido/Pedido " + pedido.getId().toString() + " " + pedido.getCliente().getNome()+ ".pdf";
+            gerarPDF(templatePreenchido, arquivo);
+            log.registrarLog(2, "Metodos", "gerarRelatorioPedido", "", "Recibo gerado em: " + arquivo);
+        } catch (IOException e) {
+            log.registrarLog(4, "Metodos", "gerarRelatorioPedido", "", "Recibo não foi gerado");
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
         
     }
 
