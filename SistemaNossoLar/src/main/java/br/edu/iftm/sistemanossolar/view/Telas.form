@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupPessoaTipo">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -71,15 +75,15 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbMenu" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="91" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btCadastrar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btCadastrar1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btCadastrar2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btCadastrarCliente" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lbMenu" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="85" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="btCadastrarDoador" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btCadastrarCidade" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -91,11 +95,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbMenu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btCadastrar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btCadastrarCliente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btCadastrar1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btCadastrarDoador" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btCadastrar2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btCadastrarCidade" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -107,28 +111,28 @@
                 <Property name="text" type="java.lang.String" value="Menu Principal"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btCadastrar">
+            <Component class="javax.swing.JButton" name="btCadastrarCliente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tela 1"/>
+                <Property name="text" type="java.lang.String" value="Cadastrar Cliente"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrarClienteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btCadastrar1">
+            <Component class="javax.swing.JButton" name="btCadastrarDoador">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tela 2"/>
+                <Property name="text" type="java.lang.String" value="Cadastrar Doador"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrar1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrarDoadorActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btCadastrar2">
+            <Component class="javax.swing.JButton" name="btCadastrarCidade">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                <Property name="text" type="java.lang.String" value="Cadastrar Cidade"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrar2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrarCidadeActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -137,7 +141,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="pnCadastroPessoa">
+            <Container class="javax.swing.JPanel" name="pnCadastroPessoaCliente">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card2"/>
@@ -147,12 +151,21 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="pnEndereco" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="165" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btLimpar" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btRegistrar" min="-2" pref="103" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="pnPessoaCliente" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="pnEnderecoCliente" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="164" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -161,16 +174,26 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="pnEndereco" min="-2" pref="297" max="-2" attributes="0"/>
-                              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="pnPessoaCliente" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="125" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="pnEnderecoCliente" min="-2" pref="224" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace pref="338" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="pnEndereco">
+                <Container class="javax.swing.JPanel" name="pnEnderecoCliente">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -346,11 +369,35 @@
                     <Component class="javax.swing.JComboBox" name="cbEnderecoUf">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
+                          <StringArray count="28">
+                            <StringItem index="0" value=" "/>
+                            <StringItem index="1" value="AC"/>
+                            <StringItem index="2" value="AL"/>
+                            <StringItem index="3" value="AP"/>
+                            <StringItem index="4" value="AM"/>
+                            <StringItem index="5" value="BA"/>
+                            <StringItem index="6" value="CE"/>
+                            <StringItem index="7" value="DF"/>
+                            <StringItem index="8" value="ES"/>
+                            <StringItem index="9" value="GO"/>
+                            <StringItem index="10" value="MA"/>
+                            <StringItem index="11" value="MT"/>
+                            <StringItem index="12" value="MS"/>
+                            <StringItem index="13" value="MG"/>
+                            <StringItem index="14" value="PA"/>
+                            <StringItem index="15" value="PB"/>
+                            <StringItem index="16" value="PR"/>
+                            <StringItem index="17" value="PE"/>
+                            <StringItem index="18" value="PI"/>
+                            <StringItem index="19" value="RJ"/>
+                            <StringItem index="20" value="RN"/>
+                            <StringItem index="21" value="RS"/>
+                            <StringItem index="22" value="RO"/>
+                            <StringItem index="23" value="RR"/>
+                            <StringItem index="24" value="SC"/>
+                            <StringItem index="25" value="SP"/>
+                            <StringItem index="26" value="SE"/>
+                            <StringItem index="27" value="TO"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -361,11 +408,12 @@
                     <Component class="javax.swing.JButton" name="btAdicionarCidade">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="+"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Cadastrar novo endere&#xe7;o"/>
                       </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel1">
+                <Container class="javax.swing.JPanel" name="pnPessoaCliente">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -379,15 +427,39 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jScrollPane1" pref="385" max="32767" attributes="0"/>
-                                  <Component id="lbObservacao" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbNome" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfEmail" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ffTelefone" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfNome" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lbNomePaciente" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbDocumento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbPessoaTipo" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="rbPessoaFisica" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="rbPessoaJuridica" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane1" pref="385" max="32767" attributes="0"/>
+                                      <Component id="lbObservacao" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbNome" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tfEmail" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="ffTelefone" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfNome" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfDocumento" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfNomePaciente" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbNomePaciente1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfNomePaciente1" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lbNomePaciente2" max="32767" attributes="0"/>
+                                          <Component id="tfNumeroId" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace pref="29" max="32767" attributes="0"/>
                           </Group>
@@ -396,7 +468,6 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbNome" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tfNome" min="-2" max="-2" attributes="0"/>
@@ -409,10 +480,38 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tfEmail" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lbPessoaTipo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="rbPessoaFisica" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbPessoaJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lbDocumento" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfDocumento" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lbObservacao" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="59" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lbNomePaciente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfNomePaciente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="lbNomePaciente1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tfNomePaciente1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lbNomePaciente2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tfNumeroId" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="66" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -438,6 +537,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEmail">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEmailActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbObservacao">
                       <Properties>
@@ -460,11 +562,88 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JRadioButton" name="rbPessoaFisica">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupPessoaTipo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Pessoa F&#xed;sica (CPF)"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="rbPessoaJuridica">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupPessoaTipo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Pessoa Jur&#xed;dica (CNPJ)"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbPessoaTipo">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tipo:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbDocumento">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="N&#xba; do Documento:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfDocumento">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDocumentoActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbNomePaciente">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Nome do Paciente:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfNomePaciente">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNomePacienteActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbNomePaciente1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Dias de Interna&#xe7;&#xe3;o:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfNomePaciente1">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value="Estimar a quantidade de dias de interna&#xe7;&#xe3;o"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNomePaciente1ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbNomePaciente2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="ID Gerado do Cadastro:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfNumeroId">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNumeroIdActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="btLimpar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Limpar"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btRegistrar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Registrar"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="pnCadastro">
+            <Container class="javax.swing.JPanel" name="pnCadastroCidade">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card3"/>
@@ -474,10 +653,165 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="pnEndereco1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="633" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="pnEndereco1" min="-2" pref="127" max="-2" attributes="0"/>
+                          <EmptySpace pref="553" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="pnEndereco1">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="Endere&#xe7;o:"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbLogradouro4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfCadastroCidade" min="-2" pref="358" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lbLogradouro8" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="cbEnderecoUf1" alignment="0" pref="112" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="btRegistrar1" min="-2" pref="103" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbLogradouro8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbLogradouro4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="cbEnderecoUf1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfCadastroCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btRegistrar1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="lbLogradouro4">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cidade:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbLogradouro8">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="UF"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="cbEnderecoUf1">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="28">
+                            <StringItem index="0" value=" "/>
+                            <StringItem index="1" value="AC"/>
+                            <StringItem index="2" value="AL"/>
+                            <StringItem index="3" value="AP"/>
+                            <StringItem index="4" value="AM"/>
+                            <StringItem index="5" value="BA"/>
+                            <StringItem index="6" value="CE"/>
+                            <StringItem index="7" value="DF"/>
+                            <StringItem index="8" value="ES"/>
+                            <StringItem index="9" value="GO"/>
+                            <StringItem index="10" value="MA"/>
+                            <StringItem index="11" value="MT"/>
+                            <StringItem index="12" value="MS"/>
+                            <StringItem index="13" value="MG"/>
+                            <StringItem index="14" value="PA"/>
+                            <StringItem index="15" value="PB"/>
+                            <StringItem index="16" value="PR"/>
+                            <StringItem index="17" value="PE"/>
+                            <StringItem index="18" value="PI"/>
+                            <StringItem index="19" value="RJ"/>
+                            <StringItem index="20" value="RN"/>
+                            <StringItem index="21" value="RS"/>
+                            <StringItem index="22" value="RO"/>
+                            <StringItem index="23" value="RR"/>
+                            <StringItem index="24" value="SC"/>
+                            <StringItem index="25" value="SP"/>
+                            <StringItem index="26" value="SE"/>
+                            <StringItem index="27" value="TO"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfCadastroCidade">
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btRegistrar1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Registrar"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnCadastroPessoaDoador">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card2"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="782" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btLimparDoador" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btRegistrarDoador" min="-2" pref="103" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="pnPessoaDoador" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="pnEnderecoDoador" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="164" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -485,18 +819,31 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="338" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="pnPessoaDoador" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="pnEnderecoDoador" min="-2" pref="224" max="-2" attributes="0"/>
+                                  <EmptySpace pref="410" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btRegistrarDoador" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btLimparDoador" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel2">
+                <Container class="javax.swing.JPanel" name="pnEnderecoDoador">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Pessoa"/>
+                        <TitledBorder title="Endere&#xe7;o:"/>
                       </Border>
                     </Property>
                   </Properties>
@@ -505,16 +852,250 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jScrollPane2" alignment="0" pref="385" max="32767" attributes="0"/>
-                                  <Component id="lbObservacao1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbEmail1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbTelefone1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbNome1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfEmail1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ffTelefone1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfNome1" alignment="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbNumero1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfEnderecoNumero1" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbBairro1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfEnderecoBairro1" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbComplemento1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfEnderecoComplemento1" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbLogradouro9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfEnderecoCep1" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbLogradouro7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cbEnderecoCidade1" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lbLogradouro10" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="cbEnderecoUf2" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btAdicionarCidade1" min="-2" pref="43" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="tfEnderecoLogradouro1" alignment="0" min="-2" pref="532" max="-2" attributes="0"/>
+                                          <Component id="lbLogradouro1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btAdicionarCidade1" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lbLogradouro7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbEnderecoCidade1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lbLogradouro10" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbEnderecoUf2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lbLogradouro9" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tfEnderecoCep1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lbLogradouro1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfEnderecoLogradouro1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbNumero1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbBairro1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbComplemento1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfEnderecoNumero1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfEnderecoBairro1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfEnderecoComplemento1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JTextField" name="tfEnderecoLogradouro1">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEnderecoLogradouro1ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbLogradouro1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Logradouro:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbNumero1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfEnderecoNumero1">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfEnderecoBairro1">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbBairro1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Bairro:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbLogradouro7">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cidade:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfEnderecoComplemento1">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbComplemento1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Complemento:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="cbEnderecoCidade1">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="Item 1"/>
+                            <StringItem index="1" value="Item 2"/>
+                            <StringItem index="2" value="Item 3"/>
+                            <StringItem index="3" value="Item 4"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfEnderecoCep1">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbLogradouro9">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="CEP:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbLogradouro10">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="UF"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="cbEnderecoUf2">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="28">
+                            <StringItem index="0" value=" "/>
+                            <StringItem index="1" value="AC"/>
+                            <StringItem index="2" value="AL"/>
+                            <StringItem index="3" value="AP"/>
+                            <StringItem index="4" value="AM"/>
+                            <StringItem index="5" value="BA"/>
+                            <StringItem index="6" value="CE"/>
+                            <StringItem index="7" value="DF"/>
+                            <StringItem index="8" value="ES"/>
+                            <StringItem index="9" value="GO"/>
+                            <StringItem index="10" value="MA"/>
+                            <StringItem index="11" value="MT"/>
+                            <StringItem index="12" value="MS"/>
+                            <StringItem index="13" value="MG"/>
+                            <StringItem index="14" value="PA"/>
+                            <StringItem index="15" value="PB"/>
+                            <StringItem index="16" value="PR"/>
+                            <StringItem index="17" value="PE"/>
+                            <StringItem index="18" value="PI"/>
+                            <StringItem index="19" value="RJ"/>
+                            <StringItem index="20" value="RN"/>
+                            <StringItem index="21" value="RS"/>
+                            <StringItem index="22" value="RO"/>
+                            <StringItem index="23" value="RR"/>
+                            <StringItem index="24" value="SC"/>
+                            <StringItem index="25" value="SP"/>
+                            <StringItem index="26" value="SE"/>
+                            <StringItem index="27" value="TO"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btAdicionarCidade1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="+"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Cadastrar novo endere&#xe7;o"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="pnPessoaDoador">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="Pessoa Doador"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lbNomePaciente5" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfNumeroId1" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lbDocumento1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbPessoaTipo1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="rbPessoaFisica1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="rbPessoaJuridica1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane2" alignment="0" pref="385" max="32767" attributes="0"/>
+                                      <Component id="lbObservacao1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbEmail1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbTelefone1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbNome1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tfEmail1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="ffTelefone1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfNome1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfDocumento1" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace pref="29" max="32767" attributes="0"/>
                           </Group>
@@ -523,7 +1104,6 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbNome1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tfNome1" min="-2" max="-2" attributes="0"/>
@@ -536,10 +1116,25 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tfEmail1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lbPessoaTipo1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="rbPessoaFisica1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbPessoaJuridica1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lbDocumento1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfDocumento1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lbObservacao1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="59" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lbNomePaciente5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfNumeroId1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="21" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -565,6 +1160,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEmail1">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEmail1ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbObservacao1">
                       <Properties>
@@ -587,8 +1185,62 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JRadioButton" name="rbPessoaFisica1">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupPessoaTipo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Pessoa F&#xed;sica (CPF)"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="rbPessoaJuridica1">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupPessoaTipo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Pessoa Jur&#xed;dica (CNPJ)"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbPessoaTipo1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tipo:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbDocumento1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="N&#xba; do Documento:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfDocumento1">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDocumento1ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbNomePaciente5">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="ID Gerado do Cadastro:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfNumeroId1">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNumeroId1ActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="btLimparDoador">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Limpar"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btRegistrarDoador">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Registrar"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
