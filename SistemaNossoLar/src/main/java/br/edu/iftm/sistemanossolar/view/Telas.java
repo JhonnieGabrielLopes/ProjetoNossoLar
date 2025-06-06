@@ -981,7 +981,15 @@ public class Telas extends javax.swing.JFrame {
             paciente.setLocal(Paciente.Local.PRONTOSOCORRO);
         }
         paciente.setNome(tfNomePaciente.getText());
-        paciente.setPrevisaoDias(Integer.parseInt(tfQtdDias.getText()));
+        
+        try{
+            if (tfQtdDias.getText()!= null && tfQtdDias.getText().trim().isEmpty()){
+                paciente.setPrevisaoDias(Integer.parseInt(tfQtdDias.getText()));
+            }
+        }catch(NumberFormatException ex){
+            ex.printStackTrace();
+        }
+        
         String telefone = ffTelefone.getText().replaceAll("[^\\d]", "");
         Pessoa novaPessoa = new Pessoa(
             tfNome.getText(),
@@ -996,7 +1004,7 @@ public class Telas extends javax.swing.JFrame {
         if(rbPessoaJuridica.isSelected()){
             novaPessoa.setTipoPessoa(Pessoa.TipoPessoa.JURIDICA);
         }
-        novaPessoa.setIdentificacao((String)ffDocumento.getValue());
+        novaPessoa.setIdentificacao(ffDocumento.getText().replaceAll("[^\\d]", ""));
         novaPessoa.setObservacao(taObservacao.getText());
         novaPessoa.setPaciente(paciente);
         
