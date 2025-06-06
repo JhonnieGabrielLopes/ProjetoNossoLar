@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
@@ -83,5 +85,29 @@ public class CidadeDAO {
             return false;
         }
 
+    }
+
+    public List<Cidade> listarCidade() throws SQLException {
+        log.registrarLog(1, "CidadeDAO", "listarCidade", "cidade", "Listando a cidade");
+        String sql = "SELECT * FROM cidade";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+
+            List<Cidade> cidades = new ArrayList<>();
+            while (rs.next()) {
+                Cidade cidade = new Cidade(
+                    rs.getString("nome"),
+                    rs.getString("uf")
+                );
+                cidades.add(cidade);
+            }
+            log.registrarLog(2, "CidadeDAO", "listarCidade", "cidade", "Cidades listadas com sucesso");
+            return cidades;
+
+        } catch (SQLException e) {
+            log.registrarLog(4, "CidadeDAO", "listarCidade", "cidade", "Erro ao listar cidades");
+            e.printStackTrace();
+            return null;
+        }
     }
 }

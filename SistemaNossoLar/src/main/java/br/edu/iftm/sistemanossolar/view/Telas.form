@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupPessoaTipo">
     </Component>
@@ -18,6 +18,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -108,6 +111,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lbMenu">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Menu Principal"/>
               </Properties>
             </Component>
@@ -144,7 +150,7 @@
             <Container class="javax.swing.JPanel" name="pnCadastroPessoaCliente">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card2"/>
+                  <CardConstraints cardName="cliente"/>
                 </Constraint>
               </Constraints>
 
@@ -165,7 +171,7 @@
                                   <Component id="pnEnderecoCliente" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="164" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -176,7 +182,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="pnPessoaCliente" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="125" max="32767" attributes="0"/>
+                                  <EmptySpace pref="101" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="pnEnderecoCliente" min="-2" pref="224" max="-2" attributes="0"/>
@@ -304,9 +310,6 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="tfEnderecoLogradouro">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEnderecoLogradouroActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbLogradouro">
                       <Properties>
@@ -319,6 +322,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEnderecoNumero">
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfEnderecoNumeroKeyTyped"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEnderecoBairro">
                     </Component>
@@ -355,6 +361,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEnderecoCep">
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfEnderecoCepKeyTyped"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbLogradouro5">
                       <Properties>
@@ -427,8 +436,15 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbNomePaciente1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfNomePaciente1" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="lbNomePaciente" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbDocumento" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbPessoaTipo" min="-2" max="-2" attributes="0"/>
@@ -445,21 +461,9 @@
                                       <Component id="tfEmail" alignment="0" max="32767" attributes="0"/>
                                       <Component id="ffTelefone" alignment="0" max="32767" attributes="0"/>
                                       <Component id="tfNome" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="tfDocumento" alignment="0" max="32767" attributes="0"/>
                                       <Component id="tfNomePaciente" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbNomePaciente1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfNomePaciente1" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="lbNomePaciente2" max="32767" attributes="0"/>
-                                          <Component id="tfNumeroId" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="ffDocumento" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="29" max="32767" attributes="0"/>
                           </Group>
@@ -488,9 +492,9 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lbDocumento" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tfDocumento" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="ffDocumento" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbObservacao" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="59" max="-2" attributes="0"/>
@@ -499,18 +503,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tfNomePaciente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="lbNomePaciente1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tfNomePaciente1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbNomePaciente2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tfNumeroId" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="lbNomePaciente1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfNomePaciente1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="66" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -518,6 +513,9 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="tfNome">
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNomeKeyTyped"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbNome">
                       <Properties>
@@ -525,6 +523,11 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JFormattedTextField" name="ffTelefone">
+                      <Properties>
+                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                          <Format format="(##) # ####-####" subtype="-1" type="5"/>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbTelefone">
                       <Properties>
@@ -537,9 +540,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEmail">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEmailActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbObservacao">
                       <Properties>
@@ -569,6 +569,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Pessoa F&#xed;sica (CPF)"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPessoaFisicaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rbPessoaJuridica">
                       <Properties>
@@ -577,6 +580,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Pessoa Jur&#xed;dica (CNPJ)"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPessoaJuridicaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbPessoaTipo">
                       <Properties>
@@ -588,11 +594,6 @@
                         <Property name="text" type="java.lang.String" value="N&#xba; do Documento:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="tfDocumento">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDocumentoActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lbNomePaciente">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Nome do Paciente:"/>
@@ -600,7 +601,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfNomePaciente">
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNomePacienteActionPerformed"/>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNomePacienteKeyTyped"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbNomePaciente1">
@@ -613,21 +614,10 @@
                         <Property name="toolTipText" type="java.lang.String" value="Estimar a quantidade de dias de interna&#xe7;&#xe3;o"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNomePaciente1ActionPerformed"/>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNomePaciente1KeyTyped"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lbNomePaciente2">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="ID Gerado do Cadastro:"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="tfNumeroId">
-                      <Properties>
-                        <Property name="toolTipText" type="java.lang.String" value=""/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNumeroIdActionPerformed"/>
-                      </Events>
+                    <Component class="javax.swing.JFormattedTextField" name="ffDocumento">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -646,7 +636,7 @@
             <Container class="javax.swing.JPanel" name="pnCadastroCidade">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card3"/>
+                  <CardConstraints cardName="cidade"/>
                 </Constraint>
               </Constraints>
 
@@ -656,7 +646,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="pnEndereco1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="633" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -665,7 +655,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="pnEndereco1" min="-2" pref="127" max="-2" attributes="0"/>
-                          <EmptySpace pref="553" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -790,7 +780,7 @@
             <Container class="javax.swing.JPanel" name="pnCadastroPessoaDoador">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card2"/>
+                  <CardConstraints cardName="doador"/>
                 </Constraint>
               </Constraints>
 
@@ -811,7 +801,7 @@
                                   <Component id="pnEnderecoDoador" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="164" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -950,9 +940,6 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="tfEnderecoLogradouro1">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEnderecoLogradouro1ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbLogradouro1">
                       <Properties>
@@ -1160,9 +1147,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEmail1">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEmail1ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbObservacao1">
                       <Properties>
@@ -1212,9 +1196,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfDocumento1">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDocumento1ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbNomePaciente5">
                       <Properties>
@@ -1225,9 +1206,6 @@
                       <Properties>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNumeroId1ActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

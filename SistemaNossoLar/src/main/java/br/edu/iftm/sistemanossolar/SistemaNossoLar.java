@@ -7,6 +7,7 @@ import br.edu.iftm.sistemanossolar.dao.ConexaoDAO;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.view.Metodos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
+import br.edu.iftm.sistemanossolar.view.Telas;
 
 public class SistemaNossoLar {
 
@@ -16,6 +17,8 @@ public class SistemaNossoLar {
         log.registrarLog(1, "SistemaNossoLar", "main", "", "Iniciando o sistema");
         try (Connection conexao = ConexaoDAO.getConnection()) {
             log.registrarLog(2, "SistemaNossoLar", "main", "", "Conexão estabelecida com o Banco de Dados");
+            Telas tela = new Telas(conexao);
+            tela.setVisible(true);
             Metodos metodos = new Metodos(conexao);
             boolean controle = true;
             Scanner scan = new Scanner(System.in);
