@@ -5,14 +5,20 @@
 package br.edu.iftm.sistemanossolar.view;
 
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
+import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
+import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
+import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 import java.awt.CardLayout;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -22,6 +28,9 @@ import javax.swing.text.MaskFormatter;
 public class Telas extends javax.swing.JFrame {
     private CardLayout cl;
     private static CidadeController cidadeController;
+    private static CadastroCidade cadastroCidade;
+    private static PessoaController pessoaController;
+    private static EnderecoController enderecoController;
     /**
      * Creates new form Telas
      *      lb - Label
@@ -31,6 +40,9 @@ public class Telas extends javax.swing.JFrame {
      */
     public Telas(Connection conexao) {
         cidadeController = new CidadeController(conexao);
+        pessoaController = new PessoaController(conexao);
+        enderecoController = new EnderecoController(conexao);
+        cadastroCidade = new CadastroCidade(this, true, conexao, this);
         initComponents();
         cl = (CardLayout) pnCard.getLayout();
     }
@@ -86,8 +98,12 @@ public class Telas extends javax.swing.JFrame {
         lbNomePaciente = new javax.swing.JLabel();
         tfNomePaciente = new javax.swing.JTextField();
         lbNomePaciente1 = new javax.swing.JLabel();
-        tfNomePaciente1 = new javax.swing.JTextField();
+        tfQtdDias = new javax.swing.JTextField();
         ffDocumento = new javax.swing.JFormattedTextField();
+        cbTipoUsuario = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cbLocalInternacao = new javax.swing.JComboBox<>();
         btLimpar = new javax.swing.JButton();
         btRegistrar = new javax.swing.JButton();
         pnCadastroCidade = new javax.swing.JPanel();
@@ -219,7 +235,11 @@ public class Telas extends javax.swing.JFrame {
 
         lbComplemento.setText("Complemento:");
 
-        cbEnderecoCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbEnderecoCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnderecoCidadeActionPerformed(evt);
+            }
+        });
 
         tfEnderecoCep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -231,10 +251,17 @@ public class Telas extends javax.swing.JFrame {
 
         lbLogradouro6.setText("UF");
 
+        cbEnderecoUf.setForeground(new java.awt.Color(0, 0, 0));
         cbEnderecoUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cbEnderecoUf.setEnabled(false);
 
         btAdicionarCidade.setText("+");
         btAdicionarCidade.setToolTipText("Cadastrar novo endereço");
+        btAdicionarCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAdicionarCidadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnEnderecoClienteLayout = new javax.swing.GroupLayout(pnEnderecoCliente);
         pnEnderecoCliente.setLayout(pnEnderecoClienteLayout);
@@ -372,12 +399,27 @@ public class Telas extends javax.swing.JFrame {
 
         lbNomePaciente1.setText("Dias de Internação:");
 
-        tfNomePaciente1.setToolTipText("Estimar a quantidade de dias de internação");
-        tfNomePaciente1.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfQtdDias.setToolTipText("Estimar a quantidade de dias de internação");
+        tfQtdDias.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfNomePaciente1KeyTyped(evt);
+                tfQtdDiasKeyTyped(evt);
             }
         });
+
+        ffDocumento.setEnabled(false);
+
+        cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Doador", "Assistente" }));
+        cbTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoUsuarioActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Tipo de Usuário");
+
+        jLabel2.setText("Local de Internação");
+
+        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro" }));
 
         javax.swing.GroupLayout pnPessoaClienteLayout = new javax.swing.GroupLayout(pnPessoaCliente);
         pnPessoaCliente.setLayout(pnPessoaClienteLayout);
@@ -385,30 +427,38 @@ public class Telas extends javax.swing.JFrame {
             pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPessoaClienteLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
-                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbNomePaciente1)
-                            .addComponent(tfNomePaciente1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(285, 285, 285))
-                    .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lbNomePaciente)
-                        .addComponent(lbDocumento)
-                        .addComponent(lbPessoaTipo)
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                            .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbNomePaciente1)
+                                .addComponent(tfQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(285, 285, 285))
+                        .addComponent(lbNomePaciente, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbDocumento, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbPessoaTipo, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnPessoaClienteLayout.createSequentialGroup()
                             .addComponent(rbPessoaFisica)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(rbPessoaJuridica))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                        .addComponent(lbObservacao)
-                        .addComponent(lbEmail)
-                        .addComponent(lbTelefone)
-                        .addComponent(lbNome)
-                        .addComponent(tfEmail)
-                        .addComponent(ffTelefone)
-                        .addComponent(tfNome)
-                        .addComponent(tfNomePaciente))
-                    .addComponent(ffDocumento, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbObservacao, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbTelefone, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbNome, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tfEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ffTelefone, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tfNome, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tfNomePaciente, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ffDocumento, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         pnPessoaClienteLayout.setVerticalGroup(
@@ -440,19 +490,37 @@ public class Telas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNomePaciente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNomePaciente1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfNomePaciente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(tfQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         btLimpar.setText("Limpar");
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimparActionPerformed(evt);
+            }
+        });
 
         btRegistrar.setText("Registrar");
+        btRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnCadastroPessoaClienteLayout = new javax.swing.GroupLayout(pnCadastroPessoaCliente);
         pnCadastroPessoaCliente.setLayout(pnCadastroPessoaClienteLayout);
@@ -478,10 +546,10 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnCadastroPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCadastroPessoaClienteLayout.createSequentialGroup()
                         .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(101, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnCadastroPessoaClienteLayout.createSequentialGroup()
                         .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 406, Short.MAX_VALUE)
                         .addGroup(pnCadastroPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btRegistrar)
                             .addComponent(btLimpar))
@@ -810,6 +878,7 @@ public class Telas extends javax.swing.JFrame {
         getContentPane().add(pnDadosPrincipal, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarClienteActionPerformed
@@ -849,12 +918,12 @@ public class Telas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfNomePacienteKeyTyped
 
-    private void tfNomePaciente1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomePaciente1KeyTyped
+    private void tfQtdDiasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQtdDiasKeyTyped
         char verificador = evt.getKeyChar();
         if(!Character.isDigit(verificador)){
             evt.consume();
         }
-    }//GEN-LAST:event_tfNomePaciente1KeyTyped
+    }//GEN-LAST:event_tfQtdDiasKeyTyped
 
     private void tfEnderecoCepKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEnderecoCepKeyTyped
         char verificador = evt.getKeyChar();
@@ -874,10 +943,93 @@ public class Telas extends javax.swing.JFrame {
         try {
             carregarCidade();
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void btAdicionarCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarCidadeActionPerformed
+        cadastroCidade.setLocationRelativeTo(this);
+        cadastroCidade.setVisible(true);
+    }//GEN-LAST:event_btAdicionarCidadeActionPerformed
+
+    private void cbEnderecoCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnderecoCidadeActionPerformed
+        Cidade cidadeSelecionada = (Cidade) cbEnderecoCidade.getSelectedItem();
+        if (cidadeSelecionada != null) {
+            cbEnderecoUf.setSelectedItem(cidadeSelecionada.getEstado()); // define a UF automaticamente
+        }
+    }//GEN-LAST:event_cbEnderecoCidadeActionPerformed
+
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        limparcamposCadastroUsuario();
+    }//GEN-LAST:event_btLimparActionPerformed
+    
+    private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
+        Cidade cidadeEscolhida = (Cidade) cbEnderecoCidade.getSelectedItem();
+        Endereco endereco = new Endereco(
+            tfEnderecoLogradouro.getText(),
+            Integer.parseInt(tfEnderecoNumero.getText()),
+            tfEnderecoBairro.getText(),
+            tfEnderecoCep.getText(),
+            tfEnderecoComplemento.getText(),
+            cidadeEscolhida
+        );
+        Tipo tipuUsuario = new Tipo((String)cbTipoUsuario.getSelectedItem());
+        Paciente paciente = new Paciente();
+        if(cbLocalInternacao.getSelectedIndex() == 0){
+            paciente.setLocal(Paciente.Local.HOSPITAL);
+        }else{
+            paciente.setLocal(Paciente.Local.PRONTOSOCORRO);
+        }
+        paciente.setNome(tfNomePaciente.getText());
+        paciente.setPrevisaoDias(Integer.parseInt(tfQtdDias.getText()));
+        String telefone = ffTelefone.getText().replaceAll("[^\\d]", "");
+        Pessoa novaPessoa = new Pessoa(
+            tfNome.getText(),
+            telefone,
+            endereco
+        );
+        
+        novaPessoa.setEmail(tfEmail.getText());
+        if(rbPessoaFisica.isSelected()){
+            novaPessoa.setTipoPessoa(Pessoa.TipoPessoa.FISICA);
+        }
+        if(rbPessoaJuridica.isSelected()){
+            novaPessoa.setTipoPessoa(Pessoa.TipoPessoa.JURIDICA);
+        }
+        novaPessoa.setIdentificacao((String)ffDocumento.getValue());
+        novaPessoa.setObservacao(taObservacao.getText());
+        novaPessoa.setPaciente(paciente);
+        
+        try{
+            enderecoController.cadastrarEndereco(endereco, cidadeEscolhida);
+            if(!pessoaController.cadastrarPessoa(novaPessoa, tipuUsuario, paciente)){
+                JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar o Usuário", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar o Usuário", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                limparcamposCadastroUsuario();
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btRegistrarActionPerformed
+
+    private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
+        if(cbTipoUsuario.getSelectedIndex()!=0){
+            tfNomePaciente.setEnabled(false);
+            tfQtdDias.setEnabled(false);
+        }else{
+            tfNomePaciente.setEnabled(true);
+            tfQtdDias.setEnabled(true);
+        }
+        if(cbTipoUsuario.getSelectedIndex() == 1){
+            cbLocalInternacao.setEnabled(false);
+        }else{
+            cbLocalInternacao.setEnabled(true);
+        }
+    }//GEN-LAST:event_cbTipoUsuarioActionPerformed
     
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
+        campo.setEnabled(true);
         try {
             MaskFormatter formatter = new MaskFormatter(mascara);
             formatter.setPlaceholderCharacter('_');
@@ -889,12 +1041,31 @@ public class Telas extends javax.swing.JFrame {
     }
     
     public void carregarCidade() throws SQLException{
-        List<Cidade> carregarCidade = new ArrayList<>();
-        carregarCidade = cidadeController.listarCidade();
-        
-        for(Cidade c : carregarCidade){
-            cbEnderecoCidade.addItem(c.getNome());
+        cbEnderecoCidade.removeAllItems();
+        Cidade cidadePadrao = new Cidade("Selecione...", null);
+        cbEnderecoCidade.addItem(cidadePadrao);
+        List<Cidade> puxarCidade = cidadeController.listarCidade();
+        for(Cidade cidade : puxarCidade){
+            cbEnderecoCidade.addItem(cidade);
         }
+    }
+    
+    public void limparcamposCadastroUsuario(){
+        tfNome.setText("");
+        ffTelefone.setText("");
+        tfEmail.setText("");
+        ffDocumento.setText("");
+        taObservacao.setText("");
+        tfNomePaciente.setText("");
+        tfQtdDias.setText("");
+        tfEnderecoCep.setText("");
+        tfEnderecoLogradouro.setText("");
+        tfEnderecoComplemento.setText("");
+        tfEnderecoBairro.setText("");
+        tfEnderecoNumero.setText("");
+        cbEnderecoCidade.setSelectedIndex(0);
+        cbEnderecoUf.setSelectedIndex(0);
+        buttonGroupPessoaTipo.clearSelection();
     }
     /**
      * @param args the command line arguments
@@ -912,14 +1083,18 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JButton btRegistrar1;
     private javax.swing.JButton btRegistrarDoador;
     private javax.swing.ButtonGroup buttonGroupPessoaTipo;
-    private javax.swing.JComboBox<String> cbEnderecoCidade;
+    private javax.swing.JComboBox<Cidade> cbEnderecoCidade;
     private javax.swing.JComboBox<String> cbEnderecoCidade1;
     private javax.swing.JComboBox<String> cbEnderecoUf;
     private javax.swing.JComboBox<String> cbEnderecoUf1;
     private javax.swing.JComboBox<String> cbEnderecoUf2;
+    private javax.swing.JComboBox<String> cbLocalInternacao;
+    private javax.swing.JComboBox<String> cbTipoUsuario;
     private javax.swing.JFormattedTextField ffDocumento;
     private javax.swing.JFormattedTextField ffTelefone;
     private javax.swing.JFormattedTextField ffTelefone1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbBairro;
@@ -988,7 +1163,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfNome1;
     private javax.swing.JTextField tfNomePaciente;
-    private javax.swing.JTextField tfNomePaciente1;
     private javax.swing.JTextField tfNumeroId1;
+    private javax.swing.JTextField tfQtdDias;
     // End of variables declaration//GEN-END:variables
 }
