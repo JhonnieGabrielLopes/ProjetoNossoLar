@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import br.edu.iftm.sistemanossolar.view.RegistrosLog;
+
 public class TipoDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
+
+    RegistrosLog log = new RegistrosLog();
 
     private final Connection conexaoBanco;
 
@@ -15,63 +16,63 @@ public class TipoDAO {
         this.conexaoBanco = conexao;
     }
 
-    public boolean cadastrarTipo(String tipo) {
-        System.out.println("[" + AMARELO + "ALR" + RESET + "] TipoDAO | cadastrarTipo - Iniciando cadastro do Tipo do Usuario");
+    public boolean cadastrarTipo(String tipo, String tabela) {
+        log.registrarLog(1, "TipoDAO", "cadastrarTipo", tabela, "Cadastrando o Tipo "+ tipo);
 
-        String sql = "INSERT INTO tipousuario (tipo) VALUES (?)";
+        String sql = "INSERT INTO "+ tabela +" (tipo) VALUES (?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setString(1, tipo);
             stmt.executeUpdate();
-            System.out.println("[" + AMARELO + "ALR" + RESET + "] TipoDAO | cadastrarTipo - Tipo do Usuario cadastrado");
+            log.registrarLog(2, "TipoDAO", "cadastrarTipo", tabela, "Tipo cadastrado");
             return true;
 
         } catch (Exception e) {
-            System.out.println("[" + VERMELHO + "ERR" + RESET + "] TipoDAO | cadastrarTipo - Tipo do Usuario não cadastrado");
+            log.registrarLog(4, "TipoDAO", "cadastrarTipo", tabela, "Tipo não cadastrado");
             e.printStackTrace();
             return false;
         }
     }
 
-    public boolean existeTipo(String tipo) {
-        System.out.println("[" + AMARELO + "ALR" + RESET + "] TipoDAO | existeTipo - Iniciando verificação se o Tipo do Usuario existe");
+    public boolean existeTipo(String tipo, String tabela) {
+        log.registrarLog(1, "TipoDAO", "existeTipo", tabela, "Verificando se o Tipo "+ tipo +" existe");
 
-        String sql = "SELECT * FROM tipousuario WHERE tipo = ?";
+        String sql = "SELECT * FROM "+ tabela +" WHERE tipo = (?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setString(1, tipo);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                System.out.println("[" + AMARELO + "ALR" + RESET + "] TipoDAO | existeTipo - Tipo do Usuario existe");
+                log.registrarLog(2, "TipoDAO", "existeTipo", tabela, "Tipo existe");
                 return true;
             } else {
-                System.out.println("[" + AMARELO + "ALR" + RESET + "] TipoDAO | existeTipo - Tipo do Usuario não existe");
+                log.registrarLog(3, "TipoDAO", "existeTipo", tabela, "Tipo não existe");
                 return false;
             }
 
         } catch (Exception e) {
-            System.out.println("[" + VERMELHO + "ERR" + RESET + "] TipoDAO | existeTipo - Erro ao verificar se o Tipo do Usuario existe");
+            log.registrarLog(4, "TipoDAO", "existeTipo", tabela, "Erro ao verificar se o Tipo existe");
             e.printStackTrace();
             return false;
         }
     }
 
-    public Integer buscarIdTipo(String tipo) {
-        System.out.println("[" + AMARELO + "ALR" + RESET + "] TipoDAO | buscarIdTipo - Iniciando busca do ID do Tipo do Usuario");
+    public Integer buscarIdTipo(String tipo, String tabela) {
+        log.registrarLog(1, "TipoDAO", "buscarIdTipo", tabela, "Buscando o ID do Tipo "+tipo);
 
-        String sql = "SELECT id FROM tipousuario WHERE tipo = ?";
+        String sql = "SELECT id FROM "+ tabela +" WHERE tipo = (?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setString(1, tipo);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                System.out.println("[" + AMARELO + "ALR" + RESET + "] TipoDAO | buscarIdTipo - ID do Tipo do Usuario encontrado");
+                log.registrarLog(2, "TipoDAO", "buscarIdTipo", tabela, "ID do Tipo encontrado");
                 return rs.getInt("id");
             } else {
-                System.out.println("[" + AMARELO + "ALR" + RESET + "] TipoDAO | buscarIdTipo - ID do Tipo do Usuario não encontrado");
+                log.registrarLog(3, "TipoDAO", "buscarIdTipo", tabela, "ID do Tipo não encontrado");
                 return null;
             }
 
         } catch (Exception e) {
-            System.out.println("[" + VERMELHO + "ERR" + RESET + "] TipoDAO | buscarIdTipo - Erro ao buscar o ID do Tipo do Usuario");
+            log.registrarLog(4, "TipoDAO", "buscarIdTipo", tabela, "Erro ao buscar o ID do Tipo");
             e.printStackTrace();
             return null;
         }

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.edu.iftm.sistemanossolar.dao.pessoa.PessoaDAO;
+import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
@@ -15,15 +16,16 @@ public class PessoaController {
         this.pessoaDAO = new PessoaDAO(conexao);
     }
 
-    public boolean cadastrarPessoa(Pessoa pessoa, Tipo tipo) throws SQLException {
-        return pessoaDAO.cadastrarPessoa(pessoa, tipo);
+    public boolean cadastrarPessoa(Pessoa pessoa, Tipo tipo, Paciente paciente) throws SQLException {
+        return pessoaDAO.cadastrarPessoa(pessoa, tipo, paciente);
     }
 
     public Pessoa buscarPessoaPorId(int id) throws SQLException {
         return pessoaDAO.buscarPessoaPorId(id);
     }
 
-    public List<Pessoa> listarPessoas() throws SQLException {
-        return pessoaDAO.listarPessoas();
+    public List<Pessoa> listarPessoas(String tipo) throws SQLException {
+        return pessoaDAO.listarPessoas(tipo);
     }
+
 }

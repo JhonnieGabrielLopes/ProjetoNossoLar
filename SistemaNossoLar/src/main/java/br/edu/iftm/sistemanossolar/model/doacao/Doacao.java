@@ -3,11 +3,12 @@ package br.edu.iftm.sistemanossolar.model.doacao;
 import java.time.LocalDate;
 import java.util.List;
 
-import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 public class Doacao {
-    private Doador doador;
+    private Integer id;
+    private Pessoa doador;
     private List<Produto> produto;
     private Tipo tipo;
     private LocalDate dataDoacao;
@@ -15,17 +16,29 @@ public class Doacao {
     private Double valor;
     private byte[] anexo;
 
-    public Doacao(Doador doador, Tipo tipo, LocalDate dataDoacao) {
+    public Doacao() {
+        
+    }
+
+    public Doacao(Pessoa doador, Tipo tipo, LocalDate dataDoacao) {
         this.doador = doador;
         this.tipo = tipo;
         this.dataDoacao = dataDoacao;
     }
 
-    public Doador getDoador() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Pessoa getDoador() {
         return doador;
     }
 
-    public void setDoador(Doador doador) {
+    public void setDoador(Pessoa doador) {
         this.doador = doador;
     }
 

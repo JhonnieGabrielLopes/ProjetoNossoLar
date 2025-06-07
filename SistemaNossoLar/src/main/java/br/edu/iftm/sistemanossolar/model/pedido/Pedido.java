@@ -2,17 +2,18 @@ package br.edu.iftm.sistemanossolar.model.pedido;
 
 import java.time.LocalDate;
 
-import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 
 public class Pedido {
-    private Cliente cliente;
+    private Integer id;
+    private Pessoa cliente;
     private Integer quantMarmita;
     private StatusPedido status;
     private String observacao;
     private LocalDate dataPedido;
     private LocalDate dataEntrega;
 
-    public Pedido(Cliente cliente, Integer quantMarmita, StatusPedido status, LocalDate dataPedido) {
+    public Pedido(Pessoa cliente, Integer quantMarmita, StatusPedido status, LocalDate dataPedido) {
         this.cliente = cliente;
         this.quantMarmita = quantMarmita;
         this.status = status;
@@ -33,11 +34,11 @@ public class Pedido {
         }
     }
 
-    public Cliente getCliente() {
+    public Pessoa getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Pessoa cliente) {
         this.cliente = cliente;
     }
 
@@ -79,6 +80,14 @@ public class Pedido {
 
     public void setDataEntrega(LocalDate dataEntrega) {
         this.dataEntrega = dataEntrega;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }

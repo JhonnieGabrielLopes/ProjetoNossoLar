@@ -5,33 +5,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
+import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class EnderecoDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
     
     private final Connection conexaoBanco;
-    private CidadeDAO cidadeDAO;
+
+    private CidadeController cidadeController;
+
+    RegistrosLog log = new RegistrosLog();
 
     public EnderecoDAO(Connection conexao) {
         this.conexaoBanco = conexao;
-        this.cidadeDAO = new CidadeDAO(conexao);
+        this.cidadeController = new CidadeController(conexao);
     }
 
     public boolean cadastrarEndereco(Endereco endereco, Cidade cidadeTemp) throws SQLException {
-        System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | cadastrarEndereco - Iniciando cadastro do endereço");
+        log.registrarLog(1, "EnderecoDAO", "cadastrarEndereco", "endereco", "Cadastrando o Endereço do Usuario");
 
-        if (!cidadeDAO.existeCidade(cidadeTemp)) {
-            cidadeDAO.cadastrarCidade(cidadeTemp);
+        if (!cidadeController.existeCidade(cidadeTemp)) {
+            cidadeController.cadastrarCidade(cidadeTemp);
         }
 
-        Integer idCidade = cidadeDAO.buscarIdCidade(cidadeTemp);
+        Integer idCidade = cidadeController.buscarIdCidade(cidadeTemp);
     
         String sql = "INSERT INTO endereco (cidade, cep, logradouro, numero, bairro, complemento) VALUES (?, ?, ?, ?, ?, ?)";
-
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setInt(1, idCidade);
             stmt.setString(2, endereco.getCep());
@@ -40,18 +41,19 @@ public class EnderecoDAO {
             stmt.setString(5, endereco.getBairro());
             stmt.setString(6, endereco.getComplemento());
             stmt.executeUpdate();
-            System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | cadastrarEndereco - Endereço cadastrado");
+
+            log.registrarLog(2, "EnderecoDAO", "cadastrarEndereco", "endereco", "Endereço cadastrado");
             return true;
 
         } catch (Exception e) {
-            System.out.println("[" + VERMELHO + "ERR" + RESET + "] EnderecoDAO | cadastrarEndereco - Endereço não cadastrado");
+            log.registrarLog(4, "EnderecoDAO", "cadastrarEndereco", "endereco", "Endereço não cadastrado");
             e.printStackTrace();
             return false;
         }
     }
 
     public Integer buscarIdEndereco(int idCidade) throws SQLException  {
-        System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarIdEndereco - Iniciando busca do ID do endereço");
+        log.registrarLog(1, "EnderecoDAO", "buscarIdEndereco", "endereco", "Buscando o ID do Endereço");
 
         String sql = "SELECT id FROM endereco WHERE cidade = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
@@ -59,18 +61,17 @@ public class EnderecoDAO {
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarIdEndereco - ID do endereço encontrado");
+                log.registrarLog(2, "EnderecoDAO", "buscarIdEndereco", "endereco", "ID do Endereço encontrado");
                 return rs.getInt("id");
             } else {
-                System.out.println("[" + AMARELO + "ALR" + RESET + "] EnderecoDAO | buscarIdEndereco - ID do endereço não encontrado");
+                log.registrarLog(3, "EnderecoDAO", "buscarIdEndereco", "endereco", "ID do Endereço não encontrado");
                 return null;
             }
 
         } catch (Exception e) {
-            System.out.println("[" + VERMELHO + "ERR" + RESET + "] EnderecoDAO | buscarIdEndereco - Erro ao buscar o ID do endereço");
+            log.registrarLog(4, "EnderecoDAO", "buscarIdEndereco", "endereco", "Erro ao buscar ID do Endereço");
             e.printStackTrace();
             return null;
         }
     }
-
 }

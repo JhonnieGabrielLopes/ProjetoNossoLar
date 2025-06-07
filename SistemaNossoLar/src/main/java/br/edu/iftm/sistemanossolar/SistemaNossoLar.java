@@ -4,20 +4,21 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import br.edu.iftm.sistemanossolar.dao.ConexaoDAO;
-
+import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.view.Metodos;
+import br.edu.iftm.sistemanossolar.view.RegistrosLog;
+import br.edu.iftm.sistemanossolar.view.Telas;
 
 public class SistemaNossoLar {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String VERDE = "\u001B[32m";
-    public static final String AMARELO = "\u001B[33m";
-    public static final String AZUL = "\u001B[34m";
+
+    static RegistrosLog log = new RegistrosLog();
 
     public static void main(String[] args) {
-        System.out.println("\n[" + AZUL + "INF" + RESET + "] SistemaNossoLar | main - Iniciando sistema...");
+        log.registrarLog(1, "SistemaNossoLar", "main", "", "Iniciando o sistema");
         try (Connection conexao = ConexaoDAO.getConnection()) {
-            System.out.println("[" + VERDE + "INF" + RESET + "] SistemaNossoLar | main - Conexão estabelecida com o Banco de Dados");
+            log.registrarLog(2, "SistemaNossoLar", "main", "", "Conexão estabelecida com o Banco de Dados");
+            Telas tela = new Telas(conexao);
+            tela.setVisible(true);
             Metodos metodos = new Metodos(conexao);
             boolean controle = true;
             Scanner scan = new Scanner(System.in);
@@ -29,56 +30,115 @@ public class SistemaNossoLar {
 
                 switch (opcao) {
                     case 1:
-                        System.out.println("[" + AZUL + "INF" + RESET + "] SistemaNossoLar | main - Cadastro de usuario");
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Usuário");
 
                         if (metodos.cadastrarUsuario(scan)) {
-                            System.out.println("[" + VERDE + "INF" + RESET + "] SistemaNossoLar | main - Usuário cadastrado");
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Usuário cadastrado");
                         } else {
-                            System.out.println("[" + AMARELO + "ALR" + RESET + "] SistemaNossoLar | main - Usuário não cadastrado");
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Usuário não cadastrado");
                         }
 
                         controle = false;
                         break;
 
                     case 2:
-                        System.out.println("[" + AZUL + "INF" + RESET + "] SistemaNossoLar | main - Cadastro de endereço");
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Endereço");
 
                         if (metodos.cadastrarEndereco(scan)) {
-                            System.out.println("[" + VERDE + "INF" + RESET + "] SistemaNossoLar | main - Endereço cadastrado");
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Endereço cadastrado");
                         } else {
-                            System.out.println("[" + AMARELO + "ALR" + RESET + "] SistemaNossoLar | main - Endereço não cadastrado");
-
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Endereço não cadastrado");
                         }
 
                         controle = false;
                         break;
 
                     case 3:
-                        System.out.println("[" + AZUL + "INF" + RESET + "] SistemaNossoLar | main - Cadastro de cidade");
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Cidade");
 
                         if (metodos.cadastrarCidade(scan)) {
-                            System.out.println("[" + VERDE + "INF" + RESET + "] SistemaNossoLar | main - Cidade cadastrada");
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Cidade cadastrada");
                         } else {
-                            System.out.println("[" + AMARELO + "ALR" + RESET + "] SistemaNossoLar | main - Cidade não cadastrada");
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Cidade não cadastrada");
                         }
 
                         controle = false;
                         break;
-
+                    
                     case 4:
-                        System.out.println("[" + AMARELO + "ALR" + RESET + "] SistemaNossoLar | main - Fechando sistema");
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Doação");
+
+                        if (metodos.cadastrarDoacao(scan)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Doação cadastrada");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Doação não cadastrada");
+                        }
+                        break;
+
+                    case 5:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Pedido");
+
+                        if (metodos.cadastrarPedido(scan)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Pedido cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Pedido não cadastrado");
+                        }
+                        break;
+
+                    case 6:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Produto");
+
+                        if (metodos.cadastrarProduto(scan, new Produto())) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Produto cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Produto não cadastrado");
+                        }
+                        break;
+
+                    case 7:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Tipo Usuário");
+
+                        if (metodos.cadastrarTipo(scan, 1)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Tipo Usuário cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Tipo Usuário não cadastrado");
+                        }
+                        break;
+
+                    case 8:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Tipo Doação");
+
+                        if (metodos.cadastrarTipo(scan, 3)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Tipo Doação cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Tipo Doação não cadastrado");
+                        }
+                        break;
+
+                    case 9:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Cadastro de Tipo Produto");
+
+                        if (metodos.cadastrarTipo(scan, 2)) {
+                            log.registrarLog(2, "SistemaNossoLar", "main", "", "Tipo Produto cadastrado");
+                        } else {
+                            log.registrarLog(3, "SistemaNossoLar", "main", "", "Tipo Produto não cadastrado");
+                        }
+                        break;
+
+                    case 26:
+                        log.registrarLog(1, "SistemaNossoLar", "main", "", "Encerrando o sistema");
                         controle = true;
                         break;
 
                     default:
                         controle = false;
-                        System.out.println("[" + AMARELO + "ALR" + RESET + "] SistemaNossoLar | main - Opção inválida.");
+                        log.registrarLog(3, "SistemaNossoLar", "main", "", "Opção inválida");
                         break;
                 }
             } while (!controle);
 
         } catch (Exception e) {
-            System.err.println("[" + VERMELHO + "ERR" + RESET + "] SistemaNossoLar | main - Erro na conexão com o Banco de Dados.");
+            log.registrarLog(4, "SistemaNossoLar", "main", "", "Erro ao conectar com o Banco de Dados");
             e.printStackTrace();
         }
     }

@@ -2,24 +2,67 @@ package br.edu.iftm.sistemanossolar.model.pessoa;
 
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 
-public abstract class Pessoa {
+public class Pessoa {
+    private int id;
     private String nome;
     private String telefone;
     private TipoPessoa tipoPessoa;
+    private Paciente paciente;
     private String email;
     private String identificacao;
     private Endereco endereco;
+    private int enderecoId;
     private String observacao;
 
-    public Pessoa(String nome, String telefone, Endereco endereco) {
+    public Pessoa(){
+        
+    }
+
+    public Pessoa(String nome, String telefone, Endereco endereco) { // construtor usado para cadastrar cliente e doador
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
     }
     
-    public Pessoa(String nome, String telefone) {
+    public Pessoa(String nome, String telefone) { // construtor usado para listar e selecionar clientes e doadores em registro de pedido e doação
         this.nome = nome;
         this.telefone = telefone;
+    }
+    // construtor usado para pegar o registro completo de usuário para jogar na tela de alterar usuário
+    public Pessoa(String nome, String telefone, TipoPessoa tipoPessoa, String email, String identificacao, Endereco endereco, String observacao) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.tipoPessoa = tipoPessoa;
+        this.email = email;
+        this.identificacao = identificacao;
+        this.endereco = endereco;
+        this.observacao = observacao;
+    }
+    
+    //Cliente
+    public Pessoa(String nome, String telefone, Endereco endereco, Paciente paciente) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.paciente = paciente;
+    }
+
+    public Pessoa(int id, String nome, String telefone){
+        this.nome = nome;
+        this.telefone = telefone;
+        this.id = id;
+    }
+    
+    //Completo
+    public Pessoa(int id, String nome, TipoPessoa tipoPessoa, String identificacao, String telefone, int enderecoId, String email,  String observacao) {
+        this.id = id;
+        this.nome = nome;
+        this.tipoPessoa = tipoPessoa;
+        this.identificacao = identificacao;
+        this.telefone = telefone;
+        this.enderecoId = enderecoId;
+        this.email = email;
+        this.observacao = observacao;
     }
 
     public enum TipoPessoa {
@@ -93,5 +136,25 @@ public abstract class Pessoa {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public int getEnderecoId() {
+        return enderecoId;
+    }
+
+    public void setEnderecoId(int enderecoId) {
+        this.enderecoId = enderecoId;
     }
 }

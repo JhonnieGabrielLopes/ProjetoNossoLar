@@ -34,4 +34,8 @@ INSERT INTO `nossolar`.`tipousuario` (`tipo`) VALUES ('Assistente');
 INSERT INTO `nossolar`.`tipousuario` (`tipo`) VALUES ('Cliente');
 INSERT INTO `nossolar`.`tipousuario` (`tipo`) VALUES ('Doador');
 
-
+SELECT * FROM nossolar.tipoproduto;
+-- INSERTS PADRÃO DA TABELA TIPO PRODUTO
+INSERT INTO `nossolar`.`tipoproduto` (`tipo`) VALUES ('Alimento');
+INSERT INTO `nossolar`.`tipoproduto` (`tipo`) VALUES ('Limpeza');
+INSERT INTO `nossolar`.`tipoproduto` (`tipo`) VALUES ('Utensílios');

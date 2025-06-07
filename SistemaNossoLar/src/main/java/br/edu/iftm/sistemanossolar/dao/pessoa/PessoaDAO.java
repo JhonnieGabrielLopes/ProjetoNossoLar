@@ -8,184 +8,186 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.iftm.sistemanossolar.dao.endereco.CidadeDAO;
-import br.edu.iftm.sistemanossolar.dao.endereco.EnderecoDAO;
-
+import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
+import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.PacienteController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
-import br.edu.iftm.sistemanossolar.model.pessoa.Cliente;
-import br.edu.iftm.sistemanossolar.model.pessoa.Doador;
+import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
+import br.edu.iftm.sistemanossolar.view.RegistrosLog;
+
 public class PessoaDAO {
-    public static final String RESET = "\u001B[0m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String AMARELO = "\u001B[33m";
 
     private final Connection conexaoBanco;
-    private static CidadeDAO cidadeDAO;
-    private static EnderecoDAO enderecoDAO;
-    private static TipoDAO tipoDAO;
+    private static CidadeController cidadeController;
+    private static EnderecoController enderecoController;
+    private static TipoController tipoController;
+    private static PacienteController pacienteController;
+
+    RegistrosLog log = new RegistrosLog();
 
     public PessoaDAO(Connection conexao) {
         this.conexaoBanco = conexao;
-        cidadeDAO = new CidadeDAO(conexao);
-        enderecoDAO = new EnderecoDAO(conexao);
-        tipoDAO = new TipoDAO(conexao);
+        cidadeController = new CidadeController(conexao);
+        enderecoController = new EnderecoController(conexao);
+        tipoController = new TipoController(conexao);
+        pacienteController = new PacienteController(conexao);
     }
 
-    public boolean cadastrarPessoa(Pessoa pessoa, Tipo tipo) throws SQLException {
-        System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Iniciando cadastro do Usuario");
+    public boolean cadastrarPessoa(Pessoa pessoa, Tipo tipo, Paciente paciente) throws SQLException {
+        log.registrarLog(1, "PessoaDAO", "cadastrarPessoa", "usuario", "Cadastrando o "+ tipo.getDescricao() +" "+ pessoa.getNome());
 
         Cidade cidadeTemp = pessoa.getEndereco().getCidade();
 
-        if (!cidadeDAO.existeCidade(cidadeTemp)) {
-            cidadeDAO.cadastrarCidade(cidadeTemp);    
+        if (!cidadeController.existeCidade(cidadeTemp)) {
+            cidadeController.cadastrarCidade(cidadeTemp);    
         }
 
-        Integer idCidade = cidadeDAO.buscarIdCidade(cidadeTemp);
-        Integer idEndereco = enderecoDAO.buscarIdEndereco(idCidade);
+        Integer idCidade = cidadeController.buscarIdCidade(cidadeTemp);
+        Integer idEndereco = enderecoController.buscarIdEndereco(idCidade);
 
         Integer idTipo = null;
-        if (!tipoDAO.existeTipo(tipo.getDescricao())) {
-            tipoDAO.cadastrarTipo(
-                    tipo.getDescricao().substring(0, 1).toUpperCase() + tipo.getDescricao().substring(1).toLowerCase());
-            idTipo = tipoDAO.buscarIdTipo(tipo.getDescricao());
+        if (!tipoController.existeTipo(tipo.getDescricao(), "tipousuario")) {
+            tipoController.cadastrarTipo(tipo.getDescricao(), "tipousuario");
+            idTipo = tipoController.buscarIdTipo(tipo.getDescricao(), "tipousuario");
         } else {
-            idTipo = tipoDAO.buscarIdTipo(tipo.getDescricao());
+            idTipo = tipoController.buscarIdTipo(tipo.getDescricao(), "tipousuario");
         }
 
-        String sql = "INSERT INTO usuario (nome, telefone, endereco, assistido, previsaoQtdDias, tipoPessoa, email, identificacao, observacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (nome, telefone, endereco, tipoPessoa, email, identificacao, observacao) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getTelefone());
             stmt.setInt(3, idEndereco);
 
-            if (pessoa instanceof Cliente) {
-                Cliente cliente = (Cliente) pessoa;
-                stmt.setString(4, cliente.getPaciente());
-                stmt.setInt(5, cliente.getPrevisaoQtdDias());
+            if (pessoa.getTipoPessoa() != null) {
+                stmt.setString(4, pessoa.getTipoPessoa().name());
             } else {
                 stmt.setNull(4, Types.VARCHAR);
-                stmt.setNull(5, Types.INTEGER);
             }
 
-            if (pessoa.getTipoPessoa() != null) {
-                stmt.setString(6, pessoa.getTipoPessoa().name());
+            if (pessoa.getEmail() != null && !pessoa.getEmail().isEmpty()) {
+                stmt.setString(5, pessoa.getEmail());
+            } else {
+                stmt.setNull(5, Types.VARCHAR);
+            }
+
+            if (pessoa.getIdentificacao() != null && !pessoa.getIdentificacao().isEmpty()) {
+                stmt.setString(6, pessoa.getIdentificacao());
             } else {
                 stmt.setNull(6, Types.VARCHAR);
             }
 
-            if (pessoa.getEmail() != null && !pessoa.getEmail().isEmpty()) {
-                stmt.setString(7, pessoa.getEmail());
+            if (pessoa.getObservacao() != null && !pessoa.getObservacao().isEmpty()) {
+                stmt.setString(7, pessoa.getObservacao());
             } else {
                 stmt.setNull(7, Types.VARCHAR);
             }
-
-            if (pessoa.getIdentificacao() != null && !pessoa.getIdentificacao().isEmpty()) {
-                stmt.setString(8, pessoa.getIdentificacao());
-            } else {
-                stmt.setNull(8, Types.VARCHAR);
-            }
-
-            if (pessoa.getObservacao() != null && !pessoa.getObservacao().isEmpty()) {
-                stmt.setString(9, pessoa.getObservacao());
-            } else {
-                stmt.setNull(9, Types.VARCHAR);
-            }
             stmt.executeUpdate();
-            System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Usuario cadastrado");
+            log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuario", tipo.getDescricao() +" cadastrado");
 
-            System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Obtendo ID do Usuario");
+            log.registrarLog(1, "PessoaDAO", "cadastrarPessoa", "usuario", "Obtendo o ID do "+tipo.getDescricao());
             Integer idUsu = null;
             try (ResultSet rs = stmt.getGeneratedKeys()) {
 
                 if (rs.next()) {
-                    System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - ID do usuário obtido");
+                    log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ tipo.getDescricao() +" obtido");
                     idUsu = rs.getInt(1);
                 } else {
-                    System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - ID do usuário não obtido");
+                    log.registrarLog(3, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ tipo.getDescricao() +" não obtido");
                 }
             } catch (SQLException e) {
-                System.out.println("[" + VERMELHO + "ERR" + RESET + "] PessoaDAO | cadastrarPessoa - Erro ao obter ID do usuário");
+                log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario", "Erro ao obter ID do "+ tipo.getDescricao());
                 e.getMessage();
             }
 
-            System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Cadastrando relação Tipo/Usuario");
             if (idUsu != null) {
+                log.registrarLog(1, "PessoaDAO", "cadastrarPessoa", "usuariotipo", "Cadastrando a relação do Tipo/Usuario");
 
                 sql = "INSERT INTO usuariotipo (usuario, tipoUsuario) VALUES (?, ?)";
                 try (PreparedStatement stmtUserTipo = conexaoBanco.prepareStatement(sql)) {
                     stmtUserTipo.setInt(1, idUsu);
                     stmtUserTipo.setInt(2, idTipo);
                     stmtUserTipo.executeUpdate();
-                    System.out.println("[" + AMARELO + "ALR" + RESET + "] PessoaDAO | cadastrarPessoa - Relação Tipo/Usuario cadastrada");
+                    log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuariotipo", "Relação do Tipo/Usuario cadastrada");
                 } catch (SQLException e) {
-                    System.out.println("[" + VERMELHO + "ERR" + RESET + "] PessoaDAO | cadastrarPessoa - Erro ao cadastrar relação Tipo/Usuario");
+                    log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuariotipo", "Erro ao cadastrar relação do Tipo/Usuario");
                     e.getMessage();
                 }
+            }
+
+            if (paciente.getNome() != null) {
+                pacienteController.cadastrarPaciente(paciente, idUsu);
             }
 
             return true;
 
         } catch (Exception e) {
-            System.out.println("[" + VERMELHO + "ERR" + RESET + "] PessoaDAO | cadastrarPessoa - Usuario ou Relação Tipo/Usuario não cadastrada");
+            log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario/usuariotipo", "Usuário ou Relação do Tipo/Usuario não cadastrada");
             e.printStackTrace();
             return false;
         }
     }
 
-    public Pessoa buscarPessoaPorId(int id) {
+    public Pessoa buscarPessoaPorId(int id) throws SQLException {
         String sql = "SELECT * FROM usuario WHERE id = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                if (rs.getString("assistido") != null) {
-                    return new Cliente(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("telefone")
-                    );
-                } else {
-                    return new Doador(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("telefone")
-                    );
-                }
+                Pessoa pessoa = new Pessoa(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    TipoPessoa.valueOf(rs.getString("tipopessoa")),
+                    rs.getString("identificacao"),
+                    rs.getString("telefone"),
+                    rs.getInt("endereco"),
+                    rs.getString("email"),
+                    rs.getString("observacao"));
+                return pessoa;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new Pessoa();
     }
 
-    public List<Pessoa> listarPessoas() {
+    public List<Pessoa> listarPessoas(String tipo) throws SQLException {
+        log.registrarLog(1, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Consultando Usuários do tipo "+ tipo);
         List<Pessoa> pessoas = new ArrayList<>();
-        String sql = "SELECT * FROM usuario";
+        int id = tipoController.buscarIdTipo(tipo, "tipousuario");
+
+        String sql = "SELECT us.id, us.nome, us.telefone FROM usuario us JOIN usuariotipo ut WHERE us.id = ut.usuario AND ut.tipoUsuario = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
+
+            int i= 0;
             while (rs.next()) {
-                if (rs.getString("assistido") != null) {
-                    Cliente cliente = new Cliente(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("telefone")
-                    );
-                    pessoas.add(cliente);
-                } else {
-                    Doador doador = new Doador(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("telefone")
-                    );
-                    pessoas.add(doador);
-                }
+                Pessoa pessoa = new Pessoa(
+                    rs.getInt("id"), 
+                    rs.getString("nome"), 
+                    rs.getString("telefone"));
+                pessoas.add(pessoa);
+                i++;
+                log.registrarLog(2, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Usuário "+ rs.getString("nome") +" encontrado");
             }
+
+            if (i > 0) {
+                log.registrarLog(2, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Foram encontrados "+ i +" usuários");
+            } else {
+                log.registrarLog(3, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Nenhum usuário encontrado");   
+            }
+            
         } catch (SQLException e) {
+            log.registrarLog(4, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Erro ao consultar os Usuários");
             e.printStackTrace();
         }
         return pessoas;
     }
+
 }
