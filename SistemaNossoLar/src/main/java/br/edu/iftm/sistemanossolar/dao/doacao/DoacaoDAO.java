@@ -7,36 +7,25 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 
-import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class DoacaoDAO {
     private final Connection conexaoBanco;
-    private static TipoController tipoController;
 
     RegistrosLog log = new RegistrosLog();
 
     public DoacaoDAO(Connection conexao) {
         this.conexaoBanco = conexao;
-        tipoController = new TipoController(conexao);
     }
 
     public boolean cadastrarDoacao(Doacao doacao) throws SQLException {
         log.registrarLog(1, "DoacaoDAO", "cadastrarDoacao", "doacao", "Cadastrando Doação");
 
-        Integer idTipo = null;
-        if (!tipoController.existeTipo(doacao.getTipo().getDescricao(), "tipodoacao")) {
-            tipoController.cadastrarTipo(doacao.getTipo().getDescricao(), "tipodoacao");
-            idTipo = tipoController.buscarIdTipo(doacao.getTipo().getDescricao(), "tipodoacao");
-        } else {
-            idTipo = tipoController.buscarIdTipo(doacao.getTipo().getDescricao(), "tipodoacao");
-        }
-
         String sql = "INSERT INTO doacao (tipoDoacao, pessoa, valor, data) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, idTipo);
+            stmt.setString(1, doacao.getTipo().toString());
             stmt.setInt(2, doacao.getDoador().getId());
             stmt.setDouble(3, doacao.getValor());
             java.sql.Date data = java.sql.Date.valueOf(doacao.getDataDoacao());
@@ -58,7 +47,7 @@ public class DoacaoDAO {
                     }
                 } catch (SQLException e) {
                     log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "doacao", "Erro ao obter o ID da Doação");
-                    e.getMessage();
+                    e.printStackTrace();
                 }
                 
                 if (idDoa != null) {
@@ -77,7 +66,7 @@ public class DoacaoDAO {
                             log.registrarLog(2, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Relação do Produto/Doação cadastrada");
                         } catch (SQLException e) {
                             log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Erro ao cadastrar relação do Produto/Doação");
-                            e.getMessage();
+                            e.printStackTrace();
                         }
                     }
                 }

@@ -1,42 +1,32 @@
 package br.edu.iftm.sistemanossolar.model.pessoa;
 
 public class Paciente {
-    private int id;
+    private Integer id;
     private String nome;
-    private Local local;
-    private int previsaoDias;
+    private Integer previsaoDias;
 
+    // Contrutor vazio
     public Paciente() {
     }
 
-    public Paciente(String nome, Local local, int previsaoDias) {
+    // Construtor mínimo para cadastrar Paciente
+    public Paciente(String nome, Integer previsaoDias) {
         this.nome = nome;
-        this.local = local;
         this.previsaoDias = previsaoDias;
     }
 
-    public enum Local {
-        HOSPITAL,
-        PRONTOSOCORRO,;
-        public static Local fromString(String opcao) {
-
-            if (opcao==null) return null;
-
-            try {
-                return Local.valueOf(opcao.toUpperCase());
-
-            } catch (IllegalArgumentException e) {
-                return null;
-            }
-
-        }
+    // Construtor completo de Paciente
+    public Paciente (Integer id, String nome, Integer previsaoDias) {
+        this.id = id;
+        this.nome = nome;
+        this.previsaoDias = previsaoDias;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -48,19 +38,11 @@ public class Paciente {
         this.nome = nome;
     }
 
-    public Local getLocal() {
-        return local;
-    }
-
-    public void setLocal(Local local) {
-        this.local = local;
-    }
-
-    public int getPrevisaoDias() {
+    public Integer getPrevisaoDias() {
         return previsaoDias;
     }
 
-    public void setPrevisaoDias(int previsaoDias) {
+    public void setPrevisaoDias(Integer previsaoDias) {
         this.previsaoDias = previsaoDias;
     }
 

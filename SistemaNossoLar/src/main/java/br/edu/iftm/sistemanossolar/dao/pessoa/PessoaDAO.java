@@ -8,61 +8,33 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
-import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PacienteController;
-import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
-import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PessoaDAO {
 
     private final Connection conexaoBanco;
-    private static CidadeController cidadeController;
-    private static EnderecoController enderecoController;
-    private static TipoController tipoController;
     private static PacienteController pacienteController;
 
     RegistrosLog log = new RegistrosLog();
 
     public PessoaDAO(Connection conexao) {
         this.conexaoBanco = conexao;
-        cidadeController = new CidadeController(conexao);
-        enderecoController = new EnderecoController(conexao);
-        tipoController = new TipoController(conexao);
         pacienteController = new PacienteController(conexao);
     }
 
-    public boolean cadastrarPessoa(Pessoa pessoa, Tipo tipo, Paciente paciente) throws SQLException {
-        log.registrarLog(1, "PessoaDAO", "cadastrarPessoa", "usuario", "Cadastrando o "+ tipo.getDescricao() +" "+ pessoa.getNome());
-
-        Cidade cidadeTemp = pessoa.getEndereco().getCidade();
-
-        if (!cidadeController.existeCidade(cidadeTemp)) {
-            cidadeController.cadastrarCidade(cidadeTemp);    
-        }
-
-        Integer idCidade = cidadeController.buscarIdCidade(cidadeTemp);
-        Integer idEndereco = enderecoController.buscarIdEndereco(idCidade);
-
-        Integer idTipo = null;
-        if (!tipoController.existeTipo(tipo.getDescricao(), "tipousuario")) {
-            tipoController.cadastrarTipo(tipo.getDescricao(), "tipousuario");
-            idTipo = tipoController.buscarIdTipo(tipo.getDescricao(), "tipousuario");
-        } else {
-            idTipo = tipoController.buscarIdTipo(tipo.getDescricao(), "tipousuario");
-        }
-
+    public boolean cadastrarPessoa(Pessoa pessoa, Paciente paciente, Integer cidade, Integer endereco, Integer idTipo) {
         String sql = "INSERT INTO usuario (nome, telefone, endereco, tipoPessoa, email, identificacao, observacao) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getTelefone());
-            stmt.setInt(3, idEndereco);
+            stmt.setInt(3, endereco);
 
             if (pessoa.getTipoPessoa() != null) {
                 stmt.setString(4, pessoa.getTipoPessoa().name());
@@ -87,22 +59,24 @@ public class PessoaDAO {
             } else {
                 stmt.setNull(7, Types.VARCHAR);
             }
-            stmt.executeUpdate();
-            log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuario", tipo.getDescricao() +" cadastrado");
 
-            log.registrarLog(1, "PessoaDAO", "cadastrarPessoa", "usuario", "Obtendo o ID do "+tipo.getDescricao());
+            stmt.executeUpdate();
+            log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuario", pessoa.getTipoUsuario() +" cadastrado");
+
+            log.registrarLog(1, "PessoaDAO", "cadastrarPessoa", "usuario", "Obtendo o ID do "+ pessoa.getTipoUsuario());
             Integer idUsu = null;
             try (ResultSet rs = stmt.getGeneratedKeys()) {
-
                 if (rs.next()) {
-                    log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ tipo.getDescricao() +" obtido");
+                    log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ pessoa.getTipoUsuario() +" obtido");
                     idUsu = rs.getInt(1);
                 } else {
-                    log.registrarLog(3, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ tipo.getDescricao() +" não obtido");
+                    log.registrarLog(3, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ pessoa.getTipoUsuario() +" não obtido");
+                    return false;
                 }
             } catch (SQLException e) {
-                log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario", "Erro ao obter ID do "+ tipo.getDescricao());
-                e.getMessage();
+                log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario", "Erro ao obter ID do "+ pessoa.getTipoUsuario());
+                e.printStackTrace();
+                return false;
             }
 
             if (idUsu != null) {
@@ -116,17 +90,17 @@ public class PessoaDAO {
                     log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuariotipo", "Relação do Tipo/Usuario cadastrada");
                 } catch (SQLException e) {
                     log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuariotipo", "Erro ao cadastrar relação do Tipo/Usuario");
-                    e.getMessage();
+                    e.printStackTrace();
+                    return false;
                 }
             }
 
             if (paciente.getNome() != null) {
                 pacienteController.cadastrarPaciente(paciente, idUsu);
             }
-
             return true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario/usuariotipo", "Usuário ou Relação do Tipo/Usuario não cadastrada");
             e.printStackTrace();
             return false;
@@ -134,38 +108,65 @@ public class PessoaDAO {
     }
 
     public Pessoa buscarPessoaPorId(int id) throws SQLException {
-        String sql = "SELECT * FROM usuario WHERE id = ?";
+        Pessoa pessoa = new Pessoa();
+        String sql = "SELECT nome, local, tipoPessoa, telefone, endereco, email, observacao FROM usuario WHERE id = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Pessoa pessoa = new Pessoa(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    TipoPessoa.valueOf(rs.getString("tipopessoa")),
-                    rs.getString("identificacao"),
-                    rs.getString("telefone"),
-                    rs.getInt("endereco"),
-                    rs.getString("email"),
-                    rs.getString("observacao"));
-                return pessoa;
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setLocal(Local.fromString(rs.getString("local")));
+
+                String tipoPessoa = rs.getString("tipoPessoa");
+                if (tipoPessoa == null || tipoPessoa.isEmpty()) {
+                    pessoa.setTipoPessoa(null);
+                } else {
+                    pessoa.setTipoPessoa(TipoPessoa.valueOf(tipoPessoa));
+                }
+                
+                pessoa.setTelefone(rs.getString("telefone"));
+                pessoa.setEnderecoId(rs.getInt("endereco"));
+                pessoa.setEmail(rs.getString("email"));
+                pessoa.setObservacao(rs.getString("observacao"));
+
+                log.registrarLog(2, "PessoaDAO", "buscarPessoaPorId", "usuario", "Dados básicos da Pessoa obtidos");
             }
         } catch (SQLException e) {
+            log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "usuario", "Dados básicos da Pessoa não obtidos");
             e.printStackTrace();
+            return new Pessoa();
         }
-        return new Pessoa();
-    }
 
-    public List<Pessoa> listarPessoas(String tipo) throws SQLException {
-        log.registrarLog(1, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Consultando Usuários do tipo "+ tipo);
-        List<Pessoa> pessoas = new ArrayList<>();
-        int id = tipoController.buscarIdTipo(tipo, "tipousuario");
+        log.registrarLog(1, "PessoaDAO", "buscarPessoaPorId", "tipousuario/usuariotipo", "Buscando Tipo de Usuário da Pessoa");
 
-        String sql = "SELECT us.id, us.nome, us.telefone FROM usuario us JOIN usuariotipo ut WHERE us.id = ut.usuario AND ut.tipoUsuario = ?";
+        sql = "SELECT t.tipo FROM tipousuario t JOIN usuariotipo u WHERE t.id = u.tipoUsuario AND u.usuario = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                pessoa.setTipoUsuario(TipoCad.fromString(rs.getString("tipo")));
+                log.registrarLog(2, "PessoaDAO", "buscarPessoaPorId", "tipousuario/usuariotipo", "Tipo de Usuário da Pessoa obtido");
+            }
+        } catch (SQLException e) {
+            log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "tipousuario/usuariotipo", "Tipo de Usuário da Pessoa não obtido");
+            e.printStackTrace();
+            return new Pessoa();
+        }
 
+        if (pessoa.getTipoUsuario() == TipoCad.BENEFICIARIO) {
+            pessoa.setPaciente(pacienteController.buscarPacienteDoBeneficiario(id));
+        }
+
+        pessoa.setId(id);
+        return pessoa;
+    }
+
+    public List<Pessoa> listarPessoas(String tipo, Integer idTipo) {
+        List<Pessoa> pessoas = new ArrayList<>();
+        String sql = "SELECT us.id, us.nome, us.telefone FROM usuario us JOIN usuariotipo ut WHERE us.id = ut.usuario AND ut.tipoUsuario = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, idTipo);
+            ResultSet rs = stmt.executeQuery();
             int i= 0;
             while (rs.next()) {
                 Pessoa pessoa = new Pessoa(

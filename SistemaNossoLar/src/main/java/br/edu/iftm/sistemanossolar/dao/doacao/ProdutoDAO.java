@@ -5,12 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class ProdutoDAO {
-    private final TipoController tipoController;
     
     private final Connection conexaoBanco;
 
@@ -18,22 +16,14 @@ public class ProdutoDAO {
 
     public ProdutoDAO(Connection conexao) {
         this.conexaoBanco = conexao;
-        tipoController = new TipoController(conexao);
     }
 
     public boolean cadastrarProduto(Produto produto) throws SQLException {
         log.registrarLog(1, "ProdutoDAO", "cadastrarProduto", "produto", "Cadastrando o Produto "+ produto.getNome());
-        Integer idTipo = null;
-        if (!tipoController.existeTipo(produto.getTipo().getDescricao(), "tipoproduto")) {
-            tipoController.cadastrarTipo(produto.getTipo().getDescricao(), "tipoproduto");
-            idTipo = tipoController.buscarIdTipo(produto.getTipo().getDescricao(), "tipoproduto");
-        } else {
-            idTipo = tipoController.buscarIdTipo(produto.getTipo().getDescricao(), "tipoproduto");
-        }
 
         String sql = "INSERT INTO produto (tipoproduto, descricao) VALUES (?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, idTipo);
+            stmt.setString(1, produto.getTipo().toString());
             stmt.setString(2, produto.getNome());
             stmt.executeUpdate();
             log.registrarLog(2, "ProdutoDAO", "cadastrarProduto", "produto", "Produto cadastrado");
