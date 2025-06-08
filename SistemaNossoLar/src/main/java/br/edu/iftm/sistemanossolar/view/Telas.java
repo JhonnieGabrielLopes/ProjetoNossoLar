@@ -185,8 +185,39 @@ public class Telas extends javax.swing.JFrame {
         pnRelatorioDoacao = new javax.swing.JPanel();
         pnRelDoa = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableRelatorioDoacao = new javax.swing.JTable();
+        lbRelDoaDtInicial = new javax.swing.JLabel();
+        ffRelDoaDtInicial = new javax.swing.JFormattedTextField();
+        lbRelDoaDtFinal = new javax.swing.JLabel();
+        ffRelDoaDtFinal = new javax.swing.JFormattedTextField();
+        lbRelDoaTpDoacao = new javax.swing.JLabel();
+        cbRelDoaTpDoacao = new javax.swing.JComboBox<>();
+        lbRelDoaDoador = new javax.swing.JLabel();
+        tfRelDoaDoador = new javax.swing.JTextField();
+        lbRelDoaOrdenacao = new javax.swing.JLabel();
+        cbRelDoaOrdenacao = new javax.swing.JComboBox<>();
+        btRelDoaFiltrar = new javax.swing.JButton();
+        btRelDoaExtrair = new javax.swing.JButton();
         pnRelatorioPedido = new javax.swing.JPanel();
+        pnRelPed = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tableRelatorioPedido = new javax.swing.JTable();
+        lbRelDoaDtInicial1 = new javax.swing.JLabel();
+        ffRelDoaDtInicial1 = new javax.swing.JFormattedTextField();
+        lbRelDoaDtFinal1 = new javax.swing.JLabel();
+        ffRelDoaDtFinal1 = new javax.swing.JFormattedTextField();
+        lbRelPedStatusPedido = new javax.swing.JLabel();
+        cbRelPedStatusPedido = new javax.swing.JComboBox<>();
+        lbRelPedCliente = new javax.swing.JLabel();
+        tfRelPedCliente = new javax.swing.JTextField();
+        lbRelPedLocal = new javax.swing.JLabel();
+        cbRelPedLocal = new javax.swing.JComboBox<>();
+        lbRelPedPessoa = new javax.swing.JLabel();
+        cbRelPedPessoa = new javax.swing.JComboBox<>();
+        lbRelPedOrdenacao = new javax.swing.JLabel();
+        cbRelPedOrdenacao = new javax.swing.JComboBox<>();
+        btRelPedFiltrar = new javax.swing.JButton();
+        btRelPedExtrair = new javax.swing.JButton();
         menuBarra = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuPessoa = new javax.swing.JMenu();
@@ -1227,34 +1258,106 @@ public class Telas extends javax.swing.JFrame {
 
         pnRelDoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatório Doação"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableRelatorioDoacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"1", "12/01/2025", "Alan", "Dinheiro", "", null, "R$ 120,00", "Realizado via Pix"},
+                {"2", "22/04/2025", "Joice", "Produto", "Arroz", "2", null, "Entregue no balcão"},
+                {"3", "08/05/2025", "Jhonnie", "Produto", "Feijão", "1", null, "Saco de feijão que trouxe da roça"},
+                {"4", "08/06/2025", "Luiz", "Produto/Dinheiro", "Macarrão", "10", "R$ 1.450,00", "Pago em dinheiro vivo"}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID da Doação", "Data da Doação", "Doador", "Tipo de Doação", "Produto", "Quantidade", "Valor", "Observação"
             }
         ));
-        jScrollPane6.setViewportView(jTable1);
+        jScrollPane6.setViewportView(tableRelatorioDoacao);
+
+        lbRelDoaDtInicial.setText("Data Inicial");
+
+        ffRelDoaDtInicial.setText(" ____ / ____ / ____");
+
+        lbRelDoaDtFinal.setText("Data Final");
+
+        ffRelDoaDtFinal.setText(" ____ / ____ / ____");
+
+        lbRelDoaTpDoacao.setText("Tipo de Doação");
+
+        cbRelDoaTpDoacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Produto", "Dinheiro", "Produto/Dinheiro", " " }));
+
+        lbRelDoaDoador.setText("Doador");
+
+        lbRelDoaOrdenacao.setText("Ordenação");
+
+        cbRelDoaOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "ID", "Nome do Doador", "Quantidade", "Valor" }));
+
+        btRelDoaFiltrar.setText("Filtrar");
+
+        btRelDoaExtrair.setText("Extrair relatório");
 
         javax.swing.GroupLayout pnRelDoaLayout = new javax.swing.GroupLayout(pnRelDoa);
         pnRelDoa.setLayout(pnRelDoaLayout);
         pnRelDoaLayout.setHorizontalGroup(
             pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelDoaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(15, 15, 15)
+                .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1096, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnRelDoaLayout.createSequentialGroup()
+                            .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbRelDoaDtInicial)
+                                .addComponent(ffRelDoaDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ffRelDoaDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbRelDoaDtFinal))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbRelDoaTpDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbRelDoaTpDoacao))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbRelDoaDoador)
+                                .addComponent(tfRelDoaDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnRelDoaLayout.createSequentialGroup()
+                                    .addComponent(cbRelDoaOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btRelDoaFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbRelDoaOrdenacao))))
+                    .addComponent(btRelDoaExtrair, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         pnRelDoaLayout.setVerticalGroup(
             pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelDoaLayout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+            .addGroup(pnRelDoaLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelDoaLayout.createSequentialGroup()
+                        .addComponent(lbRelDoaDtInicial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ffRelDoaDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelDoaLayout.createSequentialGroup()
+                        .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbRelDoaDtFinal)
+                            .addComponent(lbRelDoaTpDoacao)
+                            .addComponent(lbRelDoaDoador))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ffRelDoaDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbRelDoaTpDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfRelDoaDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelDoaLayout.createSequentialGroup()
+                        .addComponent(lbRelDoaOrdenacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbRelDoaOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btRelDoaFiltrar))))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btRelDoaExtrair)
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout pnRelatorioDoacaoLayout = new javax.swing.GroupLayout(pnRelatorioDoacao);
@@ -1264,27 +1367,176 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         pnRelatorioDoacaoLayout.setVerticalGroup(
             pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioDoacao, "card7");
+
+        pnRelPed.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatório Pedido"));
+
+        tableRelatorioPedido.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"1", "12/01/2025", "15/01/2025", "Alan", "Beneficiário", "Pendente", "2", "Araguari", "MG", "Solicitação para 2 pessoas"},
+                {"2", "22/04/2025", "22/04/2025", "Joice", "Assistente", "Finalizado", "4", "Patos de Minas", "MG", "4 Pessoas no hospital"},
+                {"3", "05/05/2025", "08/05/2025", "Jhonnie", "Assistente", "Finalizado", "3", "Paracatu", "MG", ""},
+                {"4", "08/06/2025", "", "Luiz", null, "Cancelado", "2", "Cristalina", "GO", "Paciente não veio"}
+            },
+            new String [] {
+                "ID do Pedido", "Data do Pedido", "Data da Entrega", "Nome do Cliente", "Tipo Pessoa", "Status Pedido", "Qtd Marmitas", "Local/Cidade", "UF", "Observação"
+            }
+        ));
+        jScrollPane7.setViewportView(tableRelatorioPedido);
+
+        lbRelDoaDtInicial1.setText("Data Pedido");
+
+        ffRelDoaDtInicial1.setText(" ____ / ____ / ____");
+
+        lbRelDoaDtFinal1.setText("Data Entrega");
+
+        ffRelDoaDtFinal1.setText(" ____ / ____ / ____");
+
+        lbRelPedStatusPedido.setText("Status Pedido");
+
+        cbRelPedStatusPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Finalizado", "Pendente", "Cancelado", " " }));
+
+        lbRelPedCliente.setText("Cliente");
+
+        lbRelPedLocal.setText("Local/Cidade");
+
+        cbRelPedLocal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Araguari", "Patos de Minas", "Paracatu", " " }));
+
+        lbRelPedPessoa.setText("Tipo Pessoa");
+
+        cbRelPedPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beneficiário", "Assistente", " " }));
+        cbRelPedPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRelPedPessoaActionPerformed(evt);
+            }
+        });
+
+        lbRelPedOrdenacao.setText("Ordenação");
+
+        cbRelPedOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data do Pedido", "Data da Entrega", "ID", "Nome do Cliente", "Status", "Qtd Marmitas" }));
+        cbRelPedOrdenacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRelPedOrdenacaoActionPerformed(evt);
+            }
+        });
+
+        btRelPedFiltrar.setText("Filtrar");
+        btRelPedFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelPedFiltrarActionPerformed(evt);
+            }
+        });
+
+        btRelPedExtrair.setText("Extrair relatório");
+
+        javax.swing.GroupLayout pnRelPedLayout = new javax.swing.GroupLayout(pnRelPed);
+        pnRelPed.setLayout(pnRelPedLayout);
+        pnRelPedLayout.setHorizontalGroup(
+            pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnRelPedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnRelPedLayout.createSequentialGroup()
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbRelDoaDtInicial1)
+                            .addComponent(ffRelDoaDtInicial1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ffRelDoaDtFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbRelDoaDtFinal1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbRelPedStatusPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbRelPedStatusPedido))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbRelPedCliente)
+                            .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbRelPedLocal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbRelPedPessoa)
+                            .addComponent(cbRelPedPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbRelPedOrdenacao)
+                            .addGroup(pnRelPedLayout.createSequentialGroup()
+                                .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btRelPedExtrair, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        pnRelPedLayout.setVerticalGroup(
+            pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnRelPedLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnRelPedLayout.createSequentialGroup()
+                        .addComponent(lbRelDoaDtInicial1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ffRelDoaDtInicial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnRelPedLayout.createSequentialGroup()
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbRelDoaDtFinal1)
+                            .addComponent(lbRelPedStatusPedido)
+                            .addComponent(lbRelPedCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ffRelDoaDtFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbRelPedStatusPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnRelPedLayout.createSequentialGroup()
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbRelPedLocal)
+                            .addComponent(lbRelPedPessoa))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbRelPedPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btRelPedFiltrar))
+                    .addGroup(pnRelPedLayout.createSequentialGroup()
+                        .addComponent(lbRelPedOrdenacao)
+                        .addGap(26, 26, 26)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btRelPedExtrair)
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout pnRelatorioPedidoLayout = new javax.swing.GroupLayout(pnRelatorioPedido);
         pnRelatorioPedido.setLayout(pnRelatorioPedidoLayout);
         pnRelatorioPedidoLayout.setHorizontalGroup(
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1295, Short.MAX_VALUE)
+            .addGroup(pnRelatorioPedidoLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         pnRelatorioPedidoLayout.setVerticalGroup(
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGroup(pnRelatorioPedidoLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "card8");
@@ -1593,6 +1845,18 @@ public class Telas extends javax.swing.JFrame {
     private void ffAltPedIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ffAltPedIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ffAltPedIdActionPerformed
+
+    private void cbRelPedPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedPessoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbRelPedPessoaActionPerformed
+
+    private void cbRelPedOrdenacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedOrdenacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbRelPedOrdenacaoActionPerformed
+
+    private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelPedFiltrarActionPerformed
     
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
         campo.setEnabled(true);
@@ -1652,6 +1916,10 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JButton btPedidoBuscarCliente;
     private javax.swing.JButton btPedidoLimpar;
     private javax.swing.JButton btPedidoRegistrar;
+    private javax.swing.JButton btRelDoaExtrair;
+    private javax.swing.JButton btRelDoaFiltrar;
+    private javax.swing.JButton btRelPedExtrair;
+    private javax.swing.JButton btRelPedFiltrar;
     private javax.swing.ButtonGroup buttonGroupPessoaTipo;
     private javax.swing.JComboBox<String> cbAltPedStatus;
     private javax.swing.JComboBox<String> cbDoacaoSelecionarProd;
@@ -1660,12 +1928,22 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbEnderecoUf;
     private javax.swing.JComboBox<String> cbLocalInternacao;
     private javax.swing.JComboBox<String> cbPedidoStatus;
+    private javax.swing.JComboBox<String> cbRelDoaOrdenacao;
+    private javax.swing.JComboBox<String> cbRelDoaTpDoacao;
+    private javax.swing.JComboBox<String> cbRelPedLocal;
+    private javax.swing.JComboBox<String> cbRelPedOrdenacao;
+    private javax.swing.JComboBox<String> cbRelPedPessoa;
+    private javax.swing.JComboBox<String> cbRelPedStatusPedido;
     private javax.swing.JComboBox<String> cbTipoUsuario;
     private javax.swing.JFormattedTextField ffAltPedDtPedido;
     private javax.swing.JFormattedTextField ffAltPedId;
     private javax.swing.JFormattedTextField ffDocumento;
     private javax.swing.JFormattedTextField ffPedidoDtEntrega;
     private javax.swing.JFormattedTextField ffPedidoDtPedido;
+    private javax.swing.JFormattedTextField ffRelDoaDtFinal;
+    private javax.swing.JFormattedTextField ffRelDoaDtFinal1;
+    private javax.swing.JFormattedTextField ffRelDoaDtInicial;
+    private javax.swing.JFormattedTextField ffRelDoaDtInicial1;
     private javax.swing.JFormattedTextField ffTelefone;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
@@ -1677,7 +1955,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JLabel lbAltPedCliente;
     private javax.swing.JLabel lbAltPedDtPedido;
     private javax.swing.JLabel lbAltPedId;
@@ -1717,6 +1995,18 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel lbPedidoQtdMarmitas;
     private javax.swing.JLabel lbPedidoStatus;
     private javax.swing.JLabel lbPessoaTipo;
+    private javax.swing.JLabel lbRelDoaDoador;
+    private javax.swing.JLabel lbRelDoaDtFinal;
+    private javax.swing.JLabel lbRelDoaDtFinal1;
+    private javax.swing.JLabel lbRelDoaDtInicial;
+    private javax.swing.JLabel lbRelDoaDtInicial1;
+    private javax.swing.JLabel lbRelDoaOrdenacao;
+    private javax.swing.JLabel lbRelDoaTpDoacao;
+    private javax.swing.JLabel lbRelPedCliente;
+    private javax.swing.JLabel lbRelPedLocal;
+    private javax.swing.JLabel lbRelPedOrdenacao;
+    private javax.swing.JLabel lbRelPedPessoa;
+    private javax.swing.JLabel lbRelPedStatusPedido;
     private javax.swing.JLabel lbTelefone;
     private javax.swing.JMenuBar menuBarra;
     private javax.swing.JMenu menuDoacao;
@@ -1746,6 +2036,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JPanel pnPedido1;
     private javax.swing.JPanel pnPessoaCliente;
     private javax.swing.JPanel pnRelDoa;
+    private javax.swing.JPanel pnRelPed;
     private javax.swing.JPanel pnRelatorioDoacao;
     private javax.swing.JPanel pnRelatorioPedido;
     private javax.swing.JRadioButton rbPessoaFisica;
@@ -1755,6 +2046,8 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JTextArea taDoacaoObservacao2;
     private javax.swing.JTextArea taObservacao;
     private javax.swing.JTable tableDoacaoProdutos;
+    private javax.swing.JTable tableRelatorioDoacao;
+    private javax.swing.JTable tableRelatorioPedido;
     private javax.swing.JTextField tfAltPedCliente;
     private javax.swing.JLabel tfAltPedObs;
     private javax.swing.JTextField tfAltPedQtdMarmitas;
@@ -1777,5 +2070,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tfPedidoId;
     private javax.swing.JTextField tfPedidoQtdMarmitas;
     private javax.swing.JTextField tfQtdDias;
+    private javax.swing.JTextField tfRelDoaDoador;
+    private javax.swing.JTextField tfRelPedCliente;
     // End of variables declaration//GEN-END:variables
 }
