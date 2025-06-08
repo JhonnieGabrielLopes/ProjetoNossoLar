@@ -24,20 +24,28 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="380" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Component id="pnCadastrarCidade" alignment="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="260" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Component id="pnCadastrarCidade" alignment="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="pnCadastrarCidade">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Cadastrar Cidade"/>
+          </Border>
         </Property>
       </Properties>
 
@@ -45,23 +53,21 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btCadCidCancelar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btCadCidCadastrar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="titulo" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tituloCidade" min="-2" max="-2" attributes="0"/>
-                              <Component id="entradaCidade" min="-2" pref="300" max="-2" attributes="0"/>
-                              <Component id="tituloUF" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbUF" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                              <Component id="btRegistrar" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="lbCadCidCidade" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCadCidUf" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbCadCidUf" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="tfCadCidCidade" alignment="0" min="-2" pref="322" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -69,96 +75,93 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="titulo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="tituloCidade" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbCadCidCidade" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="entradaCidade" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="tituloUF" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfCadCidCidade" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lbCadCidUf" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cbUF" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="65" max="32767" attributes="0"/>
-                  <Component id="btRegistrar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="cbCadCidUf" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="88" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btCadCidCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btCadCidCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="titulo">
+        <Component class="javax.swing.JLabel" name="lbCadCidCidade">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="24" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Cadastro de Cidade"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="tituloCidade">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Cidade:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entradaCidade">
+        <Component class="javax.swing.JTextField" name="tfCadCidCidade">
         </Component>
-        <Component class="javax.swing.JLabel" name="tituloUF">
+        <Component class="javax.swing.JLabel" name="lbCadCidUf">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="UF:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbUF">
+        <Component class="javax.swing.JComboBox" name="cbCadCidUf">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="27">
-                <StringItem index="0" value="AC"/>
-                <StringItem index="1" value="AL"/>
-                <StringItem index="2" value="AP"/>
-                <StringItem index="3" value="AM"/>
-                <StringItem index="4" value="BA"/>
-                <StringItem index="5" value="CE"/>
-                <StringItem index="6" value="DF"/>
-                <StringItem index="7" value="ES"/>
-                <StringItem index="8" value="GO"/>
-                <StringItem index="9" value="MA"/>
-                <StringItem index="10" value="MT"/>
-                <StringItem index="11" value="MS"/>
-                <StringItem index="12" value="MG"/>
-                <StringItem index="13" value="PA"/>
-                <StringItem index="14" value="PB"/>
-                <StringItem index="15" value="PR"/>
-                <StringItem index="16" value="PE"/>
-                <StringItem index="17" value="PI"/>
-                <StringItem index="18" value="RJ"/>
-                <StringItem index="19" value="RN"/>
-                <StringItem index="20" value="RS"/>
-                <StringItem index="21" value="RO"/>
-                <StringItem index="22" value="RR"/>
-                <StringItem index="23" value="SC"/>
-                <StringItem index="24" value="SP"/>
-                <StringItem index="25" value="SE"/>
-                <StringItem index="26" value="TO"/>
+              <StringArray count="29">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="MG"/>
+                <StringItem index="2" value="GO"/>
+                <StringItem index="3" value="-"/>
+                <StringItem index="4" value="AC"/>
+                <StringItem index="5" value="AL"/>
+                <StringItem index="6" value="AP"/>
+                <StringItem index="7" value="AM"/>
+                <StringItem index="8" value="BA"/>
+                <StringItem index="9" value="CE"/>
+                <StringItem index="10" value="DF"/>
+                <StringItem index="11" value="ES"/>
+                <StringItem index="12" value="MA"/>
+                <StringItem index="13" value="MT"/>
+                <StringItem index="14" value="MS"/>
+                <StringItem index="15" value="PA"/>
+                <StringItem index="16" value="PB"/>
+                <StringItem index="17" value="PR"/>
+                <StringItem index="18" value="PE"/>
+                <StringItem index="19" value="PI"/>
+                <StringItem index="20" value="RJ"/>
+                <StringItem index="21" value="RN"/>
+                <StringItem index="22" value="RS"/>
+                <StringItem index="23" value="RO"/>
+                <StringItem index="24" value="RR"/>
+                <StringItem index="25" value="SC"/>
+                <StringItem index="26" value="SP"/>
+                <StringItem index="27" value="SE"/>
+                <StringItem index="28" value="TO"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCadCidUfActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="btRegistrar">
+        <Component class="javax.swing.JButton" name="btCadCidCadastrar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Registrar"/>
+            <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRegistrarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadCidCadastrarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btCadCidCancelar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadCidCancelarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -25,93 +25,103 @@ public class CadastroCidade extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        titulo = new javax.swing.JLabel();
-        tituloCidade = new javax.swing.JLabel();
-        entradaCidade = new javax.swing.JTextField();
-        tituloUF = new javax.swing.JLabel();
-        cbUF = new javax.swing.JComboBox<>();
-        btRegistrar = new javax.swing.JButton();
+        pnCadastrarCidade = new javax.swing.JPanel();
+        lbCadCidCidade = new javax.swing.JLabel();
+        tfCadCidCidade = new javax.swing.JTextField();
+        lbCadCidUf = new javax.swing.JLabel();
+        cbCadCidUf = new javax.swing.JComboBox<>();
+        btCadCidCadastrar = new javax.swing.JButton();
+        btCadCidCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cidade");
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        pnCadastrarCidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar Cidade"));
 
-        titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        titulo.setForeground(new java.awt.Color(0, 0, 0));
-        titulo.setText("Cadastro de Cidade");
+        lbCadCidCidade.setText("Cidade:");
 
-        tituloCidade.setForeground(new java.awt.Color(0, 0, 0));
-        tituloCidade.setText("Cidade:");
+        lbCadCidUf.setText("UF:");
 
-        tituloUF.setForeground(new java.awt.Color(0, 0, 0));
-        tituloUF.setText("UF:");
-
-        cbUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
-
-        btRegistrar.setText("Registrar");
-        btRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        cbCadCidUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "MG", "GO", "-", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "MA", "MT", "MS", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cbCadCidUf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRegistrarActionPerformed(evt);
+                cbCadCidUfActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(titulo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tituloCidade)
-                            .addComponent(entradaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tituloUF)
-                            .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btRegistrar))))
-                .addContainerGap(50, Short.MAX_VALUE))
+        btCadCidCadastrar.setText("Cadastrar");
+        btCadCidCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadCidCadastrarActionPerformed(evt);
+            }
+        });
+
+        btCadCidCancelar.setText("Cancelar");
+        btCadCidCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadCidCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnCadastrarCidadeLayout = new javax.swing.GroupLayout(pnCadastrarCidade);
+        pnCadastrarCidade.setLayout(pnCadastrarCidadeLayout);
+        pnCadastrarCidadeLayout.setHorizontalGroup(
+            pnCadastrarCidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnCadastrarCidadeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btCadCidCancelar)
+                .addGap(18, 18, 18)
+                .addComponent(btCadCidCadastrar)
+                .addContainerGap())
+            .addGroup(pnCadastrarCidadeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnCadastrarCidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbCadCidCidade)
+                    .addComponent(lbCadCidUf)
+                    .addComponent(cbCadCidUf, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCadCidCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnCadastrarCidadeLayout.setVerticalGroup(
+            pnCadastrarCidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnCadastrarCidadeLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(titulo)
-                .addGap(18, 18, 18)
-                .addComponent(tituloCidade)
+                .addComponent(lbCadCidCidade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(entradaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tituloUF)
+                .addComponent(tfCadCidCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbCadCidUf)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(btRegistrar)
-                .addGap(24, 24, 24))
+                .addComponent(cbCadCidUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addGroup(pnCadastrarCidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCadCidCadastrar)
+                    .addComponent(btCadCidCancelar))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnCadastrarCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 260, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnCadastrarCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
+    private void btCadCidCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadCidCadastrarActionPerformed
         Cidade cidade = new Cidade(
-            entradaCidade.getText(),
-            (String)cbUF.getSelectedItem()
+            tfCadCidCidade.getText(),
+            (String)cbCadCidUf.getSelectedItem()
         );
         try {
             if(!cidadeController.existeCidade(cidade)){
@@ -129,19 +139,27 @@ public class CadastroCidade extends javax.swing.JDialog {
             ex.printStackTrace();
         }
         dispose();
-    }//GEN-LAST:event_btRegistrarActionPerformed
+    }//GEN-LAST:event_btCadCidCadastrarActionPerformed
+
+    private void cbCadCidUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCadCidUfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCadCidUfActionPerformed
+
+    private void btCadCidCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadCidCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btCadCidCancelarActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btRegistrar;
-    private javax.swing.JComboBox<String> cbUF;
-    private javax.swing.JTextField entradaCidade;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel titulo;
-    private javax.swing.JLabel tituloCidade;
-    private javax.swing.JLabel tituloUF;
+    private javax.swing.JButton btCadCidCadastrar;
+    private javax.swing.JButton btCadCidCancelar;
+    private javax.swing.JComboBox<String> cbCadCidUf;
+    private javax.swing.JLabel lbCadCidCidade;
+    private javax.swing.JLabel lbCadCidUf;
+    private javax.swing.JPanel pnCadastrarCidade;
+    private javax.swing.JTextField tfCadCidCidade;
     // End of variables declaration//GEN-END:variables
 }
