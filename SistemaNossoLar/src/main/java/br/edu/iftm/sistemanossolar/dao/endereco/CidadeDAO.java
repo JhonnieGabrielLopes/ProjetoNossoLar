@@ -84,7 +84,6 @@ public class CidadeDAO {
             e.printStackTrace();
             return false;
         }
-
     }
 
     public List<Cidade> listarCidade() throws SQLException {

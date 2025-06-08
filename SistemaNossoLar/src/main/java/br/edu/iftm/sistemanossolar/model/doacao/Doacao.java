@@ -4,23 +4,35 @@ import java.time.LocalDate;
 import java.util.List;
 
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 public class Doacao {
     private Integer id;
     private Pessoa doador;
     private List<Produto> produto;
-    private Tipo tipo;
+    private TipoDoa tipo;
     private LocalDate dataDoacao;
     private String observacao;
     private Double valor;
     private byte[] anexo;
 
-    public Doacao() {
-        
+    public enum TipoDoa {
+        DINHEIRO,
+        PRODUTO,;
+        public static TipoDoa fromString(String opcao) {
+            if (opcao==null) 
+                return null;
+            try {
+                return TipoDoa.valueOf(opcao.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
     }
 
-    public Doacao(Pessoa doador, Tipo tipo, LocalDate dataDoacao) {
+    public Doacao() {
+    }
+
+    public Doacao(Pessoa doador, TipoDoa tipo, LocalDate dataDoacao) {
         this.doador = doador;
         this.tipo = tipo;
         this.dataDoacao = dataDoacao;
@@ -50,11 +62,11 @@ public class Doacao {
         this.produto = produto;
     }
 
-    public Tipo getTipo() {
+    public TipoDoa getTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
+    public void setTipo(TipoDoa tipo) {
         this.tipo = tipo;
     }
 

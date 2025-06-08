@@ -150,7 +150,7 @@
             <Container class="javax.swing.JPanel" name="pnCadastroPessoaCliente">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="cliente"/>
+                  <CardConstraints cardName="beneficiario"/>
                 </Constraint>
               </Constraints>
 
@@ -652,7 +652,7 @@
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="3">
-                            <StringItem index="0" value="Cliente"/>
+                            <StringItem index="0" value="Beneficiario"/>
                             <StringItem index="1" value="Doador"/>
                             <StringItem index="2" value="Assistente"/>
                           </StringArray>
