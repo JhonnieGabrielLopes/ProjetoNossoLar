@@ -29,7 +29,6 @@ import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
 
 /**
  *
@@ -583,7 +582,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(29, 29, 29))))
         );
 
-        pnCard.add(pnCadastroPessoaCliente, "beneficiario");
+        pnCard.add(pnCadastroPessoa, "beneficiario");
 
         pnBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar"));
 
@@ -1796,8 +1795,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbTipoUsuarioActionPerformed
 
     private void menuPessoaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPessoaCadastrarActionPerformed
-        // Botão para cadastrar CLIENTE:
-        cl.show(pnCard, "cliente");
+        cl.show(pnCard, "beneficiario");
     }//GEN-LAST:event_menuPessoaCadastrarActionPerformed
 
     private void menuPessoaAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPessoaAlterarActionPerformed

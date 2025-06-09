@@ -661,7 +661,6 @@
                             <StringItem index="0" value="Beneficiario"/>
                             <StringItem index="1" value="Doador"/>
                             <StringItem index="2" value="Assistente"/>
-                            <StringItem index="3" value=" "/>
                           </StringArray>
                         </Property>
                       </Properties>
