@@ -10,7 +10,6 @@ import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 import java.io.InputStream;
 
 public class ConexaoDAO {
-
     static RegistrosLog log = new RegistrosLog();
 
     private static String URL;
@@ -19,16 +18,12 @@ public class ConexaoDAO {
     private static Connection conexao;
 
     static {
-        try (InputStream dados = ConexaoDAO.class
-                .getClassLoader()
-                .getResourceAsStream("config.properties")) {
-
+        try (InputStream dados = ConexaoDAO.class.getClassLoader().getResourceAsStream("config.properties")) {
             Properties login = new Properties();
             login.load(dados);
             URL = login.getProperty("db.url");
             USER = login.getProperty("db.user");
             PASSWORD = login.getProperty("db.password");
-
         } catch (Exception e) {
             log.registrarLog(4, "ConexaoDAO", "getConnection", "", "Não foi possivel obter os dados para conectar no Banco de Dados");
             throw new RuntimeException(e);

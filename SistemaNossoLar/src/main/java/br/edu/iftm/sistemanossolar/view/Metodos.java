@@ -18,15 +18,11 @@ import br.edu.iftm.sistemanossolar.controller.PedidoController;
 import br.edu.iftm.sistemanossolar.controller.Relatorio;
 import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
-import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
-import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao.TipoDoa;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto.TipoProd;
-import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
-import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
@@ -34,8 +30,6 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 
 public class Metodos {
-    private static EnderecoController enderecoController;
-    private static CidadeController cidadeController;
     private static PessoaController pessoaController;
     private static ProdutoController produtoController;
     private static DoacaoController doacaoController;
@@ -44,8 +38,6 @@ public class Metodos {
     RegistrosLog log = new RegistrosLog();
 
     public Metodos(Connection conexao) {
-        enderecoController = new EnderecoController(conexao);
-        cidadeController = new CidadeController(conexao);
         pessoaController = new PessoaController(conexao);
         produtoController = new ProdutoController(conexao);
         doacaoController = new DoacaoController(conexao);
@@ -83,55 +75,12 @@ public class Metodos {
     }
 
     public boolean cadastrarEndereco(Scanner scan) throws SQLException {
-        System.out.println("Digite o CEP:");
-        String cep = scan.nextLine();
-
-        System.out.println("Digite o nome da cidade:");
-        String nomeCidade = scan.nextLine();
-
-        System.out.println("Digite o estado da cidade:");
-        String estado = scan.nextLine();
-
-        Cidade cidadeTemp = new Cidade(nomeCidade, estado);
-        System.out.println("Digite o nome da rua:");
-        String rua = scan.nextLine();
-
-        System.out.println("Digite o número:");
-        int numero = scan.nextInt();
-        scan.nextLine();
-
-        System.out.println("Digite o bairro:");
-        String bairro = scan.nextLine();
-
-        System.out.println("Digite o complemento:");
-        String complemento = scan.nextLine();
-
-        Endereco novoEndereco = new Endereco(rua, numero, bairro, cep, complemento, cidadeTemp);
-
-        if (enderecoController.cadastrarEndereco(novoEndereco, cidadeTemp)) {
-            return true;
-        } else {
-            return false;
-        }
+        System.out.println("Utilize a tela!");
+        return false;
     }
 
     public boolean cadastrarCidade(Scanner scan) throws SQLException {
-        System.out.println("Digite o nome da cidade:");
-        String nomeCidade = scan.nextLine();
-
-        System.out.println("Digite o estado da cidade:");
-        String estado = scan.nextLine();
-
-        Cidade novaCidade = new Cidade(nomeCidade, estado);
-
-        if (!cidadeController.existeCidade(novaCidade)) {
-            if (cidadeController.cadastrarCidade(novaCidade)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
+        System.out.println("Utilize a tela!");
         return false;
     }
 

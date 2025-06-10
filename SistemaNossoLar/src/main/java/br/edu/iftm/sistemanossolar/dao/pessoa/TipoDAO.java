@@ -21,7 +21,6 @@ public class TipoDAO {
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setString(1, tipo);
             ResultSet rs = stmt.executeQuery();
-
             if (rs.next()) {
                 log.registrarLog(2, "TipoDAO", "buscarIdTipo", tabela, "ID do Tipo encontrado");
                 return rs.getInt("id");
@@ -29,7 +28,6 @@ public class TipoDAO {
                 log.registrarLog(3, "TipoDAO", "buscarIdTipo", tabela, "ID do Tipo não encontrado");
                 return null;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             log.registrarLog(4, "TipoDAO", "buscarIdTipo", tabela, "Erro ao buscar o ID do Tipo");
