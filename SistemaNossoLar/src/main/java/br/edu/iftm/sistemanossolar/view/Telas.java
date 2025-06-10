@@ -53,7 +53,7 @@ public class Telas extends javax.swing.JFrame {
         pessoaController = new PessoaController(conexao);
         enderecoController = new EnderecoController(conexao);
         cadastroCidade = new CadastroCidade(this, true, conexao, this);
-        cadastroProduto = new CadastroProduto(this);
+        cadastroProduto = new CadastroProduto(this, true, conexao, this);
         initComponents();
         cl = (CardLayout) pnCard.getLayout();
     }
