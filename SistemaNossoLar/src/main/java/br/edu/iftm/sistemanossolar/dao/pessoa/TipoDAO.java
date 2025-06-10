@@ -31,8 +31,8 @@ public class TipoDAO {
             }
 
         } catch (Exception e) {
-            log.registrarLog(4, "TipoDAO", "buscarIdTipo", tabela, "Erro ao buscar o ID do Tipo");
             e.printStackTrace();
+            log.registrarLog(4, "TipoDAO", "buscarIdTipo", tabela, "Erro ao buscar o ID do Tipo");
             return null;
         }
     }

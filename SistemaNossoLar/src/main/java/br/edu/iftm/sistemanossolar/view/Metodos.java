@@ -29,11 +29,9 @@ import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
-import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
-import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
 
 public class Metodos {
     private static EnderecoController enderecoController;
@@ -76,80 +74,12 @@ public class Metodos {
         System.out.println("18 - Exibir Pedido");
         System.out.println("19 - Exibir Produto");
         System.out.println("20 - Sair");
-        System.out.print("Escolha uma opção: ");
+        System.out.println("Escolha uma opção: ");
     }
 
     public boolean cadastrarUsuario(Scanner scan) throws SQLException {
-        System.out.println("Digite o nome do usuario:");
-        String nomeCliente = scan.nextLine();
-
-        System.out.println("Digite o Tipo do usuario:");
-        String tipoUsu = scan.nextLine();
-
-        System.out.println("Digite o tipo da pessoa (FISICA ou JURIDICA):");
-        String tipoPess = scan.nextLine();
-
-        System.out.println("Digite o CPF do usuario:");
-        String cpf = scan.nextLine();
-
-        System.out.println("Digite o telefone do usuario:");
-        String telefone = scan.nextLine();
-
-        System.out.println("Digite o email do usuario:");
-        String email = scan.nextLine();
-
-        Paciente paciente = new Paciente();
-
-        if (tipoUsu.equalsIgnoreCase("Beneficiário")) {
-            System.out.println("Digite o nome do paciente:");
-            String nomePaciente = scan.nextLine();
-            System.out.println("Digite a previsão de dias:");
-            int qtdDias = scan.nextInt();
-            scan.nextLine();
-            paciente.setNome(nomePaciente);
-            paciente.setPrevisaoDias(qtdDias);
-
-        } else if (tipoUsu.equalsIgnoreCase("Assistente")) {
-            paciente.setNome("N/A");
-            paciente.setPrevisaoDias(0);
-        }
-
-        System.out.println("Digite o nome da cidade:");
-        String cidade = scan.nextLine();
-
-        System.out.println("Digite o estado da cidade:");
-        String uf = scan.nextLine();
-
-        System.out.println("Observação:");
-        String observacao = scan.nextLine();
-
-        Cidade cidadeObj = new Cidade(cidade, uf);
-
-        Endereco endereco = new Endereco(cidadeObj);
-
-        Pessoa beneficiario = new Pessoa();
-        beneficiario.setNome(nomeCliente);
-        beneficiario.setTelefone(telefone);
-        beneficiario.setTipoUsuario(TipoCad.fromString(tipoUsu));
-        beneficiario.setTipoPessoa(TipoPessoa.fromString(tipoPess));
-        beneficiario.setIdentificacao(cpf);
-        beneficiario.setEndereco(endereco);
-        beneficiario.setEmail(email);
-        beneficiario.setObservacao(observacao);
-
-        if (beneficiario.getTipoUsuario() == TipoCad.BENEFICIARIO) {
-            beneficiario.setLocal(Local.fromString("HOSPITAL"));
-            beneficiario.setPaciente(paciente);
-        } else if (beneficiario.getTipoUsuario() == TipoCad.ASSISTENTE) {
-            beneficiario.setLocal(Local.fromString("PRONTOSOCORRO"));
-            beneficiario.setPaciente(paciente);
-        }
-
-        if (pessoaController.cadastrarPessoa(beneficiario, paciente)) {
-            return true;
-        } else {
-            return false;
-        }
+        System.out.println("Utilize a tela!");
+        return false;
     }
 
     public boolean cadastrarEndereco(Scanner scan) throws SQLException {
@@ -228,10 +158,7 @@ public class Metodos {
 
     public boolean cadastrarDoacao(Scanner scan) throws SQLException, IOException {
         System.out.println("Selecione o Doador (código):");
-        for (int i = 0; i < pessoaController.listarPessoas("doador").size(); i++) {
-            System.out.println((pessoaController.listarPessoas("Doador").get(i).getId()) + " - "
-                    + pessoaController.listarPessoas("Doador").get(i).getNome());
-        }
+        listarPessoas("Doador");
         int idDoador = scan.nextInt();
         scan.nextLine();
 
@@ -246,29 +173,24 @@ public class Metodos {
         boolean controle = false;
         int numProduto = 1;
         int opc = 0;
-        System.out.println("Incluir produto? 1-Sim / 2-Não");
-        opc = scan.nextInt();
-        scan.nextLine();
-        if (opc == 1) {
-            while (!controle) {
-                Produto produto = new Produto();
-                System.out.println("Inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
-                opc = scan.nextInt();
+        
+        while (!controle) {
+            Produto produto = new Produto();
+            System.out.println("Inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
+            opc = scan.nextInt();
+            scan.nextLine();
+            if (opc == 2) {
+                controle = true;
+            } else if (cadastrarProduto(scan, produto)) {
+                System.out.println("Digite a quantidade do Produto:");
+                produto.setQuantidade(scan.nextInt());
                 scan.nextLine();
-
-                if (opc == 2) {
-                    controle = true;
-                } else if (cadastrarProduto(scan, produto)) {
-                    System.out.println("Digite a quantidade do Produto:");
-                    produto.setQuantidade(scan.nextInt());
-                    scan.nextLine();
-
-                    produtos.add(produto);
-                    numProduto++;
-                    controle = false;
-                }
+                produtos.add(produto);
+                numProduto++;
+                controle = false;
             }
         }
+        
 
         System.out.println("Digite a data da doação (ex. 22/05/2025):");
         String data = scan.nextLine();
@@ -290,24 +212,32 @@ public class Metodos {
             if (opc == 1) {
                 gerarRelatorioDoacao(doacao);
             }
-
             return true;
         } else {
             return false;
         }
     }
 
+    public void listarPessoas(String tipo) throws SQLException, IOException {
+        int qtd= 0;
+        List<Pessoa> pessoas = new ArrayList<>();
+        if (tipo.equalsIgnoreCase("Beneficiario")) {
+            pessoas = pessoaController.listarPessoas("Beneficiario");
+        } else if (tipo.equalsIgnoreCase("Assistente")) {
+            pessoas = pessoaController.listarPessoas("Assistente");
+        } else if (tipo.equalsIgnoreCase("Doador")) {
+            pessoas = pessoaController.listarPessoas("Doador");
+        }
+        for (int i = 0; i < pessoas.size(); i++) {
+            System.out.println((qtd + 1) + " - " + pessoas.get(i).getNome());
+            qtd++;
+        }
+    }
+
     public boolean cadastrarPedido(Scanner scan) throws SQLException, IOException {
-        System.out.println("Selecione o Cliente (código): ");
-        int qtdCliAss = 0;
-        for (int i = 0; i < pessoaController.listarPessoas("Beneficiario").size(); i++) {
-            System.out.println((qtdCliAss + 1) + " - " + pessoaController.listarPessoas("Beneficiario").get(i).getNome());
-            qtdCliAss++;
-        }
-        for (int i = 0; i < pessoaController.listarPessoas("Assistente").size(); i++) {
-            System.out.println((qtdCliAss + 1) + " - " + pessoaController.listarPessoas("Assistente").get(i).getNome());
-            qtdCliAss++;
-        }
+        System.out.println("Selecione a Pessoa: ");
+        listarPessoas("Beneficiario");
+        listarPessoas("Assistente");
         int idCliente = scan.nextInt();
         scan.nextLine();
 
@@ -337,7 +267,6 @@ public class Metodos {
             if (opc == 1) {
                 gerarRelatorioPedido(pedido);
             }
-
             return true;
         } else {
             return false;
@@ -363,9 +292,8 @@ public class Metodos {
                 gerarPDF(templatePreenchido, arquivo);
                 log.registrarLog(2, "Metodos", "gerarRelatorioDoacao", "", "Recibo gerado em: " + arquivo);
             } catch (IOException e) {
-                log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
-                System.err.println(e.getMessage());
                 e.printStackTrace();
+                log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
             }
         } else {
             String template = Relatorio.templateDoacaoProduto();
@@ -393,9 +321,8 @@ public class Metodos {
                 gerarPDF(templatePreenchido, arquivo);
                 log.registrarLog(2, "Metodos", "gerarRelatorioDoacao", "", "Recibo gerado em: " + arquivo);
             } catch (IOException e) {
-                log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
-                System.err.println(e.getMessage());
                 e.printStackTrace();
+                log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
             }
         }
         
@@ -448,9 +375,8 @@ public class Metodos {
             gerarPDF(templatePreenchido, arquivo);
             log.registrarLog(2, "Metodos", "gerarRelatorioPedido", "", "Recibo gerado em: " + arquivo);
         } catch (IOException e) {
-            log.registrarLog(4, "Metodos", "gerarRelatorioPedido", "", "Recibo não foi gerado");
-            System.err.println(e.getMessage());
             e.printStackTrace();
+            log.registrarLog(4, "Metodos", "gerarRelatorioPedido", "", "Recibo não foi gerado");
         }
         
     }
@@ -465,8 +391,9 @@ public class Metodos {
             renderer.createPDF(os);
             log.registrarLog(2, "Metodos", "gerarPDF", "", "Arquivo PDF gerado");
         } catch (Exception e) {
+            e.printStackTrace();
             log.registrarLog(4, "Metodos", "gerarPDF", "", "Arquivo PDF não foi gerado");
-            throw new IOException(e.getMessage(), e);
+            throw new IOException();
         }
     }
 

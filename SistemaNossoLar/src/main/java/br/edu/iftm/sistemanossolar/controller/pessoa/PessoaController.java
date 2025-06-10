@@ -17,6 +17,7 @@ public class PessoaController {
     private CidadeController cidadeController;
     private EnderecoController enderecoController;
     private TipoController tipoController;
+    private PacienteController pacienteController;
 
     RegistrosLog log = new RegistrosLog();
 
@@ -25,21 +26,22 @@ public class PessoaController {
         this.cidadeController = new CidadeController(conexao);
         this.enderecoController = new EnderecoController(conexao);
         this.tipoController = new TipoController(conexao);
+        this.pacienteController = new PacienteController(conexao);
     }
 
     public boolean cadastrarPessoa(Pessoa pessoa, Paciente paciente) throws SQLException {
         log.registrarLog(1, "PessoaController", "cadastrarPessoa", "", "Cadastrando o "+ pessoa.getTipoUsuario() +" "+ pessoa.getNome());
 
         Cidade cidade = pessoa.getEndereco().getCidade();
-        if (!cidadeController.existeCidade(cidade)) {
-            cidadeController.cadastrarCidade(cidade);    
+        int pessoaId = pessoaDAO.cadastrarPessoa(pessoa, paciente, cidadeController.buscarIdCidade(cidade), enderecoController.buscarIdEndereco(pessoa.getEndereco(), cidadeController.buscarIdCidade(cidade)), tipoController.buscarIdTipo(pessoa.getTipoUsuario().toString(), "tipousuario"));
+        if (pessoaId != 0) {
+            if (paciente != null) {
+                pacienteController.cadastrarPaciente(paciente, pessoaId);
+            }
+            return true;
+        } else {
+            return false;
         }
-
-        Integer idCidade = cidadeController.buscarIdCidade(cidade);
-        Integer idEndereco = enderecoController.buscarIdEndereco(idCidade);
-        Integer idTipo = tipoController.buscarIdTipo(pessoa.getTipoUsuario().toString(), "tipousuario");
-
-        return pessoaDAO.cadastrarPessoa(pessoa, paciente, idCidade, idEndereco, idTipo);
     }
 
     public Pessoa buscarPessoaPorId(int id) throws SQLException {
