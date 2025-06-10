@@ -3,58 +3,75 @@ package br.edu.iftm.sistemanossolar.model.pessoa;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 
 public class Pessoa {
-    private int id;
+    private Integer id;
+    private TipoCad tipoCadastro;
     private String nome;
-    private String telefone;
-    private TipoPessoa tipoPessoa;
     private Paciente paciente;
-    private String email;
+    private Local local;
+    private TipoPessoa tipoPessoa;
     private String identificacao;
+    private String telefone;
+    private Integer enderecoId;
     private Endereco endereco;
-    private int enderecoId;
+    private String email;
     private String observacao;
 
-    public Pessoa(){
-        
+    public enum TipoCad {
+        ASSISTENTE,
+        BENEFICIARIO,
+        DOADOR,;
+        public static TipoCad fromString(String opcao) {
+            if (opcao==null) 
+                return null;
+            try {
+                return TipoCad.valueOf(opcao.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
     }
 
-    public Pessoa(String nome, String telefone, Endereco endereco) { // construtor usado para cadastrar cliente e doador
-        this.nome = nome;
-        this.telefone = telefone;
-        this.endereco = endereco;
-    }
-    
-    public Pessoa(String nome, String telefone) { // construtor usado para listar e selecionar clientes e doadores em registro de pedido e doação
-        this.nome = nome;
-        this.telefone = telefone;
-    }
-    // construtor usado para pegar o registro completo de usuário para jogar na tela de alterar usuário
-    public Pessoa(String nome, String telefone, TipoPessoa tipoPessoa, String email, String identificacao, Endereco endereco, String observacao) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.tipoPessoa = tipoPessoa;
-        this.email = email;
-        this.identificacao = identificacao;
-        this.endereco = endereco;
-        this.observacao = observacao;
-    }
-    
-    //Cliente
-    public Pessoa(String nome, String telefone, Endereco endereco, Paciente paciente) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.endereco = endereco;
-        this.paciente = paciente;
+    public enum Local {
+        HOSPITAL,
+        PRONTOSOCORRO,;
+        public static Local fromString(String opcao) {
+            if (opcao==null) 
+                return null;
+            try {
+                return Local.valueOf(opcao.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
     }
 
-    public Pessoa(int id, String nome, String telefone){
-        this.nome = nome;
-        this.telefone = telefone;
-        this.id = id;
+    public enum TipoPessoa {
+        FISICA,
+        JURIDICA;
+        public static TipoPessoa fromString(String opcao) {
+            if (opcao==null) 
+                return null;
+            try {
+                return TipoPessoa.valueOf(opcao.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
     }
     
-    //Completo
-    public Pessoa(int id, String nome, TipoPessoa tipoPessoa, String identificacao, String telefone, int enderecoId, String email,  String observacao) {
+    //Contrutor vazio
+    public Pessoa(){    
+    }
+
+    //Construtor mínimo para cadastrar Beneficiario e Doador
+    public Pessoa(String nome, String telefone, Endereco endereco) { 
+        this.nome = nome;
+        this.telefone = telefone;
+        this.endereco = endereco;
+    }
+
+    //Contrutor completo da Pessoa
+    public Pessoa(Integer id, String nome, TipoPessoa tipoPessoa, String identificacao, String telefone, Integer enderecoId, String email,  String observacao) {
         this.id = id;
         this.nome = nome;
         this.tipoPessoa = tipoPessoa;
@@ -64,22 +81,12 @@ public class Pessoa {
         this.email = email;
         this.observacao = observacao;
     }
-
-    public enum TipoPessoa {
-        FISICA,
-        JURIDICA;
-        public static TipoPessoa fromString(String opcao) {
-
-            if (opcao==null) return null;
-
-            try {
-                return TipoPessoa.valueOf(opcao.toUpperCase());
-
-            } catch (IllegalArgumentException e) {
-                return null;
-            }
-
-        }
+    
+    //Construtor para listar os Beneficiarios ou Doadores no Pedido/Doação
+    public Pessoa(Integer id, String nome, String telefone) { 
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
     }
 
     public String getNome() {
@@ -138,8 +145,12 @@ public class Pessoa {
         this.observacao = observacao;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Paciente getPaciente() {
@@ -150,11 +161,27 @@ public class Pessoa {
         this.paciente = paciente;
     }
 
-    public int getEnderecoId() {
+    public Integer getEnderecoId() {
         return enderecoId;
     }
 
-    public void setEnderecoId(int enderecoId) {
+    public void setEnderecoId(Integer enderecoId) {
         this.enderecoId = enderecoId;
+    }
+
+    public TipoCad getTipoUsuario() {
+        return tipoCadastro;
+    }
+
+    public void setTipoUsuario(TipoCad tipoCadastro) {
+        this.tipoCadastro = tipoCadastro;
+    }
+
+    public Local getLocal() {
+        return local;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
     }
 }

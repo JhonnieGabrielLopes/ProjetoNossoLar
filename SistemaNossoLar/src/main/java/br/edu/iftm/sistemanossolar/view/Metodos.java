@@ -20,19 +20,19 @@ import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
-import br.edu.iftm.sistemanossolar.controller.pessoa.PacienteController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
-import br.edu.iftm.sistemanossolar.controller.pessoa.TipoController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
+import br.edu.iftm.sistemanossolar.model.doacao.Doacao.TipoDoa;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto.TipoProd;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
-import br.edu.iftm.sistemanossolar.model.pessoa.Paciente.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
 
 public class Metodos {
@@ -40,10 +40,8 @@ public class Metodos {
     private static CidadeController cidadeController;
     private static PessoaController pessoaController;
     private static ProdutoController produtoController;
-    private static TipoController tipoController;
     private static DoacaoController doacaoController;
     private static PedidoController pedidoController;
-    private static PacienteController pacienteController;
 
     RegistrosLog log = new RegistrosLog();
 
@@ -52,14 +50,11 @@ public class Metodos {
         cidadeController = new CidadeController(conexao);
         pessoaController = new PessoaController(conexao);
         produtoController = new ProdutoController(conexao);
-        tipoController = new TipoController(conexao);
         doacaoController = new DoacaoController(conexao);
         pedidoController = new PedidoController(conexao);
-        pacienteController = new PacienteController(conexao);
     }
 
     public void menuPrincipal() {
-        System.out.println("\nSistema Nosso Lar");
         System.out.println("Selecione uma opção:");
         System.out.println("1 - Cadastrar Usuário");
         System.out.println("2 - Cadastrar Endereço");
@@ -67,26 +62,20 @@ public class Metodos {
         System.out.println("4 - Cadastrar Doação");
         System.out.println("5 - Cadastrar Pedido");
         System.out.println("6 - Cadastrar Produto");
-        System.out.println("7 - Cadastrar Tipo Usuario");
-        System.out.println("8 - Cadastrar Tipo Doação");
-        System.out.println("9 - Cadastrar Tipo Produto");
-        System.out.println("10 - Alterar Usuário");
-        System.out.println("11 - Alterar Endereço");
-        System.out.println("12 - Alterar Pedido");
-        System.out.println("13 - Alterar Produto");
-        System.out.println("14 - Deletar Usuário");
-        System.out.println("15 - Deletar Endereço");
-        System.out.println("16 - Deletar Cidade");
-        System.out.println("17 - Deletar Tipo Usuario");
-        System.out.println("18 - Deletar Tipo Doação");
-        System.out.println("19 - Deletar Tipo Produto");
-        System.out.println("20 - Exibir Usuário");
-        System.out.println("21 - Exibir Endereço");
-        System.out.println("22 - Exibir Cidade");
-        System.out.println("23 - Exibir Doação");
-        System.out.println("24 - Exibir Pedido");
-        System.out.println("25 - Exibir Produto");
-        System.out.println("26 - Sair");
+        System.out.println("7 - Alterar Usuário");
+        System.out.println("8 - Alterar Endereço");
+        System.out.println("9 - Alterar Pedido");
+        System.out.println("10 - Alterar Produto");
+        System.out.println("11 - Deletar Usuário");
+        System.out.println("12 - Deletar Endereço");
+        System.out.println("13 - Deletar Cidade");
+        System.out.println("14 - Exibir Usuário");
+        System.out.println("15 - Exibir Endereço");
+        System.out.println("16 - Exibir Cidade");
+        System.out.println("17 - Exibir Doação");
+        System.out.println("18 - Exibir Pedido");
+        System.out.println("19 - Exibir Produto");
+        System.out.println("20 - Sair");
         System.out.print("Escolha uma opção: ");
     }
 
@@ -111,26 +100,18 @@ public class Metodos {
 
         Paciente paciente = new Paciente();
 
-        if (tipoUsu.equalsIgnoreCase("Cliente") || tipoUsu.equalsIgnoreCase("Assistente")) {
-            System.out.println("Digite o Local:");
-            String localPaci = scan.nextLine();
-            paciente.setLocal(Local.fromString(localPaci));
+        if (tipoUsu.equalsIgnoreCase("Beneficiário")) {
+            System.out.println("Digite o nome do paciente:");
+            String nomePaciente = scan.nextLine();
+            System.out.println("Digite a previsão de dias:");
+            int qtdDias = scan.nextInt();
+            scan.nextLine();
+            paciente.setNome(nomePaciente);
+            paciente.setPrevisaoDias(qtdDias);
 
-            if (tipoUsu.equalsIgnoreCase("Cliente")) {
-                System.out.println("Digite o nome do paciente:");
-                String nomePaciente = scan.nextLine();
-
-                System.out.println("Digite a previsão de dias:");
-                int qtdDias = scan.nextInt();
-                scan.nextLine();
-
-                paciente.setNome(nomePaciente);
-                paciente.setPrevisaoDias(qtdDias);
-
-            } else if (tipoUsu.equalsIgnoreCase("Assistente")) {
-                paciente.setNome("N/A");
-                paciente.setPrevisaoDias(0);
-            }
+        } else if (tipoUsu.equalsIgnoreCase("Assistente")) {
+            paciente.setNome("N/A");
+            paciente.setPrevisaoDias(0);
         }
 
         System.out.println("Digite o nome da cidade:");
@@ -146,15 +127,25 @@ public class Metodos {
 
         Endereco endereco = new Endereco(cidadeObj);
 
-        Tipo tipo = new Tipo(tipoUsu);
+        Pessoa beneficiario = new Pessoa();
+        beneficiario.setNome(nomeCliente);
+        beneficiario.setTelefone(telefone);
+        beneficiario.setTipoUsuario(TipoCad.fromString(tipoUsu));
+        beneficiario.setTipoPessoa(TipoPessoa.fromString(tipoPess));
+        beneficiario.setIdentificacao(cpf);
+        beneficiario.setEndereco(endereco);
+        beneficiario.setEmail(email);
+        beneficiario.setObservacao(observacao);
 
-        Pessoa cliente = new Pessoa(nomeCliente, telefone, endereco);
-        cliente.setTipoPessoa(TipoPessoa.fromString(tipoPess));
-        cliente.setIdentificacao(cpf);
-        cliente.setEmail(email);
-        cliente.setObservacao(observacao);
+        if (beneficiario.getTipoUsuario() == TipoCad.BENEFICIARIO) {
+            beneficiario.setLocal(Local.fromString("HOSPITAL"));
+            beneficiario.setPaciente(paciente);
+        } else if (beneficiario.getTipoUsuario() == TipoCad.ASSISTENTE) {
+            beneficiario.setLocal(Local.fromString("PRONTOSOCORRO"));
+            beneficiario.setPaciente(paciente);
+        }
 
-        if (pessoaController.cadastrarPessoa(cliente, tipo, paciente)) {
+        if (pessoaController.cadastrarPessoa(beneficiario, paciente)) {
             return true;
         } else {
             return false;
@@ -221,12 +212,11 @@ public class Metodos {
 
         System.out.println("Digite o Tipo do produto:");
         tipoProduto = scan.nextLine();
-        Tipo tipoProd = new Tipo(tipoProduto);
 
         System.out.println("Digite o nome do Produto:");
         nomeProduto = scan.nextLine();
 
-        novoProduto.setTipo(tipoProd);
+        novoProduto.setTipo(TipoProd.fromString(tipoProduto));
         novoProduto.setNome(nomeProduto);
 
         if (produtoController.cadastrarProduto(novoProduto)) {
@@ -286,11 +276,9 @@ public class Metodos {
         DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataDoacao = LocalDate.parse(data, dataFormat);
 
-        Tipo tipoDoa = new Tipo(tipoDoacao);
-
         Pessoa doador = pessoaController.buscarPessoaPorId(idDoador);
 
-        Doacao doacao = new Doacao(doador, tipoDoa, dataDoacao);
+        Doacao doacao = new Doacao(doador, TipoDoa.fromString(tipoDoacao), dataDoacao);
         doacao.setValor(valor);
         doacao.setProduto(produtos);
 
@@ -312,8 +300,8 @@ public class Metodos {
     public boolean cadastrarPedido(Scanner scan) throws SQLException, IOException {
         System.out.println("Selecione o Cliente (código): ");
         int qtdCliAss = 0;
-        for (int i = 0; i < pessoaController.listarPessoas("Cliente").size(); i++) {
-            System.out.println((qtdCliAss + 1) + " - " + pessoaController.listarPessoas("Cliente").get(i).getNome());
+        for (int i = 0; i < pessoaController.listarPessoas("Beneficiario").size(); i++) {
+            System.out.println((qtdCliAss + 1) + " - " + pessoaController.listarPessoas("Beneficiario").get(i).getNome());
             qtdCliAss++;
         }
         for (int i = 0; i < pessoaController.listarPessoas("Assistente").size(); i++) {
@@ -336,9 +324,9 @@ public class Metodos {
         System.out.println("Observação: ");
         String observacao = scan.nextLine();
 
-        Pessoa cliente = pessoaController.buscarPessoaPorId(idCliente);
+        Pessoa beneficiario = pessoaController.buscarPessoaPorId(idCliente);
 
-        Pedido pedido = new Pedido(cliente, qtdMarmitas, StatusPedido.PENDENTE, dataPedido);
+        Pedido pedido = new Pedido(beneficiario, qtdMarmitas, StatusPedido.PENDENTE, dataPedido);
         pedido.setObservacao(observacao);
 
         if (pedidoController.cadastrarPedido(pedido)) {
@@ -355,35 +343,6 @@ public class Metodos {
             return false;
         }
 
-    }
-
-    public boolean cadastrarTipo(Scanner scan, int tipoSel) throws SQLException {
-        System.out.println("Digite a descrição do Tipo: ");
-        Tipo tipo = new Tipo(scan.nextLine());
-
-        switch (tipoSel) {
-            case 1:
-                if (tipoController.cadastrarTipo(tipo.getDescricao(), "tipousuario")) {
-                    return true;
-                } else {
-                    return false;
-                }
-            case 2:
-                if (tipoController.cadastrarTipo(tipo.getDescricao(), "tipoproduto")) {
-                    return true;
-                } else {
-                    return false;
-                }
-            case 3:
-                if (tipoController.cadastrarTipo(tipo.getDescricao(), "tipodoacao")) {
-                    return true;
-                } else {
-                    return false;
-                }
-            default:
-                break;
-        }
-        return false;
     }
 
     public void gerarRelatorioDoacao(Doacao doacao) throws IOException {
@@ -415,7 +374,7 @@ public class Metodos {
             int qtdProd = 1;
             for (Produto produto : doacao.getProduto()) {
                 produtosHtml.append("<div class='item'>")
-                            .append("<span class='item-tipo'> Item "+ qtdProd +" - ").append(produto.getTipo().getDescricao()).append(" - </span>")
+                            .append("<span class='item-tipo'> Item "+ qtdProd +" - ").append(produto.getTipo().toString()).append(" - </span>")
                             .append("<span class='item-descricao'>").append(produto.getNome()).append(" - </span>")
                             .append("<span class='item-quantidade'>").append(produto.getQuantidade()).append(" un</span>")
                             .append("</div>");
@@ -448,15 +407,40 @@ public class Metodos {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         String template = Relatorio.templateAberturaPedido();
+        
+        String tipo = "";
+        if (pedido.getCliente().getTipoUsuario() == TipoCad.BENEFICIARIO) {
+            tipo = "Beneficiário";
+        } else if (pedido.getCliente().getTipoUsuario() == TipoCad.ASSISTENTE) {
+            tipo = "Assistente";
+        }
+
+        String local = "";
+        if (pedido.getCliente().getLocal() == Local.HOSPITAL) {
+            local = "Hospital São José";
+        } else if (pedido.getCliente().getLocal() == Local.PRONTOSOCORRO) {
+            local = "Pronto Socorro Municipal";
+        }
+
+        String paciente = "";
+        if (pedido.getCliente().getPaciente() != null) {
+            paciente = pedido.getCliente().getPaciente().getNome();
+        }
+
+        String observacao = "";
+        if (pedido.getObservacao() != null && !pedido.getObservacao().isEmpty()) {
+            observacao = pedido.getObservacao();
+        }
 
         String templatePreenchido = template
-            .replace("{{local}}", pedido.getCliente().getPaciente().getLocal().name())
+            .replace("{{codigo}}", pedido.getId().toString())
+            .replace("{{local}}", local)
             .replace("{{dataPedido}}", pedido.getDataPedido().format(formatador))
-            //.replace("{{tipo}}", pedido.getCliente().getTipoPessoa().name()) Pensar em como obter o tipo do usuario
+            .replace("{{tipo}}", tipo)
             .replace("{{nome}}", pedido.getCliente().getNome())
-            .replace("{{paciente}}", pedido.getCliente().getPaciente().getNome())
+            .replace("{{paciente}}", paciente)
             .replace("{{quantidades}}", pedido.getQuantMarmita().toString())
-            .replace("{{observacao}}", pedido.getObservacao());
+            .replace("{{observacao}}", observacao);
 
         try {
             new File("Recibos").mkdirs();

@@ -1,14 +1,27 @@
 package br.edu.iftm.sistemanossolar.model.doacao;
 
-import br.edu.iftm.sistemanossolar.model.pessoa.Tipo;
-
 public class Produto {
     private Integer id;
     private String nome;
     private Integer quantidade;
-    private Tipo tipo;
+    private TipoProd tipo;
 
-    public Produto(Integer id, String nome, Integer quantidade, Tipo tipo) {
+    public enum TipoProd {
+        ALIMENTO,
+        LIMPEZA,
+        OUTRO,;
+        public static TipoProd fromString(String opcao) {
+            if (opcao==null) 
+                return null;
+            try {
+                return TipoProd.valueOf(opcao.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
+    }
+
+    public Produto(Integer id, String nome, Integer quantidade, TipoProd tipo) {
         this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
@@ -42,11 +55,11 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public Tipo getTipo() {
+    public TipoProd getTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
+    public void setTipo(TipoProd tipo) {
         this.tipo = tipo;
     }
 
