@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package br.edu.iftm.sistemanossolar.view;
 
@@ -8,12 +8,13 @@ package br.edu.iftm.sistemanossolar.view;
  *
  * @author AFSOUZA
  */
-public class CadastroProduto extends javax.swing.JFrame {
-    private static Telas tela;
+public class CadastroProduto extends javax.swing.JDialog {
+
     /**
-     * Creates new form CadastroProduto
+     * Creates new form CadastroProduto1
      */
-    public CadastroProduto(Telas tela) {
+    public CadastroProduto(java.awt.Frame parent, boolean modal, Telas tela) {
+        super(parent, modal);
         this.tela = tela;
         initComponents();
     }
@@ -67,7 +68,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                             .addComponent(cbCadProdTipoProduto, 0, 310, Short.MAX_VALUE)
                             .addComponent(tfCadProdProduto))
                         .addGap(36, 36, 36)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         pnCadastrarProdutoLayout.setVerticalGroup(
             pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +81,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addComponent(lbCadProdProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfCadProdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCadProdCadastrar)
                     .addComponent(btCadProdCancelar))
@@ -104,7 +105,45 @@ public class CadastroProduto extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                CadastroProduto dialog = new CadastroProduto(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadProdCadastrar;

@@ -586,9 +586,8 @@ public class Telas extends javax.swing.JFrame {
 
         pnCard.add(pnCadastroPessoa, "beneficiario");
 
-        pnBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar"));
+        pnBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder("Alterar Pessoa"));
 
-        tfBuscarNome.setText("Quando buscar, utilizar a tela de cadastro Pessoa para editar e registrar (?)");
         tfBuscarNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfBuscarNomeKeyTyped(evt);
@@ -601,7 +600,6 @@ public class Telas extends javax.swing.JFrame {
 
         lbBuscarId.setText("ID:");
 
-        tfBuscarId.setText("Opção de buscar pelo nome ou ID");
         tfBuscarId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfBuscarIdKeyTyped(evt);
@@ -617,7 +615,7 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfBuscarNome)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 326, Short.MAX_VALUE)
                         .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnBuscarLayout.createSequentialGroup()
                         .addGroup(pnBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -650,7 +648,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnAlterarPessoaLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(pnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(820, Short.MAX_VALUE))
+                .addContainerGap(795, Short.MAX_VALUE))
         );
         pnAlterarPessoaLayout.setVerticalGroup(
             pnAlterarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

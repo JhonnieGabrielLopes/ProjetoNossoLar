@@ -728,7 +728,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           <Component id="pnBuscar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="820" max="32767" attributes="0"/>
+                          <EmptySpace pref="795" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -747,7 +747,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Buscar"/>
+                        <TitledBorder title="Alterar Pessoa"/>
                       </Border>
                     </Property>
                   </Properties>
@@ -760,7 +760,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="tfBuscarNome" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="326" max="32767" attributes="0"/>
                                       <Component id="btBuscar" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -796,9 +796,6 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="tfBuscarNome">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Quando buscar, utilizar a tela de cadastro Pessoa para editar e registrar (?)"/>
-                      </Properties>
                       <Events>
                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBuscarNomeKeyTyped"/>
                       </Events>
@@ -819,9 +816,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfBuscarId">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Op&#xe7;&#xe3;o de buscar pelo nome ou ID"/>
-                      </Properties>
                       <Events>
                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBuscarIdKeyTyped"/>
                       </Events>
