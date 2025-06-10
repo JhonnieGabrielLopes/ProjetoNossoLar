@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package br.edu.iftm.sistemanossolar.view;
 
@@ -8,12 +8,13 @@ package br.edu.iftm.sistemanossolar.view;
  *
  * @author AFSOUZA
  */
-public class CadastroProduto extends javax.swing.JFrame {
+public class CadastroProduto extends javax.swing.JDialog {
 
     /**
-     * Creates new form CadastroProduto
+     * Creates new form CadastroProduto1
      */
-    public CadastroProduto() {
+    public CadastroProduto(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -34,7 +35,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         btCadProdCadastrar = new javax.swing.JButton();
         btCadProdCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnCadastrarProduto.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar Produto"));
 
@@ -66,7 +67,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                             .addComponent(cbCadProdTipoProduto, 0, 310, Short.MAX_VALUE)
                             .addComponent(tfCadProdProduto))
                         .addGap(36, 36, 36)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         pnCadastrarProdutoLayout.setVerticalGroup(
             pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,7 +80,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addComponent(lbCadProdProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfCadProdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCadProdCadastrar)
                     .addComponent(btCadProdCancelar))
@@ -126,11 +127,19 @@ public class CadastroProduto extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroProduto().setVisible(true);
+                CadastroProduto dialog = new CadastroProduto(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
