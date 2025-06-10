@@ -107,6 +107,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="tfBuscarPessoaNome">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Insira o nome."/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBuscarPessoaNomeActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBuscarPessoaNomeKeyTyped"/>
@@ -120,6 +123,7 @@
         <Component class="javax.swing.JButton" name="btBuscarPessoaBuscar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Realizar busca na tabela."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbBuscarPessoaTipo">
@@ -137,6 +141,7 @@
                 <StringItem index="3" value=" "/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Selecione o tipo de pessoa."/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -160,6 +165,7 @@
                     <Column editable="true" title="UF" type="java.lang.Object"/>
                   </Table>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Selecione a pessoa desejada. Selecione apenas 1 linha."/>
               </Properties>
             </Component>
           </SubComponents>
@@ -167,6 +173,7 @@
         <Component class="javax.swing.JButton" name="btBuscarPessoaSelecionar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Selecionar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Confirmar sele&#xe7;&#xe3;o da tabela."/>
           </Properties>
         </Component>
       </SubComponents>

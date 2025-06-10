@@ -86,11 +86,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Doa&#xe7;&#xe3;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuRelatorioDoacaoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuRelatorioPedido">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pedido"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuRelatorioPedidoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -319,6 +325,9 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="tfEnderecoLogradouro">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value="Insira o Logradouro do Endere&#xe7;o da Pessoa."/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbLogradouro">
                       <Properties>
@@ -359,6 +368,7 @@
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="0"/>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Selecione a Cidade da Pessoa."/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnderecoCidadeActionPerformed"/>
@@ -368,6 +378,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEnderecoCep">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value="Informe o CEP do Endere&#xe7;o de cadastro."/>
+                      </Properties>
                       <Events>
                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfEnderecoCepKeyTyped"/>
                       </Events>
@@ -416,6 +429,7 @@
                             <StringItem index="27" value="TO"/>
                           </StringArray>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="UF ser&#xe1; preenchida automaticamente mediante cadastro."/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <AuxValues>
@@ -545,6 +559,9 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="tfNome">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value="Insira o nome da Pessoa."/>
+                      </Properties>
                       <Events>
                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNomeKeyTyped"/>
                       </Events>
@@ -559,6 +576,7 @@
                         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                           <Format format="(##) # ####-####" subtype="-1" type="5"/>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Insira o telefone da Pessoa."/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbTelefone">
@@ -572,6 +590,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfEmail">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value="Insira o e-mail da Pessoa."/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbObservacao">
                       <Properties>
@@ -590,6 +611,7 @@
                             <Property name="columns" type="int" value="20"/>
                             <Property name="lineWrap" type="boolean" value="true"/>
                             <Property name="rows" type="int" value="5"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Insira coment&#xe1;rios que possa auxiliar no controle do cadastro dessa Pessoa."/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -600,6 +622,7 @@
                           <ComponentRef name="buttonGroupPessoaTipo"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Pessoa F&#xed;sica (CPF)"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Selecione o Tipo da Pessoa."/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPessoaFisicaActionPerformed"/>
@@ -611,6 +634,7 @@
                           <ComponentRef name="buttonGroupPessoaTipo"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Pessoa Jur&#xed;dica (CNPJ)"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Selecione o Tipo da Pessoa."/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPessoaJuridicaActionPerformed"/>
@@ -632,6 +656,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfNomePaciente">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value="Insira o Nome do Paciente."/>
+                      </Properties>
                       <Events>
                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNomePacienteKeyTyped"/>
                       </Events>
@@ -651,6 +678,7 @@
                     </Component>
                     <Component class="javax.swing.JFormattedTextField" name="ffDocumento">
                       <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value="Insira o n&#xfa;mero do documento (se pessoa f&#xed;sica, CPF e se pessoa jur&#xed;dica, CNPJ)."/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
@@ -664,6 +692,7 @@
                             <StringItem index="3" value=" "/>
                           </StringArray>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Selecione o Tipo de Pessoa."/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTipoUsuarioActionPerformed"/>
@@ -691,6 +720,7 @@
                             <StringItem index="2" value=" "/>
                           </StringArray>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Selecione o Local de Interna&#xe7;&#xe3;o do Paciente."/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -1832,7 +1862,7 @@
             <Container class="javax.swing.JPanel" name="pnRelatorioDoacao">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card7"/>
+                  <CardConstraints cardName="relatorioDoacao"/>
                 </Constraint>
               </Constraints>
 
@@ -2103,7 +2133,7 @@
             <Container class="javax.swing.JPanel" name="pnRelatorioPedido">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card8"/>
+                  <CardConstraints cardName="relatorioPedido"/>
                 </Constraint>
               </Constraints>
 

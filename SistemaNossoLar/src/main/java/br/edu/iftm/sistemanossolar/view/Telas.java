@@ -245,6 +245,8 @@ public class Telas extends javax.swing.JFrame {
 
         pnEnderecoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço:"));
 
+        tfEnderecoLogradouro.setToolTipText("Insira o Logradouro do Endereço da Pessoa.");
+
         lbLogradouro.setText("Logradouro:");
 
         lbNumero.setText("Número:");
@@ -261,12 +263,14 @@ public class Telas extends javax.swing.JFrame {
 
         lbComplemento.setText("Complemento:");
 
+        cbEnderecoCidade.setToolTipText("Selecione a Cidade da Pessoa.");
         cbEnderecoCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEnderecoCidadeActionPerformed(evt);
             }
         });
 
+        tfEnderecoCep.setToolTipText("Informe o CEP do Endereço de cadastro.");
         tfEnderecoCep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfEnderecoCepKeyTyped(evt);
@@ -278,6 +282,7 @@ public class Telas extends javax.swing.JFrame {
         lbLogradouro6.setText("UF");
 
         cbEnderecoUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cbEnderecoUf.setToolTipText("UF será preenchida automaticamente mediante cadastro.");
         cbEnderecoUf.setEnabled(false);
 
         btAdicionarCidade.setText("+");
@@ -369,6 +374,7 @@ public class Telas extends javax.swing.JFrame {
 
         pnPessoaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa"));
 
+        tfNome.setToolTipText("Insira o nome da Pessoa.");
         tfNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNomeKeyTyped(evt);
@@ -382,20 +388,25 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ffTelefone.setToolTipText("Insira o telefone da Pessoa.");
 
         lbTelefone.setText("Telefone:");
 
         lbEmail.setText("E-mail:");
+
+        tfEmail.setToolTipText("Insira o e-mail da Pessoa.");
 
         lbObservacao.setText("Observação:");
 
         taObservacao.setColumns(20);
         taObservacao.setLineWrap(true);
         taObservacao.setRows(5);
+        taObservacao.setToolTipText("Insira comentários que possa auxiliar no controle do cadastro dessa Pessoa.");
         jScrollPane1.setViewportView(taObservacao);
 
         buttonGroupPessoaTipo.add(rbPessoaFisica);
         rbPessoaFisica.setText("Pessoa Física (CPF)");
+        rbPessoaFisica.setToolTipText("Selecione o Tipo da Pessoa.");
         rbPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPessoaFisicaActionPerformed(evt);
@@ -404,6 +415,7 @@ public class Telas extends javax.swing.JFrame {
 
         buttonGroupPessoaTipo.add(rbPessoaJuridica);
         rbPessoaJuridica.setText("Pessoa Jurídica (CNPJ)");
+        rbPessoaJuridica.setToolTipText("Selecione o Tipo da Pessoa.");
         rbPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPessoaJuridicaActionPerformed(evt);
@@ -416,6 +428,7 @@ public class Telas extends javax.swing.JFrame {
 
         lbNomePaciente.setText("Nome do Paciente:");
 
+        tfNomePaciente.setToolTipText("Insira o Nome do Paciente.");
         tfNomePaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNomePacienteKeyTyped(evt);
@@ -431,9 +444,11 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
+        ffDocumento.setToolTipText("Insira o número do documento (se pessoa física, CPF e se pessoa jurídica, CNPJ).");
         ffDocumento.setEnabled(false);
 
         cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Doador", "Assistente", " " }));
+        cbTipoUsuario.setToolTipText("Selecione o Tipo de Pessoa.");
         cbTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoUsuarioActionPerformed(evt);
@@ -445,6 +460,7 @@ public class Telas extends javax.swing.JFrame {
         jLabel2.setText("Local de Internação");
 
         cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", " " }));
+        cbLocalInternacao.setToolTipText("Selecione o Local de Internação do Paciente.");
 
         javax.swing.GroupLayout pnPessoaClienteLayout = new javax.swing.GroupLayout(pnPessoaCliente);
         pnPessoaCliente.setLayout(pnPessoaClienteLayout);
@@ -1375,7 +1391,7 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        pnCard.add(pnRelatorioDoacao, "card7");
+        pnCard.add(pnRelatorioDoacao, "relatorioDoacao");
 
         pnRelPed.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatório Pedido"));
 
@@ -1537,7 +1553,7 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        pnCard.add(pnRelatorioPedido, "card8");
+        pnCard.add(pnRelatorioPedido, "relatorioPedido");
 
         javax.swing.GroupLayout pnDadosPrincipalLayout = new javax.swing.GroupLayout(pnDadosPrincipal);
         pnDadosPrincipal.setLayout(pnDadosPrincipalLayout);
@@ -1614,9 +1630,19 @@ public class Telas extends javax.swing.JFrame {
         menuRelatorio.setText("Relatório");
 
         menuRelatorioDoacao.setText("Doação");
+        menuRelatorioDoacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelatorioDoacaoActionPerformed(evt);
+            }
+        });
         menuRelatorio.add(menuRelatorioDoacao);
 
         menuRelatorioPedido.setText("Pedido");
+        menuRelatorioPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelatorioPedidoActionPerformed(evt);
+            }
+        });
         menuRelatorio.add(menuRelatorioPedido);
 
         menuBarra.add(menuRelatorio);
@@ -1855,6 +1881,17 @@ public class Telas extends javax.swing.JFrame {
     private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btRelPedFiltrarActionPerformed
+
+    private void menuRelatorioDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioDoacaoActionPerformed
+        // TODO add your handling code here:
+        cl.show(pnCard,"relatorioDoacao");
+    }//GEN-LAST:event_menuRelatorioDoacaoActionPerformed
+
+    private void menuRelatorioPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioPedidoActionPerformed
+        // TODO add your handling code here:
+        cl.show(pnCard,"relatorioPedido");
+
+    }//GEN-LAST:event_menuRelatorioPedidoActionPerformed
     
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
         campo.setEnabled(true);

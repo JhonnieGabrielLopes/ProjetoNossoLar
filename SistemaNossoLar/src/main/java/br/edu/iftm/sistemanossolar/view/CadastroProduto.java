@@ -42,12 +42,17 @@ public class CadastroProduto extends javax.swing.JDialog {
         lbCadProdTipo.setText("Tipo de Produto");
 
         cbCadProdTipoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCadProdTipoProduto.setToolTipText("Selecione o tipo de produto.");
 
         lbCadProdProduto.setText("Produto");
 
+        tfCadProdProduto.setToolTipText("Insira o nome do produto.");
+
         btCadProdCadastrar.setText("Cadastrar");
+        btCadProdCadastrar.setToolTipText("Confirmar cadastro de novo produto.");
 
         btCadProdCancelar.setText("Cancelar");
+        btCadProdCancelar.setToolTipText("Cancelar o registro de Produto.");
 
         javax.swing.GroupLayout pnCadastrarProdutoLayout = new javax.swing.GroupLayout(pnCadastrarProduto);
         pnCadastrarProduto.setLayout(pnCadastrarProdutoLayout);

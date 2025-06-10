@@ -40,9 +40,17 @@ public class CadastroCidade extends javax.swing.JDialog {
 
         lbCadCidCidade.setText("Cidade:");
 
+        tfCadCidCidade.setToolTipText("ATENÇÃO: Antes de registrar uma nova Cidade, certifique-se que não tenha a mesma cidade já cadastrada.");
+        tfCadCidCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCadCidCidadeActionPerformed(evt);
+            }
+        });
+
         lbCadCidUf.setText("UF:");
 
         cbCadCidUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "MG", "GO", "-", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "MA", "MT", "MS", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cbCadCidUf.setToolTipText("Selecione a UF.");
         cbCadCidUf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCadCidUfActionPerformed(evt);
@@ -50,6 +58,7 @@ public class CadastroCidade extends javax.swing.JDialog {
         });
 
         btCadCidCadastrar.setText("Cadastrar");
+        btCadCidCadastrar.setToolTipText("Realizar cadastro da Cidade.");
         btCadCidCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCadCidCadastrarActionPerformed(evt);
@@ -57,6 +66,7 @@ public class CadastroCidade extends javax.swing.JDialog {
         });
 
         btCadCidCancelar.setText("Cancelar");
+        btCadCidCancelar.setToolTipText("Cancelar o registro de Cidade.");
         btCadCidCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCadCidCancelarActionPerformed(evt);
@@ -148,6 +158,10 @@ public class CadastroCidade extends javax.swing.JDialog {
     private void btCadCidCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadCidCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btCadCidCancelarActionPerformed
+
+    private void tfCadCidCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCadCidCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCadCidCidadeActionPerformed
 
     /**
      * @param args the command line arguments

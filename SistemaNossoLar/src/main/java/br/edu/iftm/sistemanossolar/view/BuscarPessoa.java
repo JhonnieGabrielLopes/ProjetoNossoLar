@@ -41,6 +41,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
 
         pnBuscarPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar"));
 
+        tfBuscarPessoaNome.setToolTipText("Insira o nome.");
         tfBuscarPessoaNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfBuscarPessoaNomeActionPerformed(evt);
@@ -55,10 +56,12 @@ public class BuscarPessoa extends javax.swing.JDialog {
         lbBuscarPessoaNome.setText("Nome:");
 
         btBuscarPessoaBuscar.setText("Buscar");
+        btBuscarPessoaBuscar.setToolTipText("Realizar busca na tabela.");
 
         lbBuscarPessoaTipo.setText("Tipo:");
 
         cbBuscarPessoaTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beneficiário", "Assistente", "Doador ", " " }));
+        cbBuscarPessoaTipo.setToolTipText("Selecione o tipo de pessoa.");
 
         tableBuscarPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,9 +74,11 @@ public class BuscarPessoa extends javax.swing.JDialog {
                 "ID", "Nome", "Endereço", "Cidade", "UF"
             }
         ));
+        tableBuscarPessoa.setToolTipText("Selecione a pessoa desejada. Selecione apenas 1 linha.");
         jScrollPane1.setViewportView(tableBuscarPessoa);
 
         btBuscarPessoaSelecionar.setText("Selecionar");
+        btBuscarPessoaSelecionar.setToolTipText("Confirmar seleção da tabela.");
 
         javax.swing.GroupLayout pnBuscarPessoaLayout = new javax.swing.GroupLayout(pnBuscarPessoa);
         pnBuscarPessoa.setLayout(pnBuscarPessoaLayout);
