@@ -146,7 +146,7 @@ public class CadastroCidade extends javax.swing.JDialog {
     }//GEN-LAST:event_cbCadCidUfActionPerformed
 
     private void btCadCidCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadCidCancelarActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btCadCidCancelarActionPerformed
 
     /**
