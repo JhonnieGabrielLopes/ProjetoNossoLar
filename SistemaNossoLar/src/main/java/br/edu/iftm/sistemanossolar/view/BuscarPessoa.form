@@ -59,15 +59,15 @@
                       <Component id="jScrollPane1" pref="763" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbBuscarPessoaNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfBuscarPessoaNome" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                              <Component id="lbBuscarPessoaNome" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfBuscarPessoaNome" min="-2" pref="198" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbBuscarPessoaId" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbBuscarPessoaTipo" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="tfBuscarPessoaId" min="-2" pref="76" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="cbBuscarPessoaTipo" min="-2" pref="190" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btBuscarPessoaBuscar" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -85,27 +85,22 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lbBuscarPessoaNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbBuscarPessoaTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="lbBuscarPessoaNome" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tfBuscarPessoaNome" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="lbBuscarPessoaId" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tfBuscarPessoaId" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btBuscarPessoaBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="tfBuscarPessoaNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbBuscarPessoaTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btBuscarPessoaBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="365" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="btBuscarPessoaSelecionar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -127,15 +122,25 @@
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbBuscarPessoaId">
+        <Component class="javax.swing.JLabel" name="lbBuscarPessoaTipo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ID:"/>
+            <Property name="text" type="java.lang.String" value="Tipo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfBuscarPessoaId">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBuscarPessoaIdKeyTyped"/>
-          </Events>
+        <Component class="javax.swing.JComboBox" name="cbBuscarPessoaTipo">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Benefici&#xe1;rio"/>
+                <StringItem index="1" value="Assistente"/>
+                <StringItem index="2" value="Doador "/>
+                <StringItem index="3" value=" "/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>

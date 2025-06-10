@@ -31,8 +31,8 @@ public class BuscarPessoa extends javax.swing.JDialog {
         tfBuscarPessoaNome = new javax.swing.JTextField();
         lbBuscarPessoaNome = new javax.swing.JLabel();
         btBuscarPessoaBuscar = new javax.swing.JButton();
-        lbBuscarPessoaId = new javax.swing.JLabel();
-        tfBuscarPessoaId = new javax.swing.JTextField();
+        lbBuscarPessoaTipo = new javax.swing.JLabel();
+        cbBuscarPessoaTipo = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableBuscarPessoa = new javax.swing.JTable();
         btBuscarPessoaSelecionar = new javax.swing.JButton();
@@ -56,13 +56,9 @@ public class BuscarPessoa extends javax.swing.JDialog {
 
         btBuscarPessoaBuscar.setText("Buscar");
 
-        lbBuscarPessoaId.setText("ID:");
+        lbBuscarPessoaTipo.setText("Tipo:");
 
-        tfBuscarPessoaId.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBuscarPessoaIdKeyTyped(evt);
-            }
-        });
+        cbBuscarPessoaTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beneficiário", "Assistente", "Doador ", " " }));
 
         tableBuscarPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,13 +86,13 @@ public class BuscarPessoa extends javax.swing.JDialog {
                     .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
                         .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbBuscarPessoaNome)
-                            .addComponent(tfBuscarPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(tfBuscarPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
                         .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbBuscarPessoaId)
+                            .addComponent(lbBuscarPessoaTipo)
                             .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                                .addComponent(tfBuscarPessoaId, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbBuscarPessoaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btBuscarPessoaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscarPessoaLayout.createSequentialGroup()
@@ -107,23 +103,20 @@ public class BuscarPessoa extends javax.swing.JDialog {
         pnBuscarPessoaLayout.setVerticalGroup(
             pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                        .addComponent(lbBuscarPessoaNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfBuscarPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                        .addComponent(lbBuscarPessoaId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfBuscarPessoaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btBuscarPessoaBuscar))))
+                .addGap(7, 7, 7)
+                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbBuscarPessoaNome)
+                    .addComponent(lbBuscarPessoaTipo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfBuscarPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbBuscarPessoaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBuscarPessoaBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btBuscarPessoaSelecionar)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,10 +142,6 @@ public class BuscarPessoa extends javax.swing.JDialog {
     private void tfBuscarPessoaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPessoaNomeKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_tfBuscarPessoaNomeKeyTyped
-
-    private void tfBuscarPessoaIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPessoaIdKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarPessoaIdKeyTyped
 
     private void tfBuscarPessoaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarPessoaNomeActionPerformed
         // TODO add your handling code here:
@@ -203,12 +192,12 @@ public class BuscarPessoa extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarPessoaBuscar;
     private javax.swing.JButton btBuscarPessoaSelecionar;
+    private javax.swing.JComboBox<String> cbBuscarPessoaTipo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbBuscarPessoaId;
     private javax.swing.JLabel lbBuscarPessoaNome;
+    private javax.swing.JLabel lbBuscarPessoaTipo;
     private javax.swing.JPanel pnBuscarPessoa;
     private javax.swing.JTable tableBuscarPessoa;
-    private javax.swing.JTextField tfBuscarPessoaId;
     private javax.swing.JTextField tfBuscarPessoaNome;
     // End of variables declaration//GEN-END:variables
 }
