@@ -17,6 +17,7 @@ public class PacienteController {
     }
 
     public boolean cadastrarPaciente(Paciente paciente, int idUsu) throws SQLException {
+        log.registrarLog(1, "PacienteController", "cadastrarPaciente", "paciente", "Cadastrando o Paciente "+ paciente.getNome());
         return pacienteDAO.cadastrarPaciente(paciente, idUsu);
     }
 

@@ -75,7 +75,7 @@ public class DoacaoDAO {
             return true;
 
         } catch (Exception e) {
-            log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario/usuariotipo", "Usuário ou Relação do Tipo/Usuario não cadastrada");
+            log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "doacao", "Doação não cadastrada");
             e.printStackTrace();
             return false;
         }

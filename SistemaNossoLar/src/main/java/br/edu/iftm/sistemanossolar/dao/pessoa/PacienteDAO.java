@@ -18,13 +18,15 @@ public class PacienteDAO {
     }
 
     public boolean cadastrarPaciente(Paciente paciente, int idUsu) {
-        log.registrarLog(1, "PacienteDAO", "cadastrarPaciente", "paciente", "Cadastrando o Paciente "+ paciente.getNome());
-
         String sql = "INSERT INTO paciente (usuario, nome, previsaodias) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, idUsu);
-            stmt.setString(2, paciente.getNome());
-            if (paciente.getPrevisaoDias() == null) {
+            if (paciente.getNome() == null || paciente.getNome().equals("")) {
+                stmt.setNull(2, java.sql.Types.VARCHAR);
+            } else {
+                stmt.setString(2, paciente.getNome());
+            }
+            if (paciente.getPrevisaoDias() == null || paciente.getPrevisaoDias() == 0) {
                 stmt.setNull(3, java.sql.Types.INTEGER);
             } else {
                 stmt.setInt(3, paciente.getPrevisaoDias());
@@ -32,10 +34,9 @@ public class PacienteDAO {
             stmt.executeUpdate();
             log.registrarLog(2, "PacienteDAO", "cadastrarPaciente", "paciente", "Paciente cadastrado");
             return true;
-
         } catch (SQLException e) {
-            log.registrarLog(4, "PacienteDAO", "cadastrarPaciente", "paciente", "Paciente não cadastrado");
             e.printStackTrace();
+            log.registrarLog(4, "PacienteDAO", "cadastrarPaciente", "paciente", "Paciente não cadastrado");            
             return false;
         }
     }
@@ -56,8 +57,8 @@ public class PacienteDAO {
                 return new Paciente();
             }
         } catch (SQLException e) {
-            log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "paciente", "Dados do Paciente não obtidos");
             e.printStackTrace();
+            log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "paciente", "Dados do Paciente não obtidos");
             return new Paciente();
         }
     }

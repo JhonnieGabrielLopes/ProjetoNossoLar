@@ -1713,32 +1713,32 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadastroPessoaLimparActionPerformed
     
     private void btCadastroPessoaRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaRegistrarActionPerformed
-        Cidade cidadeEscolhida = (Cidade) cbEnderecoCidade.getSelectedItem();
-        Endereco endereco = new Endereco(
-            tfEnderecoLogradouro.getText(),
-            Integer.parseInt(tfEnderecoNumero.getText()),
-            tfEnderecoBairro.getText(),
-            tfEnderecoCep.getText(),
-            tfEnderecoComplemento.getText(),
-            cidadeEscolhida);
-
-        Paciente paciente = new Paciente();
-        paciente.setNome(tfNomePaciente.getText());
+        Endereco endereco = null;
+        Pessoa novaPessoa = null;
+        Paciente paciente = null;
+        String telefone = ffTelefone.getText().replaceAll("[^\\d]", "");
         
+        Cidade cidadeEscolhida = (Cidade) cbEnderecoCidade.getSelectedItem();
+        if (tfEnderecoLogradouro.getText().trim().isEmpty() || tfEnderecoLogradouro.getText().equals("")) {
+            endereco = new Endereco(cidadeEscolhida);
+        } else {
+            endereco = new Endereco(
+                tfEnderecoLogradouro.getText(),
+                Integer.parseInt(tfEnderecoNumero.getText()),
+                tfEnderecoBairro.getText(),
+                tfEnderecoCep.getText(),
+                tfEnderecoComplemento.getText(),
+                cidadeEscolhida);
+        }
+
+        novaPessoa = new Pessoa(tfNome.getText(), telefone, endereco);
         try{
             if (tfQtdDias.getText()!= null && !tfQtdDias.getText().trim().isEmpty()){
-                paciente.setPrevisaoDias(Integer.parseInt(tfQtdDias.getText()));
+                paciente = new Paciente(tfNomePaciente.getText(), Integer.parseInt(tfQtdDias.getText()));
             }
         }catch(NumberFormatException ex){
             ex.printStackTrace();
         }
-        
-        String telefone = ffTelefone.getText().replaceAll("[^\\d]", "");
-        Pessoa novaPessoa = new Pessoa(
-            tfNome.getText(),
-            telefone,
-            endereco
-        );
 
         if ((String)cbTipoUsuario.getSelectedItem() == "Assistente") {
             novaPessoa.setTipoUsuario(TipoCad.ASSISTENTE);

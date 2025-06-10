@@ -32,12 +32,8 @@ public class SistemaNossoLar {
                     case 1:
                         metodos.cadastrarUsuario(scan);
                         //ERRO 1:
-                        //AO CADASTRAR O USUARIO INFORMANDO O ENDEREÇO COMPLETO, ESTA SENDO GRAVADO NO BANCO O ID DO ENDEREÇO DA CIDADE AO INVÉS DO ID DO ENDEREÇO COMPLETO
-                        //ERRO 2:
                         //AO SELECIONE O LOCAL PRONTO SOCORRO ESTA SENDO SEMPRE GRAVADO COMO HOSPITAL NO BANCO
-                        //ERRO 3:
-                        //AO CADASTRAR O PACIENTE DE UMA PESSOA ASSISTENTE OU DOADOR, ESTA SENDO GRAVADO O NOME DO PACIENTE VAZIO NO BANCO AO INVÉS DE NULL
-                        //ERRO 4:
+                        //ERRO 2:
                         //AO CADASTRAR PEDIDO OS CÓDIGOS DAS PESSOAS ESTÃO IMPRIMINDO EM ORDEM DA LISTA AO INVES DE CONFORME O ID DO USUÁRIO NO BANCO
                         controle = false;
                         break;
@@ -59,7 +55,7 @@ public class SistemaNossoLar {
 
                     case 5:
                         metodos.cadastrarPedido(scan);
-                        //ERRO 5:
+                        //ERRO 3:
                         //AO CADASTRAR O PEDIDO NAO ESTA SENDO CRIADA A PASTA PEDIDO DENTRO DO DIRETORIO RECIBO, QUANDO O MESMO NÃO EXISTE
                         controle = false;
                         break;
@@ -82,8 +78,8 @@ public class SistemaNossoLar {
             } while (!controle);
 
         } catch (Exception e) {
-            log.registrarLog(4, "SistemaNossoLar", "main", "", "Erro ao conectar com o Banco de Dados");
             e.printStackTrace();
+            log.registrarLog(4, "SistemaNossoLar", "main", "", "Erro ao conectar com o Banco de Dados");
         }
     }
 

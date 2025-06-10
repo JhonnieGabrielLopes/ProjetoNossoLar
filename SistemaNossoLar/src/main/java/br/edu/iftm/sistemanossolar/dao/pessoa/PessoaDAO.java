@@ -18,18 +18,19 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoPessoa;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PessoaDAO {
-
     private final Connection conexaoBanco;
     private static PacienteController pacienteController;
+    private static PessoaTipoDAO pessoaTipoDAO;
 
     RegistrosLog log = new RegistrosLog();
 
     public PessoaDAO(Connection conexao) {
         this.conexaoBanco = conexao;
         pacienteController = new PacienteController(conexao);
+        pessoaTipoDAO = new PessoaTipoDAO(conexao);
     }
 
-    public boolean cadastrarPessoa(Pessoa pessoa, Paciente paciente, Integer cidade, Integer endereco, Integer idTipo) {
+    public Integer cadastrarPessoa(Pessoa pessoa, Paciente paciente, Integer cidade, Integer endereco, Integer idTipo) {
         String sql = "INSERT INTO usuario (nome, telefone, endereco, tipoPessoa, email, identificacao, observacao) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, pessoa.getNome());
@@ -69,41 +70,21 @@ public class PessoaDAO {
                 if (rs.next()) {
                     log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ pessoa.getTipoUsuario() +" obtido");
                     idUsu = rs.getInt(1);
+                    pessoaTipoDAO.cadastrarRelacao(idUsu, idTipo);
+                    return idUsu;
                 } else {
-                    log.registrarLog(3, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ pessoa.getTipoUsuario() +" não obtido");
-                    return false;
+                    log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ pessoa.getTipoUsuario() +" não obtido");
+                    return 0;
                 }
             } catch (SQLException e) {
-                log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario", "Erro ao obter ID do "+ pessoa.getTipoUsuario());
                 e.printStackTrace();
-                return false;
+                log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario", "Erro ao obter ID do "+ pessoa.getTipoUsuario());
+                return 0;
             }
-
-            if (idUsu != null) {
-                log.registrarLog(1, "PessoaDAO", "cadastrarPessoa", "usuariotipo", "Cadastrando a relação do Tipo/Usuario");
-
-                sql = "INSERT INTO usuariotipo (usuario, tipoUsuario) VALUES (?, ?)";
-                try (PreparedStatement stmtUserTipo = conexaoBanco.prepareStatement(sql)) {
-                    stmtUserTipo.setInt(1, idUsu);
-                    stmtUserTipo.setInt(2, idTipo);
-                    stmtUserTipo.executeUpdate();
-                    log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuariotipo", "Relação do Tipo/Usuario cadastrada");
-                } catch (SQLException e) {
-                    log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuariotipo", "Erro ao cadastrar relação do Tipo/Usuario");
-                    e.printStackTrace();
-                    return false;
-                }
-            }
-
-            if (paciente.getNome() != null) {
-                pacienteController.cadastrarPaciente(paciente, idUsu);
-            }
-            return true;
-
         } catch (SQLException e) {
-            log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario/usuariotipo", "Usuário ou Relação do Tipo/Usuario não cadastrada");
             e.printStackTrace();
-            return false;
+            log.registrarLog(4, "PessoaDAO", "cadastrarPessoa", "usuario", "Erro ao cadastrar a Pessoa");
+            return 0;
         }
     }
 
@@ -132,8 +113,8 @@ public class PessoaDAO {
                 log.registrarLog(2, "PessoaDAO", "buscarPessoaPorId", "usuario", "Dados básicos da Pessoa obtidos");
             }
         } catch (SQLException e) {
-            log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "usuario", "Dados básicos da Pessoa não obtidos");
             e.printStackTrace();
+            log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "usuario", "Dados básicos da Pessoa não obtidos");
             return new Pessoa();
         }
 
@@ -148,8 +129,8 @@ public class PessoaDAO {
                 log.registrarLog(2, "PessoaDAO", "buscarPessoaPorId", "tipousuario/usuariotipo", "Tipo de Usuário da Pessoa obtido");
             }
         } catch (SQLException e) {
-            log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "tipousuario/usuariotipo", "Tipo de Usuário da Pessoa não obtido");
             e.printStackTrace();
+            log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "tipousuario/usuariotipo", "Tipo de Usuário da Pessoa não obtido");
             return new Pessoa();
         }
 
@@ -185,8 +166,8 @@ public class PessoaDAO {
             }
             
         } catch (SQLException e) {
-            log.registrarLog(4, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Erro ao consultar os Usuários");
             e.printStackTrace();
+            log.registrarLog(4, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Erro ao consultar os Usuários");
         }
         return pessoas;
     }

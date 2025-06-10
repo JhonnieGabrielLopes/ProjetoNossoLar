@@ -41,15 +41,15 @@ public class PedidoDAO {
                     log.registrarLog(3, "PedidoDAO", "cadastrarPedido", "pedido", "ID do Pedido");
                 }
             } catch (SQLException e) {
-                log.registrarLog(4, "PedidoDAO", "cadastrarPedido", "pedido", "Erro ao obter ID do Pedido");
                 e.printStackTrace();
+                log.registrarLog(4, "PedidoDAO", "cadastrarPedido", "pedido", "Erro ao obter ID do Pedido");
             }
 
             return true;
 
         } catch (Exception e) {
-            log.registrarLog(4, "PedidoDAO", "cadastrarPedido", "pedido", "Pedido não cadastrado");
             e.printStackTrace();
+            log.registrarLog(4, "PedidoDAO", "cadastrarPedido", "pedido", "Pedido não cadastrado");
             return false;
         }
 
