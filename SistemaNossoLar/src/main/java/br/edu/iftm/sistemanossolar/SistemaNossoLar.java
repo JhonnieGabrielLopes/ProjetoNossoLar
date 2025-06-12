@@ -33,8 +33,6 @@ public class SistemaNossoLar {
                         metodos.cadastrarUsuario(scan);
                         //ERRO 1:
                         //AO SELECIONE O LOCAL PRONTO SOCORRO ESTA SENDO SEMPRE GRAVADO COMO HOSPITAL NO BANCO
-                        //ERRO 2:
-                        //AO CADASTRAR PEDIDO OS CÓDIGOS DAS PESSOAS ESTÃO IMPRIMINDO EM ORDEM DA LISTA AO INVES DE CONFORME O ID DO USUÁRIO NO BANCO
                         controle = false;
                         break;
 
@@ -55,7 +53,7 @@ public class SistemaNossoLar {
 
                     case 5:
                         metodos.cadastrarPedido(scan);
-                        //ERRO 3:
+                        //ERRO 2:
                         //AO CADASTRAR O PEDIDO NAO ESTA SENDO CRIADA A PASTA PEDIDO DENTRO DO DIRETORIO RECIBO, QUANDO O MESMO NÃO EXISTE
                         controle = false;
                         break;

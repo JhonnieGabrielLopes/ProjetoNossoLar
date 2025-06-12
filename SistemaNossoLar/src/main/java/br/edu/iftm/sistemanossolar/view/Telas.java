@@ -1376,7 +1376,8 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        pnCard.add(pnRelatorioDoacao, "card7");
+        pnCard.add(pnRelatorioDoacao, "relatorioDoacao");
+        pnRelatorioDoacao.getAccessibleContext().setAccessibleName("");
 
         pnRelPed.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatório Pedido"));
 
@@ -1538,7 +1539,7 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        pnCard.add(pnRelatorioPedido, "card8");
+        pnCard.add(pnRelatorioPedido, "relatorioPedido");
 
         javax.swing.GroupLayout pnDadosPrincipalLayout = new javax.swing.GroupLayout(pnDadosPrincipal);
         pnDadosPrincipal.setLayout(pnDadosPrincipalLayout);
@@ -1615,9 +1616,19 @@ public class Telas extends javax.swing.JFrame {
         menuRelatorio.setText("Relatório");
 
         menuRelatorioDoacao.setText("Doação");
+        menuRelatorioDoacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelatorioDoacaoActionPerformed(evt);
+            }
+        });
         menuRelatorio.add(menuRelatorioDoacao);
 
         menuRelatorioPedido.setText("Pedido");
+        menuRelatorioPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelatorioPedidoActionPerformed(evt);
+            }
+        });
         menuRelatorio.add(menuRelatorioPedido);
 
         menuBarra.add(menuRelatorio);
@@ -1880,6 +1891,14 @@ public class Telas extends javax.swing.JFrame {
     private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btRelPedFiltrarActionPerformed
+
+    private void menuRelatorioDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioDoacaoActionPerformed
+        cl.show(pnCard, "relatorioDoacao");
+    }//GEN-LAST:event_menuRelatorioDoacaoActionPerformed
+
+    private void menuRelatorioPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioPedidoActionPerformed
+        cl.show(pnCard, "relatorioPedido");
+    }//GEN-LAST:event_menuRelatorioPedidoActionPerformed
     
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
         campo.setEnabled(true);
