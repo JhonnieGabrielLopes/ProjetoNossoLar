@@ -64,6 +64,11 @@ public class SistemaNossoLar {
                         break;
 
                     case 20:
+                        metodos.filtrarRelatorio();
+                        controle = false;
+                        break;
+
+                    case 21:
                         log.registrarLog(1, "SistemaNossoLar", "main", "", "Encerrando o sistema");
                         controle = true;
                         break;

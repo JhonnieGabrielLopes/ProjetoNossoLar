@@ -23,8 +23,6 @@ public class DoacaoDAO {
     }
 
     public boolean cadastrarDoacao(Doacao doacao) throws SQLException {
-        log.registrarLog(1, "DoacaoDAO", "cadastrarDoacao", "doacao", "Cadastrando Doação");
-
         String sql = "INSERT INTO doacao (tipoDoacao, pessoa, valor, data) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, doacao.getTipo().toString());
@@ -81,13 +79,11 @@ public class DoacaoDAO {
         }
     }
 
-    public List<RelDoacao> filtrarRelatorio(Date dataInicio, Date dataFim, String tipoDoacao, Integer doadorId, String ordenacao) {
+    public List<RelDoacao> filtrarRegistrosRelatorio(String filtro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
-        List<Object> params = new ArrayList<>();
-        
-        sql.append("SELECT d.id AS codigo_doacao, d.data AS data_doacao, d.tipoDoacao, ");
-        sql.append("d.valor, u.id AS id_doador, u.nome AS nome_doador, ");
-        sql.append("GROUP_CONCAT(CASE WHEN p.id IS NOT NULL THEN CONCAT(p.descricao, ' (', pd.quantidade, ')') ELSE NULL END SEPARATOR ', ') AS produtos ");
+        sql.append("SELECT d.id AS codigo_doacao, u.id AS id_doador, u.nome AS nome_doador, d.tipoDoacao, d.valor, ");
+        sql.append("GROUP_CONCAT(CASE WHEN p.id IS NOT NULL THEN CONCAT(p.descricao, ' (', pd.quantidade, ' un)') ELSE NULL END SEPARATOR ', ') AS produtos, ");
+        sql.append("d.observacao, d.data AS data_doacao ");
         sql.append("FROM doacao d ");
         sql.append("JOIN usuario u ON d.pessoa = u.id ");
         sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
@@ -95,74 +91,71 @@ public class DoacaoDAO {
         sql.append("LEFT JOIN produtoDoacao pd ON d.id = pd.doacao AND d.tipoDoacao = 'PRODUTO' ");
         sql.append("LEFT JOIN produto p ON pd.produto = p.id ");
         sql.append("WHERE 1=1 ");
-        
-        //Filtros básicos
-        if (dataInicio != null) {
-            sql.append("AND d.data >= ? ");
-            params.add(new java.sql.Date(dataInicio.getTime()));
-        }
+        sql.append(filtro);
 
-        if (dataFim != null) {
-            sql.append("AND d.data <= ? ");
-            params.add(new java.sql.Date(dataFim.getTime()));
-        }
-
-        if (tipoDoacao != null && !tipoDoacao.isEmpty()) {
-            sql.append("AND d.tipoDoacao = ? ");
-            params.add(tipoDoacao);
-        }
-
-        if (doadorId != null) {
-            sql.append("AND u.id = ? ");
-            params.add(doadorId);
-        }
-
-        //Filtro específico para doação de produto
-        if (tipoProduto != null && !tipoProduto.isEmpty()) {
-            sql.append("AND (d.tipoDoacao = 'DINHEIRO' OR p.tipoProduto = ?) ");
-            params.add(tipoProduto);
-        }
-
-        sql.append("GROUP BY d.id, d.data, d.tipoDoacao, d.valor, u.id, u.nome ");
-
-        //Ordenação
-        if (ordenacao != null && !ordenacao.isEmpty()) {
-            switch (ordenacao) {
-                case "data": sql.append("ORDER BY d.data "); break;
-                case "codigo": sql.append("ORDER BY d.id "); break;
-                case "nome": sql.append("ORDER BY u.nome "); break;
-                case "valor": sql.append("ORDER BY d.valor "); break;
-                default: sql.append("ORDER BY d.data DESC ");
-            }
-        } else {
-            sql.append("ORDER BY d.data DESC ");
-        }
-
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
-            
-            for (int i = 0; i < params.size(); i++) {
-                stmt.setObject(i + 1, params.get(i));
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
+            for (int i = 0; i < filtros.size(); i++) {
+                stmt.setObject(i + 1, filtros.get(i));
             }
 
             ResultSet rs = stmt.executeQuery();
-            List<DoacaoRelatorio> resultados = new ArrayList<>();
+            List<RelDoacao> doacoes = new ArrayList<>();
 
             while (rs.next()) {
-                RelDoacao dr = new RelDoacao();
-                dr.setCodigoDoacao(rs.getInt("codigo_doacao"));
-                dr.setDataDoacao(rs.getDate("data_doacao"));
-                dr.setTipoDoacao(rs.getString("tipoDoacao"));
-                dr.setValor(rs.getDouble("valor"));
-                dr.setIdDoador(rs.getInt("id_doador"));
-                dr.setNomeDoador(rs.getString("nome_doador"));
-                dr.setProdutos(rs.getString("produtos"));
-                resultados.add(dr);
+                RelDoacao doacao = new RelDoacao();
+                doacao.setIdDoacao(rs.getInt("codigo_doacao"));
+                doacao.setIdDoador(rs.getInt("id_doador"));
+                doacao.setNomeDoador(rs.getString("nome_doador"));
+                doacao.setTipo(rs.getString("tipoDoacao"));
+                doacao.setValor(rs.getDouble("valor"));
+                doacao.setProdutos(rs.getString("produtos"));
+                doacao.setObservacao(rs.getString("observacao"));
+                doacao.setData(rs.getDate("data_doacao"));
+                doacoes.add(doacao);
+            }
+            log.registrarLog(2, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Filtragem dos dados finalizada");
+            return doacoes;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Erro ao filtrar os dados do relatório");
+            return null;
+        }
+    }
+
+    public RelDoacao filtrarTotalRelatorio(RelDoacao totalizacao, String filtro, List<Object> filtros) throws SQLException {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT ");
+        sql.append("COALESCE(SUM(d.valor), 0) AS total_valor, ");
+        sql.append("COALESCE(COUNT(DISTINCT p.id), 0) AS total_produtos, ");
+        sql.append("COALESCE(SUM(pd.quantidade), 0) AS total_itens ");
+        sql.append("FROM doacao d ");
+        sql.append("JOIN usuario u ON d.pessoa = u.id ");
+        sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
+        sql.append("JOIN tipoUsuario tu ON ut.tipoUsuario = tu.id AND tu.tipo = 'DOADOR' ");
+        sql.append("LEFT JOIN produtoDoacao pd ON d.id = pd.doacao AND d.tipoDoacao = 'PRODUTO' ");
+        sql.append("LEFT JOIN produto p ON pd.produto = p.id ");
+        sql.append("WHERE 1=1 ");
+        sql.append(filtro);
+
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
+            for (int i = 0; i < filtros.size(); i++) {
+                stmt.setObject(i + 1, filtros.get(i));
             }
 
-            return resultados;
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                totalizacao.setTotalValor(rs.getDouble("total_valor"));
+                totalizacao.setTotalProdutos(rs.getDouble("total_produtos"));
+                totalizacao.setTotalItens(rs.getDouble("total_itens"));
+            }
+            log.registrarLog(2, "DoacaoDAO", "filtrarTotalRelatorio", "varias", "Totalização finalizada");
+            return totalizacao;
+
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao gerar relatório", e);
+            e.printStackTrace();
+            log.registrarLog(4, "DoacaoDAO", "filtrarTotalRelatorio", "varias", "Erro ao totalizar o relatório");
+            return null;
         }
     }
 }

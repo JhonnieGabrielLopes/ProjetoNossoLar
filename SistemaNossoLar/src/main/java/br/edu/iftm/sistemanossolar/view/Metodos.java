@@ -28,6 +28,8 @@ import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
+import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
+import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
 
 public class Metodos {
     private static PessoaController pessoaController;
@@ -65,7 +67,8 @@ public class Metodos {
         System.out.println("17 - Exibir Doação");
         System.out.println("18 - Exibir Pedido");
         System.out.println("19 - Exibir Produto");
-        System.out.println("20 - Sair");
+        System.out.println("20 - Relatorio de Doações");
+        System.out.println("21 - Sair");
         System.out.println("Escolha uma opção: ");
     }
 
@@ -82,6 +85,24 @@ public class Metodos {
     public boolean cadastrarCidade(Scanner scan) throws SQLException {
         System.out.println("Utilize a tela!");
         return false;
+    }
+
+    public void filtrarRelatorio() throws SQLException {
+        String data1 = "2023-06-01";
+        java.sql.Date dataTeste1 = java.sql.Date.valueOf(data1);
+        String data2 = "2023-06-30";
+        java.sql.Date dataTeste2 = java.sql.Date.valueOf(data2);
+        RetornoDoacoes relatorio = doacaoController.filtrarRelatorio(null, null, "Todos", "Todos", null, null, "data", "desc");
+        System.out.println("Relatório de Doações:");
+        for (RelDoacao rel : relatorio.getDoacoes()) {
+            System.out.println("ID: " + rel.getIdDoacao() + 
+                               "\nDoador: " + rel.getIdDoador() +" "+ rel.getNomeDoador() +", Tipo: " + rel.getTipo() +
+                               ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: "+ rel.getObservacao() +", Data: " + rel.getData() +
+                               "\n");
+        }
+        RelDoacao totalizacao = relatorio.getTotalizacao();
+        System.out.println("Totalização:"+ 
+                           "\nValor total: "+ totalizacao.getTotalValor() +", Produtos total: "+ totalizacao.getTotalProdutos() +", Itens total: "+ totalizacao.getTotalItens() + "\n");
     }
 
     public boolean cadastrarProduto(Scanner scan, Produto novoProduto) throws SQLException {
@@ -138,7 +159,6 @@ public class Metodos {
                 controle = false;
             }
         }
-        
 
         System.out.println("Digite a data da doação (ex. 22/05/2025):");
         String data = scan.nextLine();
