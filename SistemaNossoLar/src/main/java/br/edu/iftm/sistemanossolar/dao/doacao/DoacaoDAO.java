@@ -46,8 +46,8 @@ public class DoacaoDAO {
                         log.registrarLog(3, "DoacaoDAO", "cadastrarDoacao", "doacao", "ID da Doação não obtido");
                     }
                 } catch (SQLException e) {
-                    log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "doacao", "Erro ao obter o ID da Doação");
                     e.printStackTrace();
+                    log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "doacao", "Erro ao obter o ID da Doação");
                 }
                 
                 if (idDoa != null) {
@@ -55,7 +55,7 @@ public class DoacaoDAO {
                     Iterator<Produto> iter = temp.iterator();
                     while (iter.hasNext()) {
                         Produto prodTemp = iter.next();
-                        log.registrarLog(1, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Cadastrando a relação do Produto/Doação");
+                        log.registrarLog(1, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Cadastrando a relação de Produto/Doação");
 
                         sql = "INSERT INTO produtodoacao (doacao, produto, quantidade) VALUES (?, ?, ?)";
                         try (PreparedStatement stmtUserTipo = conexaoBanco.prepareStatement(sql)) {
@@ -63,18 +63,18 @@ public class DoacaoDAO {
                             stmtUserTipo.setInt(2, prodTemp.getId());
                             stmtUserTipo.setInt(3, prodTemp.getQuantidade());
                             stmtUserTipo.executeUpdate();
-                            log.registrarLog(2, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Relação do Produto/Doação cadastrada");
+                            log.registrarLog(2, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Relação de Produto/Doação cadastrada");
                         } catch (SQLException e) {
-                            log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Erro ao cadastrar relação do Produto/Doação");
                             e.printStackTrace();
+                            log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "produtodoacao", "Erro ao cadastrar relação de Produto/Doação");
                         }
                     }
                 }
             }
             return true;
         } catch (Exception e) {
-            log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "doacao", "Doação não cadastrada");
             e.printStackTrace();
+            log.registrarLog(4, "DoacaoDAO", "cadastrarDoacao", "doacao", "Doação não cadastrada");
             return false;
         }
     }
