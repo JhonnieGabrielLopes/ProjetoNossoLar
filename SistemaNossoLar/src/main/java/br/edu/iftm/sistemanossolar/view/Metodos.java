@@ -96,9 +96,7 @@ public class Metodos {
         System.out.println("Relatório de Doações:");
         for (RelDoacao rel : relatorio.getDoacoes()) {
             System.out.println("ID: " + rel.getIdDoacao() + 
-                               "\nDoador: " + rel.getIdDoador() +" "+ rel.getNomeDoador() +", Tipo: " + rel.getTipo() +
-                               ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: "+ rel.getObservacao() +", Data: " + rel.getData() +
-                               "\n");
+                               "\nDoador: " + rel.getIdDoador() +" "+ rel.getNomeDoador() +", Tipo: " + rel.getTipo() + ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: "+ rel.getObservacao() +", Data: " + rel.getData() +"\n");
         }
         RelDoacao totalizacao = relatorio.getTotalizacao();
         System.out.println("Totalização:"+ 
