@@ -21,6 +21,7 @@ public class CadastroProduto extends javax.swing.JDialog {
      */
     public CadastroProduto(java.awt.Frame parent, boolean modal, Connection conexao, Telas tela) {
         super(parent, modal);
+        produtoController = new ProdutoController(conexao);
         this.tela = tela;
         produtoController = new ProdutoController(conexao);
         initComponents();

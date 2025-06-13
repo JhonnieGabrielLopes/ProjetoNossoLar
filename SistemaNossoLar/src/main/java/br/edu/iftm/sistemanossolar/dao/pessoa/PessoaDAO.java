@@ -70,6 +70,7 @@ public class PessoaDAO {
                 if (rs.next()) {
                     log.registrarLog(2, "PessoaDAO", "cadastrarPessoa", "usuario", "ID do "+ pessoa.getTipoUsuario() +" obtido");
                     idUsu = rs.getInt(1);
+                    log.registrarLog(1, "PessoaDAO", "cadastrarRelacao", "usuariotipo", "Cadastrando a relação do Tipo/Pessoa");
                     pessoaTipoDAO.cadastrarRelacao(idUsu, idTipo);
                     return idUsu;
                 } else {
@@ -158,13 +159,11 @@ public class PessoaDAO {
                 i++;
                 log.registrarLog(2, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Usuário "+ rs.getString("nome") +" encontrado");
             }
-
             if (i > 0) {
                 log.registrarLog(2, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Foram encontrados "+ i +" usuários");
             } else {
                 log.registrarLog(3, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Nenhum usuário encontrado");   
             }
-            
         } catch (SQLException e) {
             e.printStackTrace();
             log.registrarLog(4, "PessoaDAO", "listarPessoas", "usuario/tipoUsuario", "Erro ao consultar os Usuários");

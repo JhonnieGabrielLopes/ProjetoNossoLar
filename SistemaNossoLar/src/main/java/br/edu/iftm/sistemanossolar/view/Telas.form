@@ -86,11 +86,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Doa&#xe7;&#xe3;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuRelatorioDoacaoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuRelatorioPedido">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pedido"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuRelatorioPedidoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -124,7 +130,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-15,0,0,5,15"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,107,0,0,4,-80"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -139,14 +145,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnCard" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="pnCard" min="-2" pref="1200" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="pnCard" min="-2" pref="714" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnCard" min="-2" pref="830" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -180,7 +189,7 @@
                                   <Component id="pnEnderecoCliente" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="104" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -195,7 +204,7 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="pnEnderecoCliente" min="-2" pref="224" max="-2" attributes="0"/>
-                                  <EmptySpace pref="406" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="btCadastroPessoaRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btCadastroPessoaLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -728,7 +737,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           <Component id="pnBuscar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="795" max="32767" attributes="0"/>
+                          <EmptySpace pref="700" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -737,7 +746,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           <Component id="pnBuscar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="486" max="32767" attributes="0"/>
+                          <EmptySpace pref="602" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -834,21 +843,26 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="btDoacaoLimpar" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="btDoacaoRegistrarDoacao" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="btDoacaoLimpar" min="-2" pref="119" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="pnDoacao" min="-2" pref="564" max="-2" attributes="0"/>
+                              <Component id="pnDoacao" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="22" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="pnDoacaoProduto" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btDoacaoRelatorio" min="-2" pref="120" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="pnDoacaoProduto" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btDoacaoVoltar" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="135" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -860,12 +874,14 @@
                               <Component id="pnDoacao" max="32767" attributes="0"/>
                               <Component id="pnDoacaoProduto" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btDoacaoLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btDoacaoRegistrarDoacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btDoacaoRegistrarDoacao" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="btDoacaoLimpar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="btDoacaoVoltar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="btDoacaoRelatorio" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="96" max="32767" attributes="0"/>
+                          <EmptySpace pref="241" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -883,147 +899,132 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="tfDoacaoIdDoacao" min="-2" pref="175" max="-2" attributes="0"/>
-                                      <EmptySpace min="444" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jScrollPane2" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="lbDoacaoIdDoador" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lbDoacaoTipo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="cbDoacaoTipo" max="32767" attributes="0"/>
-                                                      <Component id="tfDoacaoIdDoador" alignment="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="lbDoacaoTipo1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jFormattedTextField1" min="-2" pref="138" max="-2" attributes="0"/>
-                                                  <Component id="lbDoacaoObservacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="24" max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="tfDoacaoIdentificacao" alignment="1" min="-2" pref="366" max="-2" attributes="0"/>
-                                                      <Component id="lbDoacaoIdentificacao" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="lbDoacaoValor" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Component id="jFormattedTextField2" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lbDoacaoAnexo" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="btDoacaoAnexo" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbDoacaoTipo" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cbDoacaoTipo" min="-2" pref="143" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbDoacaoData" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ftDoacaoData" min="-2" pref="143" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
+                                  <Component id="lbDoacaoIdDoacao" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lbDoacaoIdDoacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbDoacaoDoador" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="tfDoacaoDoador" min="-2" pref="424" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                              <Component id="btDoacaoBuscarDoador" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Component id="tfDoacaoIdDoacao" min="-2" pref="52" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btDoacaoBuscarDoacao" min="-2" pref="66" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="btDoacaoRecibo" min="-2" pref="119" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btDoacaoDeletar" min="-2" pref="119" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane2" alignment="1" min="-2" pref="500" max="-2" attributes="0"/>
+                                      <Component id="lbDoacaoObservacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lbDoacaoDoador" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tfDoacaoIdDoador" pref="51" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tfDoacaoDoador" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btDoacaoBuscarDoador" min="-2" pref="66" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="tfDoacaoValor" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                                      <Component id="lbDoacaoValor" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbDoacaoDoador" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="tfDoacaoDoador" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="btDoacaoBuscarDoador" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="lbDoacaoIdDoador" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lbDoacaoIdentificacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="tfDoacaoIdDoador" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="tfDoacaoIdentificacao" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                                  <Component id="cbDoacaoTipo" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="lbDoacaoTipo" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="lbDoacaoValor" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jFormattedTextField2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbDoacaoAnexo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="btDoacaoAnexo" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="lbDoacaoTipo1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jFormattedTextField1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="lbDoacaoObservacao" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="69" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="lbDoacaoIdDoacao" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tfDoacaoIdDoacao" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfDoacaoIdDoacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btDoacaoBuscarDoacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lbDoacaoDoador" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                      <Component id="tfDoacaoIdDoador" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tfDoacaoDoador" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btDoacaoBuscarDoador" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbDoacaoTipo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lbDoacaoData" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="ftDoacaoData" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="cbDoacaoTipo" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lbDoacaoValor" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfDoacaoValor" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lbDoacaoObservacao" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="122" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btDoacaoDeletar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btDoacaoRecibo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="20" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JTextField" name="tfDoacaoIdDoacao">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Gerar ap&#xf3;s registro e mostrar"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoIdDoacao">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="ID da Doa&#xe7;&#xe3;o Gerado"/>
+                        <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfDoacaoIdDoacao">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btDoacaoBuscarDoacao">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Buscar"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoDoador">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Doador"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfDoacaoIdDoador">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoIdDoadorActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfDoacaoDoador">
                       <Events>
@@ -1035,32 +1036,6 @@
                         <Property name="text" type="java.lang.String" value="Buscar"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lbDoacaoIdDoador">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="ID Doador"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="tfDoacaoIdDoador">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Puxar do BD ap&#xf3;s busca"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoIdDoadorActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbDoacaoIdentificacao">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="CPF/CNPJ"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="tfDoacaoIdentificacao">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Puxar do BD ap&#xf3;s busca"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoIdentificacaoActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoTipo">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Tipo"/>
@@ -1069,11 +1044,8 @@
                     <Component class="javax.swing.JComboBox" name="cbDoacaoTipo">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
+                          <StringArray count="1">
+                            <StringItem index="0" value="Tipo Doa&#xe7;&#xe3;o"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1081,18 +1053,40 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lbDoacaoTipo1">
+                    <Component class="javax.swing.JLabel" name="lbDoacaoData">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Data da Doa&#xe7;&#xe3;o"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+                    <Component class="javax.swing.JFormattedTextField" name="ftDoacaoData">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="________/_____/_______"/>
+                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                          <Format subtype="1" type="1"/>
+                        </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextField1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ftDoacaoDataActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbDoacaoValor">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Valor"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="tfDoacaoValor">
+                      <Properties>
+                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                          <Format format="" subtype="-1" type="5"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoValorActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbDoacaoObservacao">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xe3;o"/>
+                      </Properties>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
                       <AuxValues>
@@ -1110,33 +1104,15 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="lbDoacaoObservacao">
+                    <Component class="javax.swing.JButton" name="btDoacaoRecibo">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xe3;o"/>
+                        <Property name="text" type="java.lang.String" value="Gerar Recibo"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lbDoacaoValor">
+                    <Component class="javax.swing.JButton" name="btDoacaoDeletar">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Valor"/>
+                        <Property name="text" type="java.lang.String" value="Deletar"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbDoacaoAnexo">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Anexo"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btDoacaoAnexo">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Selecionar Anexo"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="R$ ____"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextField2ActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1152,148 +1128,89 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="lbDoacaoSelecionarProd" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="pnListBoxProd" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="cbDoacaoSelecionarProd" min="-2" pref="242" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lbDoacaoQuantidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="tfDoacaoQuantidade" min="-2" pref="111" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="btDoacaoCadastrarProd" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <Component id="lbDoacaoSelecionarProd" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="btDoacaoAdicionarProd" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="btDoacaoDeletarProd" min="-2" pref="80" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="tfDoacaoSelecionarProd" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="btDoacaoBuscarProd" min="-2" pref="57" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lbDoacaoQuantidade" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfDoacaoQuantidade" alignment="1" min="-2" pref="62" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btDoacaoAddProd" min="-2" pref="68" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbDoacaoQuantidade" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbDoacaoSelecionarProd" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                      <Component id="lbDoacaoSelecionarProd" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                              <Component id="tfDoacaoSelecionarProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btDoacaoBuscarProd" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="lbDoacaoQuantidade" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="tfDoacaoQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btDoacaoAddProd" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cbDoacaoSelecionarProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfDoacaoQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btDoacaoCadastrarProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="38" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btDoacaoDeletarProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btDoacaoAdicionarProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" min="-2" pref="299" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="pnListBoxProd" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-                      <AuxValues>
-                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                      </AuxValues>
-
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                      <SubComponents>
-                        <Component class="javax.swing.JTable" name="tableDoacaoProdutos">
-                          <Properties>
-                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="4" rowCount="4">
-                                <Column editable="true" title="ID" type="java.lang.Object">
-                                  <Data value="1"/>
-                                  <Data value="2"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
-                                <Column editable="true" title="Tipo" type="java.lang.Object">
-                                  <Data value="Alimento"/>
-                                  <Data value="Alimento"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
-                                <Column editable="true" title="Produto" type="java.lang.Object">
-                                  <Data value="Arroz"/>
-                                  <Data value="Feij&#xe3;o"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
-                                <Column editable="true" title="Quantidade" type="java.lang.Object">
-                                  <Data value="3"/>
-                                  <Data value="2"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
-                              </Table>
-                            </Property>
-                          </Properties>
-                        </Component>
-                      </SubComponents>
-                    </Container>
-                    <Component class="javax.swing.JButton" name="btDoacaoDeletarProd">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Deletar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btDoacaoCadastrarProd">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Cadastrar"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoCadastrarProdActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btDoacaoAdicionarProd">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Adicionar"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoAdicionarProdActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbDoacaoSelecionarProd">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoSelecionarProd">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Selecionar Produto"/>
+                        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfDoacaoSelecionarProd">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoSelecionarProdActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btDoacaoBuscarProd">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Buscar"/>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[2, 2, 2, 2]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoBuscarProdActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoQuantidade">
                       <Properties>
@@ -1305,16 +1222,157 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoQuantidadeActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JButton" name="btDoacaoAddProd">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Adicionar"/>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[2, 2, 2, 2]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoAddProdActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Container class="javax.swing.JPanel" name="pnListBoxProd">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                            <TitledBorder title="Produtos doados"/>
+                          </Border>
+                        </Property>
+                      </Properties>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPane3" pref="527" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="btDoacaoAltProd" min="-2" pref="119" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btDoacaoDelProd" min="-2" pref="119" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane3" min="-2" pref="314" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btDoacaoDelProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btDoacaoAltProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTable" name="tableDoacaoProdutos">
+                              <Properties>
+                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                  <Table columnCount="3" rowCount="10">
+                                    <Column editable="false" title="Tipo" type="java.lang.String">
+                                      <Data value="Alimento"/>
+                                      <Data value="Limpeza"/>
+                                      <Data value="Outro"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                    </Column>
+                                    <Column editable="false" title="Produto" type="java.lang.String">
+                                      <Data value="Arroz"/>
+                                      <Data value="Detergente"/>
+                                      <Data value="Panela"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                    </Column>
+                                    <Column editable="false" title="Quantidade" type="java.lang.Integer">
+                                      <Data value="4"/>
+                                      <Data value="2"/>
+                                      <Data value="1"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                      <Data value="null"/>
+                                    </Column>
+                                  </Table>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JButton" name="btDoacaoAltProd">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Alterar"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btDoacaoDelProd">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Deletar"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JButton" name="btDoacaoRegistrarDoacao">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Registrar Doa&#xe7;&#xe3;o"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btDoacaoLimpar">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Limpar"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btDoacaoRelatorio">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btDoacaoVoltar">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Sair"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1332,7 +1390,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="pnPedido" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="696" max="32767" attributes="0"/>
+                          <EmptySpace pref="601" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1341,7 +1399,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="pnPedido" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="223" max="32767" attributes="0"/>
+                          <EmptySpace pref="339" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1584,7 +1642,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="pnPedido1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="515" max="32767" attributes="0"/>
+                          <EmptySpace pref="420" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1593,7 +1651,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="pnPedido1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="306" max="32767" attributes="0"/>
+                          <EmptySpace pref="422" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1825,9 +1883,12 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="pnRelatorioDoacao">
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+              </AccessibilityProperties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card7"/>
+                  <CardConstraints cardName="relatorioDoacao"/>
                 </Constraint>
               </Constraints>
 
@@ -1835,18 +1896,18 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="pnRelDoa" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="89" max="32767" attributes="0"/>
+                          <EmptySpace pref="27" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="pnRelDoa" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="41" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1865,44 +1926,19 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jScrollPane6" min="-2" pref="1096" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbRelDoaDtInicial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="ffRelDoaDtInicial" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="ffRelDoaDtFinal" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
-                                              <Component id="lbRelDoaDtFinal" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="cbRelDoaTpDoacao" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
-                                              <Component id="lbRelDoaTpDoacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbRelDoaDoador" min="-2" max="-2" attributes="0"/>
-                                              <Component id="tfRelDoaDoador" min="-2" pref="163" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="cbRelDoaOrdenacao" min="-2" pref="155" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Component id="btRelDoaFiltrar" min="-2" pref="125" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="lbRelDoaOrdenacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="pnRelResultado" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btRelDoacaoSalvar" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btRelDoacaoLimpar" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btRelDoaVoltar" min="-2" pref="125" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="btRelDoaExtrair" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <Component id="pnRelFiltros" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="57" max="32767" attributes="0"/>
+                              <EmptySpace pref="20" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1910,185 +1946,409 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbRelDoaDtInicial" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="ffRelDoaDtInicial" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lbRelDoaDtFinal" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbRelDoaTpDoacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbRelDoaDoador" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="ffRelDoaDtFinal" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cbRelDoaTpDoacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfRelDoaDoador" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbRelDoaOrdenacao" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="cbRelDoaOrdenacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="btRelDoaFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="jScrollPane6" pref="446" max="32767" attributes="0"/>
+                              <Component id="pnRelFiltros" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btRelDoaExtrair" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="pnRelResultado" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btRelDoacaoSalvar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="btRelDoacaoLimpar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="btRelDoaVoltar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane6">
-                      <AuxValues>
-                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                      </AuxValues>
+                    <Container class="javax.swing.JPanel" name="pnRelFiltros">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                            <TitledBorder title="Filtros"/>
+                          </Border>
+                        </Property>
+                      </Properties>
 
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="ffRelDoaDtInicial" min="-2" pref="161" max="-2" attributes="0"/>
+                                              <Component id="lbRelDoaDtInicial" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lbRelDoaDtFinal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ffRelDoaDtFinal" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbRelDoaOrdenacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbRelDoaOrdenacao1" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="cbRelDoaOrdenacao2" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbRelDoaProd" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbRelDoaDoador" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tfRelDoaDoador" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
+                                              <Component id="tfRelDoaProd" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="btRelDoaProd" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btRelDoaDoador" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbRelDoaTpProduto" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbRelDoaTpProduto" min="-2" pref="161" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="btRelDoaFiltrar" min="-2" pref="155" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="lbRelDoaTpDoacao" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbRelDoaTpDoacao" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="btRelDoaDoador" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="lbRelDoaDtInicial" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="ffRelDoaDtInicial" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="lbRelDoaDtFinal" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="ffRelDoaDtFinal" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="lbRelDoaDoador" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tfRelDoaDoador" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lbRelDoaTpDoacao" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbRelDoaTpDoacao" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btRelDoaFiltrar" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaOrdenacao" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="cbRelDoaOrdenacao1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="cbRelDoaOrdenacao2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaProd" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="tfRelDoaProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btRelDoaProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaTpProduto" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="cbRelDoaTpProduto" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="tableRelatorioDoacao">
+                        <Component class="javax.swing.JLabel" name="lbRelDoaDtInicial">
                           <Properties>
-                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="8" rowCount="4">
-                                <Column editable="true" title="ID da Doa&#xe7;&#xe3;o" type="java.lang.Object">
-                                  <Data value="1"/>
-                                  <Data value="2"/>
-                                  <Data value="3"/>
-                                  <Data value="4"/>
-                                </Column>
-                                <Column editable="true" title="Data da Doa&#xe7;&#xe3;o" type="java.lang.Object">
-                                  <Data value="12/01/2025"/>
-                                  <Data value="22/04/2025"/>
-                                  <Data value="08/05/2025"/>
-                                  <Data value="08/06/2025"/>
-                                </Column>
-                                <Column editable="true" title="Doador" type="java.lang.Object">
-                                  <Data value="Alan"/>
-                                  <Data value="Joice"/>
-                                  <Data value="Jhonnie"/>
-                                  <Data value="Luiz"/>
-                                </Column>
-                                <Column editable="true" title="Tipo de Doa&#xe7;&#xe3;o" type="java.lang.Object">
-                                  <Data value="Dinheiro"/>
-                                  <Data value="Produto"/>
-                                  <Data value="Produto"/>
-                                  <Data value="Produto/Dinheiro"/>
-                                </Column>
-                                <Column editable="true" title="Produto" type="java.lang.Object">
-                                  <Data value=""/>
-                                  <Data value="Arroz"/>
-                                  <Data value="Feij&#xe3;o"/>
-                                  <Data value="Macarr&#xe3;o"/>
-                                </Column>
-                                <Column editable="true" title="Quantidade" type="java.lang.Object">
-                                  <Data value="null"/>
-                                  <Data value="2"/>
-                                  <Data value="1"/>
-                                  <Data value="10"/>
-                                </Column>
-                                <Column editable="true" title="Valor" type="java.lang.Object">
-                                  <Data value="R$ 120,00"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                  <Data value="R$ 1.450,00"/>
-                                </Column>
-                                <Column editable="true" title="Observa&#xe7;&#xe3;o" type="java.lang.Object">
-                                  <Data value="Realizado via Pix"/>
-                                  <Data value="Entregue no balc&#xe3;o"/>
-                                  <Data value="Saco de feij&#xe3;o que trouxe da ro&#xe7;a"/>
-                                  <Data value="Pago em dinheiro vivo"/>
-                                </Column>
-                              </Table>
+                            <Property name="text" type="java.lang.String" value="Data Inicial"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="ffRelDoaDtInicial">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaDtFinal">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Data Final"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="ffRelDoaDtFinal">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaDoador">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Doador"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="tfRelDoaDoador">
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btRelDoaDoador">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Buscar"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaTpDoacao">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Tipo de Doa&#xe7;&#xe3;o"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaTpDoacao">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="3">
+                                <StringItem index="0" value="Todos"/>
+                                <StringItem index="1" value="Produto"/>
+                                <StringItem index="2" value="Dinheiro"/>
+                              </StringArray>
                             </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaOrdenacao">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Ordena&#xe7;&#xe3;o"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaOrdenacao1">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="5">
+                                <StringItem index="0" value="Data"/>
+                                <StringItem index="1" value="C&#xf3;digo"/>
+                                <StringItem index="2" value="Nome do Doador"/>
+                                <StringItem index="3" value="Valor"/>
+                                <StringItem index="4" value="Quantidade de Produtos"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaOrdenacao2">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="2">
+                                <StringItem index="0" value="Descrente"/>
+                                <StringItem index="1" value="Crescente"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaProd">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Produto"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="tfRelDoaProd">
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btRelDoaProd">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Buscar"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaTpProduto">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Tipo de Produto"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaTpProduto">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Todos"/>
+                                <StringItem index="1" value="Alimento"/>
+                                <StringItem index="2" value="Limpeza"/>
+                                <StringItem index="3" value="Outros"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btRelDoaFiltrar">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Filtrar"/>
                           </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="lbRelDoaDtInicial">
+                    <Container class="javax.swing.JPanel" name="pnRelResultado">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Data Inicial"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="ffRelDoaDtInicial">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value=" ____ / ____ / ____"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbRelDoaDtFinal">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Data Final"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="ffRelDoaDtFinal">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value=" ____ / ____ / ____"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbRelDoaTpDoacao">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Tipo de Doa&#xe7;&#xe3;o"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbRelDoaTpDoacao">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Produto"/>
-                            <StringItem index="1" value="Dinheiro"/>
-                            <StringItem index="2" value="Produto/Dinheiro"/>
-                            <StringItem index="3" value=" "/>
-                          </StringArray>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                            <TitledBorder title="Resultado"/>
+                          </Border>
                         </Property>
                       </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbRelDoaDoador">
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="spRelResultado" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jbRelDoaTotDin" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tfRelTotDin" min="-2" pref="130" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jbRelDoaTotProd" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tfRelTotProd" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jbRelDoaTorIte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tfRelTotIte" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="spRelResultado" pref="386" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jbRelDoaTotProd" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tfRelTotProd" min="-2" pref="40" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jbRelDoaTotDin" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tfRelTotDin" min="-2" pref="40" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jbRelDoaTorIte" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tfRelTotIte" min="-2" pref="40" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JScrollPane" name="spRelResultado">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTable" name="tableRelatorioDoacao">
+                              <Properties>
+                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                  <Table columnCount="7" rowCount="10">
+                                    <Column editable="false" title="C&#xf3;digo" type="java.lang.Integer"/>
+                                    <Column editable="false" title="Doador" type="java.lang.String"/>
+                                    <Column editable="false" title="Tipo da Doa&#xe7;&#xe3;o" type="java.lang.String"/>
+                                    <Column editable="false" title="Valor" type="java.lang.Double"/>
+                                    <Column editable="false" title="Produtos" type="java.lang.String"/>
+                                    <Column editable="false" title="Observa&#xe7;&#xe3;o" type="java.lang.String"/>
+                                    <Column editable="false" title="Data" type="java.lang.String"/>
+                                  </Table>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jbRelDoaTotDin">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Valor total"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="tfRelTotDin">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="text" type="java.lang.String" value="R$ 0,00"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jbRelDoaTotProd">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Produtos total"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="tfRelTotProd">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="text" type="java.lang.String" value="0"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jbRelDoaTorIte">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Itens total"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="tfRelTotIte">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="text" type="java.lang.String" value="0"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Component class="javax.swing.JButton" name="btRelDoacaoSalvar">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Doador"/>
+                        <Property name="text" type="java.lang.String" value="Salvar Relat&#xf3;rio"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="tfRelDoaDoador">
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbRelDoaOrdenacao">
+                    <Component class="javax.swing.JButton" name="btRelDoacaoLimpar">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Ordena&#xe7;&#xe3;o"/>
+                        <Property name="text" type="java.lang.String" value="Limpar"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="cbRelDoaOrdenacao">
+                    <Component class="javax.swing.JButton" name="btRelDoaVoltar">
                       <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="Data"/>
-                            <StringItem index="1" value="ID"/>
-                            <StringItem index="2" value="Nome do Doador"/>
-                            <StringItem index="3" value="Quantidade"/>
-                            <StringItem index="4" value="Valor"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btRelDoaFiltrar">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Filtrar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btRelDoaExtrair">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Extrair relat&#xf3;rio"/>
+                        <Property name="text" type="java.lang.String" value="Voltar"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -2098,7 +2358,7 @@
             <Container class="javax.swing.JPanel" name="pnRelatorioPedido">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card8"/>
+                  <CardConstraints cardName="relatorioPedido"/>
                 </Constraint>
               </Constraints>
 
@@ -2108,7 +2368,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Component id="pnRelPed" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="21" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2117,7 +2377,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Component id="pnRelPed" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="28" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

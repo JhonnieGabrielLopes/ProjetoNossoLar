@@ -39,4 +39,26 @@ public class Relatorio {
         }
     }
 
+    public static String templateRelatorioDoacoes() throws IOException {
+        String caminho = "relatorio/pedido/relatorioDoacoes.html";
+        
+        try (InputStream inputStream = Relatorio.class.getClassLoader().getResourceAsStream(caminho)) {
+            if (inputStream == null) {
+                throw new IOException("TemplateArquivo não encontrado: " + caminho);
+            }
+            return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+        }
+    }
+
+    public static String templateRelatorioPedidos() throws IOException {
+        String caminho = "relatorio/pedido/relatorioDoacoes.html";
+        
+        try (InputStream inputStream = Relatorio.class.getClassLoader().getResourceAsStream(caminho)) {
+            if (inputStream == null) {
+                throw new IOException("TemplateArquivo não encontrado: " + caminho);
+            }
+            return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+        }
+    }
+
 }

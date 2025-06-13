@@ -46,14 +46,12 @@ public class PessoaController {
 
     public Pessoa buscarPessoaPorId(int id) throws SQLException {
         log.registrarLog(1, "PessoaController", "buscarPessoaPorId", "usuario", "Buscando Dados da Pessoa");
-        
         return pessoaDAO.buscarPessoaPorId(id);
     }
 
     public List<Pessoa> listarPessoas(String tipo) throws SQLException {
         log.registrarLog(1, "PessoaController", "listarPessoas", "usuario/tipoUsuario", "Consultando Usuários do tipo "+ tipo);
         int idTipo = tipoController.buscarIdTipo(tipo, "tipousuario");
-        
         return pessoaDAO.listarPessoas(tipo, idTipo);
     }
 

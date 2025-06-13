@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`cidade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(32) NOT NULL,
   `uf` CHAR(2) NOT NULL,
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
 
@@ -36,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`endereco` (
   `numero` VARCHAR(10) NULL,
   `bairro` VARCHAR(45) NULL,
   `complemento` VARCHAR(65) NULL,
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_endereco_cidade1_idx` (`cidade` ASC) VISIBLE,
@@ -52,10 +54,9 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`endereco` (
 CREATE TABLE IF NOT EXISTS `nossolar`.`usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
+  `local` ENUM('HOSPITAL', 'PRONTOSOCORRO') NULL,
   `tipoPessoa` ENUM('FISICA', 'JURIDICA') NULL,
   `identificacao` VARCHAR(14) NULL,
-  `assistido` VARCHAR(100) NULL,
-  `previsaoQtdDias` INT NULL,
   `telefone` VARCHAR(11) NOT NULL,
   `endereco` INT NOT NULL,
   `email` VARCHAR(60) NULL,
@@ -76,17 +77,8 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`usuario` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `nossolar`.`tipoUsuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tipo` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
-
-
--- -----------------------------------------------------
--- Table `nossolar`.`tipoDoacao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nossolar`.`tipoDoacao` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tipo` VARCHAR(20) NOT NULL,
+  `tipo` ENUM('ASSISTENTE', 'BENEFICIARIO', 'DOADOR') NOT NULL,
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
 
@@ -100,8 +92,9 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`pedido` (
   `pessoa` INT NOT NULL,
   `quantidade` INT NOT NULL,
   `observacao` TEXT NULL,
-  `dataPedido` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `dataEntrega` TIMESTAMP NULL,
+  `dataPedido` DATE NOT NULL,
+  `dataEntrega` DATE NULL,
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_pedido_pessoa1_idx` (`pessoa` ASC) VISIBLE,
@@ -117,20 +110,16 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`pedido` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `nossolar`.`doacao` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tipoDoacao` INT NOT NULL,
+  `tipoDoacao` ENUM('DINHEIRO', 'PRODUTO') NOT NULL,
   `pessoa` INT NOT NULL,
   `valor` DOUBLE NULL,
-  `data` TIMESTAMP NOT NULL,
+  `observacao` VARCHAR(250) NULL,
   `anexo` BLOB NULL,
+  `data` DATE NOT NULL,
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_doacao_tipoDoacao1_idx` (`tipoDoacao` ASC) VISIBLE,
   INDEX `fk_doacao_pessoa1_idx` (`pessoa` ASC) VISIBLE,
-  CONSTRAINT `fk_doacao_tipoDoacao1`
-    FOREIGN KEY (`tipoDoacao`)
-    REFERENCES `nossolar`.`tipoDoacao` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_doacao_pessoa1`
     FOREIGN KEY (`pessoa`)
     REFERENCES `nossolar`.`usuario` (`id`)
@@ -139,30 +128,15 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`doacao` (
 
 
 -- -----------------------------------------------------
--- Table `nossolar`.`tipoProduto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nossolar`.`tipoProduto` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tipo` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
-
-
--- -----------------------------------------------------
 -- Table `nossolar`.`produto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `nossolar`.`produto` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tipoProduto` INT NOT NULL,
+  `tipoProduto` ENUM('ALIMENTO', 'LIMPEZA', 'OUTRO') NOT NULL,
   `descricao` VARCHAR(100) NOT NULL,
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_produto_tipoProduto1_idx` (`tipoProduto` ASC) VISIBLE,
-  CONSTRAINT `fk_produto_tipoProduto1`
-    FOREIGN KEY (`tipoProduto`)
-    REFERENCES `nossolar`.`tipoProduto` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
 
 
 -- -----------------------------------------------------
@@ -171,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`produto` (
 CREATE TABLE IF NOT EXISTS `nossolar`.`usuarioTipo` (
   `usuario` INT NOT NULL,
   `tipoUsuario` INT NOT NULL,
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`usuario`, `tipoUsuario`),
   INDEX `fk_tipoUsuario_has_usuario_usuario1_idx` (`usuario` ASC) VISIBLE,
   INDEX `fk_tipoUsuario_has_usuario_tipoUsuario1_idx` (`tipoUsuario` ASC) VISIBLE,
@@ -193,9 +168,10 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`produtoDoacao` (
   `doacao` INT NOT NULL,
   `produto` INT NOT NULL,
   `quantidade` INT NOT NULL,
-  PRIMARY KEY (`doacao`, `produto`),
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX `fk_doacao_has_produto_produto1_idx` (`produto` ASC) VISIBLE,
   INDEX `fk_doacao_has_produto_doacao1_idx` (`doacao` ASC) VISIBLE,
+  PRIMARY KEY (`doacao`, `produto`),
   CONSTRAINT `fk_doacao_has_produto_doacao1`
     FOREIGN KEY (`doacao`)
     REFERENCES `nossolar`.`doacao` (`id`)
@@ -207,6 +183,37 @@ CREATE TABLE IF NOT EXISTS `nossolar`.`produtoDoacao` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+
+-- -----------------------------------------------------
+-- Table `nossolar`.`paciente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `nossolar`.`paciente` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `usuario` INT NOT NULL,
+  `nome` VARCHAR(100) NOT NULL,
+  `previsaoDias` INT NULL,
+  `dataCadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`, `usuario`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `fk_paciente_usuario1_idx` (`usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_paciente_usuario1`
+    FOREIGN KEY (`usuario`)
+    REFERENCES `nossolar`.`usuario` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+USE `nossolar`;
+
+DELIMITER $$
+USE `nossolar`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `nossolar`.`cidade_AFTER_INSERT` AFTER INSERT ON `cidade` FOR EACH ROW
+BEGIN
+    INSERT INTO endereco (cidade)
+    VALUES (NEW.id);
+END$$
+
+
+DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

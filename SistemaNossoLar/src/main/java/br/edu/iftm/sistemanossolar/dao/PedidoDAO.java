@@ -9,7 +9,6 @@ import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PedidoDAO {
-
     private final Connection conexaoBanco;
 
     RegistrosLog log = new RegistrosLog();
@@ -19,8 +18,6 @@ public class PedidoDAO {
     }
 
     public boolean cadastrarPedido(Pedido pedido) {
-        log.registrarLog(1, "PedidoDAO", "cadastrarPedido", "pedido", "Cadastrando o Pedido do Usuário "+ pedido.getCliente().getNome());
-
         String sql = "INSERT INTO pedido (pessoa, quantidade, status, observacao, dataPedido) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, pedido.getCliente().getId());
@@ -29,31 +26,24 @@ public class PedidoDAO {
             stmt.setString(4, pedido.getObservacao());
             stmt.setDate(5, java.sql.Date.valueOf(pedido.getDataPedido()));
             stmt.executeUpdate();
-
             log.registrarLog(2, "PedidoDAO", "cadastrarPedido", "pedido", "Pedido cadastrado");
-            
             log.registrarLog(1, "PedidoDAO", "cadastrarPedido", "pedido", "Obtendo o ID do Pedido");
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    log.registrarLog(2, "PedidoDAO", "cadastrarPedido", "pedido", "ID do Pedido");
+                    log.registrarLog(2, "PedidoDAO", "cadastrarPedido", "pedido", "ID do Pedido obtido");
                     pedido.setId(rs.getInt(1));
                 } else {
-                    log.registrarLog(3, "PedidoDAO", "cadastrarPedido", "pedido", "ID do Pedido");
+                    log.registrarLog(3, "PedidoDAO", "cadastrarPedido", "pedido", "ID do Pedido não obtido");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
                 log.registrarLog(4, "PedidoDAO", "cadastrarPedido", "pedido", "Erro ao obter ID do Pedido");
             }
-
             return true;
-
         } catch (Exception e) {
             e.printStackTrace();
             log.registrarLog(4, "PedidoDAO", "cadastrarPedido", "pedido", "Pedido não cadastrado");
             return false;
         }
-
-        
     }
-
 }
