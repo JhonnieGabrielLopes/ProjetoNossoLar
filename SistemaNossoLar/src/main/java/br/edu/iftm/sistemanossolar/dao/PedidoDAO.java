@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
-import br.edu.iftm.sistemanossolar.model.doacao.Doacao.TipoDoa;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
@@ -91,15 +89,15 @@ public class PedidoDAO {
                 qtdPedidos ++;
             }
             if (!pedidos.isEmpty()) {
-                log.registrarLog(2, "PedidoDAO", "consultarPedidos", "varias", "Pedidos listados - foram encontrados "+ qtdPedidos +" registros");    
+                log.registrarLog(2, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Pedidos listados - foram encontrados "+ qtdPedidos +" registros");    
             } else {
-                log.registrarLog(3, "PedidoDAO", "consultarPedidos", "varias", "Não foram encontrados registros");
+                log.registrarLog(3, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Não foram encontrados registros");
             }
             return pedidos;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "PedidoDAO", "consultarPedidos", "varias", "Erro ao consultar os pedidos");
+            log.registrarLog(4, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Erro ao consultar os pedidos");
             return null;
         }
     }

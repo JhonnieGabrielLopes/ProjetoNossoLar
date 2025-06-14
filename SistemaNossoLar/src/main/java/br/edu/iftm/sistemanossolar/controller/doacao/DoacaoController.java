@@ -27,7 +27,7 @@ public class DoacaoController {
     }
 
     public RetornoDoacoes filtrarRelatorio(LocalDate dataInicio, LocalDate dataFim, String tipoDoacao, String tipoProduto, Integer idDoador, Integer idProduto, String ordem, String sentido) throws SQLException {
-        log.registrarLog(1, "DoacaoController", "filtrarRegistrosRelatorio", "varias", "Filtrando dados do relatório");
+        log.registrarLog(1, "DoacaoController", "filtrarRegistrosRelatorio", "doacao, usuario, tipousuario, usuariotipo, produto, produtocoacao", "Filtrando dados do relatório");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
 
@@ -93,12 +93,12 @@ public class DoacaoController {
     }
 
     public RelDoacao filtrarTotalRelatorio(RelDoacao totalizacao, String filtro, List<Object> filtros) throws SQLException {
-        log.registrarLog(1, "DoacaoController", "filtrarTotalRelatorio", "varias", "Totalizando o relatório");
+        log.registrarLog(1, "DoacaoController", "filtrarTotalRelatorio", "doacao, usuario, tipousuario, usuariotipo, produto, produtocoacao", "Totalizando o relatório");
         return doacaoDAO.filtrarTotalRelatorio(totalizacao, filtro, filtros);
     }
 
     public List<Doacao> buscarDoacoes(String nomeDoador, String tipoDoacao, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
-        log.registrarLog(1, "DoacaoController", "buscarDoacao", "varias", "Listando doações para seleção");
+        log.registrarLog(1, "DoacaoController", "buscarDoacao", "doacao, usuario, tipousuario, usuariotipo", "Listando doações para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
 

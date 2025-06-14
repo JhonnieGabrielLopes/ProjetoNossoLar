@@ -99,11 +99,11 @@ public class Metodos {
         System.out.println("Relatório de Doações:");
         for (RelDoacao rel : relatorio.getDoacoes()) {
             System.out.println("ID: " + rel.getIdDoacao() + 
-                               "\nDoador: " + rel.getIdDoador() +" "+ rel.getNomeDoador() +", Tipo: " + rel.getTipo() + ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: "+ rel.getObservacao() +", Data: " + rel.getData() +"\n");
+                               "\nDoador: " + rel.getIdDoador() +" "+ rel.getNomeDoador() +", Tipo: " + rel.getTipo() + ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: "+ rel.getObservacao() +", Data: " + rel.getData());
         }
         RelDoacao totalizacao = relatorio.getTotalizacao();
         System.out.println("Totalização:"+ 
-                           "\nValor total: "+ totalizacao.getTotalValor() +", Produtos total: "+ totalizacao.getTotalProdutos() +", Itens total: "+ totalizacao.getTotalItens() + "\n");
+                           "\nValor total: "+ totalizacao.getTotalValor() +", Produtos total: "+ totalizacao.getTotalProdutos() +", Itens total: "+ totalizacao.getTotalItens());
     }
 
     public void listarDoacoes() throws SQLException {
@@ -115,7 +115,7 @@ public class Metodos {
         System.out.println("Lista de Doações:");
         for (Doacao doacao : listagemDoacoes) {
             System.out.println("ID: " + doacao.getId() + 
-                               "\nTipo: " + doacao.getTipo()+ ", Doador: " + doacao.getDoador().getNome() +", Data: " + doacao.getDataDoacao() +"\n");
+                               "\nTipo: " + doacao.getTipo()+ ", Doador: " + doacao.getDoador().getNome() +", Data: " + doacao.getDataDoacao());
         }
     }
 
@@ -128,7 +128,7 @@ public class Metodos {
         System.out.println("Lista de Pedidos:");
         for (Pedido pedido : listagemPedidos) {
             System.out.println("ID: " + pedido.getId() + 
-                               "\nPessoa: " + pedido.getCliente().getNome() + ", Tipo: " + pedido.getCliente().getTipoUsuario() +", Data: " + pedido.getDataPedido() +"\n");
+                               "\nPessoa: " + pedido.getCliente().getNome() + ", Tipo: " + pedido.getCliente().getTipoUsuario() +", Data: " + pedido.getDataPedido());
         }
     }
 

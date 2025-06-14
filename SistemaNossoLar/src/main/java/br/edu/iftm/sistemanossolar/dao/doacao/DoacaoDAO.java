@@ -116,12 +116,12 @@ public class DoacaoDAO {
                 doacao.setData(data);
                 doacoes.add(doacao);
             }
-            log.registrarLog(2, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Filtragem dos dados finalizada");
+            log.registrarLog(2, "DoacaoDAO", "filtrarRegistrosRelatorio", "doacao, usuario, tipousuario, usuariotipo, produto, produtocoacao", "Filtragem dos dados finalizada");
             return doacoes;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Erro ao filtrar os dados do relatório");
+            log.registrarLog(4, "DoacaoDAO", "filtrarRegistrosRelatorio", "doacao, usuario, tipousuario, usuariotipo, produto, produtocoacao", "Erro ao filtrar os dados do relatório");
             return null;
         }
     }
@@ -152,12 +152,12 @@ public class DoacaoDAO {
                 totalizacao.setTotalProdutos(rs.getDouble("total_produtos"));
                 totalizacao.setTotalItens(rs.getDouble("total_itens"));
             }
-            log.registrarLog(2, "DoacaoDAO", "filtrarTotalRelatorio", "varias", "Totalização finalizada");
+            log.registrarLog(2, "DoacaoDAO", "filtrarTotalRelatorio", "doacao, usuario, tipousuario, usuariotipo, produto, produtocoacao", "Totalização finalizada");
             return totalizacao;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "DoacaoDAO", "filtrarTotalRelatorio", "varias", "Erro ao totalizar o relatório");
+            log.registrarLog(4, "DoacaoDAO", "filtrarTotalRelatorio", "doacao, usuario, usuariotipo, tipousuario, produto, produtodoacao", "Erro ao totalizar o relatório");
             return null;
         }
     }
@@ -180,6 +180,7 @@ public class DoacaoDAO {
 
             ResultSet rs = stmt.executeQuery();
             List<Doacao> doacoes = new ArrayList<>();
+            int qtdDoacoes = 0;
 
             while (rs.next()) {
                 Doacao doacao = new Doacao();
@@ -195,13 +196,18 @@ public class DoacaoDAO {
                 LocalDate data = rs.getObject("data_doacao", LocalDate.class);
                 doacao.setDataDoacao(data);
                 doacoes.add(doacao);
+                qtdDoacoes ++;
             }
-            log.registrarLog(2, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Filtragem dos dados finalizada");
+            if (!doacoes.isEmpty()) {
+                log.registrarLog(2, "DoacaoDAO", "filtrarRegistrosRelatorio", "doacao, usuario, tipousuario, usuariotipo", "Doações listados - foram encontrados "+ qtdDoacoes +" registros");    
+            } else {
+                log.registrarLog(3, "DoacaoDAO", "filtrarRegistrosRelatorio", "doacao, usuario, tipousuario, usuariotipo", "Não foram encontrados registros");
+            }
             return doacoes;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Erro ao filtrar os dados do relatório");
+            log.registrarLog(4, "DoacaoDAO", "filtrarRegistrosRelatorio", "doacao, usuario, tipousuario, usuariotipo", "Erro ao filtrar os dados do relatório");
             return null;
         }
     }

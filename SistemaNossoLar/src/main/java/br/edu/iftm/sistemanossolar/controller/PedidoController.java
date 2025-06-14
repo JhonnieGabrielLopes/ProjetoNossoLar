@@ -25,7 +25,7 @@ public class PedidoController {
     }
 
     public List<Pedido> buscarPedidos(String nomePessoa, String tipoUsuario, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
-        log.registrarLog(1, "PedidoController", "buscarPedidos", "varias", "Listando pedidos para seleção");
+        log.registrarLog(1, "PedidoController", "buscarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Listando pedidos para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
 
