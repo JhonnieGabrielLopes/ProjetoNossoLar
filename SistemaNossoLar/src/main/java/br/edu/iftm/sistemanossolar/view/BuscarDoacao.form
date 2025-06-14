@@ -101,49 +101,57 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lbBuscarDoacaoDoador" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="tfBuscarDoacaoDoador" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbBuscarDoacaoTipo" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbBuscarDocaoTipo" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="cbBuscarDocaoTipo" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbBuscarDoacaoData1" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfBuscarDoacaoData1" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="tfBuscarDoacaoData1" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="tfBuscarDoacao2" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btBuscarDoacao" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="lbBuscarDoacaoData2" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfBuscarDoacao2" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btBuscarDoacao" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="tfBuscarDoacaoDoador" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfBuscarDoacaoData1" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="lbBuscarDoacaoData2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="tfBuscarDoacaoData1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfBuscarDoacao2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btBuscarDoacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="tfBuscarDoacao2" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="btBuscarDoacao" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="lbBuscarDoacaoTipo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbBuscarDocaoTipo" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="lbBuscarDoacaoData1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lbBuscarDoacaoDoador" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbBuscarDoacaoData1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -152,6 +160,18 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
+            <Component class="javax.swing.JLabel" name="lbBuscarDoacaoDoador">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nome do Doador"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfBuscarDoacaoDoador">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBuscarDoacaoDoadorActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBuscarDoacaoDoadorKeyTyped"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JLabel" name="lbBuscarDoacaoTipo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tipo"/>

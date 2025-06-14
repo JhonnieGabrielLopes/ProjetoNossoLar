@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.doacao.Doacao.TipoDoa;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
@@ -28,8 +31,7 @@ public class DoacaoDAO {
             stmt.setString(1, doacao.getTipo().toString());
             stmt.setInt(2, doacao.getDoador().getId());
             stmt.setDouble(3, doacao.getValor());
-            java.sql.Date data = java.sql.Date.valueOf(doacao.getDataDoacao());
-            stmt.setDate(4, data);
+            stmt.setObject(4, doacao.getDataDoacao());
             stmt.executeUpdate();
             log.registrarLog(2, "DoacaoDAO", "cadastrarDoacao", "doacao", "Doação cadastrada");
 
@@ -110,7 +112,8 @@ public class DoacaoDAO {
                 doacao.setValor(rs.getDouble("valor"));
                 doacao.setProdutos(rs.getString("produtos"));
                 doacao.setObservacao(rs.getString("observacao"));
-                doacao.setData(rs.getDate("data_doacao"));
+                LocalDate data = rs.getObject("data_doacao", LocalDate.class);
+                doacao.setData(data);
                 doacoes.add(doacao);
             }
             log.registrarLog(2, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Filtragem dos dados finalizada");
@@ -155,6 +158,50 @@ public class DoacaoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             log.registrarLog(4, "DoacaoDAO", "filtrarTotalRelatorio", "varias", "Erro ao totalizar o relatório");
+            return null;
+        }
+    }
+
+    public List<Doacao> listarDoacoes(String sqlFiltro, List<Object> filtros) throws SQLException {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT d.id AS codigo_doacao, d.tipoDoacao AS tipo_doacao, u.nome AS nome_doador, d.data AS data_doacao ");
+        sql.append("FROM doacao d ");
+        sql.append("JOIN usuario u ON d.pessoa = u.id ");
+        sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
+        sql.append("JOIN tipoUsuario tu ON ut.tipoUsuario = tu.id AND tu.tipo = 'DOADOR' ");
+        sql.append("WHERE 1=1 ");
+        sql.append(sqlFiltro);
+        sql.append("ORDER BY d.data DESC");
+
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
+            for (int i = 0; i < filtros.size(); i++) {
+                stmt.setObject(i + 1, filtros.get(i));
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            List<Doacao> doacoes = new ArrayList<>();
+
+            while (rs.next()) {
+                Doacao doacao = new Doacao();
+                Pessoa doador = new Pessoa();
+                doacao.setId(rs.getInt("codigo_doacao"));
+                if (rs.getString("tipo_doacao").equals("DINHEIRO")) {
+                    doacao.setTipo(TipoDoa.DINHEIRO);
+                } else {
+                    doacao.setTipo(TipoDoa.PRODUTO);
+                }
+                doador.setNome(rs.getString("nome_doador"));
+                doacao.setDoador(doador);
+                LocalDate data = rs.getObject("data_doacao", LocalDate.class);
+                doacao.setDataDoacao(data);
+                doacoes.add(doacao);
+            }
+            log.registrarLog(2, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Filtragem dos dados finalizada");
+            return doacoes;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "DoacaoDAO", "filtrarRegistrosRelatorio", "varias", "Erro ao filtrar os dados do relatório");
             return null;
         }
     }

@@ -29,6 +29,8 @@ public class BuscarDoacao extends javax.swing.JDialog {
 
         pnBuscarPessoa = new javax.swing.JPanel();
         pnBuscarDoacaoFiltros = new javax.swing.JPanel();
+        lbBuscarDoacaoDoador = new javax.swing.JLabel();
+        tfBuscarDoacaoDoador = new javax.swing.JTextField();
         lbBuscarDoacaoTipo = new javax.swing.JLabel();
         cbBuscarDocaoTipo = new javax.swing.JComboBox<>();
         lbBuscarDoacaoData1 = new javax.swing.JLabel();
@@ -46,6 +48,20 @@ public class BuscarDoacao extends javax.swing.JDialog {
         pnBuscarPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Doação"));
 
         pnBuscarDoacaoFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
+
+        lbBuscarDoacaoDoador.setText("Nome do Doador");
+        lbBuscarDoacaoDoador.setToolTipText("");
+
+        tfBuscarDoacaoDoador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfBuscarDoacaoDoadorActionPerformed(evt);
+            }
+        });
+        tfBuscarDoacaoDoador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBuscarDoacaoDoadorKeyTyped(evt);
+            }
+        });
 
         lbBuscarDoacaoTipo.setText("Tipo");
         lbBuscarDoacaoTipo.setToolTipText("");
@@ -94,40 +110,47 @@ public class BuscarDoacao extends javax.swing.JDialog {
             .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbBuscarDoacaoDoador)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tfBuscarDoacaoDoador))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbBuscarDoacaoTipo)
-                    .addComponent(cbBuscarDocaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbBuscarDocaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbBuscarDoacaoData1)
-                    .addComponent(tfBuscarDoacaoData1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfBuscarDoacaoData1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
-                        .addComponent(tfBuscarDoacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btBuscarDoacao))
-                    .addComponent(lbBuscarDoacaoData2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbBuscarDoacaoData2)
+                    .addComponent(tfBuscarDoacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btBuscarDoacao)
+                .addContainerGap())
         );
         pnBuscarDoacaoFiltrosLayout.setVerticalGroup(
             pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addGap(9, 9, 9)
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfBuscarDoacaoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfBuscarDoacaoData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
                         .addComponent(lbBuscarDoacaoData2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfBuscarDoacaoData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfBuscarDoacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btBuscarDoacao)))
+                        .addComponent(tfBuscarDoacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btBuscarDoacao)
                     .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
                         .addComponent(lbBuscarDoacaoTipo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbBuscarDocaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
-                        .addComponent(lbBuscarDoacaoData1)
-                        .addGap(27, 27, 27)))
+                        .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbBuscarDoacaoDoador)
+                            .addComponent(lbBuscarDoacaoData1))
+                        .addGap(26, 26, 26)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -254,6 +277,14 @@ public class BuscarDoacao extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfBuscarDoacao2KeyTyped
 
+    private void tfBuscarDoacaoDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarDoacaoDoadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfBuscarDoacaoDoadorActionPerformed
+
+    private void tfBuscarDoacaoDoadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarDoacaoDoadorKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfBuscarDoacaoDoadorKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -310,6 +341,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbBuscarDoacaoData1;
     private javax.swing.JLabel lbBuscarDoacaoData2;
+    private javax.swing.JLabel lbBuscarDoacaoDoador;
     private javax.swing.JLabel lbBuscarDoacaoTipo;
     private javax.swing.JPanel pnBuscarDoacaoFiltros;
     private javax.swing.JPanel pnBuscarDoacaoResultado;
@@ -317,5 +349,6 @@ public class BuscarDoacao extends javax.swing.JDialog {
     private javax.swing.JTable tableBuscarPessoa;
     private javax.swing.JTextField tfBuscarDoacao2;
     private javax.swing.JTextField tfBuscarDoacaoData1;
+    private javax.swing.JTextField tfBuscarDoacaoDoador;
     // End of variables declaration//GEN-END:variables
 }

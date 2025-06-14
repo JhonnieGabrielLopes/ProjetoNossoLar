@@ -1,8 +1,8 @@
 package br.edu.iftm.sistemanossolar.controller.doacao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,25 +26,25 @@ public class DoacaoController {
         return doacaoDAO.cadastrarDoacao(doacao);
     }
 
-    public RetornoDoacoes filtrarRelatorio(Date dataInicio, Date dataFim, String tipoDoacao, String tipoProduto, Integer idDoador, Integer idProduto, String ordem, String sentido) throws SQLException {
+    public RetornoDoacoes filtrarRelatorio(LocalDate dataInicio, LocalDate dataFim, String tipoDoacao, String tipoProduto, Integer idDoador, Integer idProduto, String ordem, String sentido) throws SQLException {
         log.registrarLog(1, "DoacaoController", "filtrarRegistrosRelatorio", "varias", "Filtrando dados do relatório");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
 
         if (dataInicio != null && dataFim == null) {
             sqlFiltro.append("AND d.data >= ? ");
-            filtros.add(new java.sql.Date(dataInicio.getTime()));
+            filtros.add(dataInicio);
         }
 
         if (dataFim != null && dataInicio == null) {
             sqlFiltro.append("AND d.data <= ? ");
-            filtros.add(new java.sql.Date(dataFim.getTime()));
+            filtros.add(dataFim);
         }
 
         if (dataInicio != null && dataFim != null) {
             sqlFiltro.append("AND d.data BETWEEN ? AND ? ");
-            filtros.add(new java.sql.Date(dataInicio.getTime()));
-            filtros.add(new java.sql.Date(dataFim.getTime()));
+            filtros.add(dataInicio);
+            filtros.add(dataFim);
         }
 
         if (!tipoDoacao.isEmpty() && !tipoDoacao.equals("Todos")) {
@@ -95,6 +95,40 @@ public class DoacaoController {
     public RelDoacao filtrarTotalRelatorio(RelDoacao totalizacao, String filtro, List<Object> filtros) throws SQLException {
         log.registrarLog(1, "DoacaoController", "filtrarTotalRelatorio", "varias", "Totalizando o relatório");
         return doacaoDAO.filtrarTotalRelatorio(totalizacao, filtro, filtros);
+    }
+
+    public List<Doacao> listarDoacoes(String nomeDoador, String tipoDoacao, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+        log.registrarLog(1, "DoacaoController", "buscarDoacao", "varias", "Listando doações para seleção");
+        StringBuilder sqlFiltro = new StringBuilder();
+        List<Object> filtros = new ArrayList<>();
+
+        if (!nomeDoador.isEmpty() || !nomeDoador.equals("")) {
+            sqlFiltro.append("AND u.nome LIKE ? ");
+            filtros.add("%"+ nomeDoador +"%");
+        }
+
+        if (dataInicio != null && dataFim == null) {
+            sqlFiltro.append("AND d.data >= ? ");
+            filtros.add(dataInicio);
+        }
+
+        if (dataFim != null && dataInicio == null) {
+            sqlFiltro.append("AND d.data <= ? ");
+            filtros.add(dataFim);
+        }
+
+        if (dataInicio != null && dataFim != null) {
+            sqlFiltro.append("AND d.data BETWEEN ? AND ? ");
+            filtros.add(dataInicio);
+            filtros.add(dataFim);
+        }
+
+        if (!tipoDoacao.isEmpty() && !tipoDoacao.equals("Todos")) {
+            sqlFiltro.append("AND d.tipoDoacao = ? ");
+            filtros.add(tipoDoacao);
+        }
+
+        return doacaoDAO.listarDoacoes(sqlFiltro.toString(), filtros);
     }
 
 }

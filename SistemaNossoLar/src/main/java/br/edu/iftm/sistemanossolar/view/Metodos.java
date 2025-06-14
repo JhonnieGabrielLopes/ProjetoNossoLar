@@ -71,7 +71,8 @@ public class Metodos {
         System.out.println("18 - Exibir Pedido");
         System.out.println("19 - Exibir Produto");
         System.out.println("20 - Relatorio de Doações");
-        System.out.println("21 - Sair");
+        System.out.println("21 - Listar Doações");
+        System.out.println("22 - Sair");
         System.out.println("Escolha uma opção: ");
     }
 
@@ -90,11 +91,11 @@ public class Metodos {
         return false;
     }
 
-    public void filtrarRelatorio() throws SQLException {
+    public void relatorioDoacao() throws SQLException {
         String data1 = "2023-06-01";
-        java.sql.Date dataTeste1 = java.sql.Date.valueOf(data1);
-        String data2 = "2023-06-30";
-        java.sql.Date dataTeste2 = java.sql.Date.valueOf(data2);
+        LocalDate dataTeste1 = LocalDate.parse(data1);
+        String data2 = "2023-06-30"; 
+        LocalDate dataTeste2 = LocalDate.parse(data2);
         RetornoDoacoes relatorio = doacaoController.filtrarRelatorio(null, null, "Todos", "Todos", null, null, "data", "desc");
         System.out.println("Relatório de Doações:");
         for (RelDoacao rel : relatorio.getDoacoes()) {
@@ -104,6 +105,19 @@ public class Metodos {
         RelDoacao totalizacao = relatorio.getTotalizacao();
         System.out.println("Totalização:"+ 
                            "\nValor total: "+ totalizacao.getTotalValor() +", Produtos total: "+ totalizacao.getTotalProdutos() +", Itens total: "+ totalizacao.getTotalItens() + "\n");
+    }
+
+    public void buscarDoacoes() throws SQLException {
+        String data1 = "2023-06-01";
+        LocalDate dataTeste1 = LocalDate.parse(data1);
+        String data2 = "2023-06-30"; 
+        LocalDate dataTeste2 = LocalDate.parse(data2);
+        List<Doacao> listagemDoacoes = doacaoController.listarDoacoes("", "Todos", null, null);
+        System.out.println("Lista de Doações:");
+        for (Doacao doacao : listagemDoacoes) {
+            System.out.println("ID: " + doacao.getId() + 
+                               "\nTipo: " + doacao.getTipo()+ ", Doador: " + doacao.getDoador().getNome() +", Data: " + doacao.getDataDoacao() +"\n");
+        }
     }
 
     public boolean cadastrarProduto(Scanner scan, Produto novoProduto) throws SQLException {
