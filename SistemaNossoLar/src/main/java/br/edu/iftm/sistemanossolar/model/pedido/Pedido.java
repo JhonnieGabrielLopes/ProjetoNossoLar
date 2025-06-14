@@ -20,6 +20,10 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
+    public Pedido() {
+        
+    }
+
     public enum StatusPedido {
         PENDENTE, 
         FINALIZADO, 

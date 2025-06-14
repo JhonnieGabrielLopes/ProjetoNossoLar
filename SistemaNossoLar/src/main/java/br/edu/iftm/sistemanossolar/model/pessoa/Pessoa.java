@@ -15,6 +15,7 @@ public class Pessoa {
     private Endereco endereco;
     private String email;
     private String observacao;
+    private String cidadeCompleta;
 
     public enum TipoCad {
         ASSISTENTE,
@@ -183,5 +184,13 @@ public class Pessoa {
 
     public void setLocal(Local local) {
         this.local = local;
+    }
+
+    public String getCidadeCompleta() {
+        return cidadeCompleta;
+    }
+
+    public void setCidadeCompleta(String cidadeCompleta) {
+        this.cidadeCompleta = cidadeCompleta;
     }
 }
