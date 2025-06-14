@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
@@ -50,8 +52,41 @@ public class ProdutoDAO {
         }
     }
 
-    public boolean buscarProduto() {
-        return false;
-    }
+    public List<Produto> consultarProdutos(String sqlFiltro, List<Object> filtros) throws SQLException {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT id AS codigo_produto, descricao AS produto ");
+        sql.append("FROM produto ");
+        sql.append("WHERE 1=1 ");
+        sql.append(sqlFiltro);
+        sql.append("ORDER BY descricao ASC");
 
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
+            for (int i = 0; i < filtros.size(); i++) {
+                stmt.setObject(i + 1, filtros.get(i));
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            List<Produto> produtos = new ArrayList<>();
+            int qtdProdutos = 0;
+
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("codigo_produto"));
+                produto.setNome(rs.getString("produto"));
+                produtos.add(produto);
+                qtdProdutos ++;
+            }
+            if (!produtos.isEmpty()) {
+                log.registrarLog(2, "ProdutoDAO", "consultarProdutos", "doacao, usuario, tipousuario, usuariotipo", "Produtos listados - foram encontrados "+ qtdProdutos +" registros");    
+            } else {
+                log.registrarLog(3, "ProdutoDAO", "consultarProdutos", "doacao, usuario, tipousuario, usuariotipo", "Não foram encontrados registros");
+            }
+            return produtos;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "ProdutoDAO", "consultarProdutos", "doacao, usuario, tipousuario, usuariotipo", "Erro ao consultar os produtos");
+            return null;
+        }
+    }
 }

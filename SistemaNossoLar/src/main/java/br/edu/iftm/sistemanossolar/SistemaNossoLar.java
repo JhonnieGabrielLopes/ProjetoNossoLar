@@ -77,6 +77,11 @@ public class SistemaNossoLar {
                         metodos.listarPedidos();
                         controle = false;
                         break;
+                    
+                    case 12:
+                        metodos.listarProdutos();
+                        controle = false;
+                        break;
                         
                     case 20:
                         metodos.relatorioDoacao();

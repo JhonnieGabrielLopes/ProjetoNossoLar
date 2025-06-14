@@ -2,7 +2,6 @@ package br.edu.iftm.sistemanossolar.controller.pessoa;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.dao.pessoa.PessoaDAO;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
-import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;

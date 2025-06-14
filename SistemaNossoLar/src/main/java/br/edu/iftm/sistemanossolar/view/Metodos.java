@@ -450,4 +450,13 @@ public class Metodos {
                                "\nPessoa: " + pessoa.getNome() + ", Cidade: " + pessoa.getCidadeCompleta() +", Observação: " + pessoa.getObservacao());
         }
     }
+
+    public void listarProdutos() throws SQLException {
+        List<Produto> listagemProdutos = produtoController.buscarProdutos("", "Todos");
+        System.out.println("Lista de Produtos:");
+        for (Produto produto : listagemProdutos) {
+            System.out.println("ID: " + produto.getId() + 
+                               "\nProduto: " + produto.getNome());
+        }
+    }
 }

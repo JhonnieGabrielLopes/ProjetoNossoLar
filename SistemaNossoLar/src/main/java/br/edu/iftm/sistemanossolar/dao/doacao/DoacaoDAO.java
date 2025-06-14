@@ -207,7 +207,7 @@ public class DoacaoDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "DoacaoDAO", "filtrarRegistrosRelatorio", "doacao, usuario, tipousuario, usuariotipo", "Erro ao filtrar os dados do relatório");
+            log.registrarLog(4, "DoacaoDAO", "filtrarRegistrosRelatorio", "doacao, usuario, tipousuario, usuariotipo", "Erro ao consultar as doações");
             return null;
         }
     }
