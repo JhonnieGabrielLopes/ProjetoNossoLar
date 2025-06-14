@@ -72,7 +72,7 @@ public class PessoaController {
             filtros.add(tipoUsuario);
         }
         
-        if (!cidade.isEmpty()) {
+        if (!cidade.isEmpty() && !cidade.equals("Todas")) {
             sqlFiltro.append("AND c.nome LIKE ? ");
             filtros.add("%"+ cidade +"%");
         }

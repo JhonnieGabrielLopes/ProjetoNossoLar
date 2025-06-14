@@ -446,7 +446,7 @@ public class Metodos {
     }
 
     public void listarPessoas() throws SQLException {
-        List<Pessoa> listagemPessoas = pessoaController.listarPessoas("", "Todos", "Ituiutaba");
+        List<Pessoa> listagemPessoas = pessoaController.listarPessoas("", "Todos", "Todas");
         System.out.println("Lista de Pessoas:");
         for (Pessoa pessoa : listagemPessoas) {
             System.out.println("ID: " + pessoa.getId() + 
