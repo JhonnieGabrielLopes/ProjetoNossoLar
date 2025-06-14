@@ -31,7 +31,7 @@ public class PedidoController {
 
         if (!nomePessoa.isEmpty() || !nomePessoa.equals("")) {
             sqlFiltro.append("AND u.nome LIKE ? ");
-            filtros.add("'%"+ nomePessoa +"%'");
+            filtros.add("%"+ nomePessoa +"%");
         }
 
         if (!tipoUsuario.isEmpty() && tipoUsuario.equals("Todos")) {

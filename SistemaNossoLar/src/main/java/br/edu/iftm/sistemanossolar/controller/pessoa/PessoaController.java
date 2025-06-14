@@ -2,12 +2,15 @@ package br.edu.iftm.sistemanossolar.controller.pessoa;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.dao.pessoa.PessoaDAO;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
+import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
@@ -55,4 +58,26 @@ public class PessoaController {
         return pessoaDAO.listarPessoas(tipo, idTipo);
     }
 
+    public List<Pessoa> buscarPessoas(String nomePessoa, String tipoUsuario, String cidade) throws SQLException {
+        log.registrarLog(1, "PessoaController", "buscarPessoas", "usuario, endereco, cidade", "Listando pessoas para seleção");
+        StringBuilder sqlFiltro = new StringBuilder();
+        List<Object> filtros = new ArrayList<>();
+
+        if (!nomePessoa.isEmpty() || !nomePessoa.equals("")) {
+            sqlFiltro.append("AND u.nome LIKE ? ");
+            filtros.add("%"+ nomePessoa +"%");
+        }
+
+        if (!tipoUsuario.isEmpty() && !tipoUsuario.equals("Todos")) {
+            sqlFiltro.append("AND tu.tipo = ? ");
+            filtros.add(tipoUsuario);
+        }
+        
+        if (!cidade.isEmpty()) {
+            sqlFiltro.append("AND c.nome LIKE ? ");
+            filtros.add("%"+ cidade +"%");
+        }
+
+        return pessoaDAO.consultarPessoas(sqlFiltro.toString(), filtros);
+    }
 }

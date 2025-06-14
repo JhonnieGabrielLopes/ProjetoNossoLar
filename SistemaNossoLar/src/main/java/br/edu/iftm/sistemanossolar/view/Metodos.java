@@ -90,48 +90,6 @@ public class Metodos {
         return false;
     }
 
-    public void relatorioDoacao() throws SQLException {
-        String data1 = "2023-06-01";
-        LocalDate dataTeste1 = LocalDate.parse(data1);
-        String data2 = "2023-06-30"; 
-        LocalDate dataTeste2 = LocalDate.parse(data2);
-        RetornoDoacoes relatorio = doacaoController.filtrarRelatorio(null, null, "Todos", "Todos", null, null, "data", "desc");
-        System.out.println("Relatório de Doações:");
-        for (RelDoacao rel : relatorio.getDoacoes()) {
-            System.out.println("ID: " + rel.getIdDoacao() + 
-                               "\nDoador: " + rel.getIdDoador() +" "+ rel.getNomeDoador() +", Tipo: " + rel.getTipo() + ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: "+ rel.getObservacao() +", Data: " + rel.getData());
-        }
-        RelDoacao totalizacao = relatorio.getTotalizacao();
-        System.out.println("Totalização:"+ 
-                           "\nValor total: "+ totalizacao.getTotalValor() +", Produtos total: "+ totalizacao.getTotalProdutos() +", Itens total: "+ totalizacao.getTotalItens());
-    }
-
-    public void listarDoacoes() throws SQLException {
-        String data1 = "2023-06-01";
-        LocalDate dataTeste1 = LocalDate.parse(data1);
-        String data2 = "2023-06-30"; 
-        LocalDate dataTeste2 = LocalDate.parse(data2);
-        List<Doacao> listagemDoacoes = doacaoController.buscarDoacoes("", "Todos", null, null);
-        System.out.println("Lista de Doações:");
-        for (Doacao doacao : listagemDoacoes) {
-            System.out.println("ID: " + doacao.getId() + 
-                               "\nTipo: " + doacao.getTipo()+ ", Doador: " + doacao.getDoador().getNome() +", Data: " + doacao.getDataDoacao());
-        }
-    }
-
-    public void listarPedidos() throws SQLException {
-        String data1 = "2023-06-01";
-        LocalDate dataTeste1 = LocalDate.parse(data1);
-        String data2 = "2023-06-30"; 
-        LocalDate dataTeste2 = LocalDate.parse(data2);
-        List<Pedido> listagemPedidos = pedidoController.buscarPedidos("", "Todos", null, null);
-        System.out.println("Lista de Pedidos:");
-        for (Pedido pedido : listagemPedidos) {
-            System.out.println("ID: " + pedido.getId() + 
-                               "\nPessoa: " + pedido.getCliente().getNome() + ", Tipo: " + pedido.getCliente().getTipoUsuario() +", Data: " + pedido.getDataPedido());
-        }
-    }
-
     public boolean cadastrarProduto(Scanner scan, Produto novoProduto) throws SQLException {
         String tipoProduto = null;
         String nomeProduto = null;
@@ -442,4 +400,54 @@ public class Metodos {
         }
     }
 
+    public void relatorioDoacao() throws SQLException {
+        String data1 = "2023-06-01";
+        LocalDate dataTeste1 = LocalDate.parse(data1);
+        String data2 = "2023-06-30"; 
+        LocalDate dataTeste2 = LocalDate.parse(data2);
+        RetornoDoacoes relatorio = doacaoController.filtrarRelatorio(null, null, "Todos", "Todos", null, null, "data", "desc");
+        System.out.println("Relatório de Doações:");
+        for (RelDoacao rel : relatorio.getDoacoes()) {
+            System.out.println("ID: " + rel.getIdDoacao() + 
+                               "\nDoador: " + rel.getIdDoador() +" "+ rel.getNomeDoador() +", Tipo: " + rel.getTipo() + ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: "+ rel.getObservacao() +", Data: " + rel.getData());
+        }
+        RelDoacao totalizacao = relatorio.getTotalizacao();
+        System.out.println("Totalização:"+ 
+                           "\nValor total: "+ totalizacao.getTotalValor() +", Produtos total: "+ totalizacao.getTotalProdutos() +", Itens total: "+ totalizacao.getTotalItens());
+    }
+
+    public void listarDoacoes() throws SQLException {
+        String data1 = "2023-06-01";
+        LocalDate dataTeste1 = LocalDate.parse(data1);
+        String data2 = "2023-06-30"; 
+        LocalDate dataTeste2 = LocalDate.parse(data2);
+        List<Doacao> listagemDoacoes = doacaoController.buscarDoacoes("", "Todos", null, null);
+        System.out.println("Lista de Doações:");
+        for (Doacao doacao : listagemDoacoes) {
+            System.out.println("ID: " + doacao.getId() + 
+                               "\nTipo: " + doacao.getTipo()+ ", Doador: " + doacao.getDoador().getNome() +", Data: " + doacao.getDataDoacao());
+        }
+    }
+
+    public void listarPedidos() throws SQLException {
+        String data1 = "2023-06-01";
+        LocalDate dataTeste1 = LocalDate.parse(data1);
+        String data2 = "2023-06-30"; 
+        LocalDate dataTeste2 = LocalDate.parse(data2);
+        List<Pedido> listagemPedidos = pedidoController.buscarPedidos("", "Todos", null, null);
+        System.out.println("Lista de Pedidos:");
+        for (Pedido pedido : listagemPedidos) {
+            System.out.println("ID: " + pedido.getId() + 
+                               "\nPessoa: " + pedido.getCliente().getNome() + ", Tipo: " + pedido.getCliente().getTipoUsuario() +", Data: " + pedido.getDataPedido());
+        }
+    }
+
+    public void listarPessoas2() throws SQLException {
+        List<Pessoa> listagemPessoas = pessoaController.buscarPessoas("", "Todos", "Ituiutaba");
+        System.out.println("Lista de Pessoas:");
+        for (Pessoa pessoa : listagemPessoas) {
+            System.out.println("ID: " + pessoa.getId() + 
+                               "\nPessoa: " + pessoa.getNome() + ", Cidade: " + pessoa.getCidadeCompleta() +", Observação: " + pessoa.getObservacao());
+        }
+    }
 }
