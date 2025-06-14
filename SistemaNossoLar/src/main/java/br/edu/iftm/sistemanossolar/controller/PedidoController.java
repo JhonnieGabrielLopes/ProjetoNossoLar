@@ -24,7 +24,7 @@ public class PedidoController {
         return pedidoDAO.cadastrarPedido(pedido);
     }
 
-    public List<Pedido> buscarPedidos(String nomePessoa, String tipoUsuario, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+    public List<Pedido> listarPedidos(String nomePessoa, String tipoUsuario, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
         log.registrarLog(1, "PedidoController", "buscarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Listando pedidos para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
@@ -57,6 +57,6 @@ public class PedidoController {
             filtros.add(dataFim);
         }
 
-        return pedidoDAO.consultarPedidos(sqlFiltro.toString(), filtros);
+        return pedidoDAO.listarPedidos(sqlFiltro.toString(), filtros);
     }
 }

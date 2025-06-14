@@ -97,7 +97,7 @@ public class DoacaoController {
         return doacaoDAO.filtrarTotalRelatorio(totalizacao, filtro, filtros);
     }
 
-    public List<Doacao> buscarDoacoes(String nomeDoador, String tipoDoacao, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+    public List<Doacao> listarDoacoes(String nomeDoador, String tipoDoacao, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
         log.registrarLog(1, "DoacaoController", "buscarDoacao", "doacao, usuario, tipousuario, usuariotipo", "Listando doações para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
@@ -128,7 +128,7 @@ public class DoacaoController {
             filtros.add(dataFim);
         }
 
-        return doacaoDAO.consultarDoacoes(sqlFiltro.toString(), filtros);
+        return doacaoDAO.listarDoacoes(sqlFiltro.toString(), filtros);
     }
 
 }

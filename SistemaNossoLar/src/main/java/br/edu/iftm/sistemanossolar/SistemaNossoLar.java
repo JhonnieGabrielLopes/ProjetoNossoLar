@@ -64,7 +64,7 @@ public class SistemaNossoLar {
                         break;
 
                     case 7:
-                        metodos.listarPessoas2();
+                        metodos.listarPessoas();
                         controle = false;
                         break;
                     

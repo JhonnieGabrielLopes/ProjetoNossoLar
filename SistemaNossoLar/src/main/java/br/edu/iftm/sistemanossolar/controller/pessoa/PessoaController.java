@@ -50,13 +50,14 @@ public class PessoaController {
         return pessoaDAO.buscarPessoaPorId(id);
     }
 
-    public List<Pessoa> listarPessoas(String tipo) throws SQLException {
+    public List<Pessoa> listarPessoas2(String tipo) throws SQLException {
+        //METODO PARA TESTES NO TERMINAL
         log.registrarLog(1, "PessoaController", "listarPessoas", "usuario/tipoUsuario", "Consultando Usuários do tipo "+ tipo);
         int idTipo = tipoController.buscarIdTipo(tipo, "tipousuario");
-        return pessoaDAO.listarPessoas(tipo, idTipo);
+        return pessoaDAO.listarPessoas2(tipo, idTipo);
     }
 
-    public List<Pessoa> buscarPessoas(String nomePessoa, String tipoUsuario, String cidade) throws SQLException {
+    public List<Pessoa> listarPessoas(String nomePessoa, String tipoUsuario, String cidade) throws SQLException {
         log.registrarLog(1, "PessoaController", "buscarPessoas", "usuario, endereco, cidade", "Listando pessoas para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
@@ -76,6 +77,6 @@ public class PessoaController {
             filtros.add("%"+ cidade +"%");
         }
 
-        return pessoaDAO.consultarPessoas(sqlFiltro.toString(), filtros);
+        return pessoaDAO.listarPessoas(sqlFiltro.toString(), filtros);
     }
 }

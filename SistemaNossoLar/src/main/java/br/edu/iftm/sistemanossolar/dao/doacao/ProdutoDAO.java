@@ -52,7 +52,7 @@ public class ProdutoDAO {
         }
     }
 
-    public List<Produto> consultarProdutos(String sqlFiltro, List<Object> filtros) throws SQLException {
+    public List<Produto> listarProdutos(String sqlFiltro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT id AS codigo_produto, descricao AS produto ");
         sql.append("FROM produto ");

@@ -111,8 +111,9 @@ public class Metodos {
     }
 
     public boolean cadastrarDoacao(Scanner scan) throws SQLException, IOException {
+        //METODO PARA TESTES NO TERMINAL
         System.out.println("Selecione o Doador (código):");
-        listarPessoas("Doador");
+        listarPessoas2("Doador");
         int idDoador = scan.nextInt();
         scan.nextLine();
 
@@ -171,14 +172,15 @@ public class Metodos {
         }
     }
 
-    public void listarPessoas(String tipo) throws SQLException, IOException {
+    public void listarPessoas2(String tipo) throws SQLException, IOException {
+        //METODO PARA TESTES NO TERMINAL
         List<Pessoa> pessoas = new ArrayList<>();
         if (tipo.equalsIgnoreCase("Beneficiario")) {
-            pessoas = pessoaController.listarPessoas("Beneficiario");
+            pessoas = pessoaController.listarPessoas2("Beneficiario");
         } else if (tipo.equalsIgnoreCase("Assistente")) {
-            pessoas = pessoaController.listarPessoas("Assistente");
+            pessoas = pessoaController.listarPessoas2("Assistente");
         } else if (tipo.equalsIgnoreCase("Doador")) {
-            pessoas = pessoaController.listarPessoas("Doador");
+            pessoas = pessoaController.listarPessoas2("Doador");
         }
         for (int i = 0; i < pessoas.size(); i++) {
             System.out.println((pessoas.get(i).getId()) + " - " + pessoas.get(i).getNome());
@@ -186,9 +188,10 @@ public class Metodos {
     }
 
     public boolean cadastrarPedido(Scanner scan) throws SQLException, IOException {
+        //METODO PARA TESTES NO TERMINAL
         System.out.println("Selecione a Pessoa: ");
-        listarPessoas("Beneficiario");
-        listarPessoas("Assistente");
+        listarPessoas2("Beneficiario");
+        listarPessoas2("Assistente");
         int idCliente = scan.nextInt();
         scan.nextLine();
 
@@ -421,7 +424,7 @@ public class Metodos {
         LocalDate dataTeste1 = LocalDate.parse(data1);
         String data2 = "2023-06-30"; 
         LocalDate dataTeste2 = LocalDate.parse(data2);
-        List<Doacao> listagemDoacoes = doacaoController.buscarDoacoes("", "Todos", null, null);
+        List<Doacao> listagemDoacoes = doacaoController.listarDoacoes("", "Todos", null, null);
         System.out.println("Lista de Doações:");
         for (Doacao doacao : listagemDoacoes) {
             System.out.println("ID: " + doacao.getId() + 
@@ -434,7 +437,7 @@ public class Metodos {
         LocalDate dataTeste1 = LocalDate.parse(data1);
         String data2 = "2023-06-30"; 
         LocalDate dataTeste2 = LocalDate.parse(data2);
-        List<Pedido> listagemPedidos = pedidoController.buscarPedidos("", "Todos", null, null);
+        List<Pedido> listagemPedidos = pedidoController.listarPedidos("", "Todos", null, null);
         System.out.println("Lista de Pedidos:");
         for (Pedido pedido : listagemPedidos) {
             System.out.println("ID: " + pedido.getId() + 
@@ -442,8 +445,8 @@ public class Metodos {
         }
     }
 
-    public void listarPessoas2() throws SQLException {
-        List<Pessoa> listagemPessoas = pessoaController.buscarPessoas("", "Todos", "Ituiutaba");
+    public void listarPessoas() throws SQLException {
+        List<Pessoa> listagemPessoas = pessoaController.listarPessoas("", "Todos", "Ituiutaba");
         System.out.println("Lista de Pessoas:");
         for (Pessoa pessoa : listagemPessoas) {
             System.out.println("ID: " + pessoa.getId() + 
@@ -452,7 +455,7 @@ public class Metodos {
     }
 
     public void listarProdutos() throws SQLException {
-        List<Produto> listagemProdutos = produtoController.buscarProdutos("", "Todos");
+        List<Produto> listagemProdutos = produtoController.listarProdutos("", "Todos");
         System.out.println("Lista de Produtos:");
         for (Produto produto : listagemProdutos) {
             System.out.println("ID: " + produto.getId() + 

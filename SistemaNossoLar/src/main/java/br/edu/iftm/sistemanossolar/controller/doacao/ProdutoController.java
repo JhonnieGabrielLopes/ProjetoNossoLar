@@ -22,7 +22,7 @@ public class ProdutoController {
         return produtoDAO.cadastrarProduto(produto);
     }
 
-    public List<Produto> buscarProdutos(String nomeProduto, String tipoProduto) throws SQLException {
+    public List<Produto> listarProdutos(String nomeProduto, String tipoProduto) throws SQLException {
         log.registrarLog(1, "ProdutoController", "buscarProdutos", "usuario, endereco, cidade", "Listando pessoas para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
@@ -37,7 +37,7 @@ public class ProdutoController {
             filtros.add("%"+ tipoProduto +"%");
         }
 
-        return produtoDAO.consultarProdutos(sqlFiltro.toString(), filtros);
+        return produtoDAO.listarProdutos(sqlFiltro.toString(), filtros);
     }
 
 }

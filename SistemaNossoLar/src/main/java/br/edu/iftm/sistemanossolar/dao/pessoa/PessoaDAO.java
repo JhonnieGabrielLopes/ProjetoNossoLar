@@ -143,7 +143,8 @@ public class PessoaDAO {
         return pessoa;
     }
 
-    public List<Pessoa> listarPessoas(String tipo, Integer idTipo) {
+    public List<Pessoa> listarPessoas2(String tipo, Integer idTipo) {
+        //METODO PARA TESTES NO TERMINAL
         List<Pessoa> pessoas = new ArrayList<>();
         String sql = "SELECT us.id, us.nome, us.telefone FROM usuario us JOIN usuariotipo ut WHERE us.id = ut.usuario AND ut.tipoUsuario = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
@@ -171,7 +172,7 @@ public class PessoaDAO {
         return pessoas;
     }
 
-    public List<Pessoa> consultarPessoas(String sqlFiltro, List<Object> filtros) throws SQLException {
+    public List<Pessoa> listarPessoas(String sqlFiltro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT u.id AS codigo_pessoa, u.nome AS nome_pessoa, CONCAT(c.nome, '/', c.uf) AS cidade, u.observacao ");
         sql.append("FROM usuario u ");

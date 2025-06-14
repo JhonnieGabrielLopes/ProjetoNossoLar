@@ -52,7 +52,7 @@ public class PedidoDAO {
         }
     }
 
-    public List<Pedido> consultarPedidos(String sqlFiltro, List<Object> filtros) throws SQLException {
+    public List<Pedido> listarPedidos(String sqlFiltro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT p.id AS codigo_pedido, u.nome AS pessoa, tu.tipo AS tipo_pessoa, p.datapedido AS data_pedido ");
         sql.append("FROM pedido p ");
