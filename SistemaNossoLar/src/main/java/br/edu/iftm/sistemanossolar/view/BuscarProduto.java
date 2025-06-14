@@ -8,12 +8,12 @@ package br.edu.iftm.sistemanossolar.view;
  *
  * @author AFSOUZA
  */
-public class BuscarPessoa extends javax.swing.JDialog {
+public class BuscarProduto extends javax.swing.JDialog {
 
     /**
      * Creates new form BuscarPessoa
      */
-    public BuscarPessoa(java.awt.Frame parent, boolean modal) {
+    public BuscarProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -28,52 +28,141 @@ public class BuscarPessoa extends javax.swing.JDialog {
     private void initComponents() {
 
         pnBuscarPessoa = new javax.swing.JPanel();
-        tfBuscarPessoaNome = new javax.swing.JTextField();
-        lbBuscarPessoaNome = new javax.swing.JLabel();
-        btBuscarPessoaBuscar = new javax.swing.JButton();
-        lbBuscarPessoaTipo = new javax.swing.JLabel();
-        cbBuscarPessoaTipo = new javax.swing.JComboBox<>();
+        pnBuscarProdutoFiltros = new javax.swing.JPanel();
+        lbBuscarProdutoNome = new javax.swing.JLabel();
+        tfBuscarProdutoNome = new javax.swing.JTextField();
+        lbBuscarProdutoTipo = new javax.swing.JLabel();
+        cbBuscarProdutoTipo = new javax.swing.JComboBox<>();
+        btBuscarProdutoBuscar = new javax.swing.JButton();
+        pnBuscarProdutosResultado = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableBuscarPessoa = new javax.swing.JTable();
-        btBuscarPessoaSelecionar = new javax.swing.JButton();
+        btBuscarProdutoSelecionar = new javax.swing.JButton();
+        btBuscarProdutoNovo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        pnBuscarPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar"));
+        pnBuscarPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Produto"));
 
-        tfBuscarPessoaNome.addActionListener(new java.awt.event.ActionListener() {
+        pnBuscarProdutoFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
+
+        lbBuscarProdutoNome.setText("Descrição");
+
+        tfBuscarProdutoNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBuscarPessoaNomeActionPerformed(evt);
+                tfBuscarProdutoNomeActionPerformed(evt);
             }
         });
-        tfBuscarPessoaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfBuscarProdutoNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBuscarPessoaNomeKeyTyped(evt);
+                tfBuscarProdutoNomeKeyTyped(evt);
             }
         });
 
-        lbBuscarPessoaNome.setText("Nome:");
+        lbBuscarProdutoTipo.setText("Tipo");
+        lbBuscarProdutoTipo.setToolTipText("");
 
-        btBuscarPessoaBuscar.setText("Buscar");
+        cbBuscarProdutoTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Alimento", "Limpeza", "Outro" }));
 
-        lbBuscarPessoaTipo.setText("Tipo:");
+        btBuscarProdutoBuscar.setText("Buscar");
+        btBuscarProdutoBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProdutoBuscarActionPerformed(evt);
+            }
+        });
 
-        cbBuscarPessoaTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beneficiário", "Assistente", "Doador ", " " }));
+        javax.swing.GroupLayout pnBuscarProdutoFiltrosLayout = new javax.swing.GroupLayout(pnBuscarProdutoFiltros);
+        pnBuscarProdutoFiltros.setLayout(pnBuscarProdutoFiltrosLayout);
+        pnBuscarProdutoFiltrosLayout.setHorizontalGroup(
+            pnBuscarProdutoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnBuscarProdutoFiltrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnBuscarProdutoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnBuscarProdutoFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbBuscarProdutoNome)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tfBuscarProdutoNome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnBuscarProdutoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbBuscarProdutoTipo)
+                    .addComponent(cbBuscarProdutoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btBuscarProdutoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnBuscarProdutoFiltrosLayout.setVerticalGroup(
+            pnBuscarProdutoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnBuscarProdutoFiltrosLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(pnBuscarProdutoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnBuscarProdutoFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbBuscarProdutoNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfBuscarProdutoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnBuscarProdutoFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbBuscarProdutoTipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbBuscarProdutoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btBuscarProdutoBuscar))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        pnBuscarProdutosResultado.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
 
         tableBuscarPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "ID", "Nome", "Endereço", "Cidade", "UF"
+                "Cód.", "Produto"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tableBuscarPessoa);
 
-        btBuscarPessoaSelecionar.setText("Selecionar");
+        javax.swing.GroupLayout pnBuscarProdutosResultadoLayout = new javax.swing.GroupLayout(pnBuscarProdutosResultado);
+        pnBuscarProdutosResultado.setLayout(pnBuscarProdutosResultadoLayout);
+        pnBuscarProdutosResultadoLayout.setHorizontalGroup(
+            pnBuscarProdutosResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnBuscarProdutosResultadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnBuscarProdutosResultadoLayout.setVerticalGroup(
+            pnBuscarProdutosResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnBuscarProdutosResultadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        btBuscarProdutoSelecionar.setText("Selecionar");
+
+        btBuscarProdutoNovo.setText("Novo");
 
         javax.swing.GroupLayout pnBuscarPessoaLayout = new javax.swing.GroupLayout(pnBuscarPessoa);
         pnBuscarPessoa.setLayout(pnBuscarPessoaLayout);
@@ -82,41 +171,29 @@ public class BuscarPessoa extends javax.swing.JDialog {
             .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
                     .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                        .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbBuscarPessoaNome)
-                            .addComponent(tfBuscarPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbBuscarPessoaTipo)
-                            .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                                .addComponent(cbBuscarPessoaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btBuscarPessoaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscarPessoaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btBuscarPessoaSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(btBuscarProdutoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btBuscarProdutoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
+                        .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnBuscarProdutosResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnBuscarProdutoFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 13, Short.MAX_VALUE))))
         );
         pnBuscarPessoaLayout.setVerticalGroup(
             pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbBuscarPessoaNome)
-                    .addComponent(lbBuscarPessoaTipo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfBuscarPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbBuscarPessoaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btBuscarPessoaBuscar))
+                .addContainerGap()
+                .addComponent(pnBuscarProdutoFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btBuscarPessoaSelecionar)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(pnBuscarProdutosResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btBuscarProdutoSelecionar, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(btBuscarProdutoNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,13 +216,17 @@ public class BuscarPessoa extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfBuscarPessoaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPessoaNomeKeyTyped
+    private void tfBuscarProdutoNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarProdutoNomeKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarPessoaNomeKeyTyped
+    }//GEN-LAST:event_tfBuscarProdutoNomeKeyTyped
 
-    private void tfBuscarPessoaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarPessoaNomeActionPerformed
+    private void tfBuscarProdutoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarProdutoNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarPessoaNomeActionPerformed
+    }//GEN-LAST:event_tfBuscarProdutoNomeActionPerformed
+
+    private void btBuscarProdutoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdutoBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btBuscarProdutoBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,20 +245,21 @@ public class BuscarPessoa extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuscarPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuscarPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuscarPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscarPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                BuscarPessoa dialog = new BuscarPessoa(new javax.swing.JFrame(), true);
+                BuscarProduto dialog = new BuscarProduto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -190,14 +272,17 @@ public class BuscarPessoa extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btBuscarPessoaBuscar;
-    private javax.swing.JButton btBuscarPessoaSelecionar;
-    private javax.swing.JComboBox<String> cbBuscarPessoaTipo;
+    private javax.swing.JButton btBuscarProdutoBuscar;
+    private javax.swing.JButton btBuscarProdutoNovo;
+    private javax.swing.JButton btBuscarProdutoSelecionar;
+    private javax.swing.JComboBox<String> cbBuscarProdutoTipo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbBuscarPessoaNome;
-    private javax.swing.JLabel lbBuscarPessoaTipo;
+    private javax.swing.JLabel lbBuscarProdutoNome;
+    private javax.swing.JLabel lbBuscarProdutoTipo;
     private javax.swing.JPanel pnBuscarPessoa;
+    private javax.swing.JPanel pnBuscarProdutoFiltros;
+    private javax.swing.JPanel pnBuscarProdutosResultado;
     private javax.swing.JTable tableBuscarPessoa;
-    private javax.swing.JTextField tfBuscarPessoaNome;
+    private javax.swing.JTextField tfBuscarProdutoNome;
     // End of variables declaration//GEN-END:variables
 }

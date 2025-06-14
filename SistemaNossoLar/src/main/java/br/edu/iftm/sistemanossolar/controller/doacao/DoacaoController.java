@@ -70,7 +70,7 @@ public class DoacaoController {
         StringBuilder sqlFinal = new StringBuilder();
         sqlFinal.append(sqlFiltro);
         
-        sqlFinal.append("GROUP BY d.data, d.id, u.id, u.nome, d.valor, d.tipoDoacao, pd.quantidade ");
+        sqlFinal.append("GROUP BY d.id ");
         if (ordem != null && !ordem.isEmpty()) {
             sqlFinal.append("ORDER BY ");
             switch (ordem) {
