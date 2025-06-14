@@ -162,7 +162,7 @@ public class DoacaoDAO {
         }
     }
 
-    public List<Doacao> listarDoacoes(String sqlFiltro, List<Object> filtros) throws SQLException {
+    public List<Doacao> consultarDoacoes(String sqlFiltro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT d.id AS codigo_doacao, d.tipoDoacao AS tipo_doacao, u.nome AS nome_doador, d.data AS data_doacao ");
         sql.append("FROM doacao d ");

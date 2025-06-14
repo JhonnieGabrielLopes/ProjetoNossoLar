@@ -101,24 +101,30 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbBuscarPedidoOrigem" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbBuscarPedidoOrigem" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="tfBuscarPedidoPessoa" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbBuscarPedidoPessoa" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lbBuscarPedidoTipoPessoa" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbBuscarPedidoTipoPessoa" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbBuscarPedidoData1" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfBuscarPedidoData1" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="tfBuscarPedidoData1" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="tfBuscarPedidoData2" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btBuscarPedidoBuscar" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="tfBuscarPedidoData2" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                           <Component id="lbBuscarPedidoData2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btBuscarPedidoBuscar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -128,22 +134,27 @@
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="lbBuscarPedidoPessoa" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfBuscarPedidoPessoa" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="tfBuscarPedidoData1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="lbBuscarPedidoData2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="tfBuscarPedidoData1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="tfBuscarPedidoData2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btBuscarPedidoBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="lbBuscarPedidoOrigem" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbBuscarPedidoTipoPessoa" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbBuscarPedidoOrigem" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbBuscarPedidoTipoPessoa" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="lbBuscarPedidoData1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
+                              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -152,13 +163,25 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lbBuscarPedidoOrigem">
+            <Component class="javax.swing.JLabel" name="lbBuscarPedidoPessoa">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Origem"/>
+                <Property name="text" type="java.lang.String" value="Nome da Pessoa"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbBuscarPedidoOrigem">
+            <Component class="javax.swing.JTextField" name="tfBuscarPedidoPessoa">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBuscarPedidoPessoaActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBuscarPedidoPessoaKeyTyped"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbBuscarPedidoTipoPessoa">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tipo"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbBuscarPedidoTipoPessoa">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
@@ -174,7 +197,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lbBuscarPedidoData1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data Inicio"/>
+                <Property name="text" type="java.lang.String" value="Data Pedido Inicio"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -186,7 +209,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lbBuscarPedidoData2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data Fim"/>
+                <Property name="text" type="java.lang.String" value="Data Pedido Fim"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -246,10 +269,11 @@
                 <Component class="javax.swing.JTable" name="tableBuscarPessoa">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="10">
+                      <Table columnCount="4" rowCount="10">
                         <Column editable="false" title="C&#xf3;d." type="java.lang.Integer"/>
                         <Column editable="false" title="Pessoa" type="java.lang.String"/>
-                        <Column editable="false" title="Data Pedido" type="java.lang.String"/>
+                        <Column editable="false" title="Tipo" type="java.lang.String"/>
+                        <Column editable="false" title="Data" type="java.lang.String"/>
                       </Table>
                     </Property>
                   </Properties>

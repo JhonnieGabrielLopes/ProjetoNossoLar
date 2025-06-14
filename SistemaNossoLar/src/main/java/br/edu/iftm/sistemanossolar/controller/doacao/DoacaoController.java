@@ -97,7 +97,7 @@ public class DoacaoController {
         return doacaoDAO.filtrarTotalRelatorio(totalizacao, filtro, filtros);
     }
 
-    public List<Doacao> listarDoacoes(String nomeDoador, String tipoDoacao, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+    public List<Doacao> buscarDoacoes(String nomeDoador, String tipoDoacao, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
         log.registrarLog(1, "DoacaoController", "buscarDoacao", "varias", "Listando doações para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
@@ -105,6 +105,11 @@ public class DoacaoController {
         if (!nomeDoador.isEmpty() || !nomeDoador.equals("")) {
             sqlFiltro.append("AND u.nome LIKE ? ");
             filtros.add("%"+ nomeDoador +"%");
+        }
+
+        if (!tipoDoacao.isEmpty() && !tipoDoacao.equals("Todos")) {
+            sqlFiltro.append("AND d.tipoDoacao = ? ");
+            filtros.add(tipoDoacao);
         }
 
         if (dataInicio != null && dataFim == null) {
@@ -123,12 +128,7 @@ public class DoacaoController {
             filtros.add(dataFim);
         }
 
-        if (!tipoDoacao.isEmpty() && !tipoDoacao.equals("Todos")) {
-            sqlFiltro.append("AND d.tipoDoacao = ? ");
-            filtros.add(tipoDoacao);
-        }
-
-        return doacaoDAO.listarDoacoes(sqlFiltro.toString(), filtros);
+        return doacaoDAO.consultarDoacoes(sqlFiltro.toString(), filtros);
     }
 
 }

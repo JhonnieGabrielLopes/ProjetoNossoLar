@@ -57,22 +57,21 @@ public class Metodos {
         System.out.println("4 - Cadastrar Doação");
         System.out.println("5 - Cadastrar Pedido");
         System.out.println("6 - Cadastrar Produto");
-        System.out.println("7 - Alterar Usuário");
-        System.out.println("8 - Alterar Endereço");
-        System.out.println("9 - Alterar Pedido");
-        System.out.println("10 - Alterar Produto");
-        System.out.println("11 - Deletar Usuário");
-        System.out.println("12 - Deletar Endereço");
-        System.out.println("13 - Deletar Cidade");
-        System.out.println("14 - Exibir Usuário");
-        System.out.println("15 - Exibir Endereço");
-        System.out.println("16 - Exibir Cidade");
-        System.out.println("17 - Exibir Doação");
-        System.out.println("18 - Exibir Pedido");
-        System.out.println("19 - Exibir Produto");
+        System.out.println("7 - Listar Pessoas");
+        System.out.println("8 - Exibir Endereço");
+        System.out.println("9 - Exibir Cidade");
+        System.out.println("10 - Listar Doações");
+        System.out.println("11 - Listar Pedidos");
+        System.out.println("12 - Listar Produtos");
+        System.out.println("13 - Alterar Usuário");
+        System.out.println("14 - Alterar Endereço");
+        System.out.println("15 - Alterar Pedido");
+        System.out.println("16 - Alterar Produto");
+        System.out.println("17 - Deletar Usuário");
+        System.out.println("18 - Deletar Endereço");
+        System.out.println("19 - Deletar Cidade");
         System.out.println("20 - Relatorio de Doações");
-        System.out.println("21 - Listar Doações");
-        System.out.println("22 - Sair");
+        System.out.println("21 - Sair");
         System.out.println("Escolha uma opção: ");
     }
 
@@ -107,16 +106,29 @@ public class Metodos {
                            "\nValor total: "+ totalizacao.getTotalValor() +", Produtos total: "+ totalizacao.getTotalProdutos() +", Itens total: "+ totalizacao.getTotalItens() + "\n");
     }
 
-    public void buscarDoacoes() throws SQLException {
+    public void listarDoacoes() throws SQLException {
         String data1 = "2023-06-01";
         LocalDate dataTeste1 = LocalDate.parse(data1);
         String data2 = "2023-06-30"; 
         LocalDate dataTeste2 = LocalDate.parse(data2);
-        List<Doacao> listagemDoacoes = doacaoController.listarDoacoes("", "Todos", null, null);
+        List<Doacao> listagemDoacoes = doacaoController.buscarDoacoes("", "Todos", null, null);
         System.out.println("Lista de Doações:");
         for (Doacao doacao : listagemDoacoes) {
             System.out.println("ID: " + doacao.getId() + 
                                "\nTipo: " + doacao.getTipo()+ ", Doador: " + doacao.getDoador().getNome() +", Data: " + doacao.getDataDoacao() +"\n");
+        }
+    }
+
+    public void listarPedidos() throws SQLException {
+        String data1 = "2023-06-01";
+        LocalDate dataTeste1 = LocalDate.parse(data1);
+        String data2 = "2023-06-30"; 
+        LocalDate dataTeste2 = LocalDate.parse(data2);
+        List<Pedido> listagemPedidos = pedidoController.buscarPedidos("", "Todos", null, null);
+        System.out.println("Lista de Pedidos:");
+        for (Pedido pedido : listagemPedidos) {
+            System.out.println("ID: " + pedido.getId() + 
+                               "\nPessoa: " + pedido.getCliente().getNome() + ", Tipo: " + pedido.getCliente().getTipoUsuario() +", Data: " + pedido.getDataPedido() +"\n");
         }
     }
 
