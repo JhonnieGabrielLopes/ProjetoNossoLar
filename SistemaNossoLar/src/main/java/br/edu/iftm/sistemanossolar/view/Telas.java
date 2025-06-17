@@ -42,6 +42,7 @@ public class Telas extends javax.swing.JFrame {
     private static BuscarPessoa buscarPessoa;
     private static PessoaController pessoaController;
     private static EnderecoController enderecoController;
+    private static BuscarDoacao buscarDoacao;
     /**
      * Creates new form Telas
      *      lb - Label
@@ -56,6 +57,7 @@ public class Telas extends javax.swing.JFrame {
         cadastroCidade = new CadastroCidade(this, true, conexao, this);
         cadastroProduto = new CadastroProduto(this, true, conexao, this);
         buscarPessoa = new BuscarPessoa(this, true, conexao, this);
+        buscarDoacao = new BuscarDoacao(this, true, conexao, this);
         initComponents();
         cl = (CardLayout) pnCard.getLayout();
     }
@@ -242,6 +244,8 @@ public class Telas extends javax.swing.JFrame {
         cbRelPedOrdenacao = new javax.swing.JComboBox<>();
         btRelPedFiltrar = new javax.swing.JButton();
         btRelPedExtrair = new javax.swing.JButton();
+        pnHome = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         menuBarra = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuPessoa = new javax.swing.JMenu();
@@ -687,7 +691,13 @@ public class Telas extends javax.swing.JFrame {
 
         tfDoacaoIdDoacao.setEditable(false);
 
-        btDoacaoBuscarDoacao.setText("Buscar");
+        btDoacaoBuscarDoacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarDoacao.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btDoacaoBuscarDoacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoBuscarDoacaoActionPerformed(evt);
+            }
+        });
 
         lbDoacaoDoador.setText("Doador");
 
@@ -704,7 +714,8 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        btDoacaoBuscarDoador.setText("Buscar");
+        btDoacaoBuscarDoador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarDoador.setMargin(new java.awt.Insets(1, 1, 1, 1));
 
         lbDoacaoTipo.setText("Tipo");
 
@@ -762,7 +773,7 @@ public class Telas extends javax.swing.JFrame {
                     .addGroup(pnDoacaoLayout.createSequentialGroup()
                         .addComponent(tfDoacaoIdDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btDoacaoBuscarDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btDoacaoBuscarDoacao))
                     .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(pnDoacaoLayout.createSequentialGroup()
                             .addComponent(btDoacaoRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -777,7 +788,7 @@ public class Telas extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tfDoacaoDoador)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btDoacaoBuscarDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btDoacaoBuscarDoador))
                         .addComponent(tfDoacaoValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lbDoacaoValor, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -818,7 +829,7 @@ public class Telas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btDoacaoDeletar)
                     .addComponent(btDoacaoRecibo))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -834,8 +845,8 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        btDoacaoBuscarProd.setText("Buscar");
-        btDoacaoBuscarProd.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btDoacaoBuscarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarProd.setMargin(new java.awt.Insets(1, 1, 1, 1));
         btDoacaoBuscarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDoacaoBuscarProdActionPerformed(evt);
@@ -941,7 +952,7 @@ public class Telas extends javax.swing.JFrame {
                             .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
                                 .addComponent(tfDoacaoSelecionarProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btDoacaoBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btDoacaoBuscarProd)
                                 .addGap(6, 6, 6)))
                         .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbDoacaoQuantidade)
@@ -962,7 +973,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(tfDoacaoSelecionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btDoacaoBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btDoacaoBuscarProd))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoProdutoLayout.createSequentialGroup()
                                 .addComponent(lbDoacaoQuantidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1020,7 +1031,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarDoacao, "cdCadastrarDoacao");
@@ -1765,6 +1776,29 @@ public class Telas extends javax.swing.JFrame {
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
 
+        pnHome.setBackground(new java.awt.Color(245, 245, 246));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NossoLarMenor.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnHomeLayout = new javax.swing.GroupLayout(pnHome);
+        pnHome.setLayout(pnHomeLayout);
+        pnHomeLayout.setHorizontalGroup(
+            pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHomeLayout.createSequentialGroup()
+                .addContainerGap(362, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(326, 326, 326))
+        );
+        pnHomeLayout.setVerticalGroup(
+            pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnHomeLayout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jLabel3)
+                .addContainerGap(199, Short.MAX_VALUE))
+        );
+
+        pnCard.add(pnHome, "cdHome");
+
         javax.swing.GroupLayout pnDadosPrincipalLayout = new javax.swing.GroupLayout(pnDadosPrincipal);
         pnDadosPrincipal.setLayout(pnDadosPrincipalLayout);
         pnDadosPrincipalLayout.setHorizontalGroup(
@@ -1777,7 +1811,7 @@ public class Telas extends javax.swing.JFrame {
             pnDadosPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDadosPrincipalLayout.createSequentialGroup()
                 .addComponent(pnCard, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnDadosPrincipal, java.awt.BorderLayout.CENTER);
@@ -1785,6 +1819,11 @@ public class Telas extends javax.swing.JFrame {
         menuBarra.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         menuInicio.setText("Inicio");
+        menuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuInicioMouseClicked(evt);
+            }
+        });
         menuBarra.add(menuInicio);
 
         menuPessoa.setText("Pessoa");
@@ -1924,6 +1963,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_tfEnderecoNumeroKeyTyped
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        cl.show(pnCard, "cdHome");
         try {
             carregarCidade();
         } catch (SQLException ex) {
@@ -2124,6 +2164,15 @@ public class Telas extends javax.swing.JFrame {
     private void tfDoacaoSelecionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDoacaoSelecionarProdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfDoacaoSelecionarProdActionPerformed
+
+    private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseClicked
+        cl.show(pnCard, "cdHome");
+    }//GEN-LAST:event_menuInicioMouseClicked
+
+    private void btDoacaoBuscarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoacaoActionPerformed
+        buscarDoacao.setLocationRelativeTo(this);
+        buscarDoacao.setVisible(true);
+    }//GEN-LAST:event_btDoacaoBuscarDoacaoActionPerformed
     
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
         campo.setEnabled(true);
@@ -2225,6 +2274,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftDoacaoData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2309,6 +2359,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JPanel pnDoacao;
     private javax.swing.JPanel pnDoacaoProduto;
     private javax.swing.JPanel pnEnderecoCliente;
+    private javax.swing.JPanel pnHome;
     private javax.swing.JPanel pnListBoxProd;
     private javax.swing.JPanel pnPedido;
     private javax.swing.JPanel pnPedido1;
