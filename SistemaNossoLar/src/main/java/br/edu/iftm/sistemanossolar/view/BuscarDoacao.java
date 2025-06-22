@@ -4,18 +4,35 @@
  */
 package br.edu.iftm.sistemanossolar.view;
 
+import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
+import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author AFSOUZA
  */
 public class BuscarDoacao extends javax.swing.JDialog {
-
+    private static Telas tela;
+    private static DoacaoController doacaoController;
+    private Doacao doacao;
+    private List<Doacao> listagem = new ArrayList<>();
+    private DefaultTableModel modelo;
     /**
      * Creates new form BuscarPessoa
      */
-    public BuscarDoacao(java.awt.Frame parent, boolean modal) {
+    public BuscarDoacao(java.awt.Frame parent, boolean modal, Connection conexao, Telas tela) {
         super(parent, modal);
+        doacaoController = new DoacaoController(conexao);
         initComponents();
+        this.tela = tela;
+        modelo = (DefaultTableModel) tableBuscarPessoa.getModel();
     }
 
     /**
@@ -34,14 +51,15 @@ public class BuscarDoacao extends javax.swing.JDialog {
         lbBuscarDoacaoTipo = new javax.swing.JLabel();
         cbBuscarDocaoTipo = new javax.swing.JComboBox<>();
         lbBuscarDoacaoData1 = new javax.swing.JLabel();
-        tfBuscarDoacaoData1 = new javax.swing.JTextField();
         lbBuscarDoacaoData2 = new javax.swing.JLabel();
-        tfBuscarDoacao2 = new javax.swing.JTextField();
         btBuscarDoacao = new javax.swing.JButton();
+        ffBuscarDoacaoDataInicio = new javax.swing.JFormattedTextField();
+        ffBuscarDoacaoDataFim = new javax.swing.JFormattedTextField();
         pnBuscarDoacaoResultado = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableBuscarPessoa = new javax.swing.JTable();
         btBuscarDoacaoSelecionar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,37 +89,28 @@ public class BuscarDoacao extends javax.swing.JDialog {
         lbBuscarDoacaoData1.setText("Data Inicio");
         lbBuscarDoacaoData1.setToolTipText("");
 
-        tfBuscarDoacaoData1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBuscarDoacaoData1ActionPerformed(evt);
-            }
-        });
-        tfBuscarDoacaoData1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBuscarDoacaoData1KeyTyped(evt);
-            }
-        });
-
         lbBuscarDoacaoData2.setText("Data Fim");
         lbBuscarDoacaoData2.setToolTipText("");
 
-        tfBuscarDoacao2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBuscarDoacao2ActionPerformed(evt);
-            }
-        });
-        tfBuscarDoacao2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBuscarDoacao2KeyTyped(evt);
-            }
-        });
-
-        btBuscarDoacao.setText("Buscar");
+        btBuscarDoacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btBuscarDoacao.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btBuscarDoacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBuscarDoacaoActionPerformed(evt);
             }
         });
+
+        try {
+            ffBuscarDoacaoDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            ffBuscarDoacaoDataFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout pnBuscarDoacaoFiltrosLayout = new javax.swing.GroupLayout(pnBuscarDoacaoFiltros);
         pnBuscarDoacaoFiltros.setLayout(pnBuscarDoacaoFiltrosLayout);
@@ -112,7 +121,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
                         .addComponent(lbBuscarDoacaoDoador)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 268, Short.MAX_VALUE))
                     .addComponent(tfBuscarDoacaoDoador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,12 +129,15 @@ public class BuscarDoacao extends javax.swing.JDialog {
                     .addComponent(cbBuscarDocaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbBuscarDoacaoData1)
-                    .addComponent(tfBuscarDoacaoData1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbBuscarDoacaoData1)
+                        .addGap(68, 68, 68))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
+                        .addComponent(ffBuscarDoacaoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbBuscarDoacaoData2)
-                    .addComponent(tfBuscarDoacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ffBuscarDoacaoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btBuscarDoacao)
                 .addContainerGap())
@@ -136,20 +148,21 @@ public class BuscarDoacao extends javax.swing.JDialog {
                 .addGap(9, 9, 9)
                 .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tfBuscarDoacaoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfBuscarDoacaoData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
                         .addComponent(lbBuscarDoacaoData2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfBuscarDoacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32))
                     .addComponent(btBuscarDoacao)
                     .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
-                        .addComponent(lbBuscarDoacaoTipo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbBuscarDocaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
-                        .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbBuscarDoacaoDoador)
+                        .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbBuscarDoacaoTipo)
                             .addComponent(lbBuscarDoacaoData1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnBuscarDoacaoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbBuscarDocaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ffBuscarDoacaoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ffBuscarDoacaoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnBuscarDoacaoFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbBuscarDoacaoDoador)
                         .addGap(26, 26, 26)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -170,14 +183,14 @@ public class BuscarDoacao extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "Cód.", "Tipo", "Doador", "Data"
+                "Cód.", "Doador", "Tipo", "Data"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -208,6 +221,18 @@ public class BuscarDoacao extends javax.swing.JDialog {
         );
 
         btBuscarDoacaoSelecionar.setText("Selecionar");
+        btBuscarDoacaoSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarDoacaoSelecionarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Limpar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnBuscarPessoaLayout = new javax.swing.GroupLayout(pnBuscarPessoa);
         pnBuscarPessoa.setLayout(pnBuscarPessoaLayout);
@@ -217,13 +242,15 @@ public class BuscarDoacao extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                        .addComponent(btBuscarDoacaoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
                         .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pnBuscarDoacaoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnBuscarDoacaoFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 11, Short.MAX_VALUE))))
+                        .addGap(0, 11, Short.MAX_VALUE))
+                    .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
+                        .addComponent(btBuscarDoacaoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnBuscarPessoaLayout.setVerticalGroup(
             pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +260,9 @@ public class BuscarDoacao extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnBuscarDoacaoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btBuscarDoacaoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btBuscarDoacaoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -258,86 +287,77 @@ public class BuscarDoacao extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarDoacaoActionPerformed
-        // TODO add your handling code here:
+        String nomeDoador = tfBuscarDoacaoDoador.getText();
+        String tipoDoacao = (String) cbBuscarDocaoTipo.getSelectedItem();
+        
+        String campoDataInicio = ffBuscarDoacaoDataInicio.getText().trim();
+        String campoDataFim = ffBuscarDoacaoDataFim.getText().trim();
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataInicio;
+        if(campoDataInicio.contains(" ") || campoDataInicio.equals("//")){
+            dataInicio = null;
+        }else{
+            dataInicio = LocalDate.parse(campoDataInicio, dataFormat);
+        }
+        LocalDate dataFim;
+        if(campoDataFim.contains(" ") || campoDataFim.equals("//")){
+            dataFim = null;
+        }else{
+            dataFim = LocalDate.parse(campoDataFim, dataFormat);
+        }
+        try{
+            listagem = doacaoController.listarDoacoes(nomeDoador, tipoDoacao, dataInicio, dataFim);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        alimentaTabela(listagem);
     }//GEN-LAST:event_btBuscarDoacaoActionPerformed
 
-    private void tfBuscarDoacaoData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarDoacaoData1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarDoacaoData1ActionPerformed
-
-    private void tfBuscarDoacaoData1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarDoacaoData1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarDoacaoData1KeyTyped
-
-    private void tfBuscarDoacao2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarDoacao2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarDoacao2ActionPerformed
-
-    private void tfBuscarDoacao2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarDoacao2KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarDoacao2KeyTyped
-
     private void tfBuscarDoacaoDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarDoacaoDoadorActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_tfBuscarDoacaoDoadorActionPerformed
-
+    
     private void tfBuscarDoacaoDoadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarDoacaoDoadorKeyTyped
-        // TODO add your handling code here:
+        char entrada = evt.getKeyChar();
+        if(!Character.isLetter(entrada) && entrada != ' '){
+            evt.consume();
+        }
     }//GEN-LAST:event_tfBuscarDoacaoDoadorKeyTyped
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        tfBuscarDoacaoDoador.setText("");
+        cbBuscarDocaoTipo.setSelectedIndex(0);
+        ffBuscarDoacaoDataInicio.setText("");
+        ffBuscarDoacaoDataFim.setText("");
+        modelo.setRowCount(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btBuscarDoacaoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarDoacaoSelecionarActionPerformed
+        int indiceDoacao = tableBuscarPessoa.getSelectedRow();
+        doacao = listagem.get(indiceDoacao);
+        tela.preencheDoacao(doacao);
+        dispose();
+    }//GEN-LAST:event_btBuscarDoacaoSelecionarActionPerformed
+    
+    public void alimentaTabela(List<Doacao> listagem){
+        modelo.setRowCount(0);
+        for(Doacao doacao : listagem){
+            Object[] linha = {doacao.getId(), doacao.getDoador().getNome(), doacao.getTipo(), doacao.getDataDoacao()};
+            modelo.addRow(linha);
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuscarDoacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuscarDoacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuscarDoacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscarDoacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                BuscarDoacao dialog = new BuscarDoacao(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarDoacao;
     private javax.swing.JButton btBuscarDoacaoSelecionar;
     private javax.swing.JComboBox<String> cbBuscarDocaoTipo;
+    private javax.swing.JFormattedTextField ffBuscarDoacaoDataFim;
+    private javax.swing.JFormattedTextField ffBuscarDoacaoDataInicio;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbBuscarDoacaoData1;
     private javax.swing.JLabel lbBuscarDoacaoData2;
@@ -347,8 +367,6 @@ public class BuscarDoacao extends javax.swing.JDialog {
     private javax.swing.JPanel pnBuscarDoacaoResultado;
     private javax.swing.JPanel pnBuscarPessoa;
     private javax.swing.JTable tableBuscarPessoa;
-    private javax.swing.JTextField tfBuscarDoacao2;
-    private javax.swing.JTextField tfBuscarDoacaoData1;
     private javax.swing.JTextField tfBuscarDoacaoDoador;
     // End of variables declaration//GEN-END:variables
 }

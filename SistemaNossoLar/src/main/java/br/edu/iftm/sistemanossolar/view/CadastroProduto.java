@@ -7,6 +7,7 @@ package br.edu.iftm.sistemanossolar.view;
 import java.sql.Connection;
 
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 
 /**
  *
@@ -22,6 +23,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         super(parent, modal);
         produtoController = new ProdutoController(conexao);
         this.tela = tela;
+        produtoController = new ProdutoController(conexao);
         initComponents();
     }
 
