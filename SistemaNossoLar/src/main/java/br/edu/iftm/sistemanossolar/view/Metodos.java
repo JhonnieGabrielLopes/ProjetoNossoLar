@@ -1,9 +1,6 @@
 package br.edu.iftm.sistemanossolar.view;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,8 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import br.edu.iftm.sistemanossolar.controller.PedidoController;
 import br.edu.iftm.sistemanossolar.controller.RelatorioController;
@@ -29,10 +24,6 @@ import br.edu.iftm.sistemanossolar.model.doacao.Produto.TipoProd;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
-import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
-import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
-import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
-import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
 
 public class Metodos {
     private static PessoaController pessoaController;

@@ -133,6 +133,7 @@ public class RelatorioController {
     }
 
     public void relatorioDoacao() throws SQLException, IOException {
+        //METODO PARA TESTES NO TERMINAL
         String data1 = "2023-01-01";
         LocalDate dataTeste1 = LocalDate.parse(data1);
         String data2 = "2023-12-30"; 
