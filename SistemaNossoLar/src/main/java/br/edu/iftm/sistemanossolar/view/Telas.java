@@ -4,13 +4,7 @@
  */
 package br.edu.iftm.sistemanossolar.view;
 
-import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
-import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
-import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
-import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
-import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
-import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
-import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import java.awt.CardLayout;
 import java.sql.Connection;
@@ -25,10 +19,15 @@ import javax.swing.text.MaskFormatter;
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
+import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import java.text.NumberFormat;
+import java.util.Locale;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,9 +39,11 @@ public class Telas extends javax.swing.JFrame {
     private static CadastroCidade cadastroCidade;
     private static CadastroProduto cadastroProduto;
     private static BuscarPessoa buscarPessoa;
+    private static DoacaoController doacaoController;
     private static PessoaController pessoaController;
     private static EnderecoController enderecoController;
     private static BuscarDoacao buscarDoacao;
+    private DefaultTableModel modeloTabela;
     /**
      * Creates new form Telas
      *      lb - Label
@@ -54,12 +55,14 @@ public class Telas extends javax.swing.JFrame {
         cidadeController = new CidadeController(conexao);
         pessoaController = new PessoaController(conexao);
         enderecoController = new EnderecoController(conexao);
+        doacaoController = new DoacaoController(conexao);
         cadastroCidade = new CadastroCidade(this, true, conexao, this);
         cadastroProduto = new CadastroProduto(this, true, conexao, this);
         buscarPessoa = new BuscarPessoa(this, true, conexao, this);
         buscarDoacao = new BuscarDoacao(this, true, conexao, this);
         initComponents();
         cl = (CardLayout) pnCard.getLayout();
+        modeloTabela = (DefaultTableModel) tableDoacaoProdutos.getModel();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -131,7 +134,8 @@ public class Telas extends javax.swing.JFrame {
         lbDoacaoData = new javax.swing.JLabel();
         ftDoacaoData = new javax.swing.JFormattedTextField();
         lbDoacaoValor = new javax.swing.JLabel();
-        tfDoacaoValor = new javax.swing.JFormattedTextField();
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        tfDoacaoValor = new javax.swing.JFormattedTextField(nf);
         lbDoacaoObservacao = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         taDoacaoObservacao = new javax.swing.JTextArea();
@@ -590,7 +594,7 @@ public class Telas extends javax.swing.JFrame {
                         .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         pnCadastroPessoaLayout.setVerticalGroup(
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -599,14 +603,14 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                         .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(158, Short.MAX_VALUE))
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                         .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btCadastroPessoaRegistrar)
                             .addComponent(btCadastroPessoaLimpar))
-                        .addGap(29, 29, 29))))
+                        .addGap(114, 114, 114))))
         );
 
         pnCard.add(pnCadastroPessoa, "beneficiario");
@@ -680,7 +684,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnAlterarPessoaLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(pnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(602, Short.MAX_VALUE))
+                .addContainerGap(590, Short.MAX_VALUE))
         );
 
         pnCard.add(pnAlterarPessoa, "cdAlterarPessoa");
@@ -719,7 +723,7 @@ public class Telas extends javax.swing.JFrame {
 
         lbDoacaoTipo.setText("Tipo");
 
-        cbDoacaoTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo Doação" }));
+        cbDoacaoTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DINHEIRO", "PRODUTO" }));
 
         lbDoacaoData.setText("Data da Doação");
 
@@ -732,11 +736,8 @@ public class Telas extends javax.swing.JFrame {
 
         lbDoacaoValor.setText("Valor");
 
-        try {
-            tfDoacaoValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        tfDoacaoValor.setColumns(10);
+        tfDoacaoValor.setValue(0.00);
         tfDoacaoValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDoacaoValorActionPerformed(evt);
@@ -753,6 +754,11 @@ public class Telas extends javax.swing.JFrame {
         btDoacaoRecibo.setText("Gerar Recibo");
 
         btDoacaoDeletar.setText("Deletar");
+        btDoacaoDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoDeletarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnDoacaoLayout = new javax.swing.GroupLayout(pnDoacao);
         pnDoacao.setLayout(pnDoacaoLayout);
@@ -873,34 +879,23 @@ public class Telas extends javax.swing.JFrame {
 
         tableDoacaoProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Alimento", "Arroz",  new Integer(4)},
-                {"Limpeza", "Detergente",  new Integer(2)},
-                {"Outro", "Panela",  new Integer(1)},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Tipo", "Produto", "Quantidade"
+                "Tipo", "Descrição", "Quantidade"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tableDoacaoProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDoacaoProdutosMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(tableDoacaoProdutos);
@@ -990,6 +985,11 @@ public class Telas extends javax.swing.JFrame {
 
         btDoacaoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoLimpar.setText("Limpar");
+        btDoacaoLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoLimparActionPerformed(evt);
+            }
+        });
 
         btDoacaoRelatorio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoRelatorio.setText("Relatório");
@@ -1180,7 +1180,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnCadastrarPedidoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarPedido, "cdCadastrarPedido");
@@ -1331,7 +1331,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnAlterarPedidoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(pnPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addContainerGap(410, Short.MAX_VALUE))
         );
 
         pnCard.add(pnAlterarPedido, "cdAlterarPedido");
@@ -1608,7 +1608,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioDoacao, "relatorioDoacao");
@@ -1771,7 +1771,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelatorioPedidoLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -2173,7 +2173,58 @@ public class Telas extends javax.swing.JFrame {
         buscarDoacao.setLocationRelativeTo(this);
         buscarDoacao.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarDoacaoActionPerformed
+
+    private void tableDoacaoProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDoacaoProdutosMouseClicked
+        int linhaSelecionada = tableDoacaoProdutos.getSelectedRow();
+        if(linhaSelecionada != -1){
+            Object descricao = tableDoacaoProdutos.getValueAt(linhaSelecionada, 1);
+            Object quantidade = tableDoacaoProdutos.getValueAt(linhaSelecionada, 2);
+            tfDoacaoSelecionarProd.setText(descricao.toString());
+            tfDoacaoQuantidade.setText(quantidade.toString());
+        }
+    }//GEN-LAST:event_tableDoacaoProdutosMouseClicked
+
+    private void btDoacaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDeletarActionPerformed
+        int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
+        if(doacaoController.removeDoacao(idDoacao)){
+            JOptionPane.showMessageDialog(rootPane, "Doacao Removida com sucesso.", "Remoção", JOptionPane.INFORMATION_MESSAGE);
+            limparCamposCadastroDoacao();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Doacao não removida.", "Remoção", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btDoacaoDeletarActionPerformed
+
+    private void btDoacaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoLimparActionPerformed
+        limparCamposCadastroDoacao();
+    }//GEN-LAST:event_btDoacaoLimparActionPerformed
     
+    public void preencheDoacao(Doacao doacao){
+        List<Produto> produtos = doacaoController.listagemDeProduto(doacao);
+        tfDoacaoIdDoacao.setText(String.valueOf(doacao.getId()));
+        tfDoacaoIdDoador.setText(String.valueOf(doacao.getDoador().getId()));
+        tfDoacaoDoador.setText(doacao.getDoador().getNome());
+        ftDoacaoData.setText(String.valueOf(doacao.getDataDoacao()));
+        switch (String.valueOf(doacao.getTipo())){
+            case "DINHEIRO": cbDoacaoTipo.setSelectedIndex(0);break;
+            case "PRODUTO": cbDoacaoTipo.setSelectedIndex(1);break;
+        }
+        tfDoacaoValor.setValue(doacao.getValor());
+        taDoacaoObservacao.setText(doacao.getObservacao());
+        modeloTabela.setRowCount(0);
+        for(Produto prod : produtos){
+            Object[] linha = {prod.getTipo(), prod.getNome(), prod.getQuantidade()};
+            modeloTabela.addRow(linha);
+        }
+        tfDoacaoSelecionarProd.setEnabled(false);
+        tfDoacaoQuantidade.setEnabled(false);
+        tfDoacaoIdDoacao.setEnabled(false);
+        tfDoacaoIdDoador.setEnabled(false);
+        tfDoacaoDoador.setEnabled(false);
+        ftDoacaoData.setEnabled(false);
+        cbDoacaoTipo.setEnabled(false);
+        tfDoacaoValor.setEnabled(false);
+        taDoacaoObservacao.setEnabled(false);
+    }
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
         campo.setEnabled(true);
         try {
@@ -2212,6 +2263,19 @@ public class Telas extends javax.swing.JFrame {
         cbEnderecoCidade.setSelectedIndex(0);
         cbEnderecoUf.setSelectedIndex(0);
         buttonGroupPessoaTipo.clearSelection();
+    }
+    
+    public void limparCamposCadastroDoacao(){
+        tfDoacaoIdDoacao.setText("");
+        tfDoacaoIdDoador.setText("");
+        tfDoacaoDoador.setText("");
+        ftDoacaoData.setText("");
+        tfDoacaoValor.setValue(0.00);
+        taDoacaoObservacao.setText("");
+        tfDoacaoSelecionarProd.setText("");
+        tfDoacaoQuantidade.setText("");
+        cbDoacaoTipo.setSelectedIndex(0);
+        modeloTabela.setRowCount(0);    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

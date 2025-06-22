@@ -8,6 +8,7 @@ import java.util.List;
 
 import br.edu.iftm.sistemanossolar.dao.doacao.DoacaoDAO;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
 import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
@@ -130,5 +131,10 @@ public class DoacaoController {
 
         return doacaoDAO.listarDoacoes(sqlFiltro.toString(), filtros);
     }
-
+    public List<Produto> listagemDeProduto(Doacao doacao){
+        return doacaoDAO.listagemDeProduto(doacao);
+    }
+    public boolean removeDoacao(int id){
+        return doacaoDAO.removeDocao(id);
+    }
 }
