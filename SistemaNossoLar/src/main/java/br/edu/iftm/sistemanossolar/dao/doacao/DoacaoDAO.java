@@ -112,6 +112,9 @@ public class DoacaoDAO {
                 doacao.setValor(rs.getDouble("valor"));
                 doacao.setProdutos(rs.getString("produtos"));
                 doacao.setObservacao(rs.getString("observacao"));
+                if (doacao.getObservacao() == null) {
+                    doacao.setObservacao("");
+                }
                 LocalDate data = rs.getObject("data_doacao", LocalDate.class);
                 doacao.setData(data);
                 doacoes.add(doacao);
@@ -149,8 +152,10 @@ public class DoacaoDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 totalizacao.setTotalValor(rs.getDouble("total_valor"));
-                totalizacao.setTotalProdutos(rs.getDouble("total_produtos"));
-                totalizacao.setTotalItens(rs.getDouble("total_itens"));
+                Double totalProd = rs.getDouble("total_produtos");
+                totalizacao.setTotalProdutos(totalProd.intValue());
+                Double totalItens = rs.getDouble("total_itens");
+                totalizacao.setTotalItens(totalItens.intValue());
             }
             log.registrarLog(2, "DoacaoDAO", "filtrarTotalRelatorio", "doacao, usuario, tipousuario, usuariotipo, produto, produtocoacao", "Totalização finalizada");
             return totalizacao;

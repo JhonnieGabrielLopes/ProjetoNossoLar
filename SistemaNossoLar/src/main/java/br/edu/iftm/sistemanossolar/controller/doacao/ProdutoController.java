@@ -40,4 +40,9 @@ public class ProdutoController {
         return produtoDAO.listarProdutos(sqlFiltro.toString(), filtros);
     }
 
+    public String capturarNomeProduto(Integer idProduto) throws SQLException {
+        log.registrarLog(1, "ProdutoController", "capturarNomeProduto", "produto", "Obtendo nome do produto");
+        return produtoDAO.capturarNomeProduto(idProduto);
+    }
+
 }

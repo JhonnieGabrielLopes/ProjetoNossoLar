@@ -12,8 +12,8 @@ public class RelDoacao {
     private String observacao;
     private LocalDate data;
     private Double totalValor;
-    private Double totalProdutos;
-    private Double totalItens;
+    private Integer totalProdutos;
+    private Integer totalItens;
 
     public RelDoacao() {
     }
@@ -90,19 +90,19 @@ public class RelDoacao {
         this.totalValor = totalValor;
     }
 
-    public Double getTotalProdutos() {
+    public Integer getTotalProdutos() {
         return totalProdutos;
     }
 
-    public void setTotalProdutos(Double totalProdutos) {
+    public void setTotalProdutos(Integer totalProdutos) {
         this.totalProdutos = totalProdutos;
     }
 
-    public Double getTotalItens() {
+    public Integer getTotalItens() {
         return totalItens;
     }
 
-    public void setTotalItens(Double totalItens) {
+    public void setTotalItens(Integer totalItens) {
         this.totalItens = totalItens;
     }
 

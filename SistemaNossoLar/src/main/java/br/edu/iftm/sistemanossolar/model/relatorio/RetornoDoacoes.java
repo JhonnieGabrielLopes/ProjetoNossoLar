@@ -6,10 +6,12 @@ import java.util.List;
 public class RetornoDoacoes {
     private List<RelDoacao> doacoes;
     private RelDoacao totalizacao;
+    private List<Object> filtros;
 
-    public RetornoDoacoes(List<RelDoacao> doacaos, RelDoacao totalizacao) {
+    public RetornoDoacoes(List<RelDoacao> doacaos, RelDoacao totalizacao, List<Object> filtros) {
         this.doacoes = doacaos;
         this.totalizacao = totalizacao;
+        this.filtros = filtros;
     }
 
     public List<RelDoacao> getDoacoes() {
@@ -26,6 +28,10 @@ public class RetornoDoacoes {
 
     public void setTotalizacao(RelDoacao totalizacao) {
         this.totalizacao = totalizacao;
+    }
+
+    public List<Object> getFiltros() {
+        return filtros;
     }
 
 }

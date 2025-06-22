@@ -40,7 +40,7 @@ public class Relatorio {
     }
 
     public static String templateRelatorioDoacoes() throws IOException {
-        String caminho = "relatorio/pedido/relatorioDoacoes.html";
+        String caminho = "relatorio/doacao/relatorioDoacoes.html";
         
         try (InputStream inputStream = Relatorio.class.getClassLoader().getResourceAsStream(caminho)) {
             if (inputStream == null) {
@@ -51,7 +51,7 @@ public class Relatorio {
     }
 
     public static String templateRelatorioPedidos() throws IOException {
-        String caminho = "relatorio/pedido/relatorioDoacoes.html";
+        String caminho = "relatorio/pedido/relatorioPedidos.html";
         
         try (InputStream inputStream = Relatorio.class.getClassLoader().getResourceAsStream(caminho)) {
             if (inputStream == null) {

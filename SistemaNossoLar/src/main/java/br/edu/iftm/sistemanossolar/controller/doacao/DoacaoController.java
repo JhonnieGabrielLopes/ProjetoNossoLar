@@ -14,11 +14,13 @@ import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class DoacaoController {
     private DoacaoDAO doacaoDAO;
+    private ProdutoController produtoController;
 
     RegistrosLog log = new RegistrosLog();
     
     public DoacaoController (Connection conexao) {
         this.doacaoDAO = new DoacaoDAO (conexao);
+        this.produtoController = new ProdutoController(conexao);
     }
 
     public boolean cadastrarDoacao(Doacao doacao) throws SQLException {
@@ -67,6 +69,20 @@ public class DoacaoController {
             filtros.add(idProduto);
         }
 
+        List<Object> filtrosRelatorio = new ArrayList<>();
+        filtrosRelatorio.add(dataInicio);
+        filtrosRelatorio.add(dataFim);
+        filtrosRelatorio.add(tipoDoacao);
+        filtrosRelatorio.add(tipoProduto);
+        filtrosRelatorio.add(idDoador);
+        if (idDoador != null) {
+            filtrosRelatorio.add(produtoController.capturarNomeProduto(idProduto));    
+        } else {
+            filtrosRelatorio.add(null);    
+        }
+        filtrosRelatorio.add(ordem);
+        filtrosRelatorio.add(sentido);
+
         StringBuilder sqlFinal = new StringBuilder();
         sqlFinal.append(sqlFiltro);
         
@@ -89,7 +105,7 @@ public class DoacaoController {
         RelDoacao totalizacao = new RelDoacao();
         totalizacao = filtrarTotalRelatorio(new RelDoacao(), sqlFiltro.toString(), filtros);
 
-        return new RetornoDoacoes(doacoes, totalizacao);
+        return new RetornoDoacoes(doacoes, totalizacao, filtrosRelatorio);
     }
 
     public RelDoacao filtrarTotalRelatorio(RelDoacao totalizacao, String filtro, List<Object> filtros) throws SQLException {

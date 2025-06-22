@@ -89,4 +89,21 @@ public class ProdutoDAO {
             return null;
         }
     }
+
+    public String capturarNomeProduto(int idProduto) {
+        String nome = null;
+        String sql = "SELECT descricao FROM produto WHERE id = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, idProduto);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                nome = rs.getString("descricao");
+                log.registrarLog(2, "ProdutoDAO", "capturarNomeProduto", "produto", "Nome do produto obtido");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "ProdutoDAO", "capturarNomeProduto", "produto", "Nome do produto não obtido");
+        }
+        return nome;
+    }
 }
