@@ -55,4 +55,13 @@ public class PessoaController {
         return pessoaDAO.listarPessoas(tipo, idTipo);
     }
 
+    public List<Pessoa> listarTodasPessoas() throws SQLException {
+        log.registrarLog(1, "PessoaController", "listarTodasPessoas", "usuario", "Consultando todos os usuários");
+        return pessoaDAO.listarTodasPessoas();
+    }
+    
+    public boolean alterarPessoa(Pessoa pessoa) throws SQLException {
+        log.registrarLog(1, "PessoaController", "alterarPessoa", "usuario", "Alterando dados do usuário: ID: " + pessoa.getId());
+        return pessoaDAO.alterarPessoa(pessoa);
+    }
 }

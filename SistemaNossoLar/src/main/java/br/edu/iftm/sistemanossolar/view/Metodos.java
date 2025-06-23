@@ -18,11 +18,15 @@ import br.edu.iftm.sistemanossolar.controller.PedidoController;
 import br.edu.iftm.sistemanossolar.controller.Relatorio;
 import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
+import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
+import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao.TipoDoa;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto.TipoProd;
+import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
+import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
@@ -32,10 +36,13 @@ import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
 import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
 
 public class Metodos {
+
     private static PessoaController pessoaController;
     private static ProdutoController produtoController;
     private static DoacaoController doacaoController;
     private static PedidoController pedidoController;
+    private static EnderecoController enderecoController;
+    private static CidadeController cidadeController;
 
     RegistrosLog log = new RegistrosLog();
 
@@ -44,6 +51,8 @@ public class Metodos {
         produtoController = new ProdutoController(conexao);
         doacaoController = new DoacaoController(conexao);
         pedidoController = new PedidoController(conexao);
+        enderecoController = new EnderecoController(conexao);
+        cidadeController = new CidadeController(conexao);
     }
 
     public void menuPrincipal() {
@@ -95,12 +104,12 @@ public class Metodos {
         RetornoDoacoes relatorio = doacaoController.filtrarRelatorio(null, null, "Todos", "Todos", null, null, "data", "desc");
         System.out.println("Relatório de Doações:");
         for (RelDoacao rel : relatorio.getDoacoes()) {
-            System.out.println("ID: " + rel.getIdDoacao() + 
-                               "\nDoador: " + rel.getIdDoador() +" "+ rel.getNomeDoador() +", Tipo: " + rel.getTipo() + ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: "+ rel.getObservacao() +", Data: " + rel.getData() +"\n");
+            System.out.println("ID: " + rel.getIdDoacao()
+                    + "\nDoador: " + rel.getIdDoador() + " " + rel.getNomeDoador() + ", Tipo: " + rel.getTipo() + ", Valor: " + rel.getValor() + ", Produtos: " + rel.getProdutos() + ", Observação: " + rel.getObservacao() + ", Data: " + rel.getData() + "\n");
         }
         RelDoacao totalizacao = relatorio.getTotalizacao();
-        System.out.println("Totalização:"+ 
-                           "\nValor total: "+ totalizacao.getTotalValor() +", Produtos total: "+ totalizacao.getTotalProdutos() +", Itens total: "+ totalizacao.getTotalItens() + "\n");
+        System.out.println("Totalização:"
+                + "\nValor total: " + totalizacao.getTotalValor() + ", Produtos total: " + totalizacao.getTotalProdutos() + ", Itens total: " + totalizacao.getTotalItens() + "\n");
     }
 
     public boolean cadastrarProduto(Scanner scan, Produto novoProduto) throws SQLException {
@@ -140,7 +149,7 @@ public class Metodos {
         boolean controle = false;
         int numProduto = 1;
         int opc = 0;
-        
+
         while (!controle) {
             Produto produto = new Produto();
             System.out.println("Inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
@@ -246,13 +255,13 @@ public class Metodos {
         if (doacao.getProduto().isEmpty()) {
             String template = Relatorio.templateDoacaoDinheiro();
             String templatePreenchido = template
-                .replace("{{codigo}}", doacao.getId().toString())
-                .replace("{{nome}}", doacao.getDoador().getNome())
-                .replace("{{valor}}", String.format("R$ %.2f", doacao.getValor()))
-                .replace("{{data}}", doacao.getDataDoacao().format(formatador));
+                    .replace("{{codigo}}", doacao.getId().toString())
+                    .replace("{{nome}}", doacao.getDoador().getNome())
+                    .replace("{{valor}}", String.format("R$ %.2f", doacao.getValor()))
+                    .replace("{{data}}", doacao.getDataDoacao().format(formatador));
             try {
                 new File("Recibos/Doacao").mkdirs();
-                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome()+ ".pdf";
+                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome() + ".pdf";
                 gerarPDF(templatePreenchido, arquivo);
                 log.registrarLog(2, "Metodos", "gerarReciboDoacao", "", "Recibo gerado em: " + arquivo);
             } catch (IOException e) {
@@ -266,22 +275,22 @@ public class Metodos {
             int qtdProd = 1;
             for (Produto produto : doacao.getProduto()) {
                 produtosHtml.append("<div class='item'>")
-                            .append("<span class='item-tipo'> Item "+ qtdProd +" - ").append(produto.getTipo().toString()).append(" - </span>")
-                            .append("<span class='item-descricao'>").append(produto.getNome()).append(" - </span>")
-                            .append("<span class='item-quantidade'>").append(produto.getQuantidade()).append(" un</span>")
-                            .append("</div>");
+                        .append("<span class='item-tipo'> Item " + qtdProd + " - ").append(produto.getTipo().toString()).append(" - </span>")
+                        .append("<span class='item-descricao'>").append(produto.getNome()).append(" - </span>")
+                        .append("<span class='item-quantidade'>").append(produto.getQuantidade()).append(" un</span>")
+                        .append("</div>");
                 qtdProd++;
             }
 
             String templatePreenchido = template
-                .replace("{{codigo}}", doacao.getId().toString())
-                .replace("{{nome}}", doacao.getDoador().getNome())
-                .replace("{{produtos}}", produtosHtml.toString())
-                .replace("{{data}}", doacao.getDataDoacao().format(formatador));
+                    .replace("{{codigo}}", doacao.getId().toString())
+                    .replace("{{nome}}", doacao.getDoador().getNome())
+                    .replace("{{produtos}}", produtosHtml.toString())
+                    .replace("{{data}}", doacao.getDataDoacao().format(formatador));
 
             try {
                 new File("Recibos").mkdirs();
-                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome()+ ".pdf";
+                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome() + ".pdf";
                 gerarPDF(templatePreenchido, arquivo);
                 log.registrarLog(2, "Metodos", "gerarReciboDoacao", "", "Recibo gerado em: " + arquivo);
             } catch (IOException e) {
@@ -299,13 +308,13 @@ public class Metodos {
         if (doacao.getProduto().isEmpty()) {
             String template = Relatorio.templateDoacaoDinheiro();
             String templatePreenchido = template
-                .replace("{{codigo}}", doacao.getId().toString())
-                .replace("{{nome}}", doacao.getDoador().getNome())
-                .replace("{{valor}}", String.format("R$ %.2f", doacao.getValor()))
-                .replace("{{data}}", doacao.getDataDoacao().format(formatador));
+                    .replace("{{codigo}}", doacao.getId().toString())
+                    .replace("{{nome}}", doacao.getDoador().getNome())
+                    .replace("{{valor}}", String.format("R$ %.2f", doacao.getValor()))
+                    .replace("{{data}}", doacao.getDataDoacao().format(formatador));
             try {
                 new File("Recibos/Doacao").mkdirs();
-                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome()+ ".pdf";
+                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome() + ".pdf";
                 gerarPDF(templatePreenchido, arquivo);
                 log.registrarLog(2, "Metodos", "gerarRelatorioDoacao", "", "Recibo gerado em: " + arquivo);
             } catch (IOException e) {
@@ -319,22 +328,22 @@ public class Metodos {
             int qtdProd = 1;
             for (Produto produto : doacao.getProduto()) {
                 produtosHtml.append("<div class='item'>")
-                            .append("<span class='item-tipo'> Item "+ qtdProd +" - ").append(produto.getTipo().toString()).append(" - </span>")
-                            .append("<span class='item-descricao'>").append(produto.getNome()).append(" - </span>")
-                            .append("<span class='item-quantidade'>").append(produto.getQuantidade()).append(" un</span>")
-                            .append("</div>");
+                        .append("<span class='item-tipo'> Item " + qtdProd + " - ").append(produto.getTipo().toString()).append(" - </span>")
+                        .append("<span class='item-descricao'>").append(produto.getNome()).append(" - </span>")
+                        .append("<span class='item-quantidade'>").append(produto.getQuantidade()).append(" un</span>")
+                        .append("</div>");
                 qtdProd++;
             }
 
             String templatePreenchido = template
-                .replace("{{codigo}}", doacao.getId().toString())
-                .replace("{{nome}}", doacao.getDoador().getNome())
-                .replace("{{produtos}}", produtosHtml.toString())
-                .replace("{{data}}", doacao.getDataDoacao().format(formatador));
+                    .replace("{{codigo}}", doacao.getId().toString())
+                    .replace("{{nome}}", doacao.getDoador().getNome())
+                    .replace("{{produtos}}", produtosHtml.toString())
+                    .replace("{{data}}", doacao.getDataDoacao().format(formatador));
 
             try {
                 new File("Recibos").mkdirs();
-                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome()+ ".pdf";
+                String arquivo = "Recibos/Doacao/Doacao " + doacao.getId().toString() + " " + doacao.getDoador().getNome() + ".pdf";
                 gerarPDF(templatePreenchido, arquivo);
                 log.registrarLog(2, "Metodos", "gerarRelatorioDoacao", "", "Recibo gerado em: " + arquivo);
             } catch (IOException e) {
@@ -342,7 +351,7 @@ public class Metodos {
                 log.registrarLog(4, "Metodos", "gerarRelatorioDoacao", "", "Recibo não foi gerado");
             }
         }
-        
+
     }
 
     public void gerarReciboPedido(Pedido pedido) throws IOException {
@@ -351,7 +360,7 @@ public class Metodos {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         String template = Relatorio.templateAberturaPedido();
-        
+
         String tipo = "";
         if (pedido.getCliente().getTipoUsuario() == TipoCad.BENEFICIARIO) {
             tipo = "Beneficiário";
@@ -377,18 +386,18 @@ public class Metodos {
         }
 
         String templatePreenchido = template
-            .replace("{{codigo}}", pedido.getId().toString())
-            .replace("{{local}}", local)
-            .replace("{{dataPedido}}", pedido.getDataPedido().format(formatador))
-            .replace("{{tipo}}", tipo)
-            .replace("{{nome}}", pedido.getCliente().getNome())
-            .replace("{{paciente}}", paciente)
-            .replace("{{quantidades}}", pedido.getQuantMarmita().toString())
-            .replace("{{observacao}}", observacao);
+                .replace("{{codigo}}", pedido.getId().toString())
+                .replace("{{local}}", local)
+                .replace("{{dataPedido}}", pedido.getDataPedido().format(formatador))
+                .replace("{{tipo}}", tipo)
+                .replace("{{nome}}", pedido.getCliente().getNome())
+                .replace("{{paciente}}", paciente)
+                .replace("{{quantidades}}", pedido.getQuantMarmita().toString())
+                .replace("{{observacao}}", observacao);
 
         try {
             new File("Recibos").mkdirs();
-            String arquivo = "Recibos/Pedido/Pedido " + pedido.getId().toString() + " " + pedido.getCliente().getNome()+ ".pdf";
+            String arquivo = "Recibos/Pedido/Pedido " + pedido.getId().toString() + " " + pedido.getCliente().getNome() + ".pdf";
             gerarPDF(templatePreenchido, arquivo);
             log.registrarLog(2, "Metodos", "gerarReciboPedido", "", "Recibo gerado em: " + arquivo);
         } catch (IOException e) {
@@ -413,4 +422,46 @@ public class Metodos {
         }
     }
 
+    public void alterarUsuario(Scanner scan) throws SQLException, IOException {
+        System.out.println("Escolha o id do usuario que você quer alterar: ");
+        for (Pessoa pessoa : pessoaController.listarTodasPessoas()) {
+            System.out.println("Id: " + pessoa.getId() + " Nome: " + pessoa.getNome() + " Telefone: " + pessoa.getTelefone());
+        }
+        int id = scan.nextInt();
+        scan.nextLine();
+        Pessoa pessoa = pessoaController.buscarPessoaPorId(id);
+        Endereco endereco = enderecoController.buscarEndereco(pessoa.getEnderecoId());
+        pessoa.setEndereco(endereco);
+        System.out.println("Se não quiser alterar repita o dado");
+        System.out.println("Nome: " + pessoa.getNome());
+        pessoa.setNome(scan.nextLine());
+        System.out.println("Local: " + pessoa.getLocal());
+        pessoa.setLocal(Pessoa.Local.fromString(scan.nextLine()));
+        System.out.println("Tipo Pessoa: " + pessoa.getTipoPessoa().toString());
+        pessoa.setTipoPessoa(Pessoa.TipoPessoa.fromString(scan.nextLine()));
+        System.out.println("Telefone: " + pessoa.getTelefone());
+        pessoa.setTelefone(scan.nextLine());
+        System.out.println("Email: " + pessoa.getEmail());
+        pessoa.setEmail(scan.nextLine());
+        System.out.println("Observação: " + pessoa.getObservacao());
+        pessoa.setObservacao(scan.nextLine());
+        System.out.println("Logradouro: " + pessoa.getEndereco().getCep());
+        endereco.setLogradouro(scan.nextLine());
+        System.out.println("Número: " + pessoa.getEndereco().getNumero());
+        endereco.setNumero(scan.nextInt());
+        scan.nextLine();
+        System.out.println("Bairro: " + pessoa.getEndereco().getBairro());
+        endereco.setBairro(scan.nextLine());
+        System.out.println("CEP: " + pessoa.getEndereco().getCep());
+        endereco.setCep(scan.nextLine());
+        System.out.println("Complemento: " + pessoa.getEndereco().getComplemento());
+        endereco.setComplemento(scan.nextLine());
+        if (enderecoController.alterarEndereco(endereco, pessoa.getEnderecoId())) {
+            System.out.println("Endereco alterado com sucesso.");
+        }
+        pessoa.setEnderecoId(enderecoController.buscarIdEndereco(endereco, cidadeController.buscarIdCidade(new Cidade(endereco.getCidade().getNome(), endereco.getCidade().getEstado()))));
+        if (pessoaController.alterarPessoa(pessoa)) {
+            System.out.println("Pessoa alterada com sucesso.");
+        }
+    }
 }

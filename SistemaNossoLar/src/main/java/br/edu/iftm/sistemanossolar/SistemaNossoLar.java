@@ -62,6 +62,11 @@ public class SistemaNossoLar {
                         metodos.cadastrarProduto(scan, new Produto());
                         controle = false;
                         break;
+                    
+                    case 7:
+                        metodos.alterarUsuario(scan);
+                        controle = false;
+                        break;
 
                     case 20:
                         metodos.filtrarRelatorio();
