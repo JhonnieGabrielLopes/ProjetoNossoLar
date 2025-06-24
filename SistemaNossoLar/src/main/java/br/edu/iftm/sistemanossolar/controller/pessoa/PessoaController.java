@@ -57,6 +57,16 @@ public class PessoaController {
         return pessoaDAO.listarPessoas2(tipo, idTipo);
     }
 
+    public List<Pessoa> listarTodasPessoas() throws SQLException {
+        log.registrarLog(1, "PessoaController", "listarTodasPessoas", "usuario", "Consultando todos os usuários");
+        return pessoaDAO.listarTodasPessoas();
+    }
+    
+    public boolean alterarPessoa(Pessoa pessoa) throws SQLException {
+        log.registrarLog(1, "PessoaController", "alterarPessoa", "usuario", "Alterando dados do usuário: ID: " + pessoa.getId());
+        return pessoaDAO.alterarPessoa(pessoa);
+    }
+    
     public List<Pessoa> listarPessoas(String nomePessoa, String tipoUsuario, String cidade) throws SQLException {
         log.registrarLog(1, "PessoaController", "buscarPessoas", "usuario, endereco, cidade", "Listando pessoas para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
