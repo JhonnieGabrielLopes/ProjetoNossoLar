@@ -127,7 +127,7 @@ public class EnderecoDAO {
             if (endereco.getNumero() != 0) {
                 stmt.setInt(4, endereco.getNumero());
             } else {
-                stmt.setNull(4, java.sql.Types.VARCHAR);
+                stmt.setNull(4, java.sql.Types.INTEGER);
             }
 
             if (endereco.getBairro() != null) {
