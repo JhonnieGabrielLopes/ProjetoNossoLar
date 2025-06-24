@@ -15,6 +15,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Inicio"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuInicioMouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuPessoa">
           <Properties>
@@ -130,7 +133,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,107,0,0,4,-80"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,101,0,0,4,-80"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -155,7 +158,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="pnCard" min="-2" pref="830" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -189,7 +192,7 @@
                                   <Component id="pnEnderecoCliente" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="104" max="32767" attributes="0"/>
+                          <EmptySpace pref="103" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -200,16 +203,16 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="pnPessoaCliente" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="158" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="pnEnderecoCliente" min="-2" pref="224" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="btCadastroPessoaRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btCadastroPessoaLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -746,7 +749,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           <Component id="pnBuscar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="602" max="32767" attributes="0"/>
+                          <EmptySpace pref="590" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -881,7 +884,7 @@
                               <Component id="btDoacaoVoltar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                               <Component id="btDoacaoRelatorio" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="241" max="32767" attributes="0"/>
+                          <EmptySpace pref="226" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -917,7 +920,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="tfDoacaoIdDoacao" min="-2" pref="52" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btDoacaoBuscarDoacao" min="-2" pref="66" max="-2" attributes="0"/>
+                                      <Component id="btDoacaoBuscarDoacao" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
@@ -935,7 +938,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="tfDoacaoDoador" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btDoacaoBuscarDoador" min="-2" pref="66" max="-2" attributes="0"/>
+                                          <Component id="btDoacaoBuscarDoador" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="tfDoacaoValor" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
                                       <Component id="lbDoacaoValor" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -988,7 +991,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="122" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btDoacaoDeletar" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="btDoacaoRecibo" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -1010,8 +1013,16 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btDoacaoBuscarDoacao">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Buscar"/>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/loupe.png"/>
+                        </Property>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[1, 1, 1, 1]"/>
+                        </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoBuscarDoacaoActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoDoador">
                       <Properties>
@@ -1033,7 +1044,12 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btDoacaoBuscarDoador">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Buscar"/>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/loupe.png"/>
+                        </Property>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[1, 1, 1, 1]"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoTipo">
@@ -1044,8 +1060,9 @@
                     <Component class="javax.swing.JComboBox" name="cbDoacaoTipo">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="1">
-                            <StringItem index="0" value="Tipo Doa&#xe7;&#xe3;o"/>
+                          <StringArray count="2">
+                            <StringItem index="0" value="DINHEIRO"/>
+                            <StringItem index="1" value="PRODUTO"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1074,14 +1091,14 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JFormattedTextField" name="tfDoacaoValor">
-                      <Properties>
-                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                          <Format format="" subtype="-1" type="5"/>
-                        </Property>
-                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoValorActionPerformed"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(nf)"/>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale(&quot;pt&quot;, &quot;BR&quot;));"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfDoacaoValor.setColumns(10);&#xa;tfDoacaoValor.setValue(0.00);"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoObservacao">
                       <Properties>
@@ -1113,6 +1130,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Deletar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoDeletarActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1134,14 +1154,14 @@
                                   <Component id="pnListBoxProd" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <Component id="lbDoacaoSelecionarProd" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="tfDoacaoSelecionarProd" max="32767" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="btDoacaoBuscarProd" min="-2" pref="57" max="-2" attributes="0"/>
+                                              <Component id="btDoacaoBuscarProd" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -1170,7 +1190,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                                               <Component id="tfDoacaoSelecionarProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btDoacaoBuscarProd" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                              <Component id="btDoacaoBuscarProd" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="lbDoacaoQuantidade" min="-2" max="-2" attributes="0"/>
@@ -1203,9 +1223,11 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btDoacaoBuscarProd">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Buscar"/>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/loupe.png"/>
+                        </Property>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                          <Insets value="[2, 2, 2, 2]"/>
+                          <Insets value="[1, 1, 1, 1]"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -1286,46 +1308,16 @@
                             <Component class="javax.swing.JTable" name="tableDoacaoProdutos">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="3" rowCount="10">
-                                    <Column editable="false" title="Tipo" type="java.lang.String">
-                                      <Data value="Alimento"/>
-                                      <Data value="Limpeza"/>
-                                      <Data value="Outro"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                    </Column>
-                                    <Column editable="false" title="Produto" type="java.lang.String">
-                                      <Data value="Arroz"/>
-                                      <Data value="Detergente"/>
-                                      <Data value="Panela"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                    </Column>
-                                    <Column editable="false" title="Quantidade" type="java.lang.Integer">
-                                      <Data value="4"/>
-                                      <Data value="2"/>
-                                      <Data value="1"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                    </Column>
+                                  <Table columnCount="3" rowCount="0">
+                                    <Column editable="false" title="Tipo" type="java.lang.Object"/>
+                                    <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
+                                    <Column editable="false" title="Quantidade" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableDoacaoProdutosMouseClicked"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1358,6 +1350,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Limpar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoLimparActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btDoacaoRelatorio">
                   <Properties>
@@ -1399,7 +1394,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="pnPedido" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="339" max="32767" attributes="0"/>
+                          <EmptySpace pref="319" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1651,7 +1646,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="pnPedido1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="422" max="32767" attributes="0"/>
+                          <EmptySpace pref="410" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1907,7 +1902,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="pnRelDoa" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="11" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2377,7 +2372,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Component id="pnRelPed" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="136" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2706,6 +2701,48 @@
                     </Component>
                   </SubComponents>
                 </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnHome">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f6" green="f5" red="f5" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="cdHome"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="362" max="32767" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="199" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel3">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/NossoLarMenor.png"/>
+                    </Property>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

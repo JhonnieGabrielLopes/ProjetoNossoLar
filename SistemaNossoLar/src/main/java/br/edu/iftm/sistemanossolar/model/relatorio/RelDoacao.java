@@ -1,6 +1,6 @@
 package br.edu.iftm.sistemanossolar.model.relatorio;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class RelDoacao {
     private Integer idDoacao;
@@ -10,10 +10,10 @@ public class RelDoacao {
     private Double valor;
     private String produtos;
     private String observacao;
-    private Date data;
+    private LocalDate data;
     private Double totalValor;
-    private Double totalProdutos;
-    private Double totalItens;
+    private Integer totalProdutos;
+    private Integer totalItens;
 
     public RelDoacao() {
     }
@@ -74,11 +74,11 @@ public class RelDoacao {
         this.observacao = observacao;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -90,19 +90,19 @@ public class RelDoacao {
         this.totalValor = totalValor;
     }
 
-    public Double getTotalProdutos() {
+    public Integer getTotalProdutos() {
         return totalProdutos;
     }
 
-    public void setTotalProdutos(Double totalProdutos) {
+    public void setTotalProdutos(Integer totalProdutos) {
         this.totalProdutos = totalProdutos;
     }
 
-    public Double getTotalItens() {
+    public Integer getTotalItens() {
         return totalItens;
     }
 
-    public void setTotalItens(Double totalItens) {
+    public void setTotalItens(Integer totalItens) {
         this.totalItens = totalItens;
     }
 

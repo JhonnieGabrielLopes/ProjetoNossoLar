@@ -143,7 +143,8 @@ public class PessoaDAO {
         return pessoa;
     }
 
-    public List<Pessoa> listarPessoas(String tipo, Integer idTipo) {
+    public List<Pessoa> listarPessoas2(String tipo, Integer idTipo) {
+        //METODO PARA TESTES NO TERMINAL
         List<Pessoa> pessoas = new ArrayList<>();
         String sql = "SELECT us.id, us.nome, us.telefone FROM usuario us JOIN usuariotipo ut WHERE us.id = ut.usuario AND ut.tipoUsuario = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
@@ -229,5 +230,49 @@ public class PessoaDAO {
             log.registrarLog(4, "PessoaDAO", "alterarPessoa", "usuario", "Erro ao alterar os dados do usuário");
         }
         return false;
+    }
+    
+    public List<Pessoa> listarPessoas(String sqlFiltro, List<Object> filtros) throws SQLException {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT u.id AS codigo_pessoa, u.nome AS nome_pessoa, CONCAT(c.nome, '/', c.uf) AS cidade, u.observacao ");
+        sql.append("FROM usuario u ");
+        sql.append("JOIN endereco e ON u.endereco = e.id ");
+        sql.append("JOIN cidade c ON e.cidade = c.id ");
+        sql.append("JOIN usuarioTipo ut ON ut.usuario = u.id ");
+        sql.append("JOIN tipoUsuario tu ON ut.tipoUsuario = tu.id ");
+        sql.append("WHERE 1=1 ");
+        sql.append(sqlFiltro);
+        sql.append("ORDER BY u.nome ASC ");
+
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
+            for (int i = 0; i < filtros.size(); i++) {
+                stmt.setObject(i + 1, filtros.get(i));
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            List<Pessoa> pessoas = new ArrayList<>();
+            int qtdPessoas= 0;
+
+            while (rs.next()) {
+                Pessoa pessoa = new Pessoa();
+                pessoa.setId(rs.getInt("codigo_pessoa"));
+                pessoa.setNome(rs.getString("nome_pessoa"));
+                pessoa.setCidadeCompleta(rs.getString("cidade"));
+                pessoa.setObservacao(rs.getString("observacao"));
+                qtdPessoas ++;
+                pessoas.add(pessoa);
+            }
+            if (!pessoas.isEmpty()) {
+                log.registrarLog(2, "PessoaDAO", "consultarPessoas", "usuario, endereco, cidade", "Pessoas listadas - foram encontrados "+ qtdPessoas +" registros");    
+            } else {
+                log.registrarLog(3, "PessoaDAO", "consultarPessoas", "usuario, endereco, cidade", "Não foram encontrados registros");
+            }
+            return pessoas;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "PessoaDAO", "consultarPessoas", "usuario, endereco, cidade", "Erro ao consultar as pessoas");
+            return null;
+        }
     }
 }

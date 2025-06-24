@@ -62,18 +62,38 @@ public class SistemaNossoLar {
                         metodos.cadastrarProduto(scan, new Produto());
                         controle = false;
                         break;
-                    
+
                     case 7:
+                        metodos.listarPessoas();
+                        controle = false;
+                        break;
+                    
+                    case 10:
+                        metodos.listarDoacoes();
+                        controle = false;
+                        break;
+
+                    case 11:
+                        metodos.listarPedidos();
+                        controle = false;
+                        break;
+                    
+                    case 12:
+                        metodos.listarProdutos();
+                        controle = false;
+                        break;
+
+                    case 13:
                         metodos.alterarUsuario(scan);
                         controle = false;
                         break;
-
+                        
                     case 20:
-                        metodos.filtrarRelatorio();
+                        metodos.relatorioDoacao();
                         controle = false;
                         break;
 
-                    case 21:
+                    case 23:
                         log.registrarLog(1, "SistemaNossoLar", "main", "", "Encerrando o sistema");
                         controle = true;
                         break;
