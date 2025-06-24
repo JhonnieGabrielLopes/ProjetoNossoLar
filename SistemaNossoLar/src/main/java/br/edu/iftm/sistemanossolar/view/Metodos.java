@@ -297,7 +297,7 @@ public class Metodos {
         pessoa.setEmail(scan.nextLine());
         System.out.println("Observação: " + pessoa.getObservacao());
         pessoa.setObservacao(scan.nextLine());
-        System.out.println("Logradouro: " + pessoa.getEndereco().getCep());
+        System.out.println("Logradouro: " + pessoa.getEndereco().getLogradouro());
         endereco.setLogradouro(scan.nextLine());
         System.out.println("Número: " + pessoa.getEndereco().getNumero());
         endereco.setNumero(scan.nextInt());
