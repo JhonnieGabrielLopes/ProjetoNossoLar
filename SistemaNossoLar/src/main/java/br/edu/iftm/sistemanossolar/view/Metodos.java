@@ -16,20 +16,27 @@ import br.edu.iftm.sistemanossolar.controller.PedidoController;
 import br.edu.iftm.sistemanossolar.controller.RelatorioController;
 import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
+import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
+import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao.TipoDoa;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto.TipoProd;
+import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
+import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido.StatusPedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 
 public class Metodos {
+
     private static PessoaController pessoaController;
     private static ProdutoController produtoController;
     private static DoacaoController doacaoController;
     private static PedidoController pedidoController;
+    private static EnderecoController enderecoController;
+    private static CidadeController cidadeController;
     private static RelatorioController relatorioController;
 
     RegistrosLog log = new RegistrosLog();
@@ -39,6 +46,8 @@ public class Metodos {
         produtoController = new ProdutoController(conexao);
         doacaoController = new DoacaoController(conexao);
         pedidoController = new PedidoController(conexao);
+        enderecoController = new EnderecoController(conexao);
+        cidadeController = new CidadeController(conexao);
         relatorioController = new RelatorioController(conexao);
     }
 
@@ -122,7 +131,7 @@ public class Metodos {
         boolean controle = false;
         int numProduto = 1;
         int opc = 0;
-        
+
         while (!controle) {
             Produto produto = new Produto();
             System.out.println("Inserir o produto nº " + numProduto + "? 1-Sim / 2-Não");
@@ -262,6 +271,49 @@ public class Metodos {
         for (Pessoa pessoa : listagemPessoas) {
             System.out.println("ID: " + pessoa.getId() + 
                                "\nPessoa: " + pessoa.getNome() + ", Cidade: " + pessoa.getCidadeCompleta() +", Observação: " + pessoa.getObservacao());
+        }
+    }
+
+    public void alterarUsuario(Scanner scan) throws SQLException, IOException {
+        System.out.println("Escolha o id do usuario que você quer alterar: ");
+        for (Pessoa pessoa : pessoaController.listarTodasPessoas()) {
+            System.out.println("Id: " + pessoa.getId() + " Nome: " + pessoa.getNome() + " Telefone: " + pessoa.getTelefone());
+        }
+        int id = scan.nextInt();
+        scan.nextLine();
+        Pessoa pessoa = pessoaController.buscarPessoaPorId(id);
+        Endereco endereco = enderecoController.buscarEndereco(pessoa.getEnderecoId());
+        pessoa.setEndereco(endereco);
+        System.out.println("Se não quiser alterar repita o dado");
+        System.out.println("Nome: " + pessoa.getNome());
+        pessoa.setNome(scan.nextLine());
+        System.out.println("Local: " + pessoa.getLocal());
+        pessoa.setLocal(Pessoa.Local.fromString(scan.nextLine()));
+        System.out.println("Tipo Pessoa: " + pessoa.getTipoPessoa().toString());
+        pessoa.setTipoPessoa(Pessoa.TipoPessoa.fromString(scan.nextLine()));
+        System.out.println("Telefone: " + pessoa.getTelefone());
+        pessoa.setTelefone(scan.nextLine());
+        System.out.println("Email: " + pessoa.getEmail());
+        pessoa.setEmail(scan.nextLine());
+        System.out.println("Observação: " + pessoa.getObservacao());
+        pessoa.setObservacao(scan.nextLine());
+        System.out.println("Logradouro: " + pessoa.getEndereco().getLogradouro());
+        endereco.setLogradouro(scan.nextLine());
+        System.out.println("Número: " + pessoa.getEndereco().getNumero());
+        endereco.setNumero(scan.nextInt());
+        scan.nextLine();
+        System.out.println("Bairro: " + pessoa.getEndereco().getBairro());
+        endereco.setBairro(scan.nextLine());
+        System.out.println("CEP: " + pessoa.getEndereco().getCep());
+        endereco.setCep(scan.nextLine());
+        System.out.println("Complemento: " + pessoa.getEndereco().getComplemento());
+        endereco.setComplemento(scan.nextLine());
+        if (enderecoController.alterarEndereco(endereco, pessoa.getEnderecoId())) {
+            System.out.println("Endereco alterado com sucesso.");
+        }
+        pessoa.setEnderecoId(enderecoController.buscarIdEndereco(endereco, cidadeController.buscarIdCidade(new Cidade(endereco.getCidade().getNome(), endereco.getCidade().getEstado()))));
+        if (pessoaController.alterarPessoa(pessoa)) {
+            System.out.println("Pessoa alterada com sucesso.");
         }
     }
 

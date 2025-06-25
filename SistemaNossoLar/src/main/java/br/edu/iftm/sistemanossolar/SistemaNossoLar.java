@@ -82,6 +82,11 @@ public class SistemaNossoLar {
                         metodos.listarProdutos();
                         controle = false;
                         break;
+
+                    case 13:
+                        metodos.alterarUsuario(scan);
+                        controle = false;
+                        break;
                         
                     case 20:
                         metodos.relatorioDoacao();

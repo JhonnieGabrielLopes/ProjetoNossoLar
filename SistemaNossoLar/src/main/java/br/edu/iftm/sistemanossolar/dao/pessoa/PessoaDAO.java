@@ -121,7 +121,7 @@ public class PessoaDAO {
 
         log.registrarLog(1, "PessoaDAO", "buscarPessoaPorId", "tipousuario/usuariotipo", "Buscando Tipo de Usuário da Pessoa");
 
-        sql = "SELECT t.tipo FROM tipousuario t JOIN usuariotipo u WHERE t.id = u.tipoUsuario AND u.usuario = ?";
+        sql = "SELECT t.tipo FROM tipoUsuario t JOIN usuarioTipo u WHERE t.id = u.tipoUsuario AND u.usuario = ?";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -172,6 +172,66 @@ public class PessoaDAO {
         return pessoas;
     }
 
+    public List<Pessoa> listarTodasPessoas() throws SQLException {
+        List<Pessoa> pessoas = new ArrayList<>();
+        String sql = "SELECT us.id, us.nome, us.telefone FROM usuario us";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            int i= 0;
+            while (rs.next()) {
+                Pessoa pessoa = new Pessoa(
+                    rs.getInt("id"), 
+                    rs.getString("nome"), 
+                    rs.getString("telefone"));
+                pessoas.add(pessoa);
+                i++;
+                log.registrarLog(2, "PessoaDAO", "listarTodasPessoas", "usuario", "Usuário "+ rs.getString("nome") +" encontrado");
+            }
+            if (i > 0) {
+                log.registrarLog(2, "PessoaDAO", "listarTodasPessoas", "usuario", "Foram encontrados "+ i +" usuários");
+            } else {
+                log.registrarLog(3, "PessoaDAO", "listarTodasPessoas", "usuario", "Nenhum usuário encontrado");   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "PessoaDAO", "listarTodasPessoas", "usuario", "Erro ao consultar os Usuários");
+        }
+        return pessoas;
+    }
+    
+    public boolean alterarPessoa(Pessoa pessoa) throws SQLException {
+        String sql = "UPDATE usuario SET nome = ?, local = ?, tipoPessoa = ?, identificacao = ?, telefone = ?, endereco = ?, email = ?, observacao = ? WHERE id = ?;";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setString(1, pessoa.getNome());
+            if (pessoa.getLocal() != null) {
+                stmt.setString(2, pessoa.getLocal().toString());
+            } else {
+                stmt.setString(2, null);
+            }
+            if (pessoa.getTipoPessoa()!= null) {
+                stmt.setString(3, pessoa.getTipoPessoa().toString());
+            } else {
+                stmt.setString(3, null);
+            }
+            stmt.setString(4, pessoa.getIdentificacao());
+            stmt.setString(5, pessoa.getTelefone());
+            stmt.setInt(6, pessoa.getEnderecoId());
+            stmt.setString(7, pessoa.getEmail());
+            stmt.setString(8, pessoa.getObservacao());
+            stmt.setInt(9, pessoa.getId());
+            boolean sucesso = stmt.executeUpdate() == 1;
+            if (sucesso) {
+                log.registrarLog(2, "PessoaDAO", "alterarPessoa", "usuario", "Sucesso ao alterar usuário");
+            } else {
+                log.registrarLog(3, "PessoaDAO", "alterarPessoa", "usuario", "Usuário não encontrado");   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "PessoaDAO", "alterarPessoa", "usuario", "Erro ao alterar os dados do usuário");
+        }
+        return false;
+    }
+    
     public List<Pessoa> listarPessoas(String sqlFiltro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT u.id AS codigo_pessoa, u.nome AS nome_pessoa, CONCAT(c.nome, '/', c.uf) AS cidade, u.observacao ");

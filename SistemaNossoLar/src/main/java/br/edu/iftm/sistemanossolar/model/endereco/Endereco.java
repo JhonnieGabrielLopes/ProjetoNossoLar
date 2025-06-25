@@ -28,7 +28,7 @@ public class Endereco {
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }
-
+    
     public int getNumero() {
         return numero;
     }
