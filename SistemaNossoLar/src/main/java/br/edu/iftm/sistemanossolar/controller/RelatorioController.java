@@ -309,4 +309,125 @@ public class RelatorioController {
         String arquivo = diretorio + "\\Pedido " +pedido.getId().toString()+ " " +pedido.getCliente().getNome()+ ".pdf";
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }
+
+    public void gerarRelatorioPedidos(List<RelDoacao> dados, RelDoacao totalizacao, List<Object> filtros) throws IOException {
+        log.registrarLog(1, "RelatorioController", "gerarRelatorioDoacoes", "", "Gerando relatorio de Doações");
+
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        String template = RelatorioController.templateRelatorioDoacoes();
+
+        StringBuilder resultado = new StringBuilder();
+        int qtdRegistros = 0;
+        String nomeDoador = "";
+        for (RelDoacao doacao : dados) {
+            boolean temProduto = doacao.getProdutos() != null && !doacao.getProdutos().isEmpty();
+                
+            resultado.append("<tr>");
+                
+            resultado.append("<td style='border-bottom:")
+                     .append(temProduto ? "none" : "1px solid #000")
+                     .append("; text-align: center;'>")
+                     .append("<span>")
+                     .append(doacao.getIdDoacao())
+                     .append("</span></td>");
+                
+            nomeDoador = doacao.getNomeDoador();
+            resultado.append("<td style='border-bottom:")
+                     .append(temProduto ? "none" : "1px solid #000").append("'><span>")
+                     .append(nomeDoador).append("</span></td>");
+                
+            resultado.append("<td style='border-bottom:")
+                     .append(temProduto ? "none" : "1px solid #000").append("'><span>")
+                     .append(doacao.getTipo()).append("</span></td>");
+                
+            resultado.append("<td style='border-bottom:")
+                     .append(temProduto ? "none" : "1px solid #000").append("'><span>");
+            if (doacao.getValor() != 0) {
+                resultado.append("R$ ").append(String.format("%.2f", doacao.getValor()));
+            }
+            resultado.append("</span></td>");
+        
+            resultado.append("<td style='border-bottom:")
+                     .append(temProduto ? "none" : "1px solid #000").append("'><span>")
+                     .append(doacao.getObservacao()).append("</span></td>");
+        
+            resultado.append("<td style='border-bottom:")
+                     .append(temProduto ? "none" : "1px solid #000").append("'><span>")
+                     .append(formatador.format(doacao.getData())).append("</span></td>");
+        
+            resultado.append("</tr>");
+        
+            if (temProduto) {
+                resultado.append("<tr class='detalhes-produto'>")
+                         .append("<td colspan='6' style='border-bottom: 1px solid #000; padding-left: 37px;'>")
+                         .append("<strong>Produtos:</strong> <span>")
+                         .append(doacao.getProdutos())
+                         .append("</span></td>")
+                         .append("</tr>");
+            }
+            qtdRegistros++;
+        }
+
+        LocalDate dataInicio = (LocalDate) filtros.get(0);
+        LocalDate dataFim = (LocalDate) filtros.get(1);
+
+        if (filtros.get(0) != null) {
+            template = template.replace("{{dataInicio}}", formatador.format(dataInicio).toString());
+        } else {
+            template = template.replace("{{dataInicio}}", "");
+        }
+
+        if (filtros.get(1) != null) {
+            template = template.replace("{{dataFim}}", formatador.format(dataFim).toString());
+        } else {
+            template = template.replace("{{dataFim}}", "");
+        }
+
+        template = template.replace("{{tipoDoacao}}", filtros.get(2).toString());
+        template = template.replace("{{tipoProduto}}", filtros.get(3).toString());
+
+        if (filtros.get(4) != null) {
+            template = template.replace("{{filtroDoador}}", nomeDoador);
+        } else {
+            template = template.replace("{{filtroDoador}}", "");
+        }
+
+        if (filtros.get(5) != null) {
+            template = template.replace("{{filtroProduto}}", filtros.get(5).toString());
+        } else {
+            template = template.replace("{{filtroProduto}}", "");
+        }
+
+        StringBuilder ordem = new StringBuilder();
+        if (filtros.get(6) != null) {
+            switch (filtros.get(6).toString()) {
+                case "data": ordem.append("Data"); break;
+                case "codigo": ordem.append("Código"); break;
+                case "nome": ordem.append("Nome do Doador"); break;
+                case "valor": ordem.append("Valor"); break;
+                case "quantidade": ordem.append("Quantidade de Produtos"); break;
+            }
+            template = template.replace("{{ordenacao}}", ordem);
+        }
+
+        if (filtros.get(7) != null) {
+            StringBuilder sentido = new StringBuilder();
+            sentido.append(filtros.get(7).equals("asc") ? "Crescente" : "Decrescente");
+            template = template.replace("{{sentido}}", sentido);
+        }
+
+        LocalDate agora = LocalDate.now();
+        template = template.replace("{{resultados}}", resultado.toString())
+                           .replace("{{qtdDoacoes}}", String.valueOf(qtdRegistros))
+                           .replace("{{vlrTotal}}", "R$ "+ String.format("%.2f", totalizacao.getTotalValor()))
+                           .replace("{{qtdProdutos}}", String.valueOf(totalizacao.getTotalProdutos()))
+                           .replace("{{qtdItens}}", String.valueOf(totalizacao.getTotalItens()))
+                           .replace("{{dataEmissao}}", formatador.format(agora));
+        String templatePreenchido = template;
+
+        String diretorio = "C:\\SistemaNossoLar\\Relatorios\\Doacao";
+        String arquivo = diretorio + "\\teste.pdf";
+        criarArquivo(diretorio, arquivo, templatePreenchido);
+    }
 }
