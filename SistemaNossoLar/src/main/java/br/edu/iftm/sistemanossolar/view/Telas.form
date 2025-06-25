@@ -2362,8 +2362,15 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Component id="pnRelPed" min="-2" max="-2" attributes="0"/>
+                          <Component id="pnRelPedOr" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                              <Component id="pnRelPed" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2371,14 +2378,21 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Component id="pnRelPed" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="136" max="32767" attributes="0"/>
+                          <Component id="pnRelPedOr" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="144" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="pnRelPed" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="30" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="pnRelPed">
+                <Container class="javax.swing.JPanel" name="pnRelPedOr">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -2608,6 +2622,9 @@
                           </StringArray>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRelPedStatusPedidoActionPerformed"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
@@ -2697,6 +2714,640 @@
                     <Component class="javax.swing.JButton" name="btRelPedExtrair">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Extrair relat&#xf3;rio"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="pnRelPed">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="Relat&#xf3;rio Doa&#xe7;&#xe3;o"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="pnRelResultado1" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btRelPedidoSalvar" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btRelPedidoLimpar" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btRelPedVoltar" min="-2" pref="125" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="pnRelFiltros1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="pnRelFiltros1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="pnRelResultado1" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btRelPedidoSalvar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="btRelPedidoLimpar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="btRelPedVoltar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="pnRelFiltros1">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                            <TitledBorder title="Filtros"/>
+                          </Border>
+                        </Property>
+                      </Properties>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="ffRelDoaDtInicial4" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                              <Component id="lbRelDoaDtInicial4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lbRelDoaDtFinal4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ffRelDoaDtFinal4" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbRelDoaOrdenacao3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbRelDoaOrdenacao7" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="cbRelDoaOrdenacao8" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbRelDoaTpDoacao4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbRelDoaTpDoacao4" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                      <Component id="lbRelDoaTpProduto4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbRelDoaTpProduto4" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbRelDoaTpDoacao3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbRelDoaTpDoacao3" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbRelDoaDoador3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="tfRelDoaDoador3" min="-2" pref="250" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="btRelDoaDoador3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace pref="269" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbRelDoaTpProduto3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbRelDoaTpProduto3" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="btRelDoaFiltrar3" min="-2" pref="155" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaDtInicial4" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="ffRelDoaDtInicial4" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaDtFinal4" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="ffRelDoaDtFinal4" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaTpDoacao4" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="cbRelDoaTpDoacao4" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaTpDoacao3" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="cbRelDoaTpDoacao3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaDoador3" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="tfRelDoaDoador3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btRelDoaDoador3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btRelDoaFiltrar3" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaOrdenacao3" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="cbRelDoaOrdenacao7" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="cbRelDoaOrdenacao8" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaTpProduto3" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="cbRelDoaTpProduto3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbRelDoaTpProduto4" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="cbRelDoaTpProduto4" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaDtInicial4">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="D:ata do Pedido"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="ffRelDoaDtInicial4">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaDtFinal4">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Data da Entrega:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="ffRelDoaDtFinal4">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaDoador3">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Benefici&#xe1;rio/Assistente"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="tfRelDoaDoador3">
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btRelDoaDoador3">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Buscar"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaTpDoacao3">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Tipo Cliente:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaTpDoacao3">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="3">
+                                <StringItem index="0" value="Todos"/>
+                                <StringItem index="1" value="Assistente"/>
+                                <StringItem index="2" value="Benefici&#xe1;rio"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRelDoaTpDoacao3ActionPerformed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaOrdenacao3">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Ordena&#xe7;&#xe3;o"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaOrdenacao7">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="6">
+                                <StringItem index="0" value="Data do Pedido"/>
+                                <StringItem index="1" value="Data da Entrega"/>
+                                <StringItem index="2" value="ID"/>
+                                <StringItem index="3" value="Nome do Cliente"/>
+                                <StringItem index="4" value="Status"/>
+                                <StringItem index="5" value="Qtd Marmitas"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaOrdenacao8">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="2">
+                                <StringItem index="0" value="Descrente"/>
+                                <StringItem index="1" value="Crescente"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaTpProduto3">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Local:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaTpProduto3">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Todos"/>
+                                <StringItem index="1" value="Alimento"/>
+                                <StringItem index="2" value="Limpeza"/>
+                                <StringItem index="3" value="Outros"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btRelDoaFiltrar3">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Filtrar"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaTpDoacao4">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Status:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaTpDoacao4">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Todos"/>
+                                <StringItem index="1" value="Finalizado"/>
+                                <StringItem index="2" value="Pendente"/>
+                                <StringItem index="3" value="Cancelado"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRelDoaTpDoacao4ActionPerformed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelDoaTpProduto4">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Cidade:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbRelDoaTpProduto4">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Todos"/>
+                                <StringItem index="1" value="Alimento"/>
+                                <StringItem index="2" value="Limpeza"/>
+                                <StringItem index="3" value="Outros"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pnRelResultado1">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                            <TitledBorder title="Resultado"/>
+                          </Border>
+                        </Property>
+                      </Properties>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="spRelPedResultado" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="spRelPedResultado" min="-2" pref="349" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JScrollPane" name="spRelPedResultado">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTable" name="tableRelatorioPedido1">
+                              <Properties>
+                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                  <Table columnCount="10" rowCount="4">
+                                    <Column editable="true" title="ID do Pedido" type="java.lang.Object">
+                                      <Data value="1"/>
+                                      <Data value="2"/>
+                                      <Data value="3"/>
+                                      <Data value="4"/>
+                                    </Column>
+                                    <Column editable="true" title="Data do Pedido" type="java.lang.Object">
+                                      <Data value="12/01/2025"/>
+                                      <Data value="22/04/2025"/>
+                                      <Data value="05/05/2025"/>
+                                      <Data value="08/06/2025"/>
+                                    </Column>
+                                    <Column editable="true" title="Data da Entrega" type="java.lang.Object">
+                                      <Data value="15/01/2025"/>
+                                      <Data value="22/04/2025"/>
+                                      <Data value="08/05/2025"/>
+                                      <Data value=""/>
+                                    </Column>
+                                    <Column editable="true" title="Nome do Cliente" type="java.lang.Object">
+                                      <Data value="Alan"/>
+                                      <Data value="Joice"/>
+                                      <Data value="Jhonnie"/>
+                                      <Data value="Luiz"/>
+                                    </Column>
+                                    <Column editable="true" title="Tipo Pessoa" type="java.lang.Object">
+                                      <Data value="Benefici&#xe1;rio"/>
+                                      <Data value="Assistente"/>
+                                      <Data value="Assistente"/>
+                                      <Data value="null"/>
+                                    </Column>
+                                    <Column editable="true" title="Status Pedido" type="java.lang.Object">
+                                      <Data value="Pendente"/>
+                                      <Data value="Finalizado"/>
+                                      <Data value="Finalizado"/>
+                                      <Data value="Cancelado"/>
+                                    </Column>
+                                    <Column editable="true" title="Qtd Marmitas" type="java.lang.Object">
+                                      <Data value="2"/>
+                                      <Data value="4"/>
+                                      <Data value="3"/>
+                                      <Data value="2"/>
+                                    </Column>
+                                    <Column editable="true" title="Local/Cidade" type="java.lang.Object">
+                                      <Data value="Araguari"/>
+                                      <Data value="Patos de Minas"/>
+                                      <Data value="Paracatu"/>
+                                      <Data value="Cristalina"/>
+                                    </Column>
+                                    <Column editable="true" title="UF" type="java.lang.Object">
+                                      <Data value="MG"/>
+                                      <Data value="MG"/>
+                                      <Data value="MG"/>
+                                      <Data value="GO"/>
+                                    </Column>
+                                    <Column editable="true" title="Observa&#xe7;&#xe3;o" type="java.lang.Object">
+                                      <Data value="Solicita&#xe7;&#xe3;o para 2 pessoas"/>
+                                      <Data value="4 Pessoas no hospital"/>
+                                      <Data value=""/>
+                                      <Data value="Paciente n&#xe3;o veio"/>
+                                    </Column>
+                                  </Table>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="jPanel1">
+                          <Properties>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                                <TitledBorder title="Status"/>
+                              </Border>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jbRelPedTotDin1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfRelPedTotProd2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jbRelPedTotDin2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfRelPedTotProd3" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jbRelPedTotDin3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfRelPedTotProd4" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                                  <Component id="tfRelPedTotProd2" min="-2" pref="40" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jbRelPedTotDin1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                                  <Component id="tfRelPedTotProd3" min="-2" pref="40" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jbRelPedTotDin2" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                                  <Component id="tfRelPedTotProd4" min="-2" pref="40" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jbRelPedTotDin3" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JLabel" name="jbRelPedTotDin1">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Abertos:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="tfRelPedTotProd2">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="text" type="java.lang.String" value="0"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jbRelPedTotDin2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Fechados:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="tfRelPedTotProd3">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="text" type="java.lang.String" value="0"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jbRelPedTotDin3">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Cancelados:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="tfRelPedTotProd4">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="text" type="java.lang.String" value="0"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="jPanel2">
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jbRelPedTotDin" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfRelPedTotProd1" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                      <Component id="jbRelPedTotDin" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tfRelPedTotProd1" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextField" name="tfRelPedTotProd1">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="text" type="java.lang.String" value="0"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jbRelPedTotDin">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Total de Marmitas:"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Component class="javax.swing.JButton" name="btRelPedidoSalvar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Salvar Relat&#xf3;rio"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btRelPedidoLimpar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btRelPedVoltar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Voltar"/>
                       </Properties>
                     </Component>
                   </SubComponents>
