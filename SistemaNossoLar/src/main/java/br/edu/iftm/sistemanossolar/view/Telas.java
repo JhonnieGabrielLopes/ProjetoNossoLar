@@ -260,18 +260,18 @@ public class Telas extends javax.swing.JFrame {
         menuPedido = new javax.swing.JMenu();
         menuPedidoCadastrar = new javax.swing.JMenuItem();
         menuPedidoAlterar = new javax.swing.JMenuItem();
-        menuRelatorio = new javax.swing.JMenu();
-        menuRelatorioDoacao = new javax.swing.JMenuItem();
-        menuRelatorioPedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(29, 29, 29));
+        setPreferredSize(new java.awt.Dimension(1200, 700));
         setSize(new java.awt.Dimension(1280, 720));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
+
+        pnDadosPrincipal.setPreferredSize(new java.awt.Dimension(1200, 700));
 
         pnCard.setLayout(new java.awt.CardLayout());
 
@@ -585,32 +585,29 @@ public class Telas extends javax.swing.JFrame {
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
+                .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                         .addComponent(btCadastroPessoaLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btCadastroPessoaRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                        .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btCadastroPessoaRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
         pnCadastroPessoaLayout.setVerticalGroup(
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                        .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(158, Short.MAX_VALUE))
+                .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                         .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(366, 366, 366)
                         .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btCadastroPessoaRegistrar)
-                            .addComponent(btCadastroPessoaLimpar))
-                        .addGap(114, 114, 114))))
+                            .addComponent(btCadastroPessoaLimpar)))
+                    .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastroPessoa, "beneficiario");
@@ -684,7 +681,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnAlterarPessoaLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(pnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(590, Short.MAX_VALUE))
+                .addContainerGap(460, Short.MAX_VALUE))
         );
 
         pnCard.add(pnAlterarPessoa, "cdAlterarPessoa");
@@ -1031,7 +1028,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarDoacao, "cdCadastrarDoacao");
@@ -1173,14 +1170,14 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnCadastrarPedidoLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(601, Short.MAX_VALUE))
+                .addContainerGap(597, Short.MAX_VALUE))
         );
         pnCadastrarPedidoLayout.setVerticalGroup(
             pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastrarPedidoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarPedido, "cdCadastrarPedido");
@@ -1331,7 +1328,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnAlterarPedidoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(pnPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(410, Short.MAX_VALUE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
 
         pnCard.add(pnAlterarPedido, "cdAlterarPedido");
@@ -1536,9 +1533,9 @@ public class Telas extends javax.swing.JFrame {
         pnRelResultadoLayout.setVerticalGroup(
             pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelResultadoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(spRelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(spRelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnRelResultadoLayout.createSequentialGroup()
@@ -1553,7 +1550,7 @@ public class Telas extends javax.swing.JFrame {
                         .addComponent(jbRelDoaTorIte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfRelTotIte, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btRelDoacaoSalvar.setText("Salvar Relatório");
@@ -1582,33 +1579,33 @@ public class Telas extends javax.swing.JFrame {
         pnRelDoaLayout.setVerticalGroup(
             pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelDoaLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(pnRelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnRelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(pnRelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRelDoaVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                    .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRelDoaVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnRelatorioDoacaoLayout = new javax.swing.GroupLayout(pnRelatorioDoacao);
         pnRelatorioDoacao.setLayout(pnRelatorioDoacaoLayout);
         pnRelatorioDoacaoLayout.setHorizontalGroup(
             pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelatorioDoacaoLayout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
         pnRelatorioDoacaoLayout.setVerticalGroup(
             pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(17, 17, 17)
                 .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioDoacao, "relatorioDoacao");
@@ -1771,7 +1768,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelatorioPedidoLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -1784,17 +1781,17 @@ public class Telas extends javax.swing.JFrame {
         pnHome.setLayout(pnHomeLayout);
         pnHomeLayout.setHorizontalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHomeLayout.createSequentialGroup()
-                .addContainerGap(362, Short.MAX_VALUE)
+            .addGroup(pnHomeLayout.createSequentialGroup()
+                .addGap(344, 344, 344)
                 .addComponent(jLabel3)
-                .addGap(326, 326, 326))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
         pnHomeLayout.setVerticalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnHomeLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(85, 85, 85)
                 .addComponent(jLabel3)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         pnCard.add(pnHome, "cdHome");
@@ -1810,15 +1807,20 @@ public class Telas extends javax.swing.JFrame {
         pnDadosPrincipalLayout.setVerticalGroup(
             pnDadosPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDadosPrincipalLayout.createSequentialGroup()
-                .addComponent(pnCard, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnCard, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnDadosPrincipal, java.awt.BorderLayout.CENTER);
 
+        menuBarra.setBackground(new java.awt.Color(52, 52, 52));
         menuBarra.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        menuBarra.setPreferredSize(new java.awt.Dimension(458, 50));
 
+        menuInicio.setBackground(new java.awt.Color(52, 52, 52));
+        menuInicio.setForeground(new java.awt.Color(255, 255, 255));
         menuInicio.setText("Inicio");
+        menuInicio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         menuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuInicioMouseClicked(evt);
@@ -1826,8 +1828,14 @@ public class Telas extends javax.swing.JFrame {
         });
         menuBarra.add(menuInicio);
 
+        menuPessoa.setBackground(new java.awt.Color(52, 52, 52));
+        menuPessoa.setForeground(new java.awt.Color(255, 255, 255));
         menuPessoa.setText("Pessoa");
+        menuPessoa.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        menuPessoaCadastrar.setBackground(new java.awt.Color(52, 52, 52));
+        menuPessoaCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuPessoaCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         menuPessoaCadastrar.setText("Cadastrar");
         menuPessoaCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1836,6 +1844,9 @@ public class Telas extends javax.swing.JFrame {
         });
         menuPessoa.add(menuPessoaCadastrar);
 
+        menuPessoaAlterar.setBackground(new java.awt.Color(52, 52, 52));
+        menuPessoaAlterar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuPessoaAlterar.setForeground(new java.awt.Color(255, 255, 255));
         menuPessoaAlterar.setText("Alterar");
         menuPessoaAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1846,8 +1857,14 @@ public class Telas extends javax.swing.JFrame {
 
         menuBarra.add(menuPessoa);
 
+        menuDoacao.setBackground(new java.awt.Color(52, 52, 52));
+        menuDoacao.setForeground(new java.awt.Color(255, 255, 255));
         menuDoacao.setText("Doação");
+        menuDoacao.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        menuDoacaoCadastrar.setBackground(new java.awt.Color(52, 52, 52));
+        menuDoacaoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuDoacaoCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         menuDoacaoCadastrar.setText("Cadastrar");
         menuDoacaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1858,8 +1875,14 @@ public class Telas extends javax.swing.JFrame {
 
         menuBarra.add(menuDoacao);
 
+        menuPedido.setBackground(new java.awt.Color(52, 52, 52));
+        menuPedido.setForeground(new java.awt.Color(255, 255, 255));
         menuPedido.setText("Pedido");
+        menuPedido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        menuPedidoCadastrar.setBackground(new java.awt.Color(52, 52, 52));
+        menuPedidoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuPedidoCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         menuPedidoCadastrar.setText("Cadastrar");
         menuPedidoCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1868,6 +1891,9 @@ public class Telas extends javax.swing.JFrame {
         });
         menuPedido.add(menuPedidoCadastrar);
 
+        menuPedidoAlterar.setBackground(new java.awt.Color(52, 52, 52));
+        menuPedidoAlterar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuPedidoAlterar.setForeground(new java.awt.Color(255, 255, 255));
         menuPedidoAlterar.setText("Alterar");
         menuPedidoAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1877,26 +1903,6 @@ public class Telas extends javax.swing.JFrame {
         menuPedido.add(menuPedidoAlterar);
 
         menuBarra.add(menuPedido);
-
-        menuRelatorio.setText("Relatório");
-
-        menuRelatorioDoacao.setText("Doação");
-        menuRelatorioDoacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuRelatorioDoacaoActionPerformed(evt);
-            }
-        });
-        menuRelatorio.add(menuRelatorioDoacao);
-
-        menuRelatorioPedido.setText("Pedido");
-        menuRelatorioPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuRelatorioPedidoActionPerformed(evt);
-            }
-        });
-        menuRelatorio.add(menuRelatorioPedido);
-
-        menuBarra.add(menuRelatorio);
 
         setJMenuBar(menuBarra);
 
@@ -2148,14 +2154,6 @@ public class Telas extends javax.swing.JFrame {
     private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btRelPedFiltrarActionPerformed
-
-    private void menuRelatorioDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioDoacaoActionPerformed
-        cl.show(pnCard, "relatorioDoacao");
-    }//GEN-LAST:event_menuRelatorioDoacaoActionPerformed
-
-    private void menuRelatorioPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioPedidoActionPerformed
-        cl.show(pnCard, "relatorioPedido");
-    }//GEN-LAST:event_menuRelatorioPedidoActionPerformed
 
     private void btDoacaoBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarProdActionPerformed
         // TODO add your handling code here:
@@ -2409,9 +2407,6 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JMenu menuPessoa;
     private javax.swing.JMenuItem menuPessoaAlterar;
     private javax.swing.JMenuItem menuPessoaCadastrar;
-    private javax.swing.JMenu menuRelatorio;
-    private javax.swing.JMenuItem menuRelatorioDoacao;
-    private javax.swing.JMenuItem menuRelatorioPedido;
     private javax.swing.JPanel pnAlterarPedido;
     private javax.swing.JPanel pnAlterarPessoa;
     private javax.swing.JPanel pnBuscar;
