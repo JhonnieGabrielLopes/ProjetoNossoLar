@@ -1674,7 +1674,7 @@ public class Telas extends javax.swing.JFrame {
 
         lbRelPedCidade.setText("Cidade Cliente:");
 
-        cbRelPedCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Alimento", "Limpeza", "Outros" }));
+        cbRelPedCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Ituiutaba", "Paracatu" }));
 
         btRelPedFiltrar.setText("Filtrar");
 

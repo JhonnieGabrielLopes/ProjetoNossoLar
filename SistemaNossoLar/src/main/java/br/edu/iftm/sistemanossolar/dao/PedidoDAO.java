@@ -11,6 +11,7 @@ import java.util.List;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
+import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PedidoDAO {
@@ -98,6 +99,93 @@ public class PedidoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             log.registrarLog(4, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Erro ao consultar os pedidos");
+            return null;
+        }
+    }
+
+    public List<RelPedido> filtrarRegistrosRelatorio(String filtro, List<Object> filtros) throws SQLException {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT p.id AS codigo_pedido, u.id AS codigo_cliente, u.nome AS nome_cliente, tu.tipo AS tipo_cliente, p.quantidade AS marmitas, u.local, p.observacao, p.dataPedido, p.dataEntrega, c.nome AS cidade ");
+        sql.append("FROM pedido p ");
+        sql.append("JOIN usuario u ON p.pessoa = u.id ");
+        sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
+        sql.append("JOIN tipoUsuario tu ON ut.tipoUsuario = tu.id ");
+        sql.append("JOIN endereco e ON u.endereco = e.id ");
+        sql.append("JOIN cidade c ON e.cidade = c.id ");
+        sql.append("WHERE 1=1 ");
+        sql.append(filtro);
+
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
+            for (int i = 0; i < filtros.size(); i++) {
+                stmt.setObject(i + 1, filtros.get(i));
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            List<RelPedido> pedidos = new ArrayList<>();
+
+            while (rs.next()) {
+                RelPedido pedido = new RelPedido();
+                pedido.setIdPedido(rs.getInt("codigo_pedido"));
+                pedido.setIdCliente(rs.getInt("codigo_cliente"));
+                pedido.setNomeCliente(rs.getString("nome_cliente"));
+                pedido.setTipoCliente(rs.getString("tipo_cliente"));
+                pedido.setQtdMarmitas(rs.getInt("marmitas"));
+                pedido.setLocal(rs.getString("local"));
+                pedido.setObservacao(rs.getString("observacao"));
+                if (pedido.getObservacao() == null) {
+                    pedido.setObservacao("");
+                }
+                LocalDate dataPedido = rs.getObject("dataPedido", LocalDate.class);
+                pedido.setDataPedido(dataPedido);
+                LocalDate dataEntrega = rs.getObject("dataEntrega", LocalDate.class);
+                pedido.setDataEntrega(dataEntrega);
+                pedido.setCidadeCliente(rs.getString("cidade"));
+                pedidos.add(pedido);
+            }
+            log.registrarLog(2, "PedidoDAO", "filtrarRegistrosRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Filtragem dos dados finalizada");
+            return pedidos;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "PedidoDAO", "filtrarRegistrosRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Erro ao filtrar os dados do relatório");
+            return null;
+        }
+    }
+
+    public RelPedido filtrarTotalRelatorio(RelPedido totalizacao, String filtro, List<Object> filtros) throws SQLException {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT ");
+        sql.append("COALESCE(SUM(p.quantidade), 0) AS total_marmitas, ");
+        sql.append("COALESCE(SUM(CASE WHEN p.status = 'PENDENTE' THEN 1 ELSE 0 END), 0) AS total_pendentes, ");
+        sql.append("COALESCE(SUM(CASE WHEN p.status = 'ENTREGUE' THEN 1 ELSE 0 END), 0) AS total_entregues, ");
+        sql.append("COALESCE(SUM(CASE WHEN p.status = 'CANCELADO' THEN 1 ELSE 0 END), 0) AS total_cancelados ");
+        sql.append("FROM pedido p ");
+        sql.append("JOIN usuario u ON p.pessoa = u.id ");
+        sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
+        sql.append("JOIN tipoUsuario tu ON ut.tipoUsuario = tu.id ");
+        sql.append("JOIN endereco e ON u.endereco = e.id ");
+        sql.append("JOIN cidade c ON e.cidade = c.id ");
+        sql.append("WHERE 1=1 ");
+        sql.append(filtro);
+
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
+            for (int i = 0; i < filtros.size(); i++) {
+                stmt.setObject(i + 1, filtros.get(i));
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                totalizacao.setTotalMarmitas(rs.getInt("total_marmitas"));
+                totalizacao.setTotalPendente(rs.getInt("total_pendentes"));
+                totalizacao.setTotalFechado(rs.getInt("total_entregues"));
+                totalizacao.setTotalCancelado(rs.getInt("total_cancelados"));
+            }
+            log.registrarLog(2, "PedidoDAO", "filtrarTotalRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Totalização finalizada");
+            return totalizacao;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "PedidoDAO", "filtrarTotalRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Erro ao totalizar o relatório");
             return null;
         }
     }

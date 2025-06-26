@@ -36,4 +36,9 @@ public class CidadeController {
         log.registrarLog(1, "CidadeController", "listarCidade", "cidade", "Consultando cidades");
         return cidadeDAO.listarCidade();
     }
+
+    public String capturarNomeCidade(Integer idCidade) throws SQLException {
+        log.registrarLog(1, "CidadeController", "capturarNomeCidade", "cidade", "Obtendo nome da cidade");
+        return cidadeDAO.capturarNomeCidade(idCidade);
+    }
 }

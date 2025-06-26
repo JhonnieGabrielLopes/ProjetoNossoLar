@@ -24,14 +24,18 @@ import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
+import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
+import br.edu.iftm.sistemanossolar.model.relatorio.RetornoPedidos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class RelatorioController {
     private DoacaoController doacaoController;
+    private PedidoController pedidoController;
 
     public RelatorioController(Connection conexao) {
         this.doacaoController = new DoacaoController(conexao);
+        this.pedidoController = new PedidoController(conexao);
     }
 
     RegistrosLog log = new RegistrosLog();
@@ -310,17 +314,27 @@ public class RelatorioController {
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }
 
-    public void gerarRelatorioPedidos(List<RelDoacao> dados, RelDoacao totalizacao, List<Object> filtros) throws IOException {
-        log.registrarLog(1, "RelatorioController", "gerarRelatorioDoacoes", "", "Gerando relatorio de Doações");
+    public void relatorioPedido() throws SQLException, IOException {
+        //METODO PARA TESTES NO TERMINAL
+        String data1 = "2023-01-01";
+        LocalDate dataTeste1 = LocalDate.parse(data1);
+        String data2 = "2023-12-30"; 
+        LocalDate dataTeste2 = LocalDate.parse(data2);
+        RetornoPedidos relatorio = pedidoController.filtrarRelatorio(null, null, "Todos", "Todos", null, "Todos", "Todas", "data", "asc");
+        gerarRelatorioPedidos(relatorio.getPedidos(), relatorio.getTotalizacao(), relatorio.getFiltros());
+    }
+
+    public void gerarRelatorioPedidos(List<RelPedido> dados, RelPedido totalizacao, List<Object> filtros) throws IOException {
+        log.registrarLog(1, "RelatorioController", "gerarRelatorioPedidos", "", "Gerando relatorio de Pedidos");
 
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        String template = RelatorioController.templateRelatorioDoacoes();
+        String template = RelatorioController.templateRelatorioPedidos();
 
         StringBuilder resultado = new StringBuilder();
         int qtdRegistros = 0;
-        String nomeDoador = "";
-        for (RelDoacao doacao : dados) {
+        String nomeCliente = "";
+        for (RelPedido pedido : dados) {
             boolean temProduto = doacao.getProdutos() != null && !doacao.getProdutos().isEmpty();
                 
             resultado.append("<tr>");
@@ -369,8 +383,8 @@ public class RelatorioController {
             qtdRegistros++;
         }
 
-        LocalDate dataInicio = (LocalDate) filtros.get(0);
-        LocalDate dataFim = (LocalDate) filtros.get(1);
+        LocalDate dataPedido = (LocalDate) filtros.get(0);
+        LocalDate dataEntrega = (LocalDate) filtros.get(1);
 
         if (filtros.get(0) != null) {
             template = template.replace("{{dataInicio}}", formatador.format(dataInicio).toString());

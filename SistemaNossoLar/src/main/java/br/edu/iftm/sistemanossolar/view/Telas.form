@@ -2708,11 +2708,10 @@
                         <Component class="javax.swing.JComboBox" name="cbRelPedCidade">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="4">
-                                <StringItem index="0" value="Todos"/>
-                                <StringItem index="1" value="Alimento"/>
-                                <StringItem index="2" value="Limpeza"/>
-                                <StringItem index="3" value="Outros"/>
+                              <StringArray count="3">
+                                <StringItem index="0" value="Todas"/>
+                                <StringItem index="1" value="Ituiutaba"/>
+                                <StringItem index="2" value="Paracatu"/>
                               </StringArray>
                             </Property>
                           </Properties>
