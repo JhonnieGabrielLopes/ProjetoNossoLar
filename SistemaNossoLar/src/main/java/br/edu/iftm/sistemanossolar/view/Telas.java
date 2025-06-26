@@ -1799,11 +1799,11 @@ public class Telas extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cód.", "Cliente", "Tipo", "Status", "Qtd. Marmitas", "Local", "Observação", "Data do Pedido", "Data da Entrega"
+                "Cód.", "Cliente", "Tipo", "Status", "Local", "Marmitas", "Observação", "Data do Pedido", "Data da Entrega"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false

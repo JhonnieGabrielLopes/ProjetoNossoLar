@@ -2791,8 +2791,8 @@
                                     <Column editable="false" title="Cliente" type="java.lang.String"/>
                                     <Column editable="false" title="Tipo" type="java.lang.String"/>
                                     <Column editable="false" title="Status" type="java.lang.String"/>
-                                    <Column editable="false" title="Qtd. Marmitas" type="java.lang.Integer"/>
                                     <Column editable="false" title="Local" type="java.lang.String"/>
+                                    <Column editable="false" title="Marmitas" type="java.lang.Integer"/>
                                     <Column editable="false" title="Observa&#xe7;&#xe3;o" type="java.lang.String"/>
                                     <Column editable="false" title="Data do Pedido" type="java.lang.String"/>
                                     <Column editable="false" title="Data da Entrega" type="java.lang.String"/>

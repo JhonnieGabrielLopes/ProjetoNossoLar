@@ -124,19 +124,19 @@
                         <table class="tabela-filtros">
                             <p><strong>Filtros:</strong></p>
                             <tr>
-                                <td><strong>Data Início:</strong> {{dataInicio}}</td>
-                                <td><strong>Data Fim:</strong> {{dataFim}}</td>
-                                <td><strong>Doador:</strong> {{filtroDoador}}</td>
+                                <td><strong>Data do Pedido:</strong> {{dataPedido}}</td>
+                                <td><strong>Data da Entrega:</strong> {{dataEntrega}}</td>
+                                <td><strong>Status:</strong> {{filtroStatus}}</td>
                             </tr>
                             <tr>
-                                <td><strong>Tipo Doação:</strong> {{tipoDoacao}}</td>
-                                <td><strong>Tipo Produto:</strong> {{tipoProduto}}</td>
-                                <td><strong>Produto:</strong> {{filtroProduto}}</td>
+                                <td><strong>Cidade Cliente:</strong> {{filtroCidade}}</td>
+                                <td><strong>Tipo Cliente:</strong> {{filtroTipo}}</td>
+                                <td><strong>Cliente:</strong> {{filtroCliente}}</td>
                             </tr>
                             <tr>
                                 <td><strong>Ordem:</strong> {{ordenacao}}</td>
                                 <td><strong>Sentido:</strong> {{sentido}}</td>
-                                <td></td>
+                                <td><strong>Local:</strong> {{filtroLocal}}</td>
                             </tr>
                         </table>
                     </td>
@@ -148,12 +148,14 @@
                 <table class="tabela-cheia">
                     <thead>
                         <tr>
-                            <th style="width: 4%;">Cód.</th>
-                            <th style="width: 28%;">Doador</th>
-                            <th style="width: 8%;">Tipo</th>
-                            <th style="width: 9%;">Valor</th>
-                            <th style="width: 38%;">Observação</th>
-                            <th style="width: 9%;">Data</th>
+                            <th style="width: 3%;">Cód.</th>
+                            <th style="width: 8%;">Status</th>
+                            <th style="width: 20%;">Cliente</th>
+                            <th style="width: 9%;">Tipo</th>
+                            <th style="width: 9%;">Local</th>
+                            <th style="width: 9%;">Marmitas</th>
+                            <th style="width: 9%;">Data Pedido</th>
+                            <th style="width: 9%;">Data Entrega</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -161,13 +163,14 @@
                     </tbody>
                 </table>
 
-                <p><span class="valor">{{qtdDoacoes}}</span> doações</p>
+                <p><span class="valor">{{qtdPedidos}}</span> pedidos</p>
 
                 <table class="tabela-totalizadora">
                     <tr>
-                        <td><strong>Valor Total: </strong><span class="valor">{{vlrTotal}}</span></td>
-                        <td><strong>Total Produtos: </strong><span class="valor">{{qtdProdutos}}</span></td>
-                        <td><strong>Total Itens: </strong><span class="valor">{{qtdItens}}</span></td>
+                        <td><strong>Total Marmitas: </strong><span class="valor">{{totalMarmitas}}</span></td>
+                        <td><strong>Pendente: </strong><span class="valor">{{totalAbertos}}</span></td>
+                        <td><strong>Fechado: </strong><span class="valor">{{totalFechados}}</span></td>
+                        <td><strong>Cancelado: </strong><span class="valor">{{totalCancelados}}</span></td>
                     </tr>
                 </table>
 
