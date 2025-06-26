@@ -1799,7 +1799,7 @@ public class Telas extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cód.", "Cliente", "Tipo", "Status", "Local", "Marmitas", "Observação", "Data do Pedido", "Data da Entrega"
+                "Cód.", "Status", "Cliente", "Tipo", "Local", "Marmitas", "Observação", "Data do Pedido", "Data da Entrega"
             }
         ) {
             Class[] types = new Class [] {
