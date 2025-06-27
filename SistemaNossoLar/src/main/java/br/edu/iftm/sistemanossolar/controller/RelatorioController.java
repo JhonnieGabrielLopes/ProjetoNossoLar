@@ -316,11 +316,11 @@ public class RelatorioController {
 
     public void relatorioPedido() throws SQLException, IOException {
         //METODO PARA TESTES NO TERMINAL
-        String data1 = "2023-01-01";
+        String data1 = "2023-06-01";
         LocalDate dataTeste1 = LocalDate.parse(data1);
-        String data2 = "2023-12-30"; 
+        String data2 = "2023-06-15"; 
         LocalDate dataTeste2 = LocalDate.parse(data2);
-        RetornoPedidos relatorio = pedidoController.filtrarRelatorio(null, null, "Todos", "Todos", null, "Todos", "Todas", "data", "asc");
+        RetornoPedidos relatorio = pedidoController.filtrarRelatorio(null, null, null, null, "Todos", null, "Todos", "Centralina", "dataPedido", "asc");
         gerarRelatorioPedidos(relatorio.getPedidos(), relatorio.getTotalizacao(), relatorio.getFiltros());
     }
 
@@ -335,112 +335,133 @@ public class RelatorioController {
         int qtdRegistros = 0;
         String nomeCliente = "";
         for (RelPedido pedido : dados) {
-            boolean temProduto = doacao.getProdutos() != null && !doacao.getProdutos().isEmpty();
+            boolean temObservacao = pedido.getObservacao() != null && !pedido.getObservacao().isEmpty();
                 
             resultado.append("<tr>");
-                
             resultado.append("<td style='border-bottom:")
-                     .append(temProduto ? "none" : "1px solid #000")
+                     .append(temObservacao ? "none" : "1px solid #000")
                      .append("; text-align: center;'>")
                      .append("<span>")
-                     .append(doacao.getIdDoacao())
+                     .append(pedido.getIdPedido())
                      .append("</span></td>");
-                
-            nomeDoador = doacao.getNomeDoador();
             resultado.append("<td style='border-bottom:")
-                     .append(temProduto ? "none" : "1px solid #000").append("'><span>")
-                     .append(nomeDoador).append("</span></td>");
-                
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; '>")
+                     .append("<span>")
+                     .append(pedido.getStatus())
+                     .append("</span></td>");
+            nomeCliente = pedido.getNomeCliente();
             resultado.append("<td style='border-bottom:")
-                     .append(temProduto ? "none" : "1px solid #000").append("'><span>")
-                     .append(doacao.getTipo()).append("</span></td>");
-                
+                     .append(temObservacao ? "none" : "1px solid #000").append("'><span>")
+                     .append(nomeCliente).append("</span></td>");
             resultado.append("<td style='border-bottom:")
-                     .append(temProduto ? "none" : "1px solid #000").append("'><span>");
-            if (doacao.getValor() != 0) {
-                resultado.append("R$ ").append(String.format("%.2f", doacao.getValor()));
+                     .append(temObservacao ? "none" : "1px solid #000").append("'><span>")
+                     .append(pedido.getLocal()).append("</span></td>");
+            resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; text-align: center;'>")
+                     .append("<span>")
+                     .append(pedido.getQtdMarmitas()).append("</span></td>");
+            resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; text-align: center;'>")
+                     .append("<span>")
+                     .append(formatador.format(pedido.getDataPedido())).append("</span></td>");
+
+            if (pedido.getDataEntrega() != null) {
+                resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; text-align: center;'>")
+                     .append("<span>")
+                     .append(formatador.format(pedido.getDataEntrega())).append("</span></td>");
+            } else {
+                resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000").append("'><span>")
+                     .append("").append("</span></td>");
             }
-            resultado.append("</span></td>");
-        
-            resultado.append("<td style='border-bottom:")
-                     .append(temProduto ? "none" : "1px solid #000").append("'><span>")
-                     .append(doacao.getObservacao()).append("</span></td>");
-        
-            resultado.append("<td style='border-bottom:")
-                     .append(temProduto ? "none" : "1px solid #000").append("'><span>")
-                     .append(formatador.format(doacao.getData())).append("</span></td>");
-        
+
             resultado.append("</tr>");
-        
-            if (temProduto) {
+            if (temObservacao) {
                 resultado.append("<tr class='detalhes-produto'>")
-                         .append("<td colspan='6' style='border-bottom: 1px solid #000; padding-left: 37px;'>")
-                         .append("<strong>Produtos:</strong> <span>")
-                         .append(doacao.getProdutos())
+                         .append("<td colspan='7' style='border-bottom: 1px solid #000; padding-left: 41px;'>")
+                         .append("<strong>Observação:</strong> <span>")
+                         .append(pedido.getObservacao())
                          .append("</span></td>")
                          .append("</tr>");
             }
             qtdRegistros++;
         }
 
-        LocalDate dataPedido = (LocalDate) filtros.get(0);
-        LocalDate dataEntrega = (LocalDate) filtros.get(1);
+        LocalDate dataPedidoInicio = (LocalDate) filtros.get(0);
+        LocalDate dataPedidoFim = (LocalDate) filtros.get(1);
+        LocalDate dataEntregaInicio = (LocalDate) filtros.get(2);
+        LocalDate dataEntregaFim = (LocalDate) filtros.get(3);
 
         if (filtros.get(0) != null) {
-            template = template.replace("{{dataInicio}}", formatador.format(dataInicio).toString());
+            template = template.replace("{{dataPedidoInicio}}", formatador.format(dataPedidoInicio).toString());
         } else {
-            template = template.replace("{{dataInicio}}", "");
+            template = template.replace("{{dataPedidoInicio}}", "");
         }
 
         if (filtros.get(1) != null) {
-            template = template.replace("{{dataFim}}", formatador.format(dataFim).toString());
+            template = template.replace("{{dataPedidoFim}}", formatador.format(dataPedidoFim).toString());
         } else {
-            template = template.replace("{{dataFim}}", "");
+            template = template.replace("{{dataPedidoFim}}", "");
         }
 
-        template = template.replace("{{tipoDoacao}}", filtros.get(2).toString());
-        template = template.replace("{{tipoProduto}}", filtros.get(3).toString());
-
-        if (filtros.get(4) != null) {
-            template = template.replace("{{filtroDoador}}", nomeDoador);
+        if (filtros.get(2) != null) {
+            template = template.replace("{{dataEntregaInicio}}", formatador.format(dataEntregaInicio).toString());
         } else {
-            template = template.replace("{{filtroDoador}}", "");
+            template = template.replace("{{dataEntregaInicio}}", "");
         }
+
+        if (filtros.get(3) != null) {
+            template = template.replace("{{dataEntregaFim}}", formatador.format(dataEntregaFim).toString());
+        } else {
+            template = template.replace("{{dataEntregaFim}}", "");
+        }
+
+        template = template.replace("{{filtroStatus}}", filtros.get(4).toString());
 
         if (filtros.get(5) != null) {
-            template = template.replace("{{filtroProduto}}", filtros.get(5).toString());
+            template = template.replace("{{filtroCliente}}", nomeCliente);
         } else {
-            template = template.replace("{{filtroProduto}}", "");
+            template = template.replace("{{filtroCliente}}", "");
         }
 
+        template = template.replace("{{filtroLocal}}", filtros.get(6).toString());
+        template = template.replace("{{filtroCidade}}", filtros.get(7).toString());
+
         StringBuilder ordem = new StringBuilder();
-        if (filtros.get(6) != null) {
-            switch (filtros.get(6).toString()) {
-                case "data": ordem.append("Data"); break;
+        if (filtros.get(8) != null) {
+            switch (filtros.get(8).toString()) {
                 case "codigo": ordem.append("Código"); break;
-                case "nome": ordem.append("Nome do Doador"); break;
-                case "valor": ordem.append("Valor"); break;
-                case "quantidade": ordem.append("Quantidade de Produtos"); break;
+                case "status": ordem.append("Status"); break;
+                case "quantidade": ordem.append("Marmitas"); break;
+                case "dataPedido": ordem.append("Data do Pedido"); break;
+                case "dataEntrega": ordem.append("Data da Entrega"); break;
+                case "nome": ordem.append("Cliente"); break;
             }
             template = template.replace("{{ordenacao}}", ordem);
         }
 
-        if (filtros.get(7) != null) {
+        if (filtros.get(9) != null) {
             StringBuilder sentido = new StringBuilder();
-            sentido.append(filtros.get(7).equals("asc") ? "Crescente" : "Decrescente");
+            sentido.append(filtros.get(9).equals("asc") ? "Crescente" : "Decrescente");
             template = template.replace("{{sentido}}", sentido);
         }
 
         LocalDate agora = LocalDate.now();
         template = template.replace("{{resultados}}", resultado.toString())
-                           .replace("{{qtdDoacoes}}", String.valueOf(qtdRegistros))
-                           .replace("{{vlrTotal}}", "R$ "+ String.format("%.2f", totalizacao.getTotalValor()))
-                           .replace("{{qtdProdutos}}", String.valueOf(totalizacao.getTotalProdutos()))
-                           .replace("{{qtdItens}}", String.valueOf(totalizacao.getTotalItens()))
+                           .replace("{{qtdPedidos}}", String.valueOf(qtdRegistros))
+                           .replace("{{totalMarmitas}}", String.valueOf(totalizacao.getTotalMarmitas()))
+                           .replace("{{totalAbertos}}", String.valueOf(totalizacao.getTotalPendente()))
+                           .replace("{{totalFechados}}", String.valueOf(totalizacao.getTotalFechado()))
+                           .replace("{{totalCancelados}}", String.valueOf(totalizacao.getTotalCancelado()))
                            .replace("{{dataEmissao}}", formatador.format(agora));
         String templatePreenchido = template;
 
-        String diretorio = "C:\\SistemaNossoLar\\Relatorios\\Doacao";
+        String diretorio = "C:\\SistemaNossoLar\\Relatorios\\Pedido";
         String arquivo = diretorio + "\\teste.pdf";
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }

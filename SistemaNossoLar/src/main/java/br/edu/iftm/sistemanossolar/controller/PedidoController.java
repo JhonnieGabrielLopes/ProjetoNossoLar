@@ -62,40 +62,36 @@ public class PedidoController {
         return pedidoDAO.listarPedidos(sqlFiltro.toString(), filtros);
     }
 
-    public RetornoPedidos filtrarRelatorio(LocalDate dataPedido, LocalDate dataEntrega, String status, String tipoCliente, Integer idCliente, String local, String cidade, String ordem, String sentido) throws SQLException {
+    public RetornoPedidos filtrarRelatorio(LocalDate dataPedidoInicio, LocalDate dataPedidoFim, LocalDate dataEntregaInicio, LocalDate dataEntregaFim, String status, Integer idCliente, String local, String cidade, String ordem, String sentido) throws SQLException {
         log.registrarLog(1, "PedidoController", "filtrarRelatorio", "pedido, usuario", "Filtrando dados do relatório");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
 
-        if (dataPedido != null && dataEntrega == null) {
+        if (dataPedidoInicio != null && dataPedidoFim == null) {
             sqlFiltro.append("AND p.dataPedido >= ? ");
-            filtros.add(dataPedido);
+            filtros.add(dataPedidoInicio);
         }
 
-        if (dataEntrega != null && dataPedido == null) {
-            sqlFiltro.append("AND p.dataEntrega <= ? ");
-            filtros.add(dataEntrega);
+        if (dataPedidoInicio != null && dataPedidoFim != null) {
+            sqlFiltro.append("AND p.dataPedido BETWEEN ? AND ? ");
+            filtros.add(dataPedidoInicio);
+            filtros.add(dataPedidoFim);
         }
 
-        if (dataPedido != null && dataEntrega != null) {
-            sqlFiltro.append("AND p.dataPedido = ? AND p.dataEntrega = ? ");
-            filtros.add(dataPedido);
-            filtros.add(dataEntrega);
+        if (dataEntregaInicio != null && dataEntregaFim == null) {
+            sqlFiltro.append("AND p.dataEntrega >= ? ");
+            filtros.add(dataEntregaInicio);
         }
 
-        if (status != null) {
+        if (dataEntregaInicio != null && dataEntregaFim != null) {
+            sqlFiltro.append("AND p.dataEntrega BETWEEN ? AND ? ");
+            filtros.add(dataEntregaInicio);
+            filtros.add(dataEntregaFim);
+        }
+
+        if (status != null && !status.equals("Todos")) {
             sqlFiltro.append("AND p.status = ? ");
             filtros.add(status);
-        }
-
-        if (!tipoCliente.isEmpty() && !tipoCliente.equals("Todos")) {
-            sqlFiltro.append("AND tu.tipo = ? ");
-            filtros.add(tipoCliente);
-        }
-
-        if (idCliente != null) {
-            sqlFiltro.append("AND p.pessoa = ? ");
-            filtros.add(idCliente);
         }
 
         if (local != null && !local.isEmpty() && !local.equals("Todos")) {
@@ -103,16 +99,22 @@ public class PedidoController {
             filtros.add("%" + local + "%");
         }
 
-        if (cidade != null && !cidade.isEmpty() && !cidade.equals("Todos")) {
+        if (idCliente != null) {
+            sqlFiltro.append("AND p.pessoa = ? ");
+            filtros.add(idCliente);
+        }
+
+        if (cidade != null && !cidade.isEmpty() && !cidade.equals("Todas")) {
             sqlFiltro.append("AND c.nome LIKE ? ");
             filtros.add("%" + cidade + "%");
         }
 
         List<Object> filtrosRelatorio = new ArrayList<>();
-        filtrosRelatorio.add(dataPedido);
-        filtrosRelatorio.add(dataEntrega);
+        filtrosRelatorio.add(dataPedidoInicio);
+        filtrosRelatorio.add(dataPedidoFim);
+        filtrosRelatorio.add(dataEntregaInicio);
+        filtrosRelatorio.add(dataEntregaFim);
         filtrosRelatorio.add(status);
-        filtrosRelatorio.add(tipoCliente);
         filtrosRelatorio.add(idCliente);
         filtrosRelatorio.add(local);
         filtrosRelatorio.add(cidade);
@@ -122,7 +124,6 @@ public class PedidoController {
         StringBuilder sqlFinal = new StringBuilder();
         sqlFinal.append(sqlFiltro);
         
-        sqlFinal.append("GROUP BY d.id ");
         if (ordem != null && !ordem.isEmpty()) {
             sqlFinal.append("ORDER BY ");
             switch (ordem) {

@@ -93,7 +93,12 @@ public class SistemaNossoLar {
                         controle = false;
                         break;
 
-                    case 23:
+                    case 21:
+                        metodos.relatorioPedido();
+                        controle = false;
+                        break;
+
+                    case 22:
                         log.registrarLog(1, "SistemaNossoLar", "main", "", "Encerrando o sistema");
                         controle = true;
                         break;

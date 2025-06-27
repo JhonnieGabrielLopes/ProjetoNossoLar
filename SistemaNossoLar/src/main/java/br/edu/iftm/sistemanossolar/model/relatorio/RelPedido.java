@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class RelPedido {
     private Integer idPedido;
     private Integer idCliente;
+    private String status;
     private String nomeCliente;
-    private String tipoCliente;
     private String cidadeCliente;
     private Integer qtdMarmitas;
     private String local;
@@ -37,6 +37,14 @@ public class RelPedido {
         this.idCliente = idCliente;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getNomeCliente() {
         return nomeCliente;
     }
@@ -51,14 +59,6 @@ public class RelPedido {
 
     public void setCidadeCliente(String cidadeCliente) {
         this.cidadeCliente = cidadeCliente;
-    }
-
-    public String getTipoCliente() {
-        return tipoCliente;
-    }
-
-    public void setTipoCliente(String tipoCliente) {
-        this.tipoCliente = tipoCliente;
     }
 
     public Integer getQtdMarmitas() {

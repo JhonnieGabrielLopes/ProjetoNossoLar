@@ -124,19 +124,20 @@
                         <table class="tabela-filtros">
                             <p><strong>Filtros:</strong></p>
                             <tr>
-                                <td><strong>Data do Pedido:</strong> {{dataPedido}}</td>
-                                <td><strong>Data da Entrega:</strong> {{dataEntrega}}</td>
+                                <td><strong>Data Pedido Inicio:</strong> {{dataPedidoInicio}}</td>
+                                <td><strong>Pedido Fim:</strong> {{dataPedidoFim}}</td>
                                 <td><strong>Status:</strong> {{filtroStatus}}</td>
+                                <td><strong>Local:</strong> {{filtroLocal}}</td>
                             </tr>
                             <tr>
-                                <td><strong>Cidade Cliente:</strong> {{filtroCidade}}</td>
-                                <td><strong>Tipo Cliente:</strong> {{filtroTipo}}</td>
+                                <td><strong>Data Entrega Inicio:</strong> {{dataEntregaInicio}}</td>
+                                <td><strong>Entrega Fim:</strong> {{dataEntregaFim}}</td>
                                 <td><strong>Cliente:</strong> {{filtroCliente}}</td>
                             </tr>
                             <tr>
                                 <td><strong>Ordem:</strong> {{ordenacao}}</td>
                                 <td><strong>Sentido:</strong> {{sentido}}</td>
-                                <td><strong>Local:</strong> {{filtroLocal}}</td>
+                                <td><strong>Cidade Cliente:</strong> {{filtroCidade}}</td>
                             </tr>
                         </table>
                     </td>
@@ -148,34 +149,29 @@
                 <table class="tabela-cheia">
                     <thead>
                         <tr>
-                            <th style="width: 3%;">Cód.</th>
-                            <th style="width: 8%;">Status</th>
-                            <th style="width: 20%;">Cliente</th>
-                            <th style="width: 9%;">Tipo</th>
-                            <th style="width: 9%;">Local</th>
-                            <th style="width: 9%;">Marmitas</th>
-                            <th style="width: 9%;">Data Pedido</th>
-                            <th style="width: 9%;">Data Entrega</th>
+                            <th style="width: 1%; text-align: center;">Cód.</th>
+                            <th style="width: 9%;">Status</th>
+                            <th style="width: 28%;">Cliente</th>
+                            <th style="width: 10%;">Local</th>
+                            <th style="width: 7%; text-align: center;">Marmitas</th>
+                            <th style="width: 7%; text-align: center;">Data Pedido</th>
+                            <th style="width: 7%; text-align: center;">Data Entrega</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{resultados}}
                     </tbody>
                 </table>
-
                 <p><span class="valor">{{qtdPedidos}}</span> pedidos</p>
-
                 <table class="tabela-totalizadora">
                     <tr>
-                        <td><strong>Total Marmitas: </strong><span class="valor">{{totalMarmitas}}</span></td>
                         <td><strong>Pendente: </strong><span class="valor">{{totalAbertos}}</span></td>
                         <td><strong>Fechado: </strong><span class="valor">{{totalFechados}}</span></td>
                         <td><strong>Cancelado: </strong><span class="valor">{{totalCancelados}}</span></td>
+                        <td><strong>Total Marmitas: </strong><span class="valor">{{totalMarmitas}}</span></td>
                     </tr>
                 </table>
-
                 <p class="data-emissao">Emitido em {{dataEmissao}}</p>
-            
             </div>
         </div>
     </div>

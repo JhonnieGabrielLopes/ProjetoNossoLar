@@ -105,7 +105,7 @@ public class PedidoDAO {
 
     public List<RelPedido> filtrarRegistrosRelatorio(String filtro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT p.id AS codigo_pedido, u.id AS codigo_cliente, u.nome AS nome_cliente, tu.tipo AS tipo_cliente, p.quantidade AS marmitas, u.local, p.observacao, p.dataPedido, p.dataEntrega, c.nome AS cidade ");
+        sql.append("SELECT p.id AS codigo_pedido, p.status, u.id AS codigo_cliente, u.nome AS nome_cliente, p.quantidade AS marmitas, u.local, p.observacao, p.dataPedido, p.dataEntrega, c.nome AS cidade ");
         sql.append("FROM pedido p ");
         sql.append("JOIN usuario u ON p.pessoa = u.id ");
         sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
@@ -126,20 +126,29 @@ public class PedidoDAO {
             while (rs.next()) {
                 RelPedido pedido = new RelPedido();
                 pedido.setIdPedido(rs.getInt("codigo_pedido"));
+                pedido.setStatus(rs.getString("status"));
                 pedido.setIdCliente(rs.getInt("codigo_cliente"));
                 pedido.setNomeCliente(rs.getString("nome_cliente"));
-                pedido.setTipoCliente(rs.getString("tipo_cliente"));
-                pedido.setQtdMarmitas(rs.getInt("marmitas"));
-                pedido.setLocal(rs.getString("local"));
-                pedido.setObservacao(rs.getString("observacao"));
-                if (pedido.getObservacao() == null) {
-                    pedido.setObservacao("");
+                
+                String local = rs.getString("local");
+                if (local.equals("HOSPITAL")) {
+                    pedido.setLocal("Hospital");
+                } else if (local.equals("PRONTOSOCORRO")) {
+                    pedido.setLocal("Pronto Socorro");
+                } else {
+                    pedido.setLocal("");   
                 }
+                
+                pedido.setQtdMarmitas(rs.getInt("marmitas"));
                 LocalDate dataPedido = rs.getObject("dataPedido", LocalDate.class);
                 pedido.setDataPedido(dataPedido);
                 LocalDate dataEntrega = rs.getObject("dataEntrega", LocalDate.class);
                 pedido.setDataEntrega(dataEntrega);
                 pedido.setCidadeCliente(rs.getString("cidade"));
+                pedido.setObservacao(rs.getString("observacao"));
+                if (pedido.getObservacao() == null) {
+                    pedido.setObservacao("");
+                }
                 pedidos.add(pedido);
             }
             log.registrarLog(2, "PedidoDAO", "filtrarRegistrosRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Filtragem dos dados finalizada");
