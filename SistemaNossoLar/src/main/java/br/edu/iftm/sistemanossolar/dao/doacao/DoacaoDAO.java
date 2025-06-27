@@ -95,7 +95,6 @@ public class DoacaoDAO {
         sql.append("WHERE 1=1 ");
         sql.append(filtro);
 
-        System.out.println(sql.toString());
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
             for (int i = 0; i < filtros.size(); i++) {
                 stmt.setObject(i + 1, filtros.get(i));

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.List;
@@ -85,6 +86,7 @@ public class RelatorioController {
         log.registrarLog(1, "RelatorioController", "montarArquivo", "", "Montando arquivo '.pdf' no template");
         try (OutputStream os = new FileOutputStream(arquivo)) {
             ITextRenderer renderer = new ITextRenderer();
+            renderer.getSharedContext().setBaseURL("file:///C:/SistemaNossoLar/SistemaNossoLar/src/main/resources/relatorio/");
             renderer.setDocumentFromString(templatePreenchido);
             renderer.layout();
             renderer.createPDF(os);
@@ -109,7 +111,7 @@ public class RelatorioController {
                 .replace("{{data}}", doacao.getDataDoacao().format(formatador));
 
             String diretorio = "C:\\SistemaNossoLar\\Recibos\\Doacao";
-            String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ " " +doacao.getDoador().getNome()+ ".pdf";
+            String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ ".pdf";
             criarArquivo(diretorio, arquivo, templatePreenchido);
         } else {
             String template = RelatorioController.templateDoacaoProduto();
@@ -131,7 +133,7 @@ public class RelatorioController {
                 .replace("{{data}}", doacao.getDataDoacao().format(formatador));
 
             String diretorio = "C:\\SistemaNossoLar\\Recibos\\Doacao";
-            String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ " " +doacao.getDoador().getNome()+ ".pdf";
+            String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ ".pdf";
             criarArquivo(diretorio, arquivo, templatePreenchido);
         }
     }
@@ -254,7 +256,7 @@ public class RelatorioController {
             template = template.replace("{{sentido}}", sentido);
         }
 
-        LocalDate agora = LocalDate.now();
+        LocalDateTime agora = LocalDateTime.now();
         template = template.replace("{{resultados}}", resultado.toString())
                            .replace("{{qtdDoacoes}}", String.valueOf(qtdRegistros))
                            .replace("{{vlrTotal}}", "R$ "+ String.format("%.2f", totalizacao.getTotalValor()))
@@ -264,7 +266,9 @@ public class RelatorioController {
         String templatePreenchido = template;
 
         String diretorio = "C:\\SistemaNossoLar\\Relatorios\\Doacao";
-        String arquivo = diretorio + "\\teste.pdf";
+        formatador = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
+        String dataHoraAgora = agora.format(formatador);
+        String arquivo = diretorio + "\\Doacoes " +dataHoraAgora+ ".pdf";
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }
 
@@ -290,7 +294,9 @@ public class RelatorioController {
         }
 
         String paciente = "";
-        if (pedido.getCliente().getPaciente() != null) {
+        if (pedido.getCliente() != null && 
+            pedido.getCliente().getPaciente() != null && 
+            pedido.getCliente().getPaciente().getNome() != null) {
             paciente = pedido.getCliente().getPaciente().getNome();
         }
 
@@ -310,7 +316,7 @@ public class RelatorioController {
             .replace("{{observacao}}", observacao);
 
         String diretorio = "C:\\SistemaNossoLar\\Recibos\\Pedidos";
-        String arquivo = diretorio + "\\Pedido " +pedido.getId().toString()+ " " +pedido.getCliente().getNome()+ ".pdf";
+        String arquivo = diretorio + "\\Pedido " +pedido.getId().toString()+ ".pdf";
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }
 
@@ -320,7 +326,7 @@ public class RelatorioController {
         LocalDate dataTeste1 = LocalDate.parse(data1);
         String data2 = "2023-06-15"; 
         LocalDate dataTeste2 = LocalDate.parse(data2);
-        RetornoPedidos relatorio = pedidoController.filtrarRelatorio(null, null, null, null, "Todos", null, "Todos", "Centralina", "dataPedido", "asc");
+        RetornoPedidos relatorio = pedidoController.filtrarRelatorio(null, null, null, null, "Todos", null, "Todos", "Todas", "dataPedido", "asc");
         gerarRelatorioPedidos(relatorio.getPedidos(), relatorio.getTotalizacao(), relatorio.getFiltros());
     }
 
@@ -451,7 +457,7 @@ public class RelatorioController {
             template = template.replace("{{sentido}}", sentido);
         }
 
-        LocalDate agora = LocalDate.now();
+        LocalDateTime agora = LocalDateTime.now();
         template = template.replace("{{resultados}}", resultado.toString())
                            .replace("{{qtdPedidos}}", String.valueOf(qtdRegistros))
                            .replace("{{totalMarmitas}}", String.valueOf(totalizacao.getTotalMarmitas()))
@@ -462,7 +468,9 @@ public class RelatorioController {
         String templatePreenchido = template;
 
         String diretorio = "C:\\SistemaNossoLar\\Relatorios\\Pedido";
-        String arquivo = diretorio + "\\teste.pdf";
+        formatador = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
+        String dataHoraAgora = agora.format(formatador);
+        String arquivo = diretorio + "\\Pedidos " +dataHoraAgora+ ".pdf";
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }
 }
