@@ -1,6 +1,5 @@
 package br.edu.iftm.sistemanossolar.model.relatorio;
 
-
 import java.util.List;
 
 public class RetornoDoacoes {

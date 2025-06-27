@@ -2389,20 +2389,20 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="pnRelPedFiltros" min="-2" pref="1185" max="-2" attributes="0"/>
-                                  <Component id="pnRelPedResultado" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="btRelPedidoSalvar" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btRelPedidoLimpar" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btRelPedVoltar" min="-2" pref="125" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="pnRelPedFiltros" max="32767" attributes="0"/>
+                                      <Component id="pnRelPedResultado" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btRelPedidoSalvar" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btRelPedidoLimpar" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btRelPedVoltar" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2413,13 +2413,13 @@
                               <Component id="pnRelPedFiltros" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="pnRelPedResultado" max="32767" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btRelPedidoSalvar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                   <Component id="btRelPedidoLimpar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                   <Component id="btRelPedVoltar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2440,39 +2440,38 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="tfRelPedDtPedido" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
-                                              <Component id="lbRelPedDtPedido" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="lbRelPedDtEntrega" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="tfRelPedDtEntrega" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbRelPedOrdenacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cbRelPedOrdenacao" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="cbRelPedSentido" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="tfRelPedDtPedido" alignment="0" pref="161" max="32767" attributes="0"/>
+                                      <Component id="lbRelPedDtPedido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbRelPedDtEntrega" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tfRelPedDtEntrega" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="tfRelPedDtPedido1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lbRelPedDtPedido1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbRelPedDtEntrega1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tfRelPedDtEntrega1" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbRelPedStatus" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbRelPedStatus" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                      <Component id="lbRelPedOrdenacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbRelPedOrdenacao" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbRelPedStatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cbRelPedStatus" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="cbRelPedSentido" min="-2" pref="161" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbRelPedTipo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cbRelPedTipo" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                              <Component id="lbRelPedLocal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbRelPedLocal" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="btRelPedFiltrar" min="-2" pref="161" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lbRelPedCliente" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
@@ -2481,95 +2480,100 @@
                                                   <Component id="btRelPedBuscarCliente" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbRelPedLocal" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cbRelPedLocal" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lbRelPedCidade" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="cbRelPedCidade" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="334" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btRelPedFiltrar" min="-2" pref="155" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lbRelPedDtPedido" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="tfRelPedDtPedido" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lbRelPedDtEntrega" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="tfRelPedDtEntrega" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lbRelPedStatus" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="cbRelPedStatus" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lbRelPedDtPedido1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lbRelPedTipo" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="cbRelPedTipo" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfRelPedDtPedido1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="lbRelPedCliente" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="3" attributes="0">
+                                                              <Component id="tfRelPedCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="btRelPedBuscarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="lbRelPedCidade" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="cbRelPedCidade" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="cbRelPedSentido" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="lbRelPedLocal" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="cbRelPedLocal" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="btRelPedFiltrar" min="-2" pref="48" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lbRelPedCliente" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="3" attributes="0">
-                                                      <Component id="tfRelPedCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="btRelPedBuscarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="lbRelPedDtPedido" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="tfRelPedDtPedido" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="lbRelPedStatus" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="cbRelPedStatus" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <EmptySpace max="32767" attributes="0"/>
+                                                          <Component id="lbRelPedDtEntrega" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="tfRelPedDtEntrega" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Group type="102" attributes="0">
+                                                                  <Component id="lbRelPedDtEntrega1" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace max="-2" attributes="0"/>
+                                                                  <Component id="tfRelPedDtEntrega1" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                              </Group>
+                                                              <Group type="102" alignment="1" attributes="0">
+                                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                                  <Component id="lbRelPedOrdenacao" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace max="-2" attributes="0"/>
+                                                                  <Component id="cbRelPedOrdenacao" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                      </Group>
                                                   </Group>
                                               </Group>
                                           </Group>
+                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btRelPedFiltrar" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lbRelPedOrdenacao" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="cbRelPedOrdenacao" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="cbRelPedSentido" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lbRelPedLocal" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="cbRelPedLocal" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lbRelPedCidade" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="cbRelPedCidade" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2577,14 +2581,14 @@
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="lbRelPedDtPedido">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="D:ata do Pedido"/>
+                            <Property name="text" type="java.lang.String" value="Data do Pedido (In&#xed;cio)"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JFormattedTextField" name="tfRelPedDtPedido">
                         </Component>
                         <Component class="javax.swing.JLabel" name="lbRelPedDtEntrega">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Data da Entrega:"/>
+                            <Property name="text" type="java.lang.String" value="Data da Entrega: (In&#xed;cio)"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JFormattedTextField" name="tfRelPedDtEntrega">
@@ -2607,28 +2611,6 @@
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRelPedStatusActionPerformed"/>
-                          </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                          </AuxValues>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="lbRelPedTipo">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Tipo Cliente:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JComboBox" name="cbRelPedTipo">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="3">
-                                <StringItem index="0" value="Todos"/>
-                                <StringItem index="1" value="Assistente"/>
-                                <StringItem index="2" value="Benefici&#xe1;rio"/>
-                              </StringArray>
-                            </Property>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRelPedTipoActionPerformed"/>
                           </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -2708,11 +2690,10 @@
                         <Component class="javax.swing.JComboBox" name="cbRelPedCidade">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="4">
-                                <StringItem index="0" value="Todos"/>
-                                <StringItem index="1" value="Alimento"/>
-                                <StringItem index="2" value="Limpeza"/>
-                                <StringItem index="3" value="Outros"/>
+                              <StringArray count="3">
+                                <StringItem index="0" value="Todas"/>
+                                <StringItem index="1" value="Ituiutaba"/>
+                                <StringItem index="2" value="Paracatu"/>
                               </StringArray>
                             </Property>
                           </Properties>
@@ -2724,6 +2705,20 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Filtrar"/>
                           </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelPedDtPedido1">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Data do Pedido (Fim)"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="tfRelPedDtPedido1">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbRelPedDtEntrega1">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Data da Entrega: (Fim)"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="tfRelPedDtEntrega1">
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2742,11 +2737,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="spRelPedResultado" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jpRelPedTotStatus" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="spRelPedResultado" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="jpRelPedTotMarmitas" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jpRelPedTotStatus" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -2760,15 +2755,15 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="spRelPedResultado" min="-2" pref="349" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                          <Component id="jpRelPedTotMarmitas" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jpRelPedTotStatus" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jpRelPedTotMarmitas" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -2786,11 +2781,10 @@
                             <Component class="javax.swing.JTable" name="tableRelatorioPedido">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="9" rowCount="10">
+                                  <Table columnCount="8" rowCount="10">
                                     <Column editable="false" title="C&#xf3;d." type="java.lang.Integer"/>
                                     <Column editable="false" title="Status" type="java.lang.String"/>
                                     <Column editable="false" title="Cliente" type="java.lang.String"/>
-                                    <Column editable="false" title="Tipo" type="java.lang.String"/>
                                     <Column editable="false" title="Local" type="java.lang.String"/>
                                     <Column editable="false" title="Marmitas" type="java.lang.Integer"/>
                                     <Column editable="false" title="Observa&#xe7;&#xe3;o" type="java.lang.String"/>
@@ -2870,7 +2864,7 @@
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="12" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
