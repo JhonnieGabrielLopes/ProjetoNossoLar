@@ -133,7 +133,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,101,0,0,4,-47"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,101,0,0,4,-23"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -189,7 +189,7 @@
                                   <Component id="pnEnderecoCliente" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="136" max="32767" attributes="0"/>
+                          <EmptySpace pref="160" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -737,7 +737,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           <Component id="pnBuscar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="733" max="32767" attributes="0"/>
+                          <EmptySpace pref="757" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -853,7 +853,7 @@
                               </Group>
                               <Component id="pnDoacao" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="55" max="32767" attributes="0"/>
+                          <EmptySpace pref="79" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="pnDoacaoProduto" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
@@ -953,7 +953,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="tfDoacaoIdDoacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btDoacaoBuscarDoacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btDoacaoBuscarDoacao" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -1382,7 +1382,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="pnPedido" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="634" max="32767" attributes="0"/>
+                          <EmptySpace pref="658" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1391,7 +1391,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="pnPedido" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="319" max="32767" attributes="0"/>
+                          <EmptySpace pref="296" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1419,36 +1419,41 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="lbPedidoCliente" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="tfPedidoCliente" min="-2" pref="424" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="tfPedidoCliente" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btPedidoBuscarCliente" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="lbPedidoStatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbPedidoQtdMarmitas" min="-2" max="-2" attributes="0"/>
-                                              <Component id="tfPedidoQtdMarmitas" min="-2" pref="351" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbPedidoDtEntrega" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="cbPedidoStatus" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                                      <Component id="lbPedidoQtdMarmitas" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tfPedidoQtdMarmitas" min="-2" pref="351" max="-2" attributes="0"/>
                                       <Component id="lbPedidoObservacao" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPane4" alignment="0" min="-2" pref="528" max="-2" attributes="0"/>
-                                      <Component id="ffPedidoDtEntrega" alignment="1" min="-2" pref="165" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="tfPedidoId" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                                          <Component id="lbPedidoId" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbPedidoIdPedido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="tfPedidoIdPedido" min="-2" pref="52" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="btPedidoBuscarPedido" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbPedidoStatus" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cbPedidoStatus" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="ffPedidoDtPedido" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
                                           <Component id="lbPedidoDtPedido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lbPedidoDtEntrega" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ffPedidoDtEntrega" alignment="1" min="-2" pref="165" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1459,48 +1464,47 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbPedidoCliente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="tfPedidoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btPedidoBuscarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbPedidoQtdMarmitas" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lbPedidoIdPedido" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tfPedidoQtdMarmitas" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="btPedidoBuscarPedido" max="32767" attributes="0"/>
+                                          <Component id="tfPedidoIdPedido" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="lbPedidoStatus" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbPedidoStatus" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lbPedidoDtPedido" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="ffPedidoDtPedido" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
                                       <Component id="lbPedidoDtEntrega" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="ffPedidoDtEntrega" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="lbPedidoStatus" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbPedidoStatus" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lbPedidoCliente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfPedidoCliente" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btPedidoBuscarCliente" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="50" max="32767" attributes="0"/>
+                              <Component id="lbPedidoQtdMarmitas" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfPedidoQtdMarmitas" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                               <Component id="lbPedidoObservacao" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane4" min="-2" pref="69" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbPedidoDtPedido" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="ffPedidoDtPedido" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbPedidoId" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tfPedidoId" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace pref="44" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btPedidoRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btPedidoLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1516,14 +1520,9 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPedidoClienteActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="btPedidoBuscarCliente">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Buscar"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lbPedidoCliente">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Cliente"/>
+                        <Property name="text" type="java.lang.String" value="Assistente/Benefici&#xe1;rio"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfPedidoQtdMarmitas">
@@ -1540,21 +1539,8 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbPedidoDtPedido">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Data do Pedido"/>
+                        <Property name="text" type="java.lang.String" value="Data do Pedido:"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbPedidoId">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="ID Gerado"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="tfPedidoId">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="ID Gerado e Data autom&#xe1;ticos ap&#xf3;s clicar em Registrar"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPedidoIdActionPerformed"/>
-                      </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane4">
                       <AuxValues>
@@ -1579,7 +1565,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbPedidoDtEntrega">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Data de Entrega"/>
+                        <Property name="text" type="java.lang.String" value="Data da Entrega:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JFormattedTextField" name="ffPedidoDtEntrega">
@@ -1604,7 +1590,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbPedidoStatus">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Status do Pedido"/>
+                        <Property name="text" type="java.lang.String" value="Status:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btPedidoRegistrar">
@@ -1616,6 +1602,42 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Limpar"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tfPedidoIdPedido">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbPedidoIdPedido">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btPedidoBuscarPedido">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/loupe.png"/>
+                        </Property>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[1, 1, 1, 1]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPedidoBuscarPedidoActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btPedidoBuscarCliente">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/loupe.png"/>
+                        </Property>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[1, 1, 1, 1]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPedidoBuscarClienteActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1634,7 +1656,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="pnPedido1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="453" max="32767" attributes="0"/>
+                          <EmptySpace pref="477" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1890,7 +1912,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="pnRelDoa" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="60" max="32767" attributes="0"/>
+                          <EmptySpace pref="84" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2989,7 +3011,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="395" max="32767" attributes="0"/>
+                          <EmptySpace pref="419" max="32767" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
                       </Group>
