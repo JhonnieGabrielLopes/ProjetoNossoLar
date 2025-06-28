@@ -34,24 +34,27 @@ public class BuscarPedido extends javax.swing.JDialog {
         lbBuscarPedidoTipoPessoa = new javax.swing.JLabel();
         cbBuscarPedidoTipoPessoa = new javax.swing.JComboBox<>();
         lbBuscarPedidoData1 = new javax.swing.JLabel();
-        tfBuscarPedidoData1 = new javax.swing.JTextField();
+        ffBuscarPedidoDataInicio = new javax.swing.JFormattedTextField();
         lbBuscarPedidoData2 = new javax.swing.JLabel();
-        tfBuscarPedidoData2 = new javax.swing.JTextField();
-        btBuscarPedidoBuscar = new javax.swing.JButton();
+        ffBuscarPedidoDataFim = new javax.swing.JFormattedTextField();
+        btBuscarPedido = new javax.swing.JButton();
         pnBuscarPedidoResultado = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableBuscarPessoa = new javax.swing.JTable();
         btBuscarPedidoSelecionar = new javax.swing.JButton();
+        btBuscarPedidoLimpar = new javax.swing.JButton();
+        btBuscarPedidoSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        pnBuscarPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Pedido"));
+        pnBuscarPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        pnBuscarPedidoFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
+        pnBuscarPedidoFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        lbBuscarPedidoPessoa.setText("Nome da Pessoa");
+        lbBuscarPedidoPessoa.setText("Assistente/Beneficiário:");
         lbBuscarPedidoPessoa.setToolTipText("");
 
+        tfBuscarPedidoPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfBuscarPedidoPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfBuscarPedidoPessoaActionPerformed(evt);
@@ -63,45 +66,36 @@ public class BuscarPedido extends javax.swing.JDialog {
             }
         });
 
-        lbBuscarPedidoTipoPessoa.setText("Tipo");
+        lbBuscarPedidoTipoPessoa.setText("Tipo:");
         lbBuscarPedidoTipoPessoa.setToolTipText("");
 
+        cbBuscarPedidoTipoPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbBuscarPedidoTipoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Assistente", "Beneficiário" }));
 
-        lbBuscarPedidoData1.setText("Data Pedido Inicio");
+        lbBuscarPedidoData1.setText("Data Pedido Inicio:");
         lbBuscarPedidoData1.setToolTipText("");
 
-        tfBuscarPedidoData1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBuscarPedidoData1ActionPerformed(evt);
-            }
-        });
-        tfBuscarPedidoData1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBuscarPedidoData1KeyTyped(evt);
-            }
-        });
+        try {
+            ffBuscarPedidoDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ffBuscarPedidoDataInicio.setText("");
+        ffBuscarPedidoDataInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbBuscarPedidoData2.setText("Data Pedido Fim");
+        lbBuscarPedidoData2.setText("Data Pedido Fim:");
         lbBuscarPedidoData2.setToolTipText("");
 
-        tfBuscarPedidoData2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBuscarPedidoData2ActionPerformed(evt);
-            }
-        });
-        tfBuscarPedidoData2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBuscarPedidoData2KeyTyped(evt);
-            }
-        });
+        try {
+            ffBuscarPedidoDataFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ffBuscarPedidoDataFim.setText("");
+        ffBuscarPedidoDataFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btBuscarPedidoBuscar.setText("Buscar");
-        btBuscarPedidoBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBuscarPedidoBuscarActionPerformed(evt);
-            }
-        });
+        btBuscarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btBuscarPedido.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
         javax.swing.GroupLayout pnBuscarPedidoFiltrosLayout = new javax.swing.GroupLayout(pnBuscarPedidoFiltros);
         pnBuscarPedidoFiltros.setLayout(pnBuscarPedidoFiltrosLayout);
@@ -110,54 +104,60 @@ public class BuscarPedido extends javax.swing.JDialog {
             .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfBuscarPedidoPessoa)
+                    .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
+                        .addComponent(tfBuscarPedidoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
                         .addComponent(lbBuscarPedidoPessoa)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbBuscarPedidoTipoPessoa)
-                    .addComponent(cbBuscarPedidoTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbBuscarPedidoTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(ffBuscarPedidoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbBuscarPedidoData1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbBuscarPedidoData1)
-                    .addComponent(tfBuscarPedidoData1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfBuscarPedidoData2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
+                        .addComponent(ffBuscarPedidoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btBuscarPedido))
                     .addComponent(lbBuscarPedidoData2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btBuscarPedidoBuscar)
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
         pnBuscarPedidoFiltrosLayout.setVerticalGroup(
             pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addGap(10, 10, 10)
                 .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
                         .addComponent(lbBuscarPedidoPessoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfBuscarPedidoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tfBuscarPedidoData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
-                        .addComponent(lbBuscarPedidoData2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfBuscarPedidoData2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btBuscarPedidoBuscar)))
+                            .addComponent(lbBuscarPedidoData1)
+                            .addComponent(lbBuscarPedidoData2))
+                        .addGap(32, 32, 32))
                     .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
                         .addComponent(lbBuscarPedidoTipoPessoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbBuscarPedidoTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
-                        .addComponent(lbBuscarPedidoData1)
-                        .addGap(26, 26, 26)))
+                        .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbBuscarPedidoTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(ffBuscarPedidoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ffBuscarPedidoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btBuscarPedido))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        pnBuscarPedidoResultado.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
+        pnBuscarPedidoResultado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        tableBuscarPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableBuscarPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -198,18 +198,16 @@ public class BuscarPedido extends javax.swing.JDialog {
             pnBuscarPedidoResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBuscarPedidoResultadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         pnBuscarPedidoResultadoLayout.setVerticalGroup(
             pnBuscarPedidoResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBuscarPedidoResultadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        btBuscarPedidoSelecionar.setText("Selecionar");
 
         javax.swing.GroupLayout pnBuscarPessoaLayout = new javax.swing.GroupLayout(pnBuscarPessoa);
         pnBuscarPessoa.setLayout(pnBuscarPessoaLayout);
@@ -217,15 +215,10 @@ public class BuscarPedido extends javax.swing.JDialog {
             pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                        .addComponent(btBuscarPedidoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnBuscarPessoaLayout.createSequentialGroup()
-                        .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnBuscarPedidoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnBuscarPedidoFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 11, Short.MAX_VALUE))))
+                .addGroup(pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnBuscarPedidoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnBuscarPedidoFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         pnBuscarPessoaLayout.setVerticalGroup(
             pnBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,11 +226,28 @@ public class BuscarPedido extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnBuscarPedidoFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnBuscarPedidoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btBuscarPedidoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(pnBuscarPedidoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        btBuscarPedidoSelecionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btBuscarPedidoSelecionar.setText("Selecionar");
+
+        btBuscarPedidoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btBuscarPedidoLimpar.setText("Limpar");
+        btBuscarPedidoLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPedidoLimparActionPerformed(evt);
+            }
+        });
+
+        btBuscarPedidoSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btBuscarPedidoSair.setText("Sair");
+        btBuscarPedidoSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPedidoSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,31 +255,33 @@ public class BuscarPedido extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(btBuscarPedidoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btBuscarPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btBuscarPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnBuscarPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btBuscarPedidoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBuscarPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBuscarPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btBuscarPedidoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btBuscarPedidoBuscarActionPerformed
-
-    private void tfBuscarPedidoData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarPedidoData1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarPedidoData1ActionPerformed
-
-    private void tfBuscarPedidoData1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPedidoData1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarPedidoData1KeyTyped
 
     private void tfBuscarPedidoPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarPedidoPessoaActionPerformed
         // TODO add your handling code here:
@@ -279,13 +291,16 @@ public class BuscarPedido extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfBuscarPedidoPessoaKeyTyped
 
-    private void tfBuscarPedidoData2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPedidoData2KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarPedidoData2KeyTyped
+    private void btBuscarPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoLimparActionPerformed
+        tfBuscarPedidoPessoa.setText("");
+        cbBuscarPedidoTipoPessoa.setSelectedIndex(0);
+        ffBuscarPedidoDataInicio.setText("");
+        ffBuscarPedidoDataFim.setText("");
+    }//GEN-LAST:event_btBuscarPedidoLimparActionPerformed
 
-    private void tfBuscarPedidoData2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarPedidoData2ActionPerformed
+    private void btBuscarPedidoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoSairActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarPedidoData2ActionPerformed
+    }//GEN-LAST:event_btBuscarPedidoSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,9 +348,13 @@ public class BuscarPedido extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btBuscarPedidoBuscar;
+    private javax.swing.JButton btBuscarPedido;
+    private javax.swing.JButton btBuscarPedidoLimpar;
+    private javax.swing.JButton btBuscarPedidoSair;
     private javax.swing.JButton btBuscarPedidoSelecionar;
     private javax.swing.JComboBox<String> cbBuscarPedidoTipoPessoa;
+    private javax.swing.JFormattedTextField ffBuscarPedidoDataFim;
+    private javax.swing.JFormattedTextField ffBuscarPedidoDataInicio;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbBuscarPedidoData1;
     private javax.swing.JLabel lbBuscarPedidoData2;
@@ -345,8 +364,6 @@ public class BuscarPedido extends javax.swing.JDialog {
     private javax.swing.JPanel pnBuscarPedidoResultado;
     private javax.swing.JPanel pnBuscarPessoa;
     private javax.swing.JTable tableBuscarPessoa;
-    private javax.swing.JTextField tfBuscarPedidoData1;
-    private javax.swing.JTextField tfBuscarPedidoData2;
     private javax.swing.JTextField tfBuscarPedidoPessoa;
     // End of variables declaration//GEN-END:variables
 }

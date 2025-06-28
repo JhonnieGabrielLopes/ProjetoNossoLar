@@ -18,6 +18,10 @@
             font-size: 12px;
         }
 
+        img {
+            width: 150px;
+        }
+
         .recibo-container {
             margin-top: 5px;
         }
@@ -25,10 +29,6 @@
         .recibo {
             border: 2px solid #000;
             padding: 5px;
-        }
-
-        .cabecalho-img {
-            width: 140px;
         }
 
         .titulo-relatorio {
@@ -112,14 +112,14 @@
 <body>
     <div class="recibo-container">
         <div class="recibo">
-            <table style="width: 100%; margin-bottom: 5mm;">
+            <table style="width: 100%; margin-bottom: 2px;">
                 <tr>
-                    <td style="width: 130px; vertical-align: top;">
-                        <img src="file:///C:/SistemaNossoLar/SistemaNossoLar/src/main/resources/relatorio/doacao/logo_simples.png" alt="cabecalho"/>
+                    <td style="width: 150px; vertical-align: center;">
+                        <img src="file:///C:/SistemaNossoLar/SistemaNossoLar/src/main/resources/NossoLar.png" alt="cabecalho"/>
                     </td>
                     <td style="vertical-align: top;">
                         <p class="titulo-relatorio"><strong>RELATÓRIO DE DOAÇÕES</strong></p>
-                        <hr style="margin: 5px 0;"/>
+                        <hr style="margin: 10px 0;"/>
                         <table class="tabela-filtros">
                             <p><strong>Filtros:</strong></p>
                             <tr>
@@ -146,12 +146,12 @@
                 <table class="tabela-cheia">
                     <thead>
                         <tr>
-                            <th style="width: 4%;">Cód.</th>
+                            <th style="width: 4%; text-align: center;">Cód.</th>
                             <th style="width: 28%;">Doador</th>
-                            <th style="width: 8%;">Tipo</th>
-                            <th style="width: 9%;">Valor</th>
+                            <th style="width: 8%; text-align: center;">Tipo</th>
+                            <th style="width: 9%; text-align: center;">Valor</th>
                             <th style="width: 38%;">Observação</th>
-                            <th style="width: 9%;">Data</th>
+                            <th style="width: 9%; text-align: center;">Data</th>
                         </tr>
                     </thead>
                     <tbody>
