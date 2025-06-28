@@ -93,26 +93,31 @@ public class Telas extends javax.swing.JFrame {
         lbNome = new javax.swing.JLabel();
         ffTelefone = new javax.swing.JFormattedTextField();
         lbTelefone = new javax.swing.JLabel();
-        lbEmail = new javax.swing.JLabel();
-        tfEmail = new javax.swing.JTextField();
-        lbObservacao = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        taObservacao = new javax.swing.JTextArea();
-        rbPessoaFisica = new javax.swing.JRadioButton();
-        rbPessoaJuridica = new javax.swing.JRadioButton();
-        lbPessoaTipo = new javax.swing.JLabel();
-        lbDocumento = new javax.swing.JLabel();
         lbNomePaciente = new javax.swing.JLabel();
         tfNomePaciente = new javax.swing.JTextField();
         lbNomePaciente1 = new javax.swing.JLabel();
-        tfQtdDias = new javax.swing.JTextField();
-        ffDocumento = new javax.swing.JFormattedTextField();
-        cbTipoUsuario = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbLocalInternacao = new javax.swing.JComboBox<>();
+        jsQtdDias = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        cbTipoUsuario = new javax.swing.JComboBox<>();
+        tfDoacaoIdDoacao1 = new javax.swing.JTextField();
+        lbNome1 = new javax.swing.JLabel();
+        btDoacaoBuscarDoacao1 = new javax.swing.JButton();
+        lbEmail = new javax.swing.JLabel();
+        tfEmail = new javax.swing.JTextField();
+        lbPessoaTipo = new javax.swing.JLabel();
+        rbPessoaFisica = new javax.swing.JRadioButton();
+        rbPessoaJuridica = new javax.swing.JRadioButton();
+        lbDocumento = new javax.swing.JLabel();
+        ffDocumento = new javax.swing.JFormattedTextField();
+        lbNomePaciente2 = new javax.swing.JLabel();
         btCadastroPessoaLimpar = new javax.swing.JButton();
-        btCadastroPessoaRegistrar = new javax.swing.JButton();
+        btCadastroPessoaSalvar = new javax.swing.JButton();
+        btCadastroPessoaSair = new javax.swing.JButton();
+        lbObservacao = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taObservacao = new javax.swing.JTextArea();
         pnCadastrarDoacao = new javax.swing.JPanel();
         pnDoacao = new javax.swing.JPanel();
         lbDoacaoIdDoacao = new javax.swing.JLabel();
@@ -155,13 +160,9 @@ public class Telas extends javax.swing.JFrame {
         tfPedidoCliente = new javax.swing.JTextField();
         lbPedidoCliente = new javax.swing.JLabel();
         lbPedidoQtdMarmitas = new javax.swing.JLabel();
-        ffPedidoDtPedido = new javax.swing.JFormattedTextField();
-        lbPedidoDtPedido = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         taDoacaoObservacao1 = new javax.swing.JTextArea();
         lbPedidoObservacao = new javax.swing.JLabel();
-        lbPedidoDtEntrega = new javax.swing.JLabel();
-        ffPedidoDtEntrega = new javax.swing.JFormattedTextField();
         cbPedidoStatus = new javax.swing.JComboBox<>();
         lbPedidoStatus = new javax.swing.JLabel();
         tfPedidoIdPedido = new javax.swing.JTextField();
@@ -170,8 +171,13 @@ public class Telas extends javax.swing.JFrame {
         btPedidoBuscarCliente = new javax.swing.JButton();
         btPedidoBuscarPedido = new javax.swing.JButton();
         jSpinner4 = new javax.swing.JSpinner();
+        lbPedidoDtPedido = new javax.swing.JLabel();
+        lbPedidoDtEntrega = new javax.swing.JLabel();
+        ffPedidoDtPedido = new javax.swing.JFormattedTextField();
+        ffPedidoDtEntrega = new javax.swing.JFormattedTextField();
         btPedidoRegistrar = new javax.swing.JButton();
         btPedidoLimpar = new javax.swing.JButton();
+        btPedidoSair = new javax.swing.JButton();
         pnRelatorioDoacao = new javax.swing.JPanel();
         pnRelDoa = new javax.swing.JPanel();
         pnRelFiltros = new javax.swing.JPanel();
@@ -184,8 +190,8 @@ public class Telas extends javax.swing.JFrame {
         lbRelDoaTpDoacao = new javax.swing.JLabel();
         cbRelDoaTpDoacao = new javax.swing.JComboBox<>();
         lbRelDoaOrdenacao = new javax.swing.JLabel();
-        cbRelDoaOrdenacao1 = new javax.swing.JComboBox<>();
-        cbRelDoaOrdenacao2 = new javax.swing.JComboBox<>();
+        cbRelDoaOrdenacao = new javax.swing.JComboBox<>();
+        cbRelDoaSentido = new javax.swing.JComboBox<>();
         lbRelDoaProd = new javax.swing.JLabel();
         tfRelDoaProd = new javax.swing.JTextField();
         lbRelDoaTpProduto = new javax.swing.JLabel();
@@ -204,31 +210,31 @@ public class Telas extends javax.swing.JFrame {
         tfRelTotIte = new javax.swing.JTextField();
         btRelDoacaoSalvar = new javax.swing.JButton();
         btRelDoacaoLimpar = new javax.swing.JButton();
-        btRelDoaVoltar = new javax.swing.JButton();
+        btRelDoaSair = new javax.swing.JButton();
         pnRelatorioPedido = new javax.swing.JPanel();
         pnRelPed = new javax.swing.JPanel();
         pnRelPedFiltros = new javax.swing.JPanel();
-        lbRelPedDtPedido = new javax.swing.JLabel();
-        tfRelPedDtPedido = new javax.swing.JFormattedTextField();
-        lbRelPedDtEntrega = new javax.swing.JLabel();
-        tfRelPedDtEntrega = new javax.swing.JFormattedTextField();
+        lbRelPedDtPedidoInicio = new javax.swing.JLabel();
+        tfRelPedDtPedidoInicio = new javax.swing.JFormattedTextField();
+        lbRelPedDtPedidoFim = new javax.swing.JLabel();
+        tfRelPedDtPedidoFim = new javax.swing.JFormattedTextField();
         lbRelPedStatus = new javax.swing.JLabel();
         cbRelPedStatus = new javax.swing.JComboBox<>();
+        lbRelPedCidade = new javax.swing.JLabel();
+        cbRelPedCidade = new javax.swing.JComboBox<>();
         lbRelPedCliente = new javax.swing.JLabel();
         tfRelPedCliente = new javax.swing.JTextField();
+        btRelPedidoBuscarCliente = new javax.swing.JButton();
+        lbRelPedDtEntregaInicio = new javax.swing.JLabel();
+        tfRelPedDtEntregaInicio = new javax.swing.JFormattedTextField();
+        lbRelPedDtEntregaFim = new javax.swing.JLabel();
+        tfRelPedDtEntregaFim = new javax.swing.JFormattedTextField();
         lbRelPedOrdenacao = new javax.swing.JLabel();
         cbRelPedOrdenacao = new javax.swing.JComboBox<>();
         cbRelPedSentido = new javax.swing.JComboBox<>();
         lbRelPedLocal = new javax.swing.JLabel();
         cbRelPedLocal = new javax.swing.JComboBox<>();
         btRelPedFiltrar = new javax.swing.JButton();
-        lbRelPedDtPedido1 = new javax.swing.JLabel();
-        lbRelPedDtEntrega1 = new javax.swing.JLabel();
-        btPedidoBuscarCliente3 = new javax.swing.JButton();
-        lbRelPedCidade = new javax.swing.JLabel();
-        cbRelPedCidade = new javax.swing.JComboBox<>();
-        tfRelPedDtPedido2 = new javax.swing.JFormattedTextField();
-        tfRelPedDtPedido3 = new javax.swing.JFormattedTextField();
         pnRelPedResultado = new javax.swing.JPanel();
         spRelPedResultado = new javax.swing.JScrollPane();
         tableRelatorioPedido = new javax.swing.JTable();
@@ -242,9 +248,9 @@ public class Telas extends javax.swing.JFrame {
         jpRelPedTotMarmitas = new javax.swing.JPanel();
         jbRelPedTotMarmitas = new javax.swing.JLabel();
         tfRelPedTotMarmitas = new javax.swing.JTextField();
-        btRelPedidoLimpar = new javax.swing.JButton();
-        btRelPedVoltar = new javax.swing.JButton();
         btRelPedidoSalvar = new javax.swing.JButton();
+        btRelPedidoLimpar = new javax.swing.JButton();
+        btRelPedidoSair = new javax.swing.JButton();
         pnHome = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         menuBarra = new javax.swing.JMenuBar();
@@ -270,7 +276,9 @@ public class Telas extends javax.swing.JFrame {
 
         pnCard.setLayout(new java.awt.CardLayout());
 
-        pnEnderecoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço:"));
+        pnEnderecoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+
+        tfEnderecoLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbLogradouro.setText("Logradouro:");
@@ -278,11 +286,14 @@ public class Telas extends javax.swing.JFrame {
         lbNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbNumero.setText("Número:");
 
+        tfEnderecoNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfEnderecoNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfEnderecoNumeroKeyTyped(evt);
             }
         });
+
+        tfEnderecoBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbBairro.setText("Bairro:");
@@ -290,15 +301,19 @@ public class Telas extends javax.swing.JFrame {
         lbLogradouro3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbLogradouro3.setText("Cidade:");
 
+        tfEnderecoComplemento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         lbComplemento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbComplemento.setText("Complemento:");
 
+        cbEnderecoCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbEnderecoCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEnderecoCidadeActionPerformed(evt);
             }
         });
 
+        tfEnderecoCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfEnderecoCep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfEnderecoCepKeyTyped(evt);
@@ -309,13 +324,14 @@ public class Telas extends javax.swing.JFrame {
         lbLogradouro5.setText("CEP:");
 
         lbLogradouro6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbLogradouro6.setText("UF");
+        lbLogradouro6.setText("UF:");
 
+        cbEnderecoUf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbEnderecoUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
         cbEnderecoUf.setEnabled(false);
 
-        btAdicionarCidade.setText("+");
-        btAdicionarCidade.setToolTipText("Cadastrar novo endereço");
+        btAdicionarCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plus.png"))); // NOI18N
+        btAdicionarCidade.setMargin(new java.awt.Insets(1, 1, 1, 1));
         btAdicionarCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAdicionarCidadeActionPerformed(evt);
@@ -330,65 +346,63 @@ public class Telas extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbNumero)
-                            .addComponent(tfEnderecoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbBairro)
-                            .addComponent(tfEnderecoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbComplemento)
-                            .addComponent(tfEnderecoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(lbLogradouro)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbLogradouro5)
-                            .addComponent(tfEnderecoCep, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbLogradouro3)
-                            .addComponent(cbEnderecoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
-                                .addComponent(lbLogradouro6)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cbEnderecoUf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btAdicionarCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfEnderecoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbLogradouro))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbNumero)
+                                    .addComponent(tfEnderecoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbBairro)
+                                    .addComponent(tfEnderecoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbComplemento)
+                                    .addComponent(tfEnderecoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbLogradouro5)
+                                    .addComponent(tfEnderecoCep, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbLogradouro3)
+                                    .addComponent(cbEnderecoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbLogradouro6)
+                                    .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
+                                        .addComponent(cbEnderecoUf, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btAdicionarCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tfEnderecoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(35, Short.MAX_VALUE))))
         );
         pnEnderecoClienteLayout.setVerticalGroup(
             pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEnderecoClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btAdicionarCidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEnderecoClienteLayout.createSequentialGroup()
-                        .addComponent(lbLogradouro3)
+                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbLogradouro3)
+                            .addComponent(lbLogradouro6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbEnderecoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEnderecoClienteLayout.createSequentialGroup()
-                        .addComponent(lbLogradouro6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbEnderecoUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbEnderecoCidade)
+                            .addComponent(cbEnderecoUf)
+                            .addComponent(btAdicionarCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEnderecoClienteLayout.createSequentialGroup()
                         .addComponent(lbLogradouro5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfEnderecoCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbLogradouro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfEnderecoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNumero)
                     .addComponent(lbBairro)
@@ -398,11 +412,12 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(tfEnderecoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfEnderecoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfEnderecoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(144, 144, 144))
+                .addGap(15, 15, 15))
         );
 
-        pnPessoaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa"));
+        pnPessoaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        tfNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNomeKeyTyped(evt);
@@ -417,46 +432,15 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ffTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbTelefone.setText("Telefone:");
 
-        lbEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbEmail.setText("E-mail:");
-
-        lbObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbObservacao.setText("Observação:");
-
-        taObservacao.setColumns(20);
-        taObservacao.setLineWrap(true);
-        taObservacao.setRows(5);
-        jScrollPane1.setViewportView(taObservacao);
-
-        buttonGroupPessoaTipo.add(rbPessoaFisica);
-        rbPessoaFisica.setText("Pessoa Física (CPF)");
-        rbPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbPessoaFisicaActionPerformed(evt);
-            }
-        });
-
-        buttonGroupPessoaTipo.add(rbPessoaJuridica);
-        rbPessoaJuridica.setText("Pessoa Jurídica (CNPJ)");
-        rbPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbPessoaJuridicaActionPerformed(evt);
-            }
-        });
-
-        lbPessoaTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbPessoaTipo.setText("Tipo:");
-
-        lbDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbDocumento.setText("Nº do Documento:");
-
         lbNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbNomePaciente.setText("Nome do Paciente:");
 
+        tfNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfNomePaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNomePacienteKeyTyped(evt);
@@ -464,17 +448,23 @@ public class Telas extends javax.swing.JFrame {
         });
 
         lbNomePaciente1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbNomePaciente1.setText("Dias de Internação:");
+        lbNomePaciente1.setText("Tempo:");
 
-        tfQtdDias.setToolTipText("Estimar a quantidade de dias de internação");
-        tfQtdDias.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfQtdDiasKeyTyped(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Local de Internação:");
 
-        ffDocumento.setEnabled(false);
+        cbLocalInternacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", " " }));
+        cbLocalInternacao.setEnabled(false);
 
+        jsQtdDias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jsQtdDias.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsQtdDias.setToolTipText("");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Tipo Cliente:");
+
+        cbTipoUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beneficiario", "Doador", "Assistente" }));
         cbTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -482,58 +472,119 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Tipo de Usuário:");
+        tfDoacaoIdDoacao1.setEditable(false);
+        tfDoacaoIdDoacao1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Local de Internação:");
+        lbNome1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbNome1.setText("Código:");
 
-        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", " " }));
-        cbLocalInternacao.setEnabled(false);
+        btDoacaoBuscarDoacao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarDoacao1.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btDoacaoBuscarDoacao1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoBuscarDoacao1ActionPerformed(evt);
+            }
+        });
+
+        lbEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbEmail.setText("E-mail:");
+
+        tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbPessoaTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPessoaTipo.setText("Tipo Pessoa:");
+
+        buttonGroupPessoaTipo.add(rbPessoaFisica);
+        rbPessoaFisica.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbPessoaFisica.setText("Física (CPF)");
+        rbPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPessoaFisicaActionPerformed(evt);
+            }
+        });
+
+        buttonGroupPessoaTipo.add(rbPessoaJuridica);
+        rbPessoaJuridica.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbPessoaJuridica.setText("Jurídica (CNPJ)");
+        rbPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPessoaJuridicaActionPerformed(evt);
+            }
+        });
+
+        lbDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDocumento.setText("Nº do Documento:");
+
+        ffDocumento.setEnabled(false);
+        ffDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbNomePaciente2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbNomePaciente2.setText("Dias");
 
         javax.swing.GroupLayout pnPessoaClienteLayout = new javax.swing.GroupLayout(pnPessoaCliente);
         pnPessoaCliente.setLayout(pnPessoaClienteLayout);
         pnPessoaClienteLayout.setHorizontalGroup(
             pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPessoaClienteLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(19, 19, 19)
                 .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lbDocumento)
+                    .addComponent(ffDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(lbPessoaTipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbPessoaFisica)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbPessoaJuridica))
+                    .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                        .addComponent(tfEmail)
+                        .addComponent(tfNomePaciente)
+                        .addComponent(lbEmail)
+                        .addComponent(lbNomePaciente)
+                        .addComponent(lbTelefone)
+                        .addComponent(lbNome)
+                        .addComponent(ffTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnPessoaClienteLayout.createSequentialGroup()
                             .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbNomePaciente1)
-                                .addComponent(tfQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(285, 285, 285))
-                        .addComponent(lbNomePaciente, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbDocumento, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbPessoaTipo, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnPessoaClienteLayout.createSequentialGroup()
-                            .addComponent(rbPessoaFisica)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(rbPessoaJuridica))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbObservacao, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbTelefone, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbNome, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tfEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ffTelefone, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tfNome, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tfNomePaciente, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ffDocumento, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
-                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                                .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addGap(18, 18, 18)
+                            .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                                    .addComponent(jsQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lbNomePaciente2))
+                                .addComponent(lbNomePaciente1)))
+                        .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                            .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                                    .addComponent(tfDoacaoIdDoacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btDoacaoBuscarDoacao1))
+                                .addComponent(lbNome1))
+                            .addGap(18, 18, 18)
+                            .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         pnPessoaClienteLayout.setVerticalGroup(
             pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPessoaClienteLayout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(lbNome1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfDoacaoIdDoacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btDoacaoBuscarDoacao1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -542,42 +593,38 @@ public class Telas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ffTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPessoaTipo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbPessoaFisica)
-                    .addComponent(rbPessoaJuridica))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbDocumento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ffDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbObservacao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(lbNomePaciente1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jsQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbNomePaciente2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNomePaciente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbNomePaciente1)
+                .addComponent(lbEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPessoaTipo)
+                    .addComponent(rbPessoaFisica)
+                    .addComponent(rbPessoaJuridica))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbDocumento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ffDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
+        btCadastroPessoaLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadastroPessoaLimpar.setText("Limpar");
         btCadastroPessoaLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -585,12 +632,30 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        btCadastroPessoaRegistrar.setText("Registrar");
-        btCadastroPessoaRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btCadastroPessoaSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCadastroPessoaSalvar.setText("Salvar");
+        btCadastroPessoaSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastroPessoaRegistrarActionPerformed(evt);
+                btCadastroPessoaSalvarActionPerformed(evt);
             }
         });
+
+        btCadastroPessoaSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCadastroPessoaSair.setText("Sair");
+        btCadastroPessoaSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastroPessoaSairActionPerformed(evt);
+            }
+        });
+
+        lbObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbObservacao.setText("Observação:");
+
+        taObservacao.setColumns(20);
+        taObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        taObservacao.setLineWrap(true);
+        taObservacao.setRows(5);
+        jScrollPane1.setViewportView(taObservacao);
 
         javax.swing.GroupLayout pnCadastroPessoaLayout = new javax.swing.GroupLayout(pnCadastroPessoa);
         pnCadastroPessoa.setLayout(pnCadastroPessoaLayout);
@@ -598,16 +663,21 @@ public class Telas extends javax.swing.JFrame {
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                        .addComponent(btCadastroPessoaLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btCadastroPessoaSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btCadastroPessoaRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btCadastroPessoaLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btCadastroPessoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                         .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                        .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbObservacao)
+                            .addComponent(jScrollPane1)
+                            .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         pnCadastroPessoaLayout.setVerticalGroup(
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -615,15 +685,19 @@ public class Telas extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                        .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(111, Short.MAX_VALUE))
+                        .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbObservacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                        .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btCadastroPessoaRegistrar)
-                            .addComponent(btCadastroPessoaLimpar))
-                        .addGap(114, 114, 114))))
+                            .addComponent(btCadastroPessoaSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCadastroPessoaLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCadastroPessoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastroPessoa, "beneficiario");
@@ -663,7 +737,11 @@ public class Telas extends javax.swing.JFrame {
         lbDoacaoData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDoacaoData.setText("Data:");
 
-        ftDoacaoData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        try {
+            ftDoacaoData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         ftDoacaoData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ftDoacaoData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -676,6 +754,7 @@ public class Telas extends javax.swing.JFrame {
 
         tfDoacaoValor.setColumns(10);
         tfDoacaoValor.setValue(0.00);
+        tfDoacaoValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
         tfDoacaoValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfDoacaoValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -694,6 +773,11 @@ public class Telas extends javax.swing.JFrame {
 
         btDoacaoRecibo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoRecibo.setText("Gerar Recibo");
+        btDoacaoRecibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoReciboActionPerformed(evt);
+            }
+        });
 
         btDoacaoDeletar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoDeletar.setText("Deletar");
@@ -721,30 +805,26 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnDoacaoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btDoacaoRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btDoacaoDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(267, 267, 267))
                     .addGroup(pnDoacaoLayout.createSequentialGroup()
-                        .addComponent(lbDoacaoDoador)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbDoacaoObservacao, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnDoacaoLayout.createSequentialGroup()
+                                .addComponent(tfDoacaoIdDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfDoacaoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btDoacaoBuscarDoador)))
+                        .addGap(0, 23, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnDoacaoLayout.createSequentialGroup()
                         .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(pnDoacaoLayout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnDoacaoLayout.createSequentialGroup()
-                                            .addComponent(btDoacaoRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btDoacaoDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnDoacaoLayout.createSequentialGroup()
-                                    .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lbDoacaoObservacao, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnDoacaoLayout.createSequentialGroup()
-                                            .addComponent(tfDoacaoIdDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tfDoacaoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btDoacaoBuscarDoador)))
-                                    .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(lbDoacaoDoador)
                             .addGroup(pnDoacaoLayout.createSequentialGroup()
                                 .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbDoacaoIdDoacao)
@@ -764,7 +844,7 @@ public class Telas extends javax.swing.JFrame {
                                 .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(tfDoacaoValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbDoacaoValor, javax.swing.GroupLayout.Alignment.LEADING))))
-                        .addGap(23, 23, 23))))
+                        .addContainerGap())))
         );
         pnDoacaoLayout.setVerticalGroup(
             pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -980,7 +1060,7 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
                         .addComponent(pnDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
                         .addComponent(btDoacaoRegistrarDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -997,7 +1077,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 510, Short.MAX_VALUE)
                     .addComponent(pnDoacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1025,12 +1105,6 @@ public class Telas extends javax.swing.JFrame {
         lbPedidoQtdMarmitas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbPedidoQtdMarmitas.setText("Marmitas:");
 
-        ffPedidoDtPedido.setText("_____ / _____ / _____");
-        ffPedidoDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        lbPedidoDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbPedidoDtPedido.setText("Data do Pedido:");
-
         taDoacaoObservacao1.setColumns(20);
         taDoacaoObservacao1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         taDoacaoObservacao1.setRows(5);
@@ -1039,12 +1113,6 @@ public class Telas extends javax.swing.JFrame {
 
         lbPedidoObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbPedidoObservacao.setText("Observação:");
-
-        lbPedidoDtEntrega.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbPedidoDtEntrega.setText("Data da Entrega:");
-
-        ffPedidoDtEntrega.setText("_____ / _____ / _____");
-        ffPedidoDtEntrega.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         cbPedidoStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbPedidoStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Finalizado", "Cancelado" }));
@@ -1081,6 +1149,26 @@ public class Telas extends javax.swing.JFrame {
         jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jSpinner4.setToolTipText("");
 
+        lbPedidoDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoDtPedido.setText("Data do Pedido:");
+
+        lbPedidoDtEntrega.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoDtEntrega.setText("Data da Entrega:");
+
+        try {
+            ffPedidoDtPedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ffPedidoDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        try {
+            ffPedidoDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ffPedidoDtEntrega.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout pnPedidoLayout = new javax.swing.GroupLayout(pnPedido);
         pnPedido.setLayout(pnPedidoLayout);
         pnPedidoLayout.setHorizontalGroup(
@@ -1089,48 +1177,44 @@ public class Telas extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnPedidoLayout.createSequentialGroup()
-                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbPedidoDtPedido)
-                            .addComponent(ffPedidoDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnPedidoLayout.createSequentialGroup()
-                                .addComponent(lbPedidoDtEntrega)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(pnPedidoLayout.createSequentialGroup()
-                                .addComponent(ffPedidoDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(lbPedidoCliente)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnPedidoLayout.createSequentialGroup()
-                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbPedidoIdPedido)
+                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnPedidoLayout.createSequentialGroup()
-                                .addComponent(tfPedidoIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfPedidoIdPedido1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btPedidoBuscarPedido)))
-                        .addGap(12, 12, 12)
-                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbPedidoStatus)
-                            .addComponent(cbPedidoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnPedidoLayout.createSequentialGroup()
-                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnPedidoLayout.createSequentialGroup()
+                                .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btPedidoBuscarCliente))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnPedidoLayout.createSequentialGroup()
                                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbPedidoIdPedido)
                                     .addGroup(pnPedidoLayout.createSequentialGroup()
-                                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lbPedidoObservacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(tfPedidoIdPedido1))
+                                        .addComponent(tfPedidoIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btPedidoBuscarCliente))
-                                    .addComponent(lbPedidoCliente))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btPedidoBuscarPedido)))
+                                .addGap(12, 12, 12)
+                                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbPedidoStatus)
+                                    .addComponent(cbPedidoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnPedidoLayout.createSequentialGroup()
                                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbPedidoQtdMarmitas)
-                                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(15, Short.MAX_VALUE))))
+                                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbPedidoDtPedido)
+                                    .addComponent(ffPedidoDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbPedidoDtEntrega)
+                                    .addComponent(ffPedidoDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnPedidoLayout.createSequentialGroup()
+                                .addComponent(lbPedidoObservacao)
+                                .addGap(498, 498, 498)))
+                        .addGap(0, 25, Short.MAX_VALUE))))
         );
         pnPedidoLayout.setVerticalGroup(
             pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1144,27 +1228,28 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(tfPedidoIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPedidoBuscarPedido)
                     .addComponent(cbPedidoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lbPedidoCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btPedidoBuscarCliente)
+                    .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfPedidoIdPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbPedidoDtEntrega)
                     .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnPedidoLayout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedidoLayout.createSequentialGroup()
                             .addComponent(lbPedidoDtPedido)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(ffPedidoDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(ffPedidoDtEntrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbPedidoCliente)
-                    .addComponent(lbPedidoQtdMarmitas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfPedidoIdPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btPedidoBuscarCliente)))
-                .addGap(18, 18, 18)
+                        .addComponent(ffPedidoDtEntrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedidoLayout.createSequentialGroup()
+                        .addComponent(lbPedidoQtdMarmitas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(lbPedidoObservacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1181,6 +1266,14 @@ public class Telas extends javax.swing.JFrame {
 
         btPedidoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btPedidoLimpar.setText("Limpar");
+        btPedidoLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoLimparActionPerformed(evt);
+            }
+        });
+
+        btPedidoSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btPedidoSair.setText("Sair");
 
         javax.swing.GroupLayout pnCadastrarPedidoLayout = new javax.swing.GroupLayout(pnCadastrarPedido);
         pnCadastrarPedido.setLayout(pnCadastrarPedidoLayout);
@@ -1192,9 +1285,11 @@ public class Telas extends javax.swing.JFrame {
                     .addGroup(pnCadastrarPedidoLayout.createSequentialGroup()
                         .addComponent(btPedidoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(560, Short.MAX_VALUE))
+                .addContainerGap(586, Short.MAX_VALUE))
         );
         pnCadastrarPedidoLayout.setVerticalGroup(
             pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1204,7 +1299,8 @@ public class Telas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btPedidoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(247, Short.MAX_VALUE))
         );
 
@@ -1217,11 +1313,21 @@ public class Telas extends javax.swing.JFrame {
         lbRelDoaDtInicial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelDoaDtInicial.setText("Data Inicial:");
 
+        try {
+            ffRelDoaDtInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         ffRelDoaDtInicial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbRelDoaDtFinal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelDoaDtFinal.setText("Data Final:");
 
+        try {
+            ffRelDoaDtFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         ffRelDoaDtFinal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbRelDoaDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1238,11 +1344,11 @@ public class Telas extends javax.swing.JFrame {
         lbRelDoaOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelDoaOrdenacao.setText("Ordenação:");
 
-        cbRelDoaOrdenacao1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbRelDoaOrdenacao1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Código", "Nome do Doador", "Valor", "Quantidade de Produtos" }));
+        cbRelDoaOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbRelDoaOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Código", "Nome do Doador", "Valor", "Quantidade de Produtos" }));
 
-        cbRelDoaOrdenacao2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbRelDoaOrdenacao2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descrente", "Crescente" }));
+        cbRelDoaSentido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbRelDoaSentido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crescente", "Decrescente" }));
 
         lbRelDoaProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelDoaProd.setText("Produto:");
@@ -1292,9 +1398,9 @@ public class Telas extends javax.swing.JFrame {
                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
                         .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbRelDoaOrdenacao)
-                            .addComponent(cbRelDoaOrdenacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbRelDoaOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbRelDoaOrdenacao2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cbRelDoaSentido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(12, 12, 12)
                 .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
@@ -1353,8 +1459,8 @@ public class Telas extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
                         .addComponent(lbRelDoaOrdenacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbRelDoaOrdenacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbRelDoaOrdenacao2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbRelDoaOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbRelDoaSentido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
                         .addComponent(lbRelDoaProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1374,6 +1480,7 @@ public class Telas extends javax.swing.JFrame {
         tableRelatorioDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableRelatorioDoacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -1454,7 +1561,7 @@ public class Telas extends javax.swing.JFrame {
             pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelResultadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spRelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spRelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1470,7 +1577,7 @@ public class Telas extends javax.swing.JFrame {
                         .addComponent(jbRelDoaTorIte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfRelTotIte, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnRelDoaLayout = new javax.swing.GroupLayout(pnRelDoa);
@@ -1500,8 +1607,8 @@ public class Telas extends javax.swing.JFrame {
         btRelDoacaoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelDoacaoLimpar.setText("Limpar");
 
-        btRelDoaVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btRelDoaVoltar.setText("Fechar");
+        btRelDoaSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelDoaSair.setText("Sair");
 
         javax.swing.GroupLayout pnRelatorioDoacaoLayout = new javax.swing.GroupLayout(pnRelatorioDoacao);
         pnRelatorioDoacao.setLayout(pnRelatorioDoacaoLayout);
@@ -1515,9 +1622,9 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btRelDoaVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btRelDoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         pnRelatorioDoacaoLayout.setVerticalGroup(
             pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1528,7 +1635,7 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRelDoaVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btRelDoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -1539,14 +1646,27 @@ public class Telas extends javax.swing.JFrame {
 
         pnRelPedFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        lbRelPedDtPedido.setText("Data do Pedido (Início)");
+        lbRelPedDtPedidoInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedDtPedidoInicio.setText("Data do Pedido (Início):");
 
-        tfRelPedDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        try {
+            tfRelPedDtPedidoInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfRelPedDtPedidoInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbRelPedDtEntrega.setText("Data da Entrega: (Início)");
+        lbRelPedDtPedidoFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedDtPedidoFim.setText("Data do Pedido (Fim):");
 
-        tfRelPedDtEntrega.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        try {
+            tfRelPedDtPedidoFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfRelPedDtPedidoFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        lbRelPedStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelPedStatus.setText("Status:");
 
         cbRelPedStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1557,11 +1677,47 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        lbRelPedCliente.setText("Assistente/Beneficiário");
+        lbRelPedCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedCidade.setText("Cidade Cliente:");
+
+        cbRelPedCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbRelPedCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Ituiutaba", "Paracatu" }));
+
+        lbRelPedCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedCliente.setText("Assistente/Beneficiário:");
 
         tfRelPedCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbRelPedOrdenacao.setText("Ordenação");
+        btRelPedidoBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btRelPedidoBuscarCliente.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btRelPedidoBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelPedidoBuscarClienteActionPerformed(evt);
+            }
+        });
+
+        lbRelPedDtEntregaInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedDtEntregaInicio.setText("Data da Entrega (Início):");
+
+        try {
+            tfRelPedDtEntregaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfRelPedDtEntregaInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbRelPedDtEntregaFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedDtEntregaFim.setText("Data da Entrega (Fim):");
+
+        try {
+            tfRelPedDtEntregaFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfRelPedDtEntregaFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedOrdenacao.setText("Ordenação:");
 
         cbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelPedOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Cliente", "Data do Pedido", "Data da Entrega", "Status", "Marmitas" }));
@@ -1569,6 +1725,7 @@ public class Telas extends javax.swing.JFrame {
         cbRelPedSentido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelPedSentido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crescente", "Decrescente" }));
 
+        lbRelPedLocal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelPedLocal.setText("Local:");
 
         cbRelPedLocal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1577,27 +1734,6 @@ public class Telas extends javax.swing.JFrame {
         btRelPedFiltrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelPedFiltrar.setText("Filtrar");
 
-        lbRelPedDtPedido1.setText("Data do Pedido (Fim)");
-
-        lbRelPedDtEntrega1.setText("Data da Entrega: (Fim)");
-
-        btPedidoBuscarCliente3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
-        btPedidoBuscarCliente3.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        btPedidoBuscarCliente3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPedidoBuscarCliente3ActionPerformed(evt);
-            }
-        });
-
-        lbRelPedCidade.setText("Cidade Cliente:");
-
-        cbRelPedCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbRelPedCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Ituiutaba", "Paracatu" }));
-
-        tfRelPedDtPedido2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        tfRelPedDtPedido3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         javax.swing.GroupLayout pnRelPedFiltrosLayout = new javax.swing.GroupLayout(pnRelPedFiltros);
         pnRelPedFiltros.setLayout(pnRelPedFiltrosLayout);
         pnRelPedFiltrosLayout.setHorizontalGroup(
@@ -1605,113 +1741,98 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfRelPedDtPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                    .addComponent(lbRelPedDtPedido)
-                    .addComponent(lbRelPedDtEntrega)
-                    .addComponent(tfRelPedDtEntrega))
+                    .addComponent(tfRelPedDtPedidoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                    .addComponent(lbRelPedDtPedidoInicio)
+                    .addComponent(lbRelPedDtEntregaInicio)
+                    .addComponent(tfRelPedDtEntregaInicio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbRelPedDtPedido1)
-                            .addComponent(lbRelPedDtEntrega1))
-                        .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfRelPedDtPedido3)
-                            .addComponent(tfRelPedDtPedido2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbRelPedStatus)
-                            .addComponent(cbRelPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbRelPedCidade)
-                            .addComponent(cbRelPedCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                            .addComponent(tfRelPedDtEntregaFim, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbRelPedDtEntregaFim))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbRelPedOrdenacao)
                             .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbRelPedSentido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cbRelPedSentido, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbRelPedLocal))
+                        .addGap(75, 75, 75)
+                        .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                                .addComponent(lbRelPedDtPedidoFim)
+                                .addGap(50, 50, 50))
+                            .addComponent(tfRelPedDtPedidoFim, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbRelPedStatus)
+                            .addComponent(cbRelPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbRelPedCidade)
+                            .addComponent(cbRelPedCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbRelPedLocal)
-                            .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(76, 76, 76)
-                        .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
                             .addComponent(lbRelPedCliente)
-                            .addGap(194, 194, 194))
-                        .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                            .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btPedidoBuscarCliente3))))
+                            .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRelPedidoBuscarCliente)))
                 .addContainerGap())
         );
         pnRelPedFiltrosLayout.setVerticalGroup(
             pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btPedidoBuscarCliente3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedLocal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbRelPedSentido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbRelPedDtPedidoInicio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfRelPedDtPedidoInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfRelPedDtPedidoFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedDtPedido)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfRelPedDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbRelPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfRelPedDtPedido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedDtPedido1)
-                                .addGap(32, 32, 32)))
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbRelPedDtEntrega)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfRelPedDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lbRelPedOrdenacao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfRelPedDtPedido3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedDtPedidoFim)
+                        .addGap(32, 32, 32))
+                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
                         .addComponent(lbRelPedCidade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbRelPedCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(cbRelPedCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btRelPedidoBuscarCliente)
+                            .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbRelPedDtEntregaInicio)
+                            .addComponent(lbRelPedDtEntregaFim))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfRelPedDtEntregaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbRelPedSentido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfRelPedDtEntregaFim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedOrdenacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedLocal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(13, 13, 13))
-            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(lbRelPedDtEntrega1)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pnRelPedResultado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
@@ -1719,8 +1840,6 @@ public class Telas extends javax.swing.JFrame {
         tableRelatorioPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableRelatorioPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -1868,14 +1987,16 @@ public class Telas extends javax.swing.JFrame {
             pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpRelPedTotStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
-                        .addGap(0, 15, Short.MAX_VALUE)
-                        .addComponent(jpRelPedTotMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jpRelPedTotMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jpRelPedTotStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(19, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout pnRelPedLayout = new javax.swing.GroupLayout(pnRelPed);
@@ -1899,11 +2020,14 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        btRelPedidoSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelPedidoSalvar.setText("Salvar");
+
+        btRelPedidoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelPedidoLimpar.setText("Limpar");
 
-        btRelPedVoltar.setText("Fechar");
-
-        btRelPedidoSalvar.setText("Salvar");
+        btRelPedidoSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelPedidoSair.setText("Sair");
 
         javax.swing.GroupLayout pnRelatorioPedidoLayout = new javax.swing.GroupLayout(pnRelatorioPedido);
         pnRelatorioPedido.setLayout(pnRelatorioPedidoLayout);
@@ -1917,9 +2041,9 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btRelPedVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         pnRelatorioPedidoLayout.setVerticalGroup(
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1930,8 +2054,8 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRelPedVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -1945,7 +2069,7 @@ public class Telas extends javax.swing.JFrame {
         pnHomeLayout.setHorizontalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHomeLayout.createSequentialGroup()
-                .addContainerGap(360, Short.MAX_VALUE)
+                .addContainerGap(386, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(326, 326, 326))
         );
@@ -2085,13 +2209,6 @@ public class Telas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfNomePacienteKeyTyped
 
-    private void tfQtdDiasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQtdDiasKeyTyped
-        char verificador = evt.getKeyChar();
-        if (!Character.isDigit(verificador)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_tfQtdDiasKeyTyped
-
     private void tfEnderecoCepKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEnderecoCepKeyTyped
         char verificador = evt.getKeyChar();
         if (!Character.isDigit(verificador)) {
@@ -2115,11 +2232,6 @@ public class Telas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void btAdicionarCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarCidadeActionPerformed
-        cadastroCidade.setLocationRelativeTo(this);
-        cadastroCidade.setVisible(true);
-    }//GEN-LAST:event_btAdicionarCidadeActionPerformed
-
     private void cbEnderecoCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnderecoCidadeActionPerformed
         Cidade cidadeSelecionada = (Cidade) cbEnderecoCidade.getSelectedItem();
         if (cidadeSelecionada != null) {
@@ -2131,7 +2243,7 @@ public class Telas extends javax.swing.JFrame {
         limparcamposCadastroUsuario();
     }//GEN-LAST:event_btCadastroPessoaLimparActionPerformed
 
-    private void btCadastroPessoaRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaRegistrarActionPerformed
+    private void btCadastroPessoaSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSalvarActionPerformed
         Endereco endereco = null;
         Pessoa novaPessoa = null;
         Paciente paciente = null;
@@ -2152,9 +2264,9 @@ public class Telas extends javax.swing.JFrame {
 
         novaPessoa = new Pessoa(tfNome.getText(), telefone, endereco);
         try {
-            if (tfQtdDias.getText() != null && !tfQtdDias.getText().trim().isEmpty()) {
-                paciente = new Paciente(tfNomePaciente.getText(), Integer.parseInt(tfQtdDias.getText()));
-            }
+            //if (tfQtdDias.getText() != null && !tfQtdDias.getText().trim().isEmpty()) {
+            //    paciente = new Paciente(tfNomePaciente.getText(), Integer.parseInt(tfQtdDias.getText()));
+            //}
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
@@ -2215,26 +2327,26 @@ public class Telas extends javax.swing.JFrame {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_btCadastroPessoaRegistrarActionPerformed
+    }//GEN-LAST:event_btCadastroPessoaSalvarActionPerformed
 
     private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
         switch (cbTipoUsuario.getSelectedIndex()) {
             //0 Bene 1 Doador 2 Assis
             case 0:
                 tfNomePaciente.setEnabled(true);
-                tfQtdDias.setEnabled(true);
+                //tfQtdDias.setEnabled(true);
                 cbLocalInternacao.setSelectedIndex(0);
                 // hospital
                 break;
             case 1:
                 tfNomePaciente.setEnabled(false);
-                tfQtdDias.setEnabled(false);
+                //tfQtdDias.setEnabled(false);
                 cbLocalInternacao.setSelectedIndex(2);
                 // nulo
                 break;
             case 2:
                 tfNomePaciente.setEnabled(false);
-                tfQtdDias.setEnabled(false);
+                //tfQtdDias.setEnabled(false);
                 cbLocalInternacao.setSelectedIndex(1);
                 // Pronto socorro
                 break;
@@ -2306,17 +2418,17 @@ public class Telas extends javax.swing.JFrame {
             Object descricao = tableDoacaoProdutos.getValueAt(linhaSelecionada, 1);
             Object quantidade = tableDoacaoProdutos.getValueAt(linhaSelecionada, 2);
             tfDoacaoSelecionarProd.setText(descricao.toString());
-            //tfDoacaoQuantidade.setText(quantidade.toString());
+            jsDoacaoQuantidadeProduto.setValue(quantidade);
         }
     }//GEN-LAST:event_tableDoacaoProdutosMouseClicked
 
     private void btDoacaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDeletarActionPerformed
         int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
         if (doacaoController.removeDoacao(idDoacao)) {
-            JOptionPane.showMessageDialog(rootPane, "Doacao Removida com sucesso.", "Remoção", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Doação deletada com sucesso.", "Deleção", JOptionPane.INFORMATION_MESSAGE);
             limparCamposCadastroDoacao();
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Doacao não removida.", "Remoção", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Não foi possivel deletar a Doação!", "Deleção", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btDoacaoDeletarActionPerformed
 
@@ -2352,9 +2464,30 @@ public class Telas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btPedidoBuscarCliente2ActionPerformed
 
-    private void btPedidoBuscarCliente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarCliente3ActionPerformed
+    private void btRelPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoBuscarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btPedidoBuscarCliente3ActionPerformed
+    }//GEN-LAST:event_btRelPedidoBuscarClienteActionPerformed
+
+    private void btCadastroPessoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btCadastroPessoaSairActionPerformed
+
+    private void btDoacaoBuscarDoacao1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoacao1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btDoacaoBuscarDoacao1ActionPerformed
+
+    private void btAdicionarCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarCidadeActionPerformed
+        cadastroCidade.setLocationRelativeTo(this);
+        cadastroCidade.setVisible(true);
+    }//GEN-LAST:event_btAdicionarCidadeActionPerformed
+
+    private void btPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoLimparActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPedidoLimparActionPerformed
+
+    private void btDoacaoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoReciboActionPerformed
+        
+    }//GEN-LAST:event_btDoacaoReciboActionPerformed
     
     public void preencheDoacao(Doacao doacao){
         List<Produto> produtos = doacaoController.listagemDeProduto(doacao);
@@ -2417,7 +2550,7 @@ public class Telas extends javax.swing.JFrame {
         ffDocumento.setText("");
         taObservacao.setText("");
         tfNomePaciente.setText("");
-        tfQtdDias.setText("");
+        jsQtdDias.setValue(0);
         tfEnderecoCep.setText("");
         tfEnderecoLogradouro.setText("");
         tfEnderecoComplemento.setText("");
@@ -2436,7 +2569,7 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoValor.setValue(0.00);
         taDoacaoObservacao.setText("");
         tfDoacaoSelecionarProd.setText("");
-        //jsDoacaoQuantidadeProduto.setText("");
+        jsDoacaoQuantidadeProduto.setValue(0);
         cbDoacaoTipo.setSelectedIndex(0);
         modeloTabela.setRowCount(0);
     }
@@ -2444,10 +2577,12 @@ public class Telas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionarCidade;
     private javax.swing.JButton btCadastroPessoaLimpar;
-    private javax.swing.JButton btCadastroPessoaRegistrar;
+    private javax.swing.JButton btCadastroPessoaSair;
+    private javax.swing.JButton btCadastroPessoaSalvar;
     private javax.swing.JButton btDoacaoAddProd;
     private javax.swing.JButton btDoacaoAltProd;
     private javax.swing.JButton btDoacaoBuscarDoacao;
+    private javax.swing.JButton btDoacaoBuscarDoacao1;
     private javax.swing.JButton btDoacaoBuscarDoador;
     private javax.swing.JButton btDoacaoBuscarProd;
     private javax.swing.JButton btDoacaoDelProd;
@@ -2460,17 +2595,18 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JButton btPedidoBuscarCliente;
     private javax.swing.JButton btPedidoBuscarCliente1;
     private javax.swing.JButton btPedidoBuscarCliente2;
-    private javax.swing.JButton btPedidoBuscarCliente3;
     private javax.swing.JButton btPedidoBuscarPedido;
     private javax.swing.JButton btPedidoLimpar;
     private javax.swing.JButton btPedidoRegistrar;
+    private javax.swing.JButton btPedidoSair;
     private javax.swing.JButton btRelDoaFiltrar;
-    private javax.swing.JButton btRelDoaVoltar;
+    private javax.swing.JButton btRelDoaSair;
     private javax.swing.JButton btRelDoacaoLimpar;
     private javax.swing.JButton btRelDoacaoSalvar;
     private javax.swing.JButton btRelPedFiltrar;
-    private javax.swing.JButton btRelPedVoltar;
+    private javax.swing.JButton btRelPedidoBuscarCliente;
     private javax.swing.JButton btRelPedidoLimpar;
+    private javax.swing.JButton btRelPedidoSair;
     private javax.swing.JButton btRelPedidoSalvar;
     private javax.swing.ButtonGroup buttonGroupPessoaTipo;
     private javax.swing.JComboBox<String> cbDoacaoTipo;
@@ -2478,8 +2614,8 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbEnderecoUf;
     private javax.swing.JComboBox<String> cbLocalInternacao;
     private javax.swing.JComboBox<String> cbPedidoStatus;
-    private javax.swing.JComboBox<String> cbRelDoaOrdenacao1;
-    private javax.swing.JComboBox<String> cbRelDoaOrdenacao2;
+    private javax.swing.JComboBox<String> cbRelDoaOrdenacao;
+    private javax.swing.JComboBox<String> cbRelDoaSentido;
     private javax.swing.JComboBox<String> cbRelDoaTpDoacao;
     private javax.swing.JComboBox<String> cbRelDoaTpProduto;
     private javax.swing.JComboBox<String> cbRelPedCidade;
@@ -2514,6 +2650,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JPanel jpRelPedTotMarmitas;
     private javax.swing.JPanel jpRelPedTotStatus;
     private javax.swing.JSpinner jsDoacaoQuantidadeProduto;
+    private javax.swing.JSpinner jsQtdDias;
     private javax.swing.JLabel lbBairro;
     private javax.swing.JLabel lbComplemento;
     private javax.swing.JLabel lbDoacaoData;
@@ -2531,8 +2668,10 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel lbLogradouro5;
     private javax.swing.JLabel lbLogradouro6;
     private javax.swing.JLabel lbNome;
+    private javax.swing.JLabel lbNome1;
     private javax.swing.JLabel lbNomePaciente;
     private javax.swing.JLabel lbNomePaciente1;
+    private javax.swing.JLabel lbNomePaciente2;
     private javax.swing.JLabel lbNumero;
     private javax.swing.JLabel lbObservacao;
     private javax.swing.JLabel lbPedidoCliente;
@@ -2552,10 +2691,10 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel lbRelDoaTpProduto;
     private javax.swing.JLabel lbRelPedCidade;
     private javax.swing.JLabel lbRelPedCliente;
-    private javax.swing.JLabel lbRelPedDtEntrega;
-    private javax.swing.JLabel lbRelPedDtEntrega1;
-    private javax.swing.JLabel lbRelPedDtPedido;
-    private javax.swing.JLabel lbRelPedDtPedido1;
+    private javax.swing.JLabel lbRelPedDtEntregaFim;
+    private javax.swing.JLabel lbRelPedDtEntregaInicio;
+    private javax.swing.JLabel lbRelPedDtPedidoFim;
+    private javax.swing.JLabel lbRelPedDtPedidoInicio;
     private javax.swing.JLabel lbRelPedLocal;
     private javax.swing.JLabel lbRelPedOrdenacao;
     private javax.swing.JLabel lbRelPedStatus;
@@ -2603,6 +2742,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JTable tableRelatorioPedido;
     private javax.swing.JTextField tfDoacaoDoador;
     private javax.swing.JTextField tfDoacaoIdDoacao;
+    private javax.swing.JTextField tfDoacaoIdDoacao1;
     private javax.swing.JTextField tfDoacaoIdDoador;
     private javax.swing.JTextField tfDoacaoSelecionarProd;
     private javax.swing.JFormattedTextField tfDoacaoValor;
@@ -2617,14 +2757,13 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JTextField tfPedidoCliente;
     private javax.swing.JTextField tfPedidoIdPedido;
     private javax.swing.JTextField tfPedidoIdPedido1;
-    private javax.swing.JTextField tfQtdDias;
     private javax.swing.JTextField tfRelDoaDoador;
     private javax.swing.JTextField tfRelDoaProd;
     private javax.swing.JTextField tfRelPedCliente;
-    private javax.swing.JFormattedTextField tfRelPedDtEntrega;
-    private javax.swing.JFormattedTextField tfRelPedDtPedido;
-    private javax.swing.JFormattedTextField tfRelPedDtPedido2;
-    private javax.swing.JFormattedTextField tfRelPedDtPedido3;
+    private javax.swing.JFormattedTextField tfRelPedDtEntregaFim;
+    private javax.swing.JFormattedTextField tfRelPedDtEntregaInicio;
+    private javax.swing.JFormattedTextField tfRelPedDtPedidoFim;
+    private javax.swing.JFormattedTextField tfRelPedDtPedidoInicio;
     private javax.swing.JTextField tfRelPedTotCancelado;
     private javax.swing.JTextField tfRelPedTotFechado;
     private javax.swing.JTextField tfRelPedTotMarmitas;

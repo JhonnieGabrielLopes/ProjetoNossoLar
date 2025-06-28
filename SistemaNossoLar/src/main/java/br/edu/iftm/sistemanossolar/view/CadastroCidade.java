@@ -46,7 +46,7 @@ public class CadastroCidade extends javax.swing.JDialog {
         lbCadCidUf.setText("UF:");
 
         cbCadCidUf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbCadCidUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MT", "MS", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cbCadCidUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MT", "MS", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
         cbCadCidUf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCadCidUfActionPerformed(evt);
