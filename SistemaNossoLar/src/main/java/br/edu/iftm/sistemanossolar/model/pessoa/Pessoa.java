@@ -20,7 +20,7 @@ public class Pessoa {
     public enum TipoCad {
         ASSISTENTE,
         BENEFICIARIO,
-        DOADOR,;
+        DOADOR;
         public static TipoCad fromString(String opcao) {
             if (opcao==null) 
                 return null;
