@@ -99,4 +99,22 @@ public class CidadeDAO {
             return null;
         }
     }
+
+    public String capturarNomeCidade(int idCidade) {
+        String nome = null;
+        String sql = "SELECT CONCAT(nome, '/', uf) AS cidade FROM cidade WHERE id = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            stmt.setInt(1, idCidade);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                nome = rs.getString("descricao");
+                log.registrarLog(2, "CidadeDAO", "capturarNomeCidade", "cidade", "Nome da cidade obtido");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "CidadeDAO", "capturarNomeCidade", "cidade", "Nome da cidade não obtido");
+        }
+        return nome;
+    }
+
 }

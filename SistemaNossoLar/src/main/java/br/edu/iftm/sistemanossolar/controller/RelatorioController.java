@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.List;
@@ -24,14 +25,18 @@ import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
+import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
+import br.edu.iftm.sistemanossolar.model.relatorio.RetornoPedidos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class RelatorioController {
     private DoacaoController doacaoController;
+    private PedidoController pedidoController;
 
     public RelatorioController(Connection conexao) {
         this.doacaoController = new DoacaoController(conexao);
+        this.pedidoController = new PedidoController(conexao);
     }
 
     RegistrosLog log = new RegistrosLog();
@@ -81,6 +86,7 @@ public class RelatorioController {
         log.registrarLog(1, "RelatorioController", "montarArquivo", "", "Montando arquivo '.pdf' no template");
         try (OutputStream os = new FileOutputStream(arquivo)) {
             ITextRenderer renderer = new ITextRenderer();
+            renderer.getSharedContext().setBaseURL("file:///C:/SistemaNossoLar/SistemaNossoLar/src/main/resources/relatorio/");
             renderer.setDocumentFromString(templatePreenchido);
             renderer.layout();
             renderer.createPDF(os);
@@ -105,7 +111,7 @@ public class RelatorioController {
                 .replace("{{data}}", doacao.getDataDoacao().format(formatador));
 
             String diretorio = "C:\\SistemaNossoLar\\Recibos\\Doacao";
-            String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ " " +doacao.getDoador().getNome()+ ".pdf";
+            String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ ".pdf";
             criarArquivo(diretorio, arquivo, templatePreenchido);
         } else {
             String template = RelatorioController.templateDoacaoProduto();
@@ -127,7 +133,7 @@ public class RelatorioController {
                 .replace("{{data}}", doacao.getDataDoacao().format(formatador));
 
             String diretorio = "C:\\SistemaNossoLar\\Recibos\\Doacao";
-            String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ " " +doacao.getDoador().getNome()+ ".pdf";
+            String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ ".pdf";
             criarArquivo(diretorio, arquivo, templatePreenchido);
         }
     }
@@ -250,7 +256,7 @@ public class RelatorioController {
             template = template.replace("{{sentido}}", sentido);
         }
 
-        LocalDate agora = LocalDate.now();
+        LocalDateTime agora = LocalDateTime.now();
         template = template.replace("{{resultados}}", resultado.toString())
                            .replace("{{qtdDoacoes}}", String.valueOf(qtdRegistros))
                            .replace("{{vlrTotal}}", "R$ "+ String.format("%.2f", totalizacao.getTotalValor()))
@@ -260,7 +266,9 @@ public class RelatorioController {
         String templatePreenchido = template;
 
         String diretorio = "C:\\SistemaNossoLar\\Relatorios\\Doacao";
-        String arquivo = diretorio + "\\teste.pdf";
+        formatador = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
+        String dataHoraAgora = agora.format(formatador);
+        String arquivo = diretorio + "\\Doacoes " +dataHoraAgora+ ".pdf";
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }
 
@@ -286,7 +294,9 @@ public class RelatorioController {
         }
 
         String paciente = "";
-        if (pedido.getCliente().getPaciente() != null) {
+        if (pedido.getCliente() != null && 
+            pedido.getCliente().getPaciente() != null && 
+            pedido.getCliente().getPaciente().getNome() != null) {
             paciente = pedido.getCliente().getPaciente().getNome();
         }
 
@@ -306,7 +316,161 @@ public class RelatorioController {
             .replace("{{observacao}}", observacao);
 
         String diretorio = "C:\\SistemaNossoLar\\Recibos\\Pedidos";
-        String arquivo = diretorio + "\\Pedido " +pedido.getId().toString()+ " " +pedido.getCliente().getNome()+ ".pdf";
+        String arquivo = diretorio + "\\Pedido " +pedido.getId().toString()+ ".pdf";
+        criarArquivo(diretorio, arquivo, templatePreenchido);
+    }
+
+    public void relatorioPedido() throws SQLException, IOException {
+        //METODO PARA TESTES NO TERMINAL
+        String data1 = "2023-06-01";
+        LocalDate dataTeste1 = LocalDate.parse(data1);
+        String data2 = "2023-06-15"; 
+        LocalDate dataTeste2 = LocalDate.parse(data2);
+        RetornoPedidos relatorio = pedidoController.filtrarRelatorio(null, null, null, null, "Todos", null, "Todos", "Todas", "dataPedido", "asc");
+        gerarRelatorioPedidos(relatorio.getPedidos(), relatorio.getTotalizacao(), relatorio.getFiltros());
+    }
+
+    public void gerarRelatorioPedidos(List<RelPedido> dados, RelPedido totalizacao, List<Object> filtros) throws IOException {
+        log.registrarLog(1, "RelatorioController", "gerarRelatorioPedidos", "", "Gerando relatorio de Pedidos");
+
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        String template = RelatorioController.templateRelatorioPedidos();
+
+        StringBuilder resultado = new StringBuilder();
+        int qtdRegistros = 0;
+        String nomeCliente = "";
+        for (RelPedido pedido : dados) {
+            boolean temObservacao = pedido.getObservacao() != null && !pedido.getObservacao().isEmpty();
+                
+            resultado.append("<tr>");
+            resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; text-align: center;'>")
+                     .append("<span>")
+                     .append(pedido.getIdPedido())
+                     .append("</span></td>");
+            resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; '>")
+                     .append("<span>")
+                     .append(pedido.getStatus())
+                     .append("</span></td>");
+            nomeCliente = pedido.getNomeCliente();
+            resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000").append("'><span>")
+                     .append(nomeCliente).append("</span></td>");
+            resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000").append("'><span>")
+                     .append(pedido.getLocal()).append("</span></td>");
+            resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; text-align: center;'>")
+                     .append("<span>")
+                     .append(pedido.getQtdMarmitas()).append("</span></td>");
+            resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; text-align: center;'>")
+                     .append("<span>")
+                     .append(formatador.format(pedido.getDataPedido())).append("</span></td>");
+
+            if (pedido.getDataEntrega() != null) {
+                resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000")
+                     .append("; text-align: center;'>")
+                     .append("<span>")
+                     .append(formatador.format(pedido.getDataEntrega())).append("</span></td>");
+            } else {
+                resultado.append("<td style='border-bottom:")
+                     .append(temObservacao ? "none" : "1px solid #000").append("'><span>")
+                     .append("").append("</span></td>");
+            }
+
+            resultado.append("</tr>");
+            if (temObservacao) {
+                resultado.append("<tr class='detalhes-produto'>")
+                         .append("<td colspan='7' style='border-bottom: 1px solid #000; padding-left: 41px;'>")
+                         .append("<strong>Observação:</strong> <span>")
+                         .append(pedido.getObservacao())
+                         .append("</span></td>")
+                         .append("</tr>");
+            }
+            qtdRegistros++;
+        }
+
+        LocalDate dataPedidoInicio = (LocalDate) filtros.get(0);
+        LocalDate dataPedidoFim = (LocalDate) filtros.get(1);
+        LocalDate dataEntregaInicio = (LocalDate) filtros.get(2);
+        LocalDate dataEntregaFim = (LocalDate) filtros.get(3);
+
+        if (filtros.get(0) != null) {
+            template = template.replace("{{dataPedidoInicio}}", formatador.format(dataPedidoInicio).toString());
+        } else {
+            template = template.replace("{{dataPedidoInicio}}", "");
+        }
+
+        if (filtros.get(1) != null) {
+            template = template.replace("{{dataPedidoFim}}", formatador.format(dataPedidoFim).toString());
+        } else {
+            template = template.replace("{{dataPedidoFim}}", "");
+        }
+
+        if (filtros.get(2) != null) {
+            template = template.replace("{{dataEntregaInicio}}", formatador.format(dataEntregaInicio).toString());
+        } else {
+            template = template.replace("{{dataEntregaInicio}}", "");
+        }
+
+        if (filtros.get(3) != null) {
+            template = template.replace("{{dataEntregaFim}}", formatador.format(dataEntregaFim).toString());
+        } else {
+            template = template.replace("{{dataEntregaFim}}", "");
+        }
+
+        template = template.replace("{{filtroStatus}}", filtros.get(4).toString());
+
+        if (filtros.get(5) != null) {
+            template = template.replace("{{filtroCliente}}", nomeCliente);
+        } else {
+            template = template.replace("{{filtroCliente}}", "");
+        }
+
+        template = template.replace("{{filtroLocal}}", filtros.get(6).toString());
+        template = template.replace("{{filtroCidade}}", filtros.get(7).toString());
+
+        StringBuilder ordem = new StringBuilder();
+        if (filtros.get(8) != null) {
+            switch (filtros.get(8).toString()) {
+                case "codigo": ordem.append("Código"); break;
+                case "status": ordem.append("Status"); break;
+                case "quantidade": ordem.append("Marmitas"); break;
+                case "dataPedido": ordem.append("Data do Pedido"); break;
+                case "dataEntrega": ordem.append("Data da Entrega"); break;
+                case "nome": ordem.append("Cliente"); break;
+            }
+            template = template.replace("{{ordenacao}}", ordem);
+        }
+
+        if (filtros.get(9) != null) {
+            StringBuilder sentido = new StringBuilder();
+            sentido.append(filtros.get(9).equals("asc") ? "Crescente" : "Decrescente");
+            template = template.replace("{{sentido}}", sentido);
+        }
+
+        LocalDateTime agora = LocalDateTime.now();
+        template = template.replace("{{resultados}}", resultado.toString())
+                           .replace("{{qtdPedidos}}", String.valueOf(qtdRegistros))
+                           .replace("{{totalMarmitas}}", String.valueOf(totalizacao.getTotalMarmitas()))
+                           .replace("{{totalAbertos}}", String.valueOf(totalizacao.getTotalPendente()))
+                           .replace("{{totalFechados}}", String.valueOf(totalizacao.getTotalFechado()))
+                           .replace("{{totalCancelados}}", String.valueOf(totalizacao.getTotalCancelado()))
+                           .replace("{{dataEmissao}}", formatador.format(agora));
+        String templatePreenchido = template;
+
+        String diretorio = "C:\\SistemaNossoLar\\Relatorios\\Pedido";
+        formatador = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
+        String dataHoraAgora = agora.format(formatador);
+        String arquivo = diretorio + "\\Pedidos " +dataHoraAgora+ ".pdf";
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }
 }

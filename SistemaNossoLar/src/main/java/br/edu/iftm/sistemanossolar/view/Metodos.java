@@ -73,7 +73,8 @@ public class Metodos {
         System.out.println("18 - Deletar Endereço");
         System.out.println("19 - Deletar Cidade");
         System.out.println("20 - Relatorio de Doações");
-        System.out.println("21 - Sair");
+        System.out.println("21 - Relatorio de Pedidos");
+        System.out.println("22 - Sair");
         System.out.println("Escolha uma opção: ");
     }
 
@@ -234,6 +235,11 @@ public class Metodos {
     public void relatorioDoacao() throws SQLException, IOException {
         //METODO PARA TESTES NO TERMINAL
         relatorioController.relatorioDoacao();
+    }
+
+    public void relatorioPedido() throws SQLException, IOException {
+        //METODO PARA TESTES NO TERMINAL
+        relatorioController.relatorioPedido();
     }
 
     public void listarDoacoes() throws SQLException {

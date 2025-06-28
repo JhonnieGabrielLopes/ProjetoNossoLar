@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        @page {
+            size: A4;
+            margin: 5mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            font-size: 12px;
+        }
+
+        .recibo-container {
+            margin-top: 5px;
+        }
+
+        .recibo {
+            border: 2px solid #000;
+            padding: 5px;
+        }
+
+        .cabecalho-img {
+            width: 140px;
+        }
+
+        .titulo-relatorio {
+            text-align: center;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .tabela-filtros {
+            font-size: 12px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+            margin-left: 10px;
+        }
+
+        .tabela-filtros p {
+            font-size: 12px;
+        }
+
+        .resultado tr {
+            page-break-inside: avoid;
+        }
+
+        .tabela-cheia {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            word-wrap: break-word;
+            margin-top: 10px;
+            margin-bottom: 2px;
+        }
+
+        .tabela-cheia th {
+            font-size: 12px;
+            border: 1px solid #000;
+            padding: 2px;
+            text-align: left;
+        }
+
+        .tabela-cheia td {
+            font-size: 12px;
+            border-bottom: 1px solid #000;
+            padding: 2px;
+            vertical-align: top;
+        }
+
+        .detalhes-produto td {
+            border-bottom: 1px solid #000;
+            padding-left: 29px;
+        }
+
+        .tabela-totalizadora {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+            margin-top: 2px;
+        }
+
+        .tabela-totalizadora td {
+            font-size: 12px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #000;
+            border-top: none;
+            border-bottom: none;
+        }
+
+        .valor {
+            font-weight: bold;
+            color: #0066cc;
+        }
+
+        .data-emissao {
+            text-align: right;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="recibo-container">
+        <div class="recibo">
+            <table style="width: 100%; margin-bottom: 5mm;">
+                <tr>
+                    <td style="width: 130px; vertical-align: top;">
+                        <img src="file:///C:/SistemaNossoLar/SistemaNossoLar/src/main/resources/relatorio/pedido/logo_simples.png" alt="cabecalho"/>
+                    </td>
+                    <td style="vertical-align: top;">
+                        <p class="titulo-relatorio"><strong>RELATÓRIO DE PEDIDOS</strong></p>
+                        <hr style="margin: 5px 0;"/>
+                        <table class="tabela-filtros">
+                            <p><strong>Filtros:</strong></p>
+                            <tr>
+                                <td><strong>Data Pedido Inicio:</strong> {{dataPedidoInicio}}</td>
+                                <td><strong>Pedido Fim:</strong> {{dataPedidoFim}}</td>
+                                <td><strong>Status:</strong> {{filtroStatus}}</td>
+                                <td><strong>Local:</strong> {{filtroLocal}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Entrega Inicio:</strong> {{dataEntregaInicio}}</td>
+                                <td><strong>Entrega Fim:</strong> {{dataEntregaFim}}</td>
+                                <td><strong>Cliente:</strong> {{filtroCliente}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ordem:</strong> {{ordenacao}}</td>
+                                <td><strong>Sentido:</strong> {{sentido}}</td>
+                                <td><strong>Cidade Cliente:</strong> {{filtroCidade}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="resultado">
+                <table class="tabela-cheia">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%; text-align: center;">Cód.</th>
+                            <th style="width: 9%;">Status</th>
+                            <th style="width: 28%;">Cliente</th>
+                            <th style="width: 10%;">Local</th>
+                            <th style="width: 7%; text-align: center;">Marmitas</th>
+                            <th style="width: 7%; text-align: center;">Data Pedido</th>
+                            <th style="width: 7%; text-align: center;">Data Entrega</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{resultados}}
+                    </tbody>
+                </table>
+                <p><span class="valor">{{qtdPedidos}}</span> pedidos</p>
+                <table class="tabela-totalizadora">
+                    <tr>
+                        <td><strong>Pendente: </strong><span class="valor">{{totalAbertos}}</span></td>
+                        <td><strong>Fechado: </strong><span class="valor">{{totalFechados}}</span></td>
+                        <td><strong>Cancelado: </strong><span class="valor">{{totalCancelados}}</span></td>
+                        <td><strong>Total Marmitas: </strong><span class="valor">{{totalMarmitas}}</span></td>
+                    </tr>
+                </table>
+                <p class="data-emissao">Emitido em {{dataEmissao}}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
