@@ -31,7 +31,7 @@ public class PessoaDAO {
     }
 
     public Integer cadastrarPessoa(Pessoa pessoa, Paciente paciente, Integer cidade, Integer endereco, Integer idTipo) {
-        String sql = "INSERT INTO usuario (nome, telefone, endereco, tipoPessoa, email, identificacao, observacao) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (nome, telefone, endereco, tipoPessoa, email, identificacao, observacao, local) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getTelefone());
@@ -59,6 +59,12 @@ public class PessoaDAO {
                 stmt.setString(7, pessoa.getObservacao());
             } else {
                 stmt.setNull(7, Types.VARCHAR);
+            }
+            
+            if (pessoa.getLocal() != null) {
+                stmt.setString(8, pessoa.getLocal().toString());
+            } else {
+                stmt.setNull(8, Types.VARCHAR);
             }
 
             stmt.executeUpdate();

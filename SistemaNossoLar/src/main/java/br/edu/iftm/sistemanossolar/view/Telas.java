@@ -34,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
  * @author AFSOUZA
  */
 public class Telas extends javax.swing.JFrame {
+
     private CardLayout cl;
     private static CidadeController cidadeController;
     private static CadastroCidade cadastroCidade;
@@ -44,12 +45,10 @@ public class Telas extends javax.swing.JFrame {
     private static EnderecoController enderecoController;
     private static BuscarDoacao buscarDoacao;
     private DefaultTableModel modeloTabela;
+
     /**
-     * Creates new form Telas
-     *      lb - Label
-     *      tf - TextField
-     *      ta - TextArea
-     *      ff - FormatedField
+     * Creates new form Telas lb - Label tf - TextField ta - TextArea ff -
+     * FormatedField
      */
     public Telas(Connection conexao) {
         cidadeController = new CidadeController(conexao);
@@ -497,6 +496,7 @@ public class Telas extends javax.swing.JFrame {
         jLabel2.setText("Local de Internação");
 
         cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", " " }));
+        cbLocalInternacao.setEnabled(false);
 
         javax.swing.GroupLayout pnPessoaClienteLayout = new javax.swing.GroupLayout(pnPessoaCliente);
         pnPessoaCliente.setLayout(pnPessoaClienteLayout);
@@ -810,7 +810,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGroup(pnDoacaoLayout.createSequentialGroup()
                             .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lbDoacaoDoador)
-                                .addComponent(tfDoacaoIdDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 51, Short.MAX_VALUE))
+                                .addComponent(tfDoacaoIdDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tfDoacaoDoador)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1628,7 +1628,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioDoacao, "relatorioDoacao");
@@ -2144,7 +2144,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void tfNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomeKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isLetter(verificador) && verificador != ' '){
+        if (!Character.isLetter(verificador) && verificador != ' ') {
             evt.consume();
         }
     }//GEN-LAST:event_tfNomeKeyTyped
@@ -2159,28 +2159,28 @@ public class Telas extends javax.swing.JFrame {
 
     private void tfNomePacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomePacienteKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isLetter(verificador) && verificador != ' '){
+        if (!Character.isLetter(verificador) && verificador != ' ') {
             evt.consume();
         }
     }//GEN-LAST:event_tfNomePacienteKeyTyped
 
     private void tfQtdDiasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQtdDiasKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isDigit(verificador)){
+        if (!Character.isDigit(verificador)) {
             evt.consume();
         }
     }//GEN-LAST:event_tfQtdDiasKeyTyped
 
     private void tfEnderecoCepKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEnderecoCepKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isDigit(verificador)){
+        if (!Character.isDigit(verificador)) {
             evt.consume();
         }
     }//GEN-LAST:event_tfEnderecoCepKeyTyped
 
     private void tfEnderecoNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEnderecoNumeroKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isDigit(verificador)){
+        if (!Character.isDigit(verificador)) {
             evt.consume();
         }
     }//GEN-LAST:event_tfEnderecoNumeroKeyTyped
@@ -2209,86 +2209,116 @@ public class Telas extends javax.swing.JFrame {
     private void btCadastroPessoaLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaLimparActionPerformed
         limparcamposCadastroUsuario();
     }//GEN-LAST:event_btCadastroPessoaLimparActionPerformed
-    
+
     private void btCadastroPessoaRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaRegistrarActionPerformed
         Endereco endereco = null;
         Pessoa novaPessoa = null;
         Paciente paciente = null;
         String telefone = ffTelefone.getText().replaceAll("[^\\d]", "");
-        
+
         Cidade cidadeEscolhida = (Cidade) cbEnderecoCidade.getSelectedItem();
         if (tfEnderecoLogradouro.getText().trim().isEmpty() || tfEnderecoLogradouro.getText().equals("")) {
             endereco = new Endereco(cidadeEscolhida);
         } else {
             endereco = new Endereco(
-                tfEnderecoLogradouro.getText(),
-                Integer.parseInt(tfEnderecoNumero.getText()),
-                tfEnderecoBairro.getText(),
-                tfEnderecoCep.getText(),
-                tfEnderecoComplemento.getText(),
-                cidadeEscolhida);
+                    tfEnderecoLogradouro.getText(),
+                    Integer.parseInt(tfEnderecoNumero.getText()),
+                    tfEnderecoBairro.getText(),
+                    tfEnderecoCep.getText(),
+                    tfEnderecoComplemento.getText(),
+                    cidadeEscolhida);
         }
 
         novaPessoa = new Pessoa(tfNome.getText(), telefone, endereco);
-        try{
-            if (tfQtdDias.getText()!= null && !tfQtdDias.getText().trim().isEmpty()){
+        try {
+            if (tfQtdDias.getText() != null && !tfQtdDias.getText().trim().isEmpty()) {
                 paciente = new Paciente(tfNomePaciente.getText(), Integer.parseInt(tfQtdDias.getText()));
             }
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
 
-        if ((String)cbTipoUsuario.getSelectedItem() == "Assistente") {
-            novaPessoa.setTipoUsuario(TipoCad.ASSISTENTE);
-        } else if ((String)cbTipoUsuario.getSelectedItem() == "Beneficiário") {
-            novaPessoa.setTipoUsuario(TipoCad.BENEFICIARIO);
-        } else if ((String)cbTipoUsuario.getSelectedItem() == "Doador") {
-            novaPessoa.setTipoUsuario(TipoCad.DOADOR);   
-        }
-
-        if(cbLocalInternacao.getSelectedIndex() == 0){
-            novaPessoa.setLocal(Pessoa.Local.HOSPITAL);
-        }else{
-            novaPessoa.setLocal(Pessoa.Local.PRONTOSOCORRO);
+        Object selected = cbTipoUsuario.getSelectedItem();
+        if (selected != null) {
+            String tipo = selected.toString();
+            switch (tipo) {
+                case "Assistente":
+                    novaPessoa.setTipoUsuario(TipoCad.ASSISTENTE);
+                    break;
+                case "Beneficiario":
+                    novaPessoa.setTipoUsuario(TipoCad.BENEFICIARIO);
+                    break;
+                case "Doador":
+                    novaPessoa.setTipoUsuario(TipoCad.DOADOR);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(rootPane, "Tipo de usuário inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return; // evita continuar com tipoUsuario nulo
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um tipo de usuário.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
         }
         
+        switch (cbLocalInternacao.getSelectedIndex()) {
+            case 0:
+                novaPessoa.setLocal(Pessoa.Local.HOSPITAL);
+                break;
+                
+            case 1:
+                novaPessoa.setLocal(Pessoa.Local.PRONTOSOCORRO);
+                break;
+            default:
+                novaPessoa.setLocal(null);
+        }
+
         novaPessoa.setEmail(tfEmail.getText());
-        if(rbPessoaFisica.isSelected()){
+        if (rbPessoaFisica.isSelected()) {
             novaPessoa.setTipoPessoa(Pessoa.TipoPessoa.FISICA);
         }
-        if(rbPessoaJuridica.isSelected()){
+        if (rbPessoaJuridica.isSelected()) {
             novaPessoa.setTipoPessoa(Pessoa.TipoPessoa.JURIDICA);
         }
         novaPessoa.setIdentificacao(ffDocumento.getText().replaceAll("[^\\d]", ""));
         novaPessoa.setObservacao(taObservacao.getText());
         novaPessoa.setPaciente(paciente);
-        
-        try{
+
+        try {
             enderecoController.cadastrarEndereco(endereco, cidadeEscolhida);
-            if(!pessoaController.cadastrarPessoa(novaPessoa, paciente)){
+            if (!pessoaController.cadastrarPessoa(novaPessoa, paciente)) {
                 JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar o Usuário", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar o Usuário", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
                 limparcamposCadastroUsuario();
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btCadastroPessoaRegistrarActionPerformed
 
     private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
-        if(cbTipoUsuario.getSelectedIndex()==0){
-            tfNomePaciente.setEnabled(false);
-            tfQtdDias.setEnabled(false);
-            cbLocalInternacao.setEnabled(true);
-        }else if (cbTipoUsuario.getSelectedIndex()==1){
-            tfNomePaciente.setEnabled(true);
-            tfQtdDias.setEnabled(true);
-            cbLocalInternacao.setEnabled(true);
-        } else if (cbTipoUsuario.getSelectedIndex()==2){
-            tfNomePaciente.setEnabled(false);
-            tfQtdDias.setEnabled(false);
-            cbLocalInternacao.setEnabled(false);
+        switch (cbTipoUsuario.getSelectedIndex()) {
+            //0 Bene 1 Doador 2 Assis
+            case 0:
+                tfNomePaciente.setEnabled(true);
+                tfQtdDias.setEnabled(true);
+                cbLocalInternacao.setSelectedIndex(0);
+                // hospital
+                break;
+            case 1:
+                tfNomePaciente.setEnabled(false);
+                tfQtdDias.setEnabled(false);
+                cbLocalInternacao.setSelectedIndex(2);
+                // nulo
+                break;
+            case 2:
+                tfNomePaciente.setEnabled(false);
+                tfQtdDias.setEnabled(false);
+                cbLocalInternacao.setSelectedIndex(1);
+                // Pronto socorro
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_cbTipoUsuarioActionPerformed
 
@@ -2387,7 +2417,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void tableDoacaoProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDoacaoProdutosMouseClicked
         int linhaSelecionada = tableDoacaoProdutos.getSelectedRow();
-        if(linhaSelecionada != -1){
+        if (linhaSelecionada != -1) {
             Object descricao = tableDoacaoProdutos.getValueAt(linhaSelecionada, 1);
             Object quantidade = tableDoacaoProdutos.getValueAt(linhaSelecionada, 2);
             tfDoacaoSelecionarProd.setText(descricao.toString());
@@ -2397,10 +2427,10 @@ public class Telas extends javax.swing.JFrame {
 
     private void btDoacaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDeletarActionPerformed
         int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
-        if(doacaoController.removeDoacao(idDoacao)){
+        if (doacaoController.removeDoacao(idDoacao)) {
             JOptionPane.showMessageDialog(rootPane, "Doacao Removida com sucesso.", "Remoção", JOptionPane.INFORMATION_MESSAGE);
             limparCamposCadastroDoacao();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Doacao não removida.", "Remoção", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btDoacaoDeletarActionPerformed
@@ -2409,24 +2439,24 @@ public class Telas extends javax.swing.JFrame {
         limparCamposCadastroDoacao();
     }//GEN-LAST:event_btDoacaoLimparActionPerformed
 
-    private void cbRelPedStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbRelPedStatusActionPerformed
-    
     public void preencheDoacao(Doacao doacao){
         List<Produto> produtos = doacaoController.listagemDeProduto(doacao);
         tfDoacaoIdDoacao.setText(String.valueOf(doacao.getId()));
         tfDoacaoIdDoador.setText(String.valueOf(doacao.getDoador().getId()));
         tfDoacaoDoador.setText(doacao.getDoador().getNome());
         ftDoacaoData.setText(String.valueOf(doacao.getDataDoacao()));
-        switch (String.valueOf(doacao.getTipo())){
-            case "DINHEIRO": cbDoacaoTipo.setSelectedIndex(0);break;
-            case "PRODUTO": cbDoacaoTipo.setSelectedIndex(1);break;
+        switch (String.valueOf(doacao.getTipo())) {
+            case "DINHEIRO":
+                cbDoacaoTipo.setSelectedIndex(0);
+                break;
+            case "PRODUTO":
+                cbDoacaoTipo.setSelectedIndex(1);
+                break;
         }
         tfDoacaoValor.setValue(doacao.getValor());
         taDoacaoObservacao.setText(doacao.getObservacao());
         modeloTabela.setRowCount(0);
-        for(Produto prod : produtos){
+        for (Produto prod : produtos) {
             Object[] linha = {prod.getTipo(), prod.getNome(), prod.getQuantidade()};
             modeloTabela.addRow(linha);
         }
@@ -2440,29 +2470,30 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoValor.setEnabled(false);
         taDoacaoObservacao.setEnabled(false);
     }
+
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
         campo.setEnabled(true);
         try {
             MaskFormatter formatter = new MaskFormatter(mascara);
             formatter.setPlaceholderCharacter('_');
-            campo.setFormatterFactory( new javax.swing.text.DefaultFormatterFactory(formatter));
+            campo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(formatter));
             campo.setValue(null);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-    
-    public void carregarCidade() throws SQLException{
+
+    public void carregarCidade() throws SQLException {
         cbEnderecoCidade.removeAllItems();
         Cidade cidadePadrao = new Cidade("Selecione...", null);
         cbEnderecoCidade.addItem(cidadePadrao);
         List<Cidade> puxarCidade = cidadeController.listarCidade();
-        for(Cidade cidade : puxarCidade){
+        for (Cidade cidade : puxarCidade) {
             cbEnderecoCidade.addItem(cidade);
         }
     }
-    
-    public void limparcamposCadastroUsuario(){
+
+    public void limparcamposCadastroUsuario() {
         tfNome.setText("");
         ffTelefone.setText("");
         tfEmail.setText("");
@@ -2479,8 +2510,8 @@ public class Telas extends javax.swing.JFrame {
         cbEnderecoUf.setSelectedIndex(0);
         buttonGroupPessoaTipo.clearSelection();
     }
-    
-    public void limparCamposCadastroDoacao(){
+
+    public void limparCamposCadastroDoacao() {
         tfDoacaoIdDoacao.setText("");
         tfDoacaoIdDoador.setText("");
         tfDoacaoDoador.setText("");
@@ -2490,7 +2521,7 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoSelecionarProd.setText("");
         tfDoacaoQuantidade.setText("");
         cbDoacaoTipo.setSelectedIndex(0);
-        modeloTabela.setRowCount(0);    
+        modeloTabela.setRowCount(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
