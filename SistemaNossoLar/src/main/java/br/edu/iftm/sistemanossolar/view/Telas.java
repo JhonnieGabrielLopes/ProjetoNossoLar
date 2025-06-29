@@ -2681,7 +2681,6 @@ public class Telas extends javax.swing.JFrame {
     }
     
     public void destravaCamposDoacao(){
-        tfDoacaoQuantidade.setEnabled(true);
         tfDoacaoDoador.setEnabled(true);
         ftDoacaoData.setEnabled(true);
         cbDoacaoTipo.setEnabled(true);
