@@ -34,7 +34,7 @@ public class PessoaController {
         log.registrarLog(1, "PessoaController", "cadastrarPessoa", "", "Cadastrando o "+ pessoa.getTipoUsuario() +" "+ pessoa.getNome());
 
         Cidade cidade = pessoa.getEndereco().getCidade();
-        int pessoaId = pessoaDAO.cadastrarPessoa(pessoa, paciente, cidadeController.buscarIdCidade(cidade), enderecoController.buscarIdEndereco(pessoa.getEndereco(), cidadeController.buscarIdCidade(cidade)), tipoController.buscarIdTipo(pessoa.getTipoUsuario().toString(), "tipousuario"));
+        int pessoaId = pessoaDAO.cadastrarPessoa(pessoa, paciente, cidadeController.buscarIdCidade(cidade), enderecoController.buscarIdEndereco(pessoa.getEndereco(), cidadeController.buscarIdCidade(cidade)), tipoController.buscarIdTipo(pessoa.getTipoUsuario().toString(), "tipoUsuario"));
         if (pessoaId != 0) {
             if (paciente != null) {
                 pacienteController.cadastrarPaciente(paciente, pessoaId);

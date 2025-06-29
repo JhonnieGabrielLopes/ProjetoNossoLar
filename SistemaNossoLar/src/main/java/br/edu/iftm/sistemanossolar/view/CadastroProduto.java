@@ -44,28 +44,38 @@ public class CadastroProduto extends javax.swing.JDialog {
         cbCadProdTipoProduto = new javax.swing.JComboBox<>();
         lbCadProdProduto = new javax.swing.JLabel();
         tfCadProdProduto = new javax.swing.JTextField();
-        btCadProdCadastrar = new javax.swing.JButton();
-        btCadProdCancelar = new javax.swing.JButton();
+        btCadProdSalvar = new javax.swing.JButton();
+        btCadProdLimpar = new javax.swing.JButton();
+        btCadProdSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lbCadProdTipo.setText("Tipo");
+        lbCadProdTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbCadProdTipo.setText("Tipo:");
 
+        cbCadProdTipoProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbCadProdTipoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALIMENTO", "LIMPEZA", "OUTRO" }));
 
-        lbCadProdProduto.setText("Descrição");
+        lbCadProdProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbCadProdProduto.setText("Descrição:");
 
-        btCadProdCadastrar.setText("Cadastrar");
-        btCadProdCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadProdCadastrarActionPerformed(evt);
-            }
-        });
+        tfCadProdProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btCadProdCancelar.setText("Cancelar");
-        btCadProdCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btCadProdSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCadProdSalvar.setText("Salvar");
+        btCadProdSalvar.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        btCadProdSalvarActionPerformed(evt);
+                    }
+                });
+        btCadProdLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCadProdLimpar.setText("Limpar");
+
+        btCadProdSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCadProdSair.setText("Sair");
+        btCadProdSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadProdCancelarActionPerformed(evt);
+                btCadProdSairActionPerformed(evt);
             }
         });
 
@@ -76,35 +86,37 @@ public class CadastroProduto extends javax.swing.JDialog {
             .addGroup(pnCadastrarProdutoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btCadProdCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbCadProdTipo)
-                    .addComponent(cbCadProdTipoProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbCadProdTipoProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btCadProdSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btCadProdCancelar)
                     .addComponent(lbCadProdProduto)
-                    .addComponent(tfCadProdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(tfCadProdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnCadastrarProdutoLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(btCadProdLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btCadProdSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         pnCadastrarProdutoLayout.setVerticalGroup(
             pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastrarProdutoLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnCadastrarProdutoLayout.createSequentialGroup()
-                        .addComponent(lbCadProdTipo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbCadProdTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfCadProdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnCadastrarProdutoLayout.createSequentialGroup()
-                        .addComponent(lbCadProdProduto)
-                        .addGap(28, 28, 28)))
+                .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCadProdTipo)
+                    .addComponent(lbCadProdProduto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbCadProdTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCadProdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btCadProdCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(btCadProdCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCadProdSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadProdLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadProdSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,11 +139,11 @@ public class CadastroProduto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCadProdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCancelarActionPerformed
+    private void btCadProdSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btCadProdCancelarActionPerformed
 
-    private void btCadProdCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCadastrarActionPerformed
+    private void btCadProdSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCadastrarActionPerformed
         Produto produto = new Produto();
         produto.setNome(tfCadProdProduto.getText());
         if((String)cbCadProdTipoProduto.getSelectedItem() == "ALIMENTO"){
@@ -154,8 +166,9 @@ public class CadastroProduto extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCadProdCadastrar;
-    private javax.swing.JButton btCadProdCancelar;
+    private javax.swing.JButton btCadProdLimpar;
+    private javax.swing.JButton btCadProdSair;
+    private javax.swing.JButton btCadProdSalvar;
     private javax.swing.JComboBox<String> cbCadProdTipoProduto;
     private javax.swing.JLabel lbCadProdProduto;
     private javax.swing.JLabel lbCadProdTipo;

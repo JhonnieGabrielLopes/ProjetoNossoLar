@@ -16,7 +16,7 @@ public class PessoaTipoDAO {
     }
 
     public boolean cadastrarRelacao(int idUsuario, int idTipo) {
-        String sql = "INSERT INTO usuariotipo (usuario, tipoUsuario) VALUES (?, ?)";
+        String sql = "INSERT INTO usuarioTipo (usuario, tipoUsuario) VALUES (?, ?)";
         try (PreparedStatement stmtUserTipo = conexaoBanco.prepareStatement(sql)) {
             stmtUserTipo.setInt(1, idUsuario);
             stmtUserTipo.setInt(2, idTipo);

@@ -37,6 +37,7 @@ import javax.swing.table.DefaultTableModel;
  * @author AFSOUZA
  */
 public class Telas extends javax.swing.JFrame {
+
     private CardLayout cl;
     private static CidadeController cidadeController;
     private static CadastroCidade cadastroCidade;
@@ -53,11 +54,8 @@ public class Telas extends javax.swing.JFrame {
     private int indiceTabelaProduto;
     private boolean acaoTelaDoacao = true;
     /**
-     * Creates new form Telas
-     *      lb - Label
-     *      tf - TextField
-     *      ta - TextArea
-     *      ff - FormatedField
+     * Creates new form Telas lb - Label tf - TextField ta - TextArea ff -
+     * FormatedField
      */
     public Telas(Connection conexao) {
         cidadeController = new CidadeController(conexao);
@@ -80,6 +78,7 @@ public class Telas extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroupPessoaTipo = new javax.swing.ButtonGroup();
+        jSpinner1 = new javax.swing.JSpinner();
         pnDadosPrincipal = new javax.swing.JPanel();
         pnCard = new javax.swing.JPanel();
         pnCadastroPessoa = new javax.swing.JPanel();
@@ -104,42 +103,38 @@ public class Telas extends javax.swing.JFrame {
         lbNome = new javax.swing.JLabel();
         ffTelefone = new javax.swing.JFormattedTextField();
         lbTelefone = new javax.swing.JLabel();
-        lbEmail = new javax.swing.JLabel();
-        tfEmail = new javax.swing.JTextField();
-        lbObservacao = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        taObservacao = new javax.swing.JTextArea();
-        rbPessoaFisica = new javax.swing.JRadioButton();
-        rbPessoaJuridica = new javax.swing.JRadioButton();
-        lbPessoaTipo = new javax.swing.JLabel();
-        lbDocumento = new javax.swing.JLabel();
         lbNomePaciente = new javax.swing.JLabel();
         tfNomePaciente = new javax.swing.JTextField();
         lbNomePaciente1 = new javax.swing.JLabel();
-        tfQtdDias = new javax.swing.JTextField();
-        ffDocumento = new javax.swing.JFormattedTextField();
-        cbTipoUsuario = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbLocalInternacao = new javax.swing.JComboBox<>();
+        jsQtdDias = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        cbTipoUsuario = new javax.swing.JComboBox<>();
+        tfDoacaoIdDoacao1 = new javax.swing.JTextField();
+        lbNome1 = new javax.swing.JLabel();
+        btDoacaoBuscarDoacao1 = new javax.swing.JButton();
+        lbEmail = new javax.swing.JLabel();
+        tfEmail = new javax.swing.JTextField();
+        lbPessoaTipo = new javax.swing.JLabel();
+        rbPessoaFisica = new javax.swing.JRadioButton();
+        rbPessoaJuridica = new javax.swing.JRadioButton();
+        lbDocumento = new javax.swing.JLabel();
+        ffDocumento = new javax.swing.JFormattedTextField();
+        lbNomePaciente2 = new javax.swing.JLabel();
         btCadastroPessoaLimpar = new javax.swing.JButton();
-        btCadastroPessoaRegistrar = new javax.swing.JButton();
-        pnAlterarPessoa = new javax.swing.JPanel();
-        pnBuscar = new javax.swing.JPanel();
-        tfBuscarNome = new javax.swing.JTextField();
-        lbBuscarNome = new javax.swing.JLabel();
-        btBuscar = new javax.swing.JButton();
-        lbBuscarId = new javax.swing.JLabel();
-        tfBuscarId = new javax.swing.JTextField();
+        btCadastroPessoaSalvar = new javax.swing.JButton();
+        btCadastroPessoaSair = new javax.swing.JButton();
+        lbObservacao = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taObservacao = new javax.swing.JTextArea();
         pnCadastrarDoacao = new javax.swing.JPanel();
         pnDoacao = new javax.swing.JPanel();
         lbDoacaoIdDoacao = new javax.swing.JLabel();
         tfDoacaoIdDoacao = new javax.swing.JTextField();
-        btDoacaoBuscarDoacao = new javax.swing.JButton();
         lbDoacaoDoador = new javax.swing.JLabel();
         tfDoacaoIdDoador = new javax.swing.JTextField();
         tfDoacaoDoador = new javax.swing.JTextField();
-        btDoacaoBuscarDoador = new javax.swing.JButton();
         lbDoacaoTipo = new javax.swing.JLabel();
         cbDoacaoTipo = new javax.swing.JComboBox<>();
         lbDoacaoData = new javax.swing.JLabel();
@@ -152,16 +147,18 @@ public class Telas extends javax.swing.JFrame {
         taDoacaoObservacao = new javax.swing.JTextArea();
         btDoacaoRecibo = new javax.swing.JButton();
         btDoacaoDeletar = new javax.swing.JButton();
+        btDoacaoBuscarDoacao = new javax.swing.JButton();
+        btDoacaoBuscarDoador = new javax.swing.JButton();
         pnDoacaoProduto = new javax.swing.JPanel();
         lbDoacaoSelecionarProd = new javax.swing.JLabel();
-        tfDoacaoSelecionarProd = new javax.swing.JTextField();
-        btDoacaoBuscarProd = new javax.swing.JButton();
         lbDoacaoQuantidade = new javax.swing.JLabel();
-        tfDoacaoQuantidade = new javax.swing.JTextField();
+        jsDoacaoQuantidadeProduto = new javax.swing.JSpinner();
         btDoacaoAddProd = new javax.swing.JButton();
         pnListBoxProd = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableDoacaoProdutos = new javax.swing.JTable();
+        tfDoacaoSelecionarProd = new javax.swing.JTextField();
+        btDoacaoBuscarProd = new javax.swing.JButton();
         btDoacaoAltProd = new javax.swing.JButton();
         btDoacaoDelProd = new javax.swing.JButton();
         btDoacaoRegistrarDoacao = new javax.swing.JButton();
@@ -171,41 +168,29 @@ public class Telas extends javax.swing.JFrame {
         pnCadastrarPedido = new javax.swing.JPanel();
         pnPedido = new javax.swing.JPanel();
         tfPedidoCliente = new javax.swing.JTextField();
-        btPedidoBuscarCliente = new javax.swing.JButton();
         lbPedidoCliente = new javax.swing.JLabel();
-        tfPedidoQtdMarmitas = new javax.swing.JTextField();
         lbPedidoQtdMarmitas = new javax.swing.JLabel();
-        ffPedidoDtPedido = new javax.swing.JFormattedTextField();
-        lbPedidoDtPedido = new javax.swing.JLabel();
-        lbPedidoId = new javax.swing.JLabel();
-        tfPedidoId = new javax.swing.JFormattedTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         taDoacaoObservacao1 = new javax.swing.JTextArea();
         lbPedidoObservacao = new javax.swing.JLabel();
-        lbPedidoDtEntrega = new javax.swing.JLabel();
-        ffPedidoDtEntrega = new javax.swing.JFormattedTextField();
         cbPedidoStatus = new javax.swing.JComboBox<>();
         lbPedidoStatus = new javax.swing.JLabel();
+        tfPedidoIdPedido = new javax.swing.JTextField();
+        lbPedidoIdPedido = new javax.swing.JLabel();
+        tfPedidoIdPedido1 = new javax.swing.JTextField();
+        btPedidoBuscarCliente = new javax.swing.JButton();
+        btPedidoBuscarPedido = new javax.swing.JButton();
+        jSpinner4 = new javax.swing.JSpinner();
+        lbPedidoDtPedido = new javax.swing.JLabel();
+        lbPedidoDtEntrega = new javax.swing.JLabel();
+        ffPedidoDtPedido = new javax.swing.JFormattedTextField();
+        ffPedidoDtEntrega = new javax.swing.JFormattedTextField();
+        btPedidoDeletar = new javax.swing.JButton();
+        btPedidoRecibo = new javax.swing.JButton();
         btPedidoRegistrar = new javax.swing.JButton();
         btPedidoLimpar = new javax.swing.JButton();
-        pnAlterarPedido = new javax.swing.JPanel();
-        pnPedido1 = new javax.swing.JPanel();
-        tfAltPedCliente = new javax.swing.JTextField();
-        btAltPedBuscar = new javax.swing.JButton();
-        lbAltPedCliente = new javax.swing.JLabel();
-        tfAltPedQtdMarmitas = new javax.swing.JTextField();
-        lbAltPedQtdMarmitas = new javax.swing.JLabel();
-        lbAltPedId = new javax.swing.JLabel();
-        ffAltPedId = new javax.swing.JFormattedTextField();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        taDoacaoObservacao2 = new javax.swing.JTextArea();
-        tfAltPedObs = new javax.swing.JLabel();
-        lbAltPedDtPedido = new javax.swing.JLabel();
-        ffAltPedDtPedido = new javax.swing.JFormattedTextField();
-        cbAltPedStatus = new javax.swing.JComboBox<>();
-        lbAltPedStatus = new javax.swing.JLabel();
-        btAltPedAtualizar = new javax.swing.JButton();
-        btAltPedLimpar = new javax.swing.JButton();
+        btPedidoSair = new javax.swing.JButton();
+        btPedidoRelatorio = new javax.swing.JButton();
         pnRelatorioDoacao = new javax.swing.JPanel();
         pnRelDoa = new javax.swing.JPanel();
         pnRelFiltros = new javax.swing.JPanel();
@@ -215,18 +200,18 @@ public class Telas extends javax.swing.JFrame {
         ffRelDoaDtFinal = new javax.swing.JFormattedTextField();
         lbRelDoaDoador = new javax.swing.JLabel();
         tfRelDoaDoador = new javax.swing.JTextField();
-        btRelDoaDoador = new javax.swing.JButton();
         lbRelDoaTpDoacao = new javax.swing.JLabel();
         cbRelDoaTpDoacao = new javax.swing.JComboBox<>();
         lbRelDoaOrdenacao = new javax.swing.JLabel();
-        cbRelDoaOrdenacao1 = new javax.swing.JComboBox<>();
-        cbRelDoaOrdenacao2 = new javax.swing.JComboBox<>();
+        cbRelDoaOrdenacao = new javax.swing.JComboBox<>();
+        cbRelDoaSentido = new javax.swing.JComboBox<>();
         lbRelDoaProd = new javax.swing.JLabel();
         tfRelDoaProd = new javax.swing.JTextField();
-        btRelDoaProd = new javax.swing.JButton();
         lbRelDoaTpProduto = new javax.swing.JLabel();
         cbRelDoaTpProduto = new javax.swing.JComboBox<>();
         btRelDoaFiltrar = new javax.swing.JButton();
+        btPedidoBuscarCliente1 = new javax.swing.JButton();
+        btPedidoBuscarCliente2 = new javax.swing.JButton();
         pnRelResultado = new javax.swing.JPanel();
         spRelResultado = new javax.swing.JScrollPane();
         tableRelatorioDoacao = new javax.swing.JTable();
@@ -238,28 +223,30 @@ public class Telas extends javax.swing.JFrame {
         tfRelTotIte = new javax.swing.JTextField();
         btRelDoacaoSalvar = new javax.swing.JButton();
         btRelDoacaoLimpar = new javax.swing.JButton();
-        btRelDoaVoltar = new javax.swing.JButton();
+        btRelDoaSair = new javax.swing.JButton();
         pnRelatorioPedido = new javax.swing.JPanel();
         pnRelPed = new javax.swing.JPanel();
         pnRelPedFiltros = new javax.swing.JPanel();
-        lbRelPedDtPedido = new javax.swing.JLabel();
-        tfRelPedDtPedido = new javax.swing.JFormattedTextField();
-        lbRelPedDtEntrega = new javax.swing.JLabel();
-        tfRelPedDtEntrega = new javax.swing.JFormattedTextField();
+        lbRelPedDtPedidoInicio = new javax.swing.JLabel();
+        tfRelPedDtPedidoInicio = new javax.swing.JFormattedTextField();
+        lbRelPedDtPedidoFim = new javax.swing.JLabel();
+        tfRelPedDtPedidoFim = new javax.swing.JFormattedTextField();
         lbRelPedStatus = new javax.swing.JLabel();
         cbRelPedStatus = new javax.swing.JComboBox<>();
-        lbRelPedTipo = new javax.swing.JLabel();
-        cbRelPedTipo = new javax.swing.JComboBox<>();
+        lbRelPedCidade = new javax.swing.JLabel();
+        cbRelPedCidade = new javax.swing.JComboBox<>();
         lbRelPedCliente = new javax.swing.JLabel();
         tfRelPedCliente = new javax.swing.JTextField();
-        btRelPedBuscarCliente = new javax.swing.JButton();
+        btRelPedidoBuscarCliente = new javax.swing.JButton();
+        lbRelPedDtEntregaInicio = new javax.swing.JLabel();
+        tfRelPedDtEntregaInicio = new javax.swing.JFormattedTextField();
+        lbRelPedDtEntregaFim = new javax.swing.JLabel();
+        tfRelPedDtEntregaFim = new javax.swing.JFormattedTextField();
         lbRelPedOrdenacao = new javax.swing.JLabel();
         cbRelPedOrdenacao = new javax.swing.JComboBox<>();
         cbRelPedSentido = new javax.swing.JComboBox<>();
         lbRelPedLocal = new javax.swing.JLabel();
         cbRelPedLocal = new javax.swing.JComboBox<>();
-        lbRelPedCidade = new javax.swing.JLabel();
-        cbRelPedCidade = new javax.swing.JComboBox<>();
         btRelPedFiltrar = new javax.swing.JButton();
         pnRelPedResultado = new javax.swing.JPanel();
         spRelPedResultado = new javax.swing.JScrollPane();
@@ -276,19 +263,20 @@ public class Telas extends javax.swing.JFrame {
         tfRelPedTotMarmitas = new javax.swing.JTextField();
         btRelPedidoSalvar = new javax.swing.JButton();
         btRelPedidoLimpar = new javax.swing.JButton();
-        btRelPedVoltar = new javax.swing.JButton();
+        btRelPedidoSair = new javax.swing.JButton();
         pnHome = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         menuBarra = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuPessoa = new javax.swing.JMenu();
         menuPessoaCadastrar = new javax.swing.JMenuItem();
-        menuPessoaAlterar = new javax.swing.JMenuItem();
         menuDoacao = new javax.swing.JMenu();
         menuDoacaoCadastrar = new javax.swing.JMenuItem();
         menuPedido = new javax.swing.JMenu();
         menuPedidoCadastrar = new javax.swing.JMenuItem();
-        menuPedidoAlterar = new javax.swing.JMenuItem();
+        menuRelatorio = new javax.swing.JMenu();
+        menuRelatorioDoacao = new javax.swing.JMenuItem();
+        menuRelatorioPedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(29, 29, 29));
@@ -303,45 +291,62 @@ public class Telas extends javax.swing.JFrame {
 
         pnCard.setLayout(new java.awt.CardLayout());
 
-        pnEnderecoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço:"));
+        pnEnderecoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        tfEnderecoLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbLogradouro.setText("Logradouro:");
 
+        lbNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbNumero.setText("Número:");
 
+        tfEnderecoNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfEnderecoNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfEnderecoNumeroKeyTyped(evt);
             }
         });
 
+        tfEnderecoBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbBairro.setText("Bairro:");
 
+        lbLogradouro3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbLogradouro3.setText("Cidade:");
 
+        tfEnderecoComplemento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbComplemento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbComplemento.setText("Complemento:");
 
+        cbEnderecoCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbEnderecoCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEnderecoCidadeActionPerformed(evt);
             }
         });
 
+        tfEnderecoCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfEnderecoCep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfEnderecoCepKeyTyped(evt);
             }
         });
 
+        lbLogradouro5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbLogradouro5.setText("CEP:");
 
-        lbLogradouro6.setText("UF");
+        lbLogradouro6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbLogradouro6.setText("UF:");
 
+        cbEnderecoUf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbEnderecoUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
         cbEnderecoUf.setEnabled(false);
 
-        btAdicionarCidade.setText("+");
-        btAdicionarCidade.setToolTipText("Cadastrar novo endereço");
+        btAdicionarCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plus.png"))); // NOI18N
+        btAdicionarCidade.setMargin(new java.awt.Insets(1, 1, 1, 1));
         btAdicionarCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAdicionarCidadeActionPerformed(evt);
@@ -356,65 +361,63 @@ public class Telas extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbNumero)
-                            .addComponent(tfEnderecoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbBairro)
-                            .addComponent(tfEnderecoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbComplemento)
-                            .addComponent(tfEnderecoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(lbLogradouro)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbLogradouro5)
-                            .addComponent(tfEnderecoCep, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbLogradouro3)
-                            .addComponent(cbEnderecoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
-                                .addComponent(lbLogradouro6)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cbEnderecoUf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btAdicionarCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
-                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfEnderecoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbLogradouro))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbNumero)
+                                    .addComponent(tfEnderecoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbBairro)
+                                    .addComponent(tfEnderecoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbComplemento)
+                                    .addComponent(tfEnderecoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbLogradouro5)
+                                    .addComponent(tfEnderecoCep, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbLogradouro3)
+                                    .addComponent(cbEnderecoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbLogradouro6)
+                                    .addGroup(pnEnderecoClienteLayout.createSequentialGroup()
+                                        .addComponent(cbEnderecoUf, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btAdicionarCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tfEnderecoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(35, Short.MAX_VALUE))))
         );
         pnEnderecoClienteLayout.setVerticalGroup(
             pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEnderecoClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btAdicionarCidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEnderecoClienteLayout.createSequentialGroup()
-                        .addComponent(lbLogradouro3)
+                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbLogradouro3)
+                            .addComponent(lbLogradouro6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbEnderecoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEnderecoClienteLayout.createSequentialGroup()
-                        .addComponent(lbLogradouro6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbEnderecoUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbEnderecoCidade)
+                            .addComponent(cbEnderecoUf)
+                            .addComponent(btAdicionarCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEnderecoClienteLayout.createSequentialGroup()
                         .addComponent(lbLogradouro5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfEnderecoCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbLogradouro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfEnderecoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNumero)
                     .addComponent(lbBairro)
@@ -424,17 +427,19 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(tfEnderecoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfEnderecoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfEnderecoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(144, 144, 144))
+                .addGap(15, 15, 15))
         );
 
-        pnPessoaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa"));
+        pnPessoaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        tfNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNomeKeyTyped(evt);
             }
         });
 
+        lbNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbNome.setText("Nome:");
 
         try {
@@ -442,57 +447,39 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ffTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        lbTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbTelefone.setText("Telefone:");
 
-        lbEmail.setText("E-mail:");
-
-        lbObservacao.setText("Observação:");
-
-        taObservacao.setColumns(20);
-        taObservacao.setLineWrap(true);
-        taObservacao.setRows(5);
-        jScrollPane1.setViewportView(taObservacao);
-
-        buttonGroupPessoaTipo.add(rbPessoaFisica);
-        rbPessoaFisica.setText("Pessoa Física (CPF)");
-        rbPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbPessoaFisicaActionPerformed(evt);
-            }
-        });
-
-        buttonGroupPessoaTipo.add(rbPessoaJuridica);
-        rbPessoaJuridica.setText("Pessoa Jurídica (CNPJ)");
-        rbPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbPessoaJuridicaActionPerformed(evt);
-            }
-        });
-
-        lbPessoaTipo.setText("Tipo:");
-
-        lbDocumento.setText("Nº do Documento:");
-
+        lbNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbNomePaciente.setText("Nome do Paciente:");
 
+        tfNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfNomePaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNomePacienteKeyTyped(evt);
             }
         });
 
-        lbNomePaciente1.setText("Dias de Internação:");
+        lbNomePaciente1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbNomePaciente1.setText("Tempo:");
 
-        tfQtdDias.setToolTipText("Estimar a quantidade de dias de internação");
-        tfQtdDias.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfQtdDiasKeyTyped(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Local de Internação:");
 
-        ffDocumento.setEnabled(false);
+        cbLocalInternacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", " " }));
+        cbLocalInternacao.setEnabled(false);
 
+        jsQtdDias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jsQtdDias.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsQtdDias.setToolTipText("");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Tipo Cliente:");
+
+        cbTipoUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beneficiario", "Doador", "Assistente" }));
         cbTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -500,55 +487,119 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Tipo de Usuário");
+        tfDoacaoIdDoacao1.setEditable(false);
+        tfDoacaoIdDoacao1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel2.setText("Local de Internação");
+        lbNome1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbNome1.setText("Código:");
 
-        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", " " }));
+        btDoacaoBuscarDoacao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarDoacao1.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btDoacaoBuscarDoacao1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoBuscarDoacao1ActionPerformed(evt);
+            }
+        });
+
+        lbEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbEmail.setText("E-mail:");
+
+        tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbPessoaTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPessoaTipo.setText("Tipo Pessoa:");
+
+        buttonGroupPessoaTipo.add(rbPessoaFisica);
+        rbPessoaFisica.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbPessoaFisica.setText("Física (CPF)");
+        rbPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPessoaFisicaActionPerformed(evt);
+            }
+        });
+
+        buttonGroupPessoaTipo.add(rbPessoaJuridica);
+        rbPessoaJuridica.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbPessoaJuridica.setText("Jurídica (CNPJ)");
+        rbPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPessoaJuridicaActionPerformed(evt);
+            }
+        });
+
+        lbDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDocumento.setText("Nº do Documento:");
+
+        ffDocumento.setEnabled(false);
+        ffDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbNomePaciente2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbNomePaciente2.setText("Dias");
 
         javax.swing.GroupLayout pnPessoaClienteLayout = new javax.swing.GroupLayout(pnPessoaCliente);
         pnPessoaCliente.setLayout(pnPessoaClienteLayout);
         pnPessoaClienteLayout.setHorizontalGroup(
             pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPessoaClienteLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(19, 19, 19)
                 .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lbDocumento)
+                    .addComponent(ffDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(lbPessoaTipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbPessoaFisica)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbPessoaJuridica))
+                    .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                        .addComponent(tfEmail)
+                        .addComponent(tfNomePaciente)
+                        .addComponent(lbEmail)
+                        .addComponent(lbNomePaciente)
+                        .addComponent(lbTelefone)
+                        .addComponent(lbNome)
+                        .addComponent(ffTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnPessoaClienteLayout.createSequentialGroup()
                             .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbNomePaciente1)
-                                .addComponent(tfQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(285, 285, 285))
-                        .addComponent(lbNomePaciente, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbDocumento, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbPessoaTipo, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnPessoaClienteLayout.createSequentialGroup()
-                            .addComponent(rbPessoaFisica)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(rbPessoaJuridica))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbObservacao, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbTelefone, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbNome, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tfEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ffTelefone, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tfNome, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tfNomePaciente, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ffDocumento, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
-                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                                .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addGap(18, 18, 18)
+                            .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                                    .addComponent(jsQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lbNomePaciente2))
+                                .addComponent(lbNomePaciente1)))
+                        .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                            .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                                    .addComponent(tfDoacaoIdDoacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btDoacaoBuscarDoacao1))
+                                .addComponent(lbNome1))
+                            .addGap(18, 18, 18)
+                            .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         pnPessoaClienteLayout.setVerticalGroup(
             pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPessoaClienteLayout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(lbNome1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfDoacaoIdDoacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btDoacaoBuscarDoacao1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -557,42 +608,38 @@ public class Telas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ffTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPessoaTipo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbPessoaFisica)
-                    .addComponent(rbPessoaJuridica))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbDocumento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ffDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbObservacao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnPessoaClienteLayout.createSequentialGroup()
+                        .addComponent(lbNomePaciente1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jsQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbNomePaciente2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNomePaciente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbNomePaciente1)
+                .addComponent(lbEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPessoaTipo)
+                    .addComponent(rbPessoaFisica)
+                    .addComponent(rbPessoaJuridica))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbDocumento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ffDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
+        btCadastroPessoaLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadastroPessoaLimpar.setText("Limpar");
         btCadastroPessoaLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -600,12 +647,30 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        btCadastroPessoaRegistrar.setText("Registrar");
-        btCadastroPessoaRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btCadastroPessoaSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCadastroPessoaSalvar.setText("Salvar");
+        btCadastroPessoaSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastroPessoaRegistrarActionPerformed(evt);
+                btCadastroPessoaSalvarActionPerformed(evt);
             }
         });
+
+        btCadastroPessoaSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCadastroPessoaSair.setText("Sair");
+        btCadastroPessoaSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastroPessoaSairActionPerformed(evt);
+            }
+        });
+
+        lbObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbObservacao.setText("Observação:");
+
+        taObservacao.setColumns(20);
+        taObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        taObservacao.setLineWrap(true);
+        taObservacao.setRows(5);
+        jScrollPane1.setViewportView(taObservacao);
 
         javax.swing.GroupLayout pnCadastroPessoaLayout = new javax.swing.GroupLayout(pnCadastroPessoa);
         pnCadastroPessoa.setLayout(pnCadastroPessoaLayout);
@@ -618,125 +683,63 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                        .addComponent(btCadastroPessoaLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btCadastroPessoaSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btCadastroPessoaRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                        .addComponent(btCadastroPessoaLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btCadastroPessoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
+                        .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbObservacao)
+                            .addComponent(jScrollPane1)
+                            .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         pnCadastroPessoaLayout.setVerticalGroup(
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                        .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(366, 366, 366)
+                        .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbObservacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
+                        .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btCadastroPessoaRegistrar)
-                            .addComponent(btCadastroPessoaLimpar)))
-                    .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                            .addComponent(btCadastroPessoaSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCadastroPessoaLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCadastroPessoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastroPessoa, "beneficiario");
 
-        pnBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder("Alterar Pessoa"));
+        pnDoacao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Doação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        tfBuscarNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBuscarNomeKeyTyped(evt);
-            }
-        });
-
-        lbBuscarNome.setText("Nome:");
-
-        btBuscar.setText("Buscar");
-
-        lbBuscarId.setText("ID:");
-
-        tfBuscarId.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBuscarIdKeyTyped(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnBuscarLayout = new javax.swing.GroupLayout(pnBuscar);
-        pnBuscar.setLayout(pnBuscarLayout);
-        pnBuscarLayout.setHorizontalGroup(
-            pnBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnBuscarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfBuscarNome)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscarLayout.createSequentialGroup()
-                        .addGap(0, 326, Short.MAX_VALUE)
-                        .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnBuscarLayout.createSequentialGroup()
-                        .addGroup(pnBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbBuscarNome)
-                            .addComponent(lbBuscarId)
-                            .addComponent(tfBuscarId, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        pnBuscarLayout.setVerticalGroup(
-            pnBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnBuscarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbBuscarNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfBuscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbBuscarId)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfBuscarId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btBuscar)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnAlterarPessoaLayout = new javax.swing.GroupLayout(pnAlterarPessoa);
-        pnAlterarPessoa.setLayout(pnAlterarPessoaLayout);
-        pnAlterarPessoaLayout.setHorizontalGroup(
-            pnAlterarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnAlterarPessoaLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(pnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(733, Short.MAX_VALUE))
-        );
-        pnAlterarPessoaLayout.setVerticalGroup(
-            pnAlterarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnAlterarPessoaLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(pnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(460, Short.MAX_VALUE))
-        );
-
-        pnCard.add(pnAlterarPessoa, "cdAlterarPessoa");
-
-        pnDoacao.setBorder(javax.swing.BorderFactory.createTitledBorder("Doação"));
-
-        lbDoacaoIdDoacao.setText("Código");
+        lbDoacaoIdDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDoacaoIdDoacao.setText("Código:");
 
         tfDoacaoIdDoacao.setEnabled(false);
+        tfDoacaoIdDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btDoacaoBuscarDoacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
-        btDoacaoBuscarDoacao.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        btDoacaoBuscarDoacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDoacaoBuscarDoacaoActionPerformed(evt);
-            }
-        });
-
-        lbDoacaoDoador.setText("Doador");
+        lbDoacaoDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDoacaoDoador.setText("Doador:");
 
         tfDoacaoIdDoador.setEnabled(false);
+        tfDoacaoIdDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfDoacaoIdDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDoacaoIdDoadorActionPerformed(evt);
             }
         });
 
+        tfDoacaoDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfDoacaoDoador.setEnabled(false);
         tfDoacaoDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -752,49 +755,80 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        lbDoacaoTipo.setText("Tipo");
+        lbDoacaoTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDoacaoTipo.setText("Tipo:");
 
+        cbDoacaoTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbDoacaoTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DINHEIRO", "PRODUTO" }));
 
-        lbDoacaoData.setText("Data da Doação");
+        lbDoacaoData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDoacaoData.setText("Data:");
 
-        ftDoacaoData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        try {
+            ftDoacaoData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftDoacaoData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ftDoacaoData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ftDoacaoDataActionPerformed(evt);
             }
         });
 
-        lbDoacaoValor.setText("Valor");
+        lbDoacaoValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDoacaoValor.setText("Valor:");
 
         tfDoacaoValor.setColumns(10);
         tfDoacaoValor.setValue(0.00);
+        tfDoacaoValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        tfDoacaoValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfDoacaoValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDoacaoValorActionPerformed(evt);
             }
         });
 
-        lbDoacaoObservacao.setText("Observação");
+        lbDoacaoObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDoacaoObservacao.setText("Observação:");
 
         taDoacaoObservacao.setColumns(20);
+        taDoacaoObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         taDoacaoObservacao.setRows(5);
         taDoacaoObservacao.setWrapStyleWord(true);
         jScrollPane2.setViewportView(taDoacaoObservacao);
 
+        btDoacaoRecibo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoRecibo.setText("Gerar Recibo");
         btDoacaoRecibo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDoacaoReciboActionPerformed(evt);
             }
         });
+        btDoacaoRecibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoReciboActionPerformed(evt);
+            }
+        });
 
+        btDoacaoDeletar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoDeletar.setText("Deletar");
         btDoacaoDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDoacaoDeletarActionPerformed(evt);
             }
         });
+
+        btDoacaoBuscarDoacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarDoacao.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btDoacaoBuscarDoacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoBuscarDoacaoActionPerformed(evt);
+            }
+        });
+
+        btDoacaoBuscarDoador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarDoador.setMargin(new java.awt.Insets(1, 1, 1, 1));
 
         javax.swing.GroupLayout pnDoacaoLayout = new javax.swing.GroupLayout(pnDoacao);
         pnDoacao.setLayout(pnDoacaoLayout);
@@ -805,82 +839,94 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnDoacaoLayout.createSequentialGroup()
                         .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbDoacaoTipo)
-                            .addComponent(cbDoacaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbDoacaoData)
-                            .addComponent(ftDoacaoData, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lbDoacaoIdDoacao)
+                            .addComponent(lbDoacaoDoador)
+                            .addGroup(pnDoacaoLayout.createSequentialGroup()
+                                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbDoacaoIdDoacao)
+                                    .addGroup(pnDoacaoLayout.createSequentialGroup()
+                                        .addComponent(tfDoacaoIdDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btDoacaoBuscarDoacao)))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbDoacaoTipo)
+                                    .addComponent(cbDoacaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnDoacaoLayout.createSequentialGroup()
+                                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbDoacaoData)
+                                    .addComponent(ftDoacaoData, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfDoacaoValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbDoacaoValor, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btDoacaoRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btDoacaoDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(267, 267, 267))
                     .addGroup(pnDoacaoLayout.createSequentialGroup()
-                        .addComponent(tfDoacaoIdDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btDoacaoBuscarDoacao))
-                    .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(pnDoacaoLayout.createSequentialGroup()
-                            .addComponent(btDoacaoRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btDoacaoDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbDoacaoObservacao, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnDoacaoLayout.createSequentialGroup()
-                            .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lbDoacaoDoador)
-                                .addComponent(tfDoacaoIdDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 51, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tfDoacaoDoador)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btDoacaoBuscarDoador))
-                        .addComponent(tfDoacaoValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbDoacaoValor, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lbDoacaoObservacao, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnDoacaoLayout.createSequentialGroup()
+                                    .addComponent(tfDoacaoIdDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfDoacaoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btDoacaoBuscarDoador))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         pnDoacaoLayout.setVerticalGroup(
             pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDoacaoLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(lbDoacaoIdDoacao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfDoacaoIdDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDoacaoBuscarDoacao))
-                .addGap(18, 18, 18)
-                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnDoacaoLayout.createSequentialGroup()
+                        .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnDoacaoLayout.createSequentialGroup()
+                                .addComponent(lbDoacaoIdDoacao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfDoacaoIdDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btDoacaoBuscarDoacao)))
+                            .addGroup(pnDoacaoLayout.createSequentialGroup()
+                                .addComponent(lbDoacaoTipo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbDoacaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addComponent(lbDoacaoDoador)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tfDoacaoIdDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfDoacaoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btDoacaoBuscarDoador)))
-                .addGap(18, 18, 18)
-                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbDoacaoTipo)
-                    .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnDoacaoLayout.createSequentialGroup()
-                            .addComponent(lbDoacaoData)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(ftDoacaoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(cbDoacaoTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(lbDoacaoValor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfDoacaoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tfDoacaoIdDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfDoacaoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btDoacaoBuscarDoador))
+                        .addGap(18, 18, 18)
+                        .addComponent(lbDoacaoData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ftDoacaoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnDoacaoLayout.createSequentialGroup()
+                        .addComponent(lbDoacaoValor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfDoacaoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(lbDoacaoObservacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btDoacaoDeletar)
                     .addComponent(btDoacaoRecibo))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        pnDoacaoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder("Produto"));
+        pnDoacaoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        lbDoacaoSelecionarProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDoacaoSelecionarProd.setText("Descrição");
-
         tfDoacaoSelecionarProd.setEnabled(false);
         tfDoacaoSelecionarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -896,14 +942,14 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        lbDoacaoQuantidade.setText("Quantidade");
+        lbDoacaoQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDoacaoQuantidade.setText("Quantidade:");
 
-        tfDoacaoQuantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDoacaoQuantidadeActionPerformed(evt);
-            }
-        });
+        jsDoacaoQuantidadeProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jsDoacaoQuantidadeProduto.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsDoacaoQuantidadeProduto.setToolTipText("");
 
+        btDoacaoAddProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoAddProd.setText("Adicionar");
         btDoacaoAddProd.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btDoacaoAddProd.addActionListener(new java.awt.event.ActionListener() {
@@ -912,8 +958,9 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        pnListBoxProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos doados"));
+        pnListBoxProd.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produtos doados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        tableDoacaoProdutos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableDoacaoProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -957,26 +1004,37 @@ public class Telas extends javax.swing.JFrame {
             pnListBoxProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnListBoxProdLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnListBoxProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnListBoxProdLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btDoacaoAltProd, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btDoacaoDelProd, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane3)
                 .addContainerGap())
         );
         pnListBoxProdLayout.setVerticalGroup(
             pnListBoxProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnListBoxProdLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnListBoxProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btDoacaoDelProd)
-                    .addComponent(btDoacaoAltProd))
-                .addGap(12, 12, 12))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        tfDoacaoSelecionarProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDoacaoSelecionarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDoacaoSelecionarProdActionPerformed(evt);
+            }
+        });
+
+        btDoacaoBuscarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarProd.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btDoacaoBuscarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoBuscarProdActionPerformed(evt);
+            }
+        });
+
+        btDoacaoAltProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btDoacaoAltProd.setText("Alterar");
+
+        btDoacaoDelProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btDoacaoDelProd.setText("Deletar");
 
         javax.swing.GroupLayout pnDoacaoProdutoLayout = new javax.swing.GroupLayout(pnDoacaoProduto);
         pnDoacaoProduto.setLayout(pnDoacaoProdutoLayout);
@@ -985,22 +1043,25 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
+                        .addComponent(btDoacaoAltProd, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btDoacaoDelProd, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnListBoxProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
                         .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbDoacaoSelecionarProd)
                             .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
-                                .addComponent(lbDoacaoSelecionarProd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
-                                .addComponent(tfDoacaoSelecionarProd)
+                                .addComponent(tfDoacaoSelecionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btDoacaoBuscarProd)
-                                .addGap(6, 6, 6)))
-                        .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btDoacaoBuscarProd)))
+                        .addGap(12, 12, 12)
+                        .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbDoacaoQuantidade)
-                            .addComponent(tfDoacaoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btDoacaoAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
+                                .addComponent(jsDoacaoQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btDoacaoAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         pnDoacaoProdutoLayout.setVerticalGroup(
@@ -1008,27 +1069,34 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
                 .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lbDoacaoSelecionarProd))
-                    .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbDoacaoQuantidade)
                         .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(tfDoacaoSelecionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btDoacaoBuscarProd))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoProdutoLayout.createSequentialGroup()
-                                .addComponent(lbDoacaoQuantidade)
+                            .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfDoacaoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btDoacaoAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jsDoacaoQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoProdutoLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(btDoacaoAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(22, 22, 22))
+                    .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lbDoacaoSelecionarProd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfDoacaoSelecionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btDoacaoBuscarProd))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(pnListBoxProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btDoacaoAltProd)
+                    .addComponent(btDoacaoDelProd))
+                .addGap(43, 43, 43))
         );
 
         btDoacaoRegistrarDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btDoacaoRegistrarDoacao.setText("Registrar Doação");
+        btDoacaoRegistrarDoacao.setText("Salvar");
         btDoacaoRegistrarDoacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDoacaoRegistrarDoacaoActionPerformed(evt);
@@ -1064,371 +1132,360 @@ public class Telas extends javax.swing.JFrame {
         pnCadastrarDoacaoLayout.setHorizontalGroup(
             pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(25, 25, 25)
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
-                        .addComponent(btDoacaoRegistrarDoacao)
+                        .addComponent(pnDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
+                        .addComponent(btDoacaoRegistrarDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCadastrarDoacaoLayout.createSequentialGroup()
-                        .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btDoacaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
+                        .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btDoacaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25))
         );
         pnCadastrarDoacaoLayout.setVerticalGroup(
             pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnDoacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(38, 38, 38)
+                    .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 517, Short.MAX_VALUE)
+                    .addComponent(pnDoacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btDoacaoRegistrarDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDoacaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                    .addComponent(btDoacaoRegistrarDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btDoacaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarDoacao, "cdCadastrarDoacao");
 
-        pnPedido.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedido"));
+        pnPedido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        tfPedidoCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfPedidoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPedidoClienteActionPerformed(evt);
             }
         });
 
-        btPedidoBuscarCliente.setText("Buscar");
+        lbPedidoCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoCliente.setText("Assistente/Beneficiário:");
 
-        lbPedidoCliente.setText("Cliente");
-
-        lbPedidoQtdMarmitas.setText("Quantidade de Marmitas");
-
-        ffPedidoDtPedido.setText("_____ / _____ / _____");
-
-        lbPedidoDtPedido.setText("Data do Pedido");
-
-        lbPedidoId.setText("ID Gerado");
-
-        tfPedidoId.setText("ID Gerado e Data automáticos após clicar em Registrar");
-        tfPedidoId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPedidoIdActionPerformed(evt);
-            }
-        });
+        lbPedidoQtdMarmitas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoQtdMarmitas.setText("Marmitas:");
 
         taDoacaoObservacao1.setColumns(20);
+        taDoacaoObservacao1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         taDoacaoObservacao1.setRows(5);
         taDoacaoObservacao1.setWrapStyleWord(true);
         jScrollPane4.setViewportView(taDoacaoObservacao1);
 
-        lbPedidoObservacao.setText("Observação");
+        lbPedidoObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoObservacao.setText("Observação:");
 
-        lbPedidoDtEntrega.setText("Data de Entrega");
+        cbPedidoStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbPedidoStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Finalizado", "Cancelado" }));
 
-        ffPedidoDtEntrega.setText("_____ / _____ / _____");
+        lbPedidoStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoStatus.setText("Status:");
 
-        cbPedidoStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Finalizado", "Cancelado", " " }));
+        tfPedidoIdPedido.setEditable(false);
+        tfPedidoIdPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbPedidoStatus.setText("Status do Pedido");
+        lbPedidoIdPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoIdPedido.setText("Código:");
 
-        btPedidoRegistrar.setText("Registrar");
+        tfPedidoIdPedido1.setEditable(false);
+        tfPedidoIdPedido1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btPedidoLimpar.setText("Limpar");
+        btPedidoBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btPedidoBuscarCliente.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btPedidoBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoBuscarClienteActionPerformed(evt);
+            }
+        });
+
+        btPedidoBuscarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btPedidoBuscarPedido.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btPedidoBuscarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoBuscarPedidoActionPerformed(evt);
+            }
+        });
+
+        jSpinner4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jSpinner4.setToolTipText("");
+
+        lbPedidoDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoDtPedido.setText("Data do Pedido:");
+
+        lbPedidoDtEntrega.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPedidoDtEntrega.setText("Data da Entrega:");
+
+        try {
+            ffPedidoDtPedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ffPedidoDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        try {
+            ffPedidoDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ffPedidoDtEntrega.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        btPedidoDeletar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btPedidoDeletar.setText("Deletar");
+        btPedidoDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoDeletarActionPerformed(evt);
+            }
+        });
+
+        btPedidoRecibo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btPedidoRecibo.setText("Gerar Recibo");
+        btPedidoRecibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoReciboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnPedidoLayout = new javax.swing.GroupLayout(pnPedido);
         pnPedido.setLayout(pnPedidoLayout);
         pnPedidoLayout.setHorizontalGroup(
             pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedidoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btPedidoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
             .addGroup(pnPedidoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbPedidoCliente)
-                        .addGroup(pnPedidoLayout.createSequentialGroup()
-                            .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(32, 32, 32)
-                            .addComponent(btPedidoBuscarCliente))
-                        .addComponent(lbPedidoStatus)
-                        .addGroup(pnPedidoLayout.createSequentialGroup()
-                            .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbPedidoQtdMarmitas)
-                                .addComponent(tfPedidoQtdMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(lbPedidoDtEntrega))
-                        .addComponent(cbPedidoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbPedidoObservacao)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ffPedidoDtEntrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnPedidoLayout.createSequentialGroup()
-                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfPedidoId, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbPedidoId))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ffPedidoDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbPedidoDtPedido))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(btPedidoRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btPedidoDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnPedidoLayout.createSequentialGroup()
+                        .addComponent(lbPedidoCliente)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnPedidoLayout.createSequentialGroup()
+                        .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnPedidoLayout.createSequentialGroup()
+                                .addComponent(tfPedidoIdPedido1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btPedidoBuscarCliente))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnPedidoLayout.createSequentialGroup()
+                                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbPedidoIdPedido)
+                                    .addGroup(pnPedidoLayout.createSequentialGroup()
+                                        .addComponent(tfPedidoIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btPedidoBuscarPedido)))
+                                .addGap(12, 12, 12)
+                                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbPedidoStatus)
+                                    .addComponent(cbPedidoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnPedidoLayout.createSequentialGroup()
+                                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbPedidoQtdMarmitas)
+                                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbPedidoDtPedido)
+                                    .addComponent(ffPedidoDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbPedidoDtEntrega)
+                                    .addComponent(ffPedidoDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnPedidoLayout.createSequentialGroup()
+                                .addComponent(lbPedidoObservacao)
+                                .addGap(498, 498, 498)))
+                        .addGap(0, 25, Short.MAX_VALUE))))
         );
         pnPedidoLayout.setVerticalGroup(
             pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPedidoLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPedidoIdPedido)
+                    .addComponent(lbPedidoStatus))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfPedidoIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPedidoBuscarPedido)
+                    .addComponent(cbPedidoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(lbPedidoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPedidoBuscarCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnPedidoLayout.createSequentialGroup()
+                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btPedidoBuscarCliente)
+                    .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfPedidoIdPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbPedidoDtEntrega)
+                    .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedidoLayout.createSequentialGroup()
+                            .addComponent(lbPedidoDtPedido)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ffPedidoDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ffPedidoDtEntrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedidoLayout.createSequentialGroup()
                         .addComponent(lbPedidoQtdMarmitas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfPedidoQtdMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnPedidoLayout.createSequentialGroup()
-                        .addComponent(lbPedidoDtEntrega)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ffPedidoDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPedidoStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbPedidoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(lbPedidoObservacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedidoLayout.createSequentialGroup()
-                        .addComponent(lbPedidoDtPedido)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ffPedidoDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedidoLayout.createSequentialGroup()
-                        .addComponent(lbPedidoId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfPedidoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btPedidoRegistrar)
-                    .addComponent(btPedidoLimpar))
-                .addGap(44, 44, 44))
+                    .addComponent(btPedidoDeletar)
+                    .addComponent(btPedidoRecibo))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        btPedidoRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btPedidoRegistrar.setText("Salvar");
+        btPedidoRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoRegistrarActionPerformed(evt);
+            }
+        });
+
+        btPedidoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btPedidoLimpar.setText("Limpar");
+        btPedidoLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoLimparActionPerformed(evt);
+            }
+        });
+
+        btPedidoSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btPedidoSair.setText("Sair");
+
+        btPedidoRelatorio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btPedidoRelatorio.setText("Relatório");
 
         javax.swing.GroupLayout pnCadastrarPedidoLayout = new javax.swing.GroupLayout(pnCadastrarPedido);
         pnCadastrarPedido.setLayout(pnCadastrarPedidoLayout);
         pnCadastrarPedidoLayout.setHorizontalGroup(
             pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastrarPedidoLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(634, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addGroup(pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnCadastrarPedidoLayout.createSequentialGroup()
+                        .addComponent(btPedidoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btPedidoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(595, Short.MAX_VALUE))
         );
         pnCadastrarPedidoLayout.setVerticalGroup(
             pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastrarPedidoLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(25, 25, 25)
                 .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btPedidoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPedidoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarPedido, "cdCadastrarPedido");
 
-        pnPedido1.setBorder(javax.swing.BorderFactory.createTitledBorder("Alterar Pedido"));
+        pnRelDoa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Relatório Doação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        tfAltPedCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfAltPedClienteActionPerformed(evt);
-            }
-        });
+        pnRelFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        btAltPedBuscar.setText("Buscar");
+        lbRelDoaDtInicial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelDoaDtInicial.setText("Data Inicial:");
 
-        lbAltPedCliente.setText("Cliente");
+        try {
+            ffRelDoaDtInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ffRelDoaDtInicial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbAltPedQtdMarmitas.setText("Quantidade de Marmitas");
+        lbRelDoaDtFinal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelDoaDtFinal.setText("Data Final:");
 
-        lbAltPedId.setText("ID Gerado");
+        try {
+            ffRelDoaDtFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ffRelDoaDtFinal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        ffAltPedId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ffAltPedIdActionPerformed(evt);
-            }
-        });
+        lbRelDoaDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelDoaDoador.setText("Doador:");
 
-        taDoacaoObservacao2.setColumns(20);
-        taDoacaoObservacao2.setRows(5);
-        taDoacaoObservacao2.setWrapStyleWord(true);
-        jScrollPane5.setViewportView(taDoacaoObservacao2);
+        tfRelDoaDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        tfAltPedObs.setText("Observação");
+        lbRelDoaTpDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelDoaTpDoacao.setText("Tipo Doação:");
 
-        lbAltPedDtPedido.setText("Data do Pedido");
-
-        ffAltPedDtPedido.setText("_____ / _____ / _____");
-
-        cbAltPedStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Finalizado", "Cancelado", " " }));
-
-        lbAltPedStatus.setText("Status do Pedido");
-
-        btAltPedAtualizar.setText("Atualizar");
-
-        btAltPedLimpar.setText("Limpar");
-
-        javax.swing.GroupLayout pnPedido1Layout = new javax.swing.GroupLayout(pnPedido1);
-        pnPedido1.setLayout(pnPedido1Layout);
-        pnPedido1Layout.setHorizontalGroup(
-            pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnPedido1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnPedido1Layout.createSequentialGroup()
-                        .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnPedido1Layout.createSequentialGroup()
-                                .addComponent(lbAltPedCliente)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(tfAltPedCliente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbAltPedDtPedido)
-                            .addComponent(ffAltPedDtPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbAltPedId)
-                            .addGroup(pnPedido1Layout.createSequentialGroup()
-                                .addComponent(ffAltPedId, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btAltPedBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(pnPedido1Layout.createSequentialGroup()
-                        .addComponent(tfAltPedObs)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnPedido1Layout.createSequentialGroup()
-                        .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnPedido1Layout.createSequentialGroup()
-                                .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnPedido1Layout.createSequentialGroup()
-                                        .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbAltPedQtdMarmitas)
-                                            .addComponent(tfAltPedQtdMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbAltPedStatus)
-                                            .addComponent(cbAltPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 29, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedido1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btAltPedLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btAltPedAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        pnPedido1Layout.setVerticalGroup(
-            pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnPedido1Layout.createSequentialGroup()
-                .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(pnPedido1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(lbAltPedCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfAltPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbAltPedQtdMarmitas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfAltPedQtdMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnPedido1Layout.createSequentialGroup()
-                        .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnPedido1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lbAltPedId)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ffAltPedId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btAltPedBuscar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(pnPedido1Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbAltPedDtPedido)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ffAltPedDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)))
-                        .addComponent(lbAltPedStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbAltPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfAltPedObs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addGroup(pnPedido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAltPedLimpar)
-                    .addComponent(btAltPedAtualizar))
-                .addContainerGap(70, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnAlterarPedidoLayout = new javax.swing.GroupLayout(pnAlterarPedido);
-        pnAlterarPedido.setLayout(pnAlterarPedidoLayout);
-        pnAlterarPedidoLayout.setHorizontalGroup(
-            pnAlterarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnAlterarPedidoLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(pnPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(453, Short.MAX_VALUE))
-        );
-        pnAlterarPedidoLayout.setVerticalGroup(
-            pnAlterarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnAlterarPedidoLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(pnPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(280, Short.MAX_VALUE))
-        );
-
-        pnCard.add(pnAlterarPedido, "cdAlterarPedido");
-
-        pnRelDoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatório Doação"));
-
-        pnRelFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
-
-        lbRelDoaDtInicial.setText("Data Inicial");
-
-        lbRelDoaDtFinal.setText("Data Final");
-
-        lbRelDoaDoador.setText("Doador");
-
-        btRelDoaDoador.setText("Buscar");
-
-        lbRelDoaTpDoacao.setText("Tipo de Doação");
-
+        cbRelDoaTpDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelDoaTpDoacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Produto", "Dinheiro" }));
 
-        lbRelDoaOrdenacao.setText("Ordenação");
+        lbRelDoaOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelDoaOrdenacao.setText("Ordenação:");
 
-        cbRelDoaOrdenacao1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Código", "Nome do Doador", "Valor", "Quantidade de Produtos" }));
+        cbRelDoaOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbRelDoaOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Código", "Nome do Doador", "Valor", "Quantidade de Produtos" }));
 
-        cbRelDoaOrdenacao2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descrente", "Crescente" }));
+        cbRelDoaSentido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbRelDoaSentido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crescente", "Decrescente" }));
 
-        lbRelDoaProd.setText("Produto");
+        lbRelDoaProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelDoaProd.setText("Produto:");
 
-        btRelDoaProd.setText("Buscar");
+        tfRelDoaProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbRelDoaTpProduto.setText("Tipo de Produto");
+        lbRelDoaTpProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelDoaTpProduto.setText("Tipo Produto:");
 
+        cbRelDoaTpProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelDoaTpProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Alimento", "Limpeza", "Outros" }));
 
+        btRelDoaFiltrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelDoaFiltrar.setText("Filtrar");
+
+        btPedidoBuscarCliente1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btPedidoBuscarCliente1.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btPedidoBuscarCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoBuscarCliente1ActionPerformed(evt);
+            }
+        });
+
+        btPedidoBuscarCliente2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btPedidoBuscarCliente2.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btPedidoBuscarCliente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoBuscarCliente2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnRelFiltrosLayout = new javax.swing.GroupLayout(pnRelFiltros);
         pnRelFiltros.setLayout(pnRelFiltrosLayout);
@@ -1448,39 +1505,45 @@ public class Telas extends javax.swing.JFrame {
                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
                         .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbRelDoaOrdenacao)
-                            .addComponent(cbRelDoaOrdenacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbRelDoaOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbRelDoaOrdenacao2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cbRelDoaSentido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(12, 12, 12)
-                .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbRelDoaProd)
+                .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
-                        .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbRelDoaDoador)
-                            .addComponent(tfRelDoaDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfRelDoaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btRelDoaProd)
-                            .addComponent(btRelDoaDoador))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbRelDoaProd)
+                        .addGap(90, 90, 90))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
+                        .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnRelFiltrosLayout.createSequentialGroup()
+                                .addComponent(tfRelDoaProd, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btPedidoBuscarCliente2))
+                            .addGroup(pnRelFiltrosLayout.createSequentialGroup()
+                                .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnRelFiltrosLayout.createSequentialGroup()
+                                        .addComponent(lbRelDoaDoador)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(tfRelDoaDoador))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btPedidoBuscarCliente1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
                         .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbRelDoaTpProduto)
                             .addComponent(cbRelDoaTpProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btRelDoaFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btRelDoaFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbRelDoaTpDoacao)
                     .addComponent(cbRelDoaTpDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 13, Short.MAX_VALUE))
         );
         pnRelFiltrosLayout.setVerticalGroup(
             pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnRelFiltrosLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btRelDoaDoador)
                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
                         .addComponent(lbRelDoaDtInicial)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1490,41 +1553,41 @@ public class Telas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ffRelDoaDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
-                        .addComponent(lbRelDoaDoador)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfRelDoaDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnRelFiltrosLayout.createSequentialGroup()
                         .addComponent(lbRelDoaTpDoacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbRelDoaTpDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbRelDoaTpDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnRelFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelDoaDoador)
+                        .addGap(32, 32, 32))
+                    .addComponent(tfRelDoaDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPedidoBuscarCliente1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btRelDoaFiltrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelDoaOrdenacao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbRelDoaOrdenacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbRelDoaOrdenacao2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelDoaProd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfRelDoaProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btRelDoaProd)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelDoaTpProduto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbRelDoaTpProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(lbRelDoaOrdenacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelDoaOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbRelDoaSentido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelDoaProd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfRelDoaProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelDoaTpProduto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btRelDoaFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbRelDoaTpProduto)))
+                    .addComponent(btPedidoBuscarCliente2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(15, 15, 15))
         );
 
-        pnRelResultado.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
+        pnRelResultado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        tableRelatorioDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableRelatorioDoacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -1557,19 +1620,25 @@ public class Telas extends javax.swing.JFrame {
         });
         spRelResultado.setViewportView(tableRelatorioDoacao);
 
-        jbRelDoaTotDin.setText("Valor total");
+        jbRelDoaTotDin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbRelDoaTotDin.setText("Valor Total:");
 
         tfRelTotDin.setEditable(false);
+        tfRelTotDin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelTotDin.setText("R$ 0,00");
 
-        jbRelDoaTotProd.setText("Produtos total");
+        jbRelDoaTotProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbRelDoaTotProd.setText("Total Produtos:");
 
         tfRelTotProd.setEditable(false);
+        tfRelTotProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelTotProd.setText("0");
 
-        jbRelDoaTorIte.setText("Itens total");
+        jbRelDoaTorIte.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbRelDoaTorIte.setText("Total Itens:");
 
         tfRelTotIte.setEditable(false);
+        tfRelTotIte.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelTotIte.setText("0");
 
         javax.swing.GroupLayout pnRelResultadoLayout = new javax.swing.GroupLayout(pnRelResultado);
@@ -1579,12 +1648,12 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelResultadoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spRelResultado)
+                    .addComponent(spRelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
                     .addGroup(pnRelResultadoLayout.createSequentialGroup()
                         .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbRelDoaTotDin)
                             .addComponent(tfRelTotDin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbRelDoaTotProd)
                             .addComponent(tfRelTotProd, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1598,9 +1667,9 @@ public class Telas extends javax.swing.JFrame {
         pnRelResultadoLayout.setVerticalGroup(
             pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelResultadoLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(spRelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(spRelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnRelResultadoLayout.createSequentialGroup()
@@ -1615,14 +1684,8 @@ public class Telas extends javax.swing.JFrame {
                         .addComponent(jbRelDoaTorIte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfRelTotIte, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
-
-        btRelDoacaoSalvar.setText("Salvar Relatório");
-
-        btRelDoacaoLimpar.setText("Limpar");
-
-        btRelDoaVoltar.setText("Voltar");
 
         javax.swing.GroupLayout pnRelDoaLayout = new javax.swing.GroupLayout(pnRelDoa);
         pnRelDoa.setLayout(pnRelDoaLayout);
@@ -1632,12 +1695,6 @@ public class Telas extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnRelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelDoaLayout.createSequentialGroup()
-                        .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btRelDoaVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnRelFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -1647,45 +1704,79 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(pnRelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnRelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRelDoaVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnRelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
+
+        btRelDoacaoSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelDoacaoSalvar.setText("Salvar");
+
+        btRelDoacaoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelDoacaoLimpar.setText("Limpar");
+
+        btRelDoaSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelDoaSair.setText("Sair");
 
         javax.swing.GroupLayout pnRelatorioDoacaoLayout = new javax.swing.GroupLayout(pnRelatorioDoacao);
         pnRelatorioDoacao.setLayout(pnRelatorioDoacaoLayout);
         pnRelatorioDoacaoLayout.setHorizontalGroup(
             pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelatorioDoacaoLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
+                        .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btRelDoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         pnRelatorioDoacaoLayout.setVerticalGroup(
             pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelatorioDoacaoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(25, 25, 25)
                 .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRelDoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioDoacao, "relatorioDoacao");
         pnRelatorioDoacao.getAccessibleContext().setAccessibleName("");
 
-        pnRelPed.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatório Pedidos"));
+        pnRelPed.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Relatório Pedidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        pnRelPedFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
+        pnRelPedFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        lbRelPedDtPedido.setText("D:ata do Pedido");
+        lbRelPedDtPedidoInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedDtPedidoInicio.setText("Data do Pedido (Início):");
 
-        lbRelPedDtEntrega.setText("Data da Entrega:");
+        try {
+            tfRelPedDtPedidoInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfRelPedDtPedidoInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        lbRelPedDtPedidoFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedDtPedidoFim.setText("Data do Pedido (Fim):");
+
+        try {
+            tfRelPedDtPedidoFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfRelPedDtPedidoFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbRelPedStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelPedStatus.setText("Status:");
 
+        cbRelPedStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelPedStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pendente", "Finalizado", "Cancelado" }));
         cbRelPedStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1693,33 +1784,61 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        lbRelPedTipo.setText("Tipo Cliente:");
+        lbRelPedCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedCidade.setText("Cidade Cliente:");
 
-        cbRelPedTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Assistente", "Beneficiário" }));
-        cbRelPedTipo.addActionListener(new java.awt.event.ActionListener() {
+        cbRelPedCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbRelPedCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Ituiutaba", "Paracatu" }));
+
+        lbRelPedCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedCliente.setText("Assistente/Beneficiário:");
+
+        tfRelPedCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        btRelPedidoBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btRelPedidoBuscarCliente.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btRelPedidoBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbRelPedTipoActionPerformed(evt);
+                btRelPedidoBuscarClienteActionPerformed(evt);
             }
         });
 
-        lbRelPedCliente.setText("Assistente/Beneficiário");
+        lbRelPedDtEntregaInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedDtEntregaInicio.setText("Data da Entrega (Início):");
 
-        btRelPedBuscarCliente.setText("Buscar");
+        try {
+            tfRelPedDtEntregaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfRelPedDtEntregaInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbRelPedOrdenacao.setText("Ordenação");
+        lbRelPedDtEntregaFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedDtEntregaFim.setText("Data da Entrega (Fim):");
 
+        try {
+            tfRelPedDtEntregaFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfRelPedDtEntregaFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbRelPedOrdenacao.setText("Ordenação:");
+
+        cbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelPedOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Cliente", "Data do Pedido", "Data da Entrega", "Status", "Marmitas" }));
 
+        cbRelPedSentido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelPedSentido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crescente", "Decrescente" }));
 
+        lbRelPedLocal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelPedLocal.setText("Local:");
 
+        cbRelPedLocal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelPedLocal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Hospital São José", "Pronto Socorro" }));
 
-        lbRelPedCidade.setText("Cidade Cliente:");
-
-        cbRelPedCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Alimento", "Limpeza", "Outros" }));
-
+        btRelPedFiltrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelPedFiltrar.setText("Filtrar");
 
         javax.swing.GroupLayout pnRelPedFiltrosLayout = new javax.swing.GroupLayout(pnRelPedFiltros);
@@ -1729,128 +1848,126 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfRelPedDtPedidoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                    .addComponent(lbRelPedDtPedidoInicio)
+                    .addComponent(lbRelPedDtEntregaInicio)
+                    .addComponent(tfRelPedDtEntregaInicio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfRelPedDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbRelPedDtPedido))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbRelPedDtEntrega)
-                            .addComponent(tfRelPedDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                            .addComponent(tfRelPedDtEntregaFim, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbRelPedDtEntregaFim))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbRelPedOrdenacao)
                             .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbRelPedSentido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelPedSentido, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbRelPedLocal))
+                        .addGap(75, 75, 75)
+                        .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                                .addComponent(lbRelPedDtPedidoFim)
+                                .addGap(50, 50, 50))
+                            .addComponent(tfRelPedDtPedidoFim, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbRelPedStatus)
                             .addComponent(cbRelPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbRelPedTipo)
-                            .addComponent(cbRelPedTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbRelPedCliente)
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btRelPedBuscarCliente))))
-                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbRelPedLocal)
-                            .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbRelPedCidade)
                             .addComponent(cbRelPedCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(334, 334, 334)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbRelPedCliente)
+                            .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRelPedidoBuscarCliente)))
+                .addContainerGap())
         );
         pnRelPedFiltrosLayout.setVerticalGroup(
             pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedDtPedido)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfRelPedDtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedDtEntrega)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfRelPedDtEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbRelPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(lbRelPedDtPedidoInicio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfRelPedDtPedidoInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfRelPedDtPedidoFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedDtPedidoFim)
+                        .addGap(32, 32, 32))
+                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelPedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedCidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelPedCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedTipo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbRelPedTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btRelPedBuscarCliente))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btRelPedidoBuscarCliente)
+                            .addComponent(tfRelPedCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                        .addGap(0, 2, Short.MAX_VALUE)
-                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedOrdenacao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbRelPedSentido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedLocal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
-                                .addComponent(lbRelPedCidade)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbRelPedCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(15, 15, 15))
+                        .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbRelPedDtEntregaInicio)
+                            .addComponent(lbRelPedDtEntregaFim))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfRelPedDtEntregaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbRelPedSentido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfRelPedDtEntregaFim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedOrdenacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
+                        .addComponent(lbRelPedLocal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13))
         );
 
-        pnRelPedResultado.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
+        pnRelPedResultado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        tableRelatorioPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableRelatorioPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cód.", "Status", "Cliente", "Tipo", "Local", "Marmitas", "Observação", "Data do Pedido", "Data da Entrega"
+                "Cód.", "Status", "Cliente", "Local", "Marmitas", "Observação", "Data do Pedido", "Data da Entrega"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1863,24 +1980,27 @@ public class Telas extends javax.swing.JFrame {
         });
         spRelPedResultado.setViewportView(tableRelatorioPedido);
 
-        jpRelPedTotStatus.setBorder(javax.swing.BorderFactory.createTitledBorder("Status"));
+        jpRelPedTotStatus.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Status", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        jbRelPedTotPendente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbRelPedTotPendente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelPedTotPendente.setText("Pendente:");
 
         tfRelPedTotPendente.setEditable(false);
+        tfRelPedTotPendente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelPedTotPendente.setText("0");
 
-        jbRelPedTotFechado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbRelPedTotFechado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelPedTotFechado.setText("Fechado:");
 
         tfRelPedTotFechado.setEditable(false);
+        tfRelPedTotFechado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelPedTotFechado.setText("0");
 
-        jbRelPedTotCancelado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbRelPedTotCancelado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelPedTotCancelado.setText("Cancelado:");
 
         tfRelPedTotCancelado.setEditable(false);
+        tfRelPedTotCancelado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelPedTotCancelado.setText("0");
 
         javax.swing.GroupLayout jpRelPedTotStatusLayout = new javax.swing.GroupLayout(jpRelPedTotStatus);
@@ -1931,10 +2051,11 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jbRelPedTotMarmitas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbRelPedTotMarmitas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelPedTotMarmitas.setText("Total de Marmitas:");
 
         tfRelPedTotMarmitas.setEditable(false);
+        tfRelPedTotMarmitas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelPedTotMarmitas.setText("0");
 
         javax.swing.GroupLayout jpRelPedTotMarmitasLayout = new javax.swing.GroupLayout(jpRelPedTotMarmitas);
@@ -1969,37 +2090,26 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(spRelPedResultado)
                     .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
-                        .addComponent(jpRelPedTotStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpRelPedTotMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(166, 166, 166)
-                        .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btRelPedVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpRelPedTotStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnRelPedResultadoLayout.setVerticalGroup(
             pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jpRelPedTotMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jpRelPedTotStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(12, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedResultadoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btRelPedVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jpRelPedTotMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                        .addContainerGap(19, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout pnRelPedLayout = new javax.swing.GroupLayout(pnRelPed);
@@ -2008,38 +2118,57 @@ public class Telas extends javax.swing.JFrame {
             pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelPedLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(pnRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnRelPedFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnRelPedResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnRelPedFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 1185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         pnRelPedLayout.setVerticalGroup(
             pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelPedLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnRelPedFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        btRelPedidoSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelPedidoSalvar.setText("Salvar");
+
+        btRelPedidoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelPedidoLimpar.setText("Limpar");
+
+        btRelPedidoSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btRelPedidoSair.setText("Sair");
 
         javax.swing.GroupLayout pnRelatorioPedidoLayout = new javax.swing.GroupLayout(pnRelatorioPedido);
         pnRelatorioPedido.setLayout(pnRelatorioPedidoLayout);
         pnRelatorioPedidoLayout.setHorizontalGroup(
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelatorioPedidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addGroup(pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnRelatorioPedidoLayout.createSequentialGroup()
+                        .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         pnRelatorioPedidoLayout.setVerticalGroup(
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelatorioPedidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -2053,7 +2182,7 @@ public class Telas extends javax.swing.JFrame {
         pnHomeLayout.setHorizontalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHomeLayout.createSequentialGroup()
-                .addContainerGap(395, Short.MAX_VALUE)
+                .addContainerGap(386, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addContainerGap(344, Short.MAX_VALUE))
         );
@@ -2062,7 +2191,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnHomeLayout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(jLabel3)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pnCard.add(pnHome, "cdHome");
@@ -2071,12 +2200,14 @@ public class Telas extends javax.swing.JFrame {
         pnDadosPrincipal.setLayout(pnDadosPrincipalLayout);
         pnDadosPrincipalLayout.setHorizontalGroup(
             pnDadosPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnDadosPrincipalLayout.createSequentialGroup()
+                .addComponent(pnCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnDadosPrincipalLayout.setVerticalGroup(
             pnDadosPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDadosPrincipalLayout.createSequentialGroup()
-                .addComponent(pnCard, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnCard, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -2112,17 +2243,6 @@ public class Telas extends javax.swing.JFrame {
             }
         });
         menuPessoa.add(menuPessoaCadastrar);
-
-        menuPessoaAlterar.setBackground(new java.awt.Color(52, 52, 52));
-        menuPessoaAlterar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuPessoaAlterar.setForeground(new java.awt.Color(255, 255, 255));
-        menuPessoaAlterar.setText("Alterar");
-        menuPessoaAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPessoaAlterarActionPerformed(evt);
-            }
-        });
-        menuPessoa.add(menuPessoaAlterar);
 
         menuBarra.add(menuPessoa);
 
@@ -2160,17 +2280,6 @@ public class Telas extends javax.swing.JFrame {
         });
         menuPedido.add(menuPedidoCadastrar);
 
-        menuPedidoAlterar.setBackground(new java.awt.Color(52, 52, 52));
-        menuPedidoAlterar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuPedidoAlterar.setForeground(new java.awt.Color(255, 255, 255));
-        menuPedidoAlterar.setText("Alterar");
-        menuPedidoAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPedidoAlterarActionPerformed(evt);
-            }
-        });
-        menuPedido.add(menuPedidoAlterar);
-
         menuBarra.add(menuPedido);
 
         setJMenuBar(menuBarra);
@@ -2196,7 +2305,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void tfNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomeKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isLetter(verificador) && verificador != ' '){
+        if (!Character.isLetter(verificador) && verificador != ' ') {
             evt.consume();
         }
     }//GEN-LAST:event_tfNomeKeyTyped
@@ -2211,28 +2320,21 @@ public class Telas extends javax.swing.JFrame {
 
     private void tfNomePacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomePacienteKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isLetter(verificador) && verificador != ' '){
+        if (!Character.isLetter(verificador) && verificador != ' ') {
             evt.consume();
         }
     }//GEN-LAST:event_tfNomePacienteKeyTyped
 
-    private void tfQtdDiasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQtdDiasKeyTyped
-        char verificador = evt.getKeyChar();
-        if(!Character.isDigit(verificador)){
-            evt.consume();
-        }
-    }//GEN-LAST:event_tfQtdDiasKeyTyped
-
     private void tfEnderecoCepKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEnderecoCepKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isDigit(verificador)){
+        if (!Character.isDigit(verificador)) {
             evt.consume();
         }
     }//GEN-LAST:event_tfEnderecoCepKeyTyped
 
     private void tfEnderecoNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEnderecoNumeroKeyTyped
         char verificador = evt.getKeyChar();
-        if(!Character.isDigit(verificador)){
+        if (!Character.isDigit(verificador)) {
             evt.consume();
         }
     }//GEN-LAST:event_tfEnderecoNumeroKeyTyped
@@ -2246,11 +2348,6 @@ public class Telas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void btAdicionarCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarCidadeActionPerformed
-        cadastroCidade.setLocationRelativeTo(this);
-        cadastroCidade.setVisible(true);
-    }//GEN-LAST:event_btAdicionarCidadeActionPerformed
-
     private void cbEnderecoCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnderecoCidadeActionPerformed
         Cidade cidadeSelecionada = (Cidade) cbEnderecoCidade.getSelectedItem();
         if (cidadeSelecionada != null) {
@@ -2261,96 +2358,122 @@ public class Telas extends javax.swing.JFrame {
     private void btCadastroPessoaLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaLimparActionPerformed
         limparcamposCadastroUsuario();
     }//GEN-LAST:event_btCadastroPessoaLimparActionPerformed
-    
-    private void btCadastroPessoaRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaRegistrarActionPerformed
+
+    private void btCadastroPessoaSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSalvarActionPerformed
         Endereco endereco = null;
         Pessoa novaPessoa = null;
         Paciente paciente = null;
         String telefone = ffTelefone.getText().replaceAll("[^\\d]", "");
-        
+
         Cidade cidadeEscolhida = (Cidade) cbEnderecoCidade.getSelectedItem();
         if (tfEnderecoLogradouro.getText().trim().isEmpty() || tfEnderecoLogradouro.getText().equals("")) {
             endereco = new Endereco(cidadeEscolhida);
         } else {
             endereco = new Endereco(
-                tfEnderecoLogradouro.getText(),
-                Integer.parseInt(tfEnderecoNumero.getText()),
-                tfEnderecoBairro.getText(),
-                tfEnderecoCep.getText(),
-                tfEnderecoComplemento.getText(),
-                cidadeEscolhida);
+                    tfEnderecoLogradouro.getText(),
+                    Integer.parseInt(tfEnderecoNumero.getText()),
+                    tfEnderecoBairro.getText(),
+                    tfEnderecoCep.getText(),
+                    tfEnderecoComplemento.getText(),
+                    cidadeEscolhida);
         }
 
         novaPessoa = new Pessoa(tfNome.getText(), telefone, endereco);
-        try{
-            if (tfQtdDias.getText()!= null && !tfQtdDias.getText().trim().isEmpty()){
-                paciente = new Paciente(tfNomePaciente.getText(), Integer.parseInt(tfQtdDias.getText()));
-            }
-        }catch(NumberFormatException ex){
+        try {
+            //if (tfQtdDias.getText() != null && !tfQtdDias.getText().trim().isEmpty()) {
+            //    paciente = new Paciente(tfNomePaciente.getText(), Integer.parseInt(tfQtdDias.getText()));
+            //}
+        } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
 
-        if ((String)cbTipoUsuario.getSelectedItem() == "Assistente") {
-            novaPessoa.setTipoUsuario(TipoCad.ASSISTENTE);
-        } else if ((String)cbTipoUsuario.getSelectedItem() == "Beneficiário") {
-            novaPessoa.setTipoUsuario(TipoCad.BENEFICIARIO);
-        } else if ((String)cbTipoUsuario.getSelectedItem() == "Doador") {
-            novaPessoa.setTipoUsuario(TipoCad.DOADOR);   
-        }
-
-        if(cbLocalInternacao.getSelectedIndex() == 0){
-            novaPessoa.setLocal(Pessoa.Local.HOSPITAL);
-        }else{
-            novaPessoa.setLocal(Pessoa.Local.PRONTOSOCORRO);
+        Object selected = cbTipoUsuario.getSelectedItem();
+        if (selected != null) {
+            String tipo = selected.toString();
+            switch (tipo) {
+                case "Assistente":
+                    novaPessoa.setTipoUsuario(TipoCad.ASSISTENTE);
+                    break;
+                case "Beneficiario":
+                    novaPessoa.setTipoUsuario(TipoCad.BENEFICIARIO);
+                    break;
+                case "Doador":
+                    novaPessoa.setTipoUsuario(TipoCad.DOADOR);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(rootPane, "Tipo de usuário inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return; // evita continuar com tipoUsuario nulo
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um tipo de usuário.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
         }
         
+        switch (cbLocalInternacao.getSelectedIndex()) {
+            case 0:
+                novaPessoa.setLocal(Pessoa.Local.HOSPITAL);
+                break;
+                
+            case 1:
+                novaPessoa.setLocal(Pessoa.Local.PRONTOSOCORRO);
+                break;
+            default:
+                novaPessoa.setLocal(null);
+        }
+
         novaPessoa.setEmail(tfEmail.getText());
-        if(rbPessoaFisica.isSelected()){
+        if (rbPessoaFisica.isSelected()) {
             novaPessoa.setTipoPessoa(Pessoa.TipoPessoa.FISICA);
         }
-        if(rbPessoaJuridica.isSelected()){
+        if (rbPessoaJuridica.isSelected()) {
             novaPessoa.setTipoPessoa(Pessoa.TipoPessoa.JURIDICA);
         }
         novaPessoa.setIdentificacao(ffDocumento.getText().replaceAll("[^\\d]", ""));
         novaPessoa.setObservacao(taObservacao.getText());
         novaPessoa.setPaciente(paciente);
-        
-        try{
+
+        try {
             enderecoController.cadastrarEndereco(endereco, cidadeEscolhida);
-            if(!pessoaController.cadastrarPessoa(novaPessoa, paciente)){
+            if (!pessoaController.cadastrarPessoa(novaPessoa, paciente)) {
                 JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar o Usuário", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar o Usuário", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
                 limparcamposCadastroUsuario();
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_btCadastroPessoaRegistrarActionPerformed
+    }//GEN-LAST:event_btCadastroPessoaSalvarActionPerformed
 
     private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
-        if(cbTipoUsuario.getSelectedIndex()==0){
-            tfNomePaciente.setEnabled(false);
-            tfQtdDias.setEnabled(false);
-            cbLocalInternacao.setEnabled(true);
-        }else if (cbTipoUsuario.getSelectedIndex()==1){
-            tfNomePaciente.setEnabled(true);
-            tfQtdDias.setEnabled(true);
-            cbLocalInternacao.setEnabled(true);
-        } else if (cbTipoUsuario.getSelectedIndex()==2){
-            tfNomePaciente.setEnabled(false);
-            tfQtdDias.setEnabled(false);
-            cbLocalInternacao.setEnabled(false);
+        switch (cbTipoUsuario.getSelectedIndex()) {
+            //0 Bene 1 Doador 2 Assis
+            case 0:
+                tfNomePaciente.setEnabled(true);
+                //tfQtdDias.setEnabled(true);
+                cbLocalInternacao.setSelectedIndex(0);
+                // hospital
+                break;
+            case 1:
+                tfNomePaciente.setEnabled(false);
+                //tfQtdDias.setEnabled(false);
+                cbLocalInternacao.setSelectedIndex(2);
+                // nulo
+                break;
+            case 2:
+                tfNomePaciente.setEnabled(false);
+                //tfQtdDias.setEnabled(false);
+                cbLocalInternacao.setSelectedIndex(1);
+                // Pronto socorro
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_cbTipoUsuarioActionPerformed
 
     private void menuPessoaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPessoaCadastrarActionPerformed
         cl.show(pnCard, "beneficiario");
     }//GEN-LAST:event_menuPessoaCadastrarActionPerformed
-
-    private void menuPessoaAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPessoaAlterarActionPerformed
-        cl.show(pnCard, "cdAlterarPessoa");
-    }//GEN-LAST:event_menuPessoaAlterarActionPerformed
 
     private void menuDoacaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDoacaoCadastrarActionPerformed
         cl.show(pnCard, "cdCadastrarDoacao");
@@ -2360,18 +2483,6 @@ public class Telas extends javax.swing.JFrame {
     private void menuPedidoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPedidoCadastrarActionPerformed
         cl.show(pnCard, "cdCadastrarPedido");
     }//GEN-LAST:event_menuPedidoCadastrarActionPerformed
-
-    private void menuPedidoAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPedidoAlterarActionPerformed
-        cl.show(pnCard, "cdAlterarPedido");
-    }//GEN-LAST:event_menuPedidoAlterarActionPerformed
-
-    private void tfBuscarNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarNomeKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarNomeKeyTyped
-
-    private void tfBuscarIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarIdKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBuscarIdKeyTyped
 
     private void tfDoacaoDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDoacaoDoadorActionPerformed
         // TODO add your handling code here:
@@ -2408,25 +2519,9 @@ public class Telas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btDoacaoAddProdActionPerformed
 
-    private void tfDoacaoQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDoacaoQuantidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDoacaoQuantidadeActionPerformed
-
     private void tfPedidoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPedidoClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfPedidoClienteActionPerformed
-
-    private void tfPedidoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPedidoIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPedidoIdActionPerformed
-
-    private void tfAltPedClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAltPedClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfAltPedClienteActionPerformed
-
-    private void ffAltPedIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ffAltPedIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ffAltPedIdActionPerformed
 
     private void menuRelatorioDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioDoacaoActionPerformed
         cl.show(pnCard, "relatorioDoacao");
@@ -2440,10 +2535,6 @@ public class Telas extends javax.swing.JFrame {
         buscarProduto.setLocationRelativeTo(this);
         buscarProduto.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarProdActionPerformed
-
-    private void tfDoacaoSelecionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDoacaoSelecionarProdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDoacaoSelecionarProdActionPerformed
 
     private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseClicked
         cl.show(pnCard, "cdHome");
@@ -2462,17 +2553,17 @@ public class Telas extends javax.swing.JFrame {
             Object descricao = tableDoacaoProdutos.getValueAt(linhaSelecionada, 1);
             Object quantidade = tableDoacaoProdutos.getValueAt(linhaSelecionada, 2);
             tfDoacaoSelecionarProd.setText(descricao.toString());
-            tfDoacaoQuantidade.setText(quantidade.toString());
+            jsDoacaoQuantidadeProduto.setValue(quantidade);
         }
     }//GEN-LAST:event_tableDoacaoProdutosMouseClicked
 
     private void btDoacaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDeletarActionPerformed
         int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
-        if(doacaoController.removeDoacao(idDoacao)){
-            JOptionPane.showMessageDialog(rootPane, "Doacao Removida com sucesso.", "Remoção", JOptionPane.INFORMATION_MESSAGE);
+        if (doacaoController.removeDoacao(idDoacao)) {
+            JOptionPane.showMessageDialog(rootPane, "Doação deletada com sucesso.", "Deleção", JOptionPane.INFORMATION_MESSAGE);
             limparCamposCadastroDoacao();
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Doacao não removida.", "Remoção", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Não foi possivel deletar a Doação!", "Deleção", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btDoacaoDeletarActionPerformed
 
@@ -2480,10 +2571,6 @@ public class Telas extends javax.swing.JFrame {
         limparCamposCadastroDoacao();
         destravaCamposDoacao();
     }//GEN-LAST:event_btDoacaoLimparActionPerformed
-
-    private void cbRelPedTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbRelPedTipoActionPerformed
 
     private void cbRelPedStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedStatusActionPerformed
         // TODO add your handling code here:
@@ -2538,9 +2625,13 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoIdDoador.setText(String.valueOf(doacao.getDoador().getId()));
         tfDoacaoDoador.setText(doacao.getDoador().getNome());
         ftDoacaoData.setText(String.valueOf(doacao.getDataDoacao()));
-        switch (String.valueOf(doacao.getTipo())){
-            case "DINHEIRO": cbDoacaoTipo.setSelectedIndex(0);break;
-            case "PRODUTO": cbDoacaoTipo.setSelectedIndex(1);break;
+        switch (String.valueOf(doacao.getTipo())) {
+            case "DINHEIRO":
+                cbDoacaoTipo.setSelectedIndex(0);
+                break;
+            case "PRODUTO":
+                cbDoacaoTipo.setSelectedIndex(1);
+                break;
         }
         tfDoacaoValor.setValue(doacao.getValor());
         taDoacaoObservacao.setText(doacao.getObservacao());
@@ -2551,12 +2642,13 @@ public class Telas extends javax.swing.JFrame {
         }
         travaCamposDoacao();
     }
+
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
         campo.setEnabled(true);
         try {
             MaskFormatter formatter = new MaskFormatter(mascara);
             formatter.setPlaceholderCharacter('_');
-            campo.setFormatterFactory( new javax.swing.text.DefaultFormatterFactory(formatter));
+            campo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(formatter));
             campo.setValue(null);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -2572,14 +2664,13 @@ public class Telas extends javax.swing.JFrame {
         Cidade cidadePadrao = new Cidade("Selecione...", null);
         cbEnderecoCidade.addItem(cidadePadrao);
         List<Cidade> puxarCidade = cidadeController.listarCidade();
-        for(Cidade cidade : puxarCidade){
+        for (Cidade cidade : puxarCidade) {
             cbEnderecoCidade.addItem(cidade);
         }
     }
     
     public void travaCamposDoacao(){
         tfDoacaoSelecionarProd.setEnabled(false);
-        tfDoacaoQuantidade.setEnabled(false);
         tfDoacaoIdDoacao.setEnabled(false);
         tfDoacaoIdDoador.setEnabled(false);
         tfDoacaoDoador.setEnabled(false);
@@ -2605,7 +2696,7 @@ public class Telas extends javax.swing.JFrame {
         ffDocumento.setText("");
         taObservacao.setText("");
         tfNomePaciente.setText("");
-        tfQtdDias.setText("");
+        jsQtdDias.setValue(0);
         tfEnderecoCep.setText("");
         tfEnderecoLogradouro.setText("");
         tfEnderecoComplemento.setText("");
@@ -2615,8 +2706,8 @@ public class Telas extends javax.swing.JFrame {
         cbEnderecoUf.setSelectedIndex(0);
         buttonGroupPessoaTipo.clearSelection();
     }
-    
-    public void limparCamposCadastroDoacao(){
+
+    public void limparCamposCadastroDoacao() {
         tfDoacaoIdDoacao.setText("");
         tfDoacaoIdDoador.setText("");
         tfDoacaoDoador.setText("");
@@ -2624,22 +2715,20 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoValor.setValue(0.00);
         taDoacaoObservacao.setText("");
         tfDoacaoSelecionarProd.setText("");
-        tfDoacaoQuantidade.setText("");
+        jsDoacaoQuantidadeProduto.setValue(0);
         cbDoacaoTipo.setSelectedIndex(0);
-        modeloTabela.setRowCount(0);    
+        modeloTabela.setRowCount(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionarCidade;
-    private javax.swing.JButton btAltPedAtualizar;
-    private javax.swing.JButton btAltPedBuscar;
-    private javax.swing.JButton btAltPedLimpar;
-    private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCadastroPessoaLimpar;
-    private javax.swing.JButton btCadastroPessoaRegistrar;
+    private javax.swing.JButton btCadastroPessoaSair;
+    private javax.swing.JButton btCadastroPessoaSalvar;
     private javax.swing.JButton btDoacaoAddProd;
     private javax.swing.JButton btDoacaoAltProd;
     private javax.swing.JButton btDoacaoBuscarDoacao;
+    private javax.swing.JButton btDoacaoBuscarDoacao1;
     private javax.swing.JButton btDoacaoBuscarDoador;
     private javax.swing.JButton btDoacaoBuscarProd;
     private javax.swing.JButton btDoacaoDelProd;
@@ -2650,28 +2739,32 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JButton btDoacaoRelatorio;
     private javax.swing.JButton btDoacaoVoltar;
     private javax.swing.JButton btPedidoBuscarCliente;
+    private javax.swing.JButton btPedidoBuscarCliente1;
+    private javax.swing.JButton btPedidoBuscarCliente2;
+    private javax.swing.JButton btPedidoBuscarPedido;
+    private javax.swing.JButton btPedidoDeletar;
     private javax.swing.JButton btPedidoLimpar;
+    private javax.swing.JButton btPedidoRecibo;
     private javax.swing.JButton btPedidoRegistrar;
-    private javax.swing.JButton btRelDoaDoador;
+    private javax.swing.JButton btPedidoRelatorio;
+    private javax.swing.JButton btPedidoSair;
     private javax.swing.JButton btRelDoaFiltrar;
-    private javax.swing.JButton btRelDoaProd;
-    private javax.swing.JButton btRelDoaVoltar;
+    private javax.swing.JButton btRelDoaSair;
     private javax.swing.JButton btRelDoacaoLimpar;
     private javax.swing.JButton btRelDoacaoSalvar;
-    private javax.swing.JButton btRelPedBuscarCliente;
     private javax.swing.JButton btRelPedFiltrar;
-    private javax.swing.JButton btRelPedVoltar;
+    private javax.swing.JButton btRelPedidoBuscarCliente;
     private javax.swing.JButton btRelPedidoLimpar;
+    private javax.swing.JButton btRelPedidoSair;
     private javax.swing.JButton btRelPedidoSalvar;
     private javax.swing.ButtonGroup buttonGroupPessoaTipo;
-    private javax.swing.JComboBox<String> cbAltPedStatus;
     private javax.swing.JComboBox<String> cbDoacaoTipo;
     private javax.swing.JComboBox<Cidade> cbEnderecoCidade;
     private javax.swing.JComboBox<String> cbEnderecoUf;
     private javax.swing.JComboBox<String> cbLocalInternacao;
     private javax.swing.JComboBox<String> cbPedidoStatus;
-    private javax.swing.JComboBox<String> cbRelDoaOrdenacao1;
-    private javax.swing.JComboBox<String> cbRelDoaOrdenacao2;
+    private javax.swing.JComboBox<String> cbRelDoaOrdenacao;
+    private javax.swing.JComboBox<String> cbRelDoaSentido;
     private javax.swing.JComboBox<String> cbRelDoaTpDoacao;
     private javax.swing.JComboBox<String> cbRelDoaTpProduto;
     private javax.swing.JComboBox<String> cbRelPedCidade;
@@ -2679,10 +2772,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbRelPedOrdenacao;
     private javax.swing.JComboBox<String> cbRelPedSentido;
     private javax.swing.JComboBox<String> cbRelPedStatus;
-    private javax.swing.JComboBox<String> cbRelPedTipo;
     private javax.swing.JComboBox<String> cbTipoUsuario;
-    private javax.swing.JFormattedTextField ffAltPedDtPedido;
-    private javax.swing.JFormattedTextField ffAltPedId;
     private javax.swing.JFormattedTextField ffDocumento;
     private javax.swing.JFormattedTextField ffPedidoDtEntrega;
     private javax.swing.JFormattedTextField ffPedidoDtPedido;
@@ -2697,7 +2787,8 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner4;
     private javax.swing.JLabel jbRelDoaTorIte;
     private javax.swing.JLabel jbRelDoaTotDin;
     private javax.swing.JLabel jbRelDoaTotProd;
@@ -2707,14 +2798,9 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel jbRelPedTotPendente;
     private javax.swing.JPanel jpRelPedTotMarmitas;
     private javax.swing.JPanel jpRelPedTotStatus;
-    private javax.swing.JLabel lbAltPedCliente;
-    private javax.swing.JLabel lbAltPedDtPedido;
-    private javax.swing.JLabel lbAltPedId;
-    private javax.swing.JLabel lbAltPedQtdMarmitas;
-    private javax.swing.JLabel lbAltPedStatus;
+    private javax.swing.JSpinner jsDoacaoQuantidadeProduto;
+    private javax.swing.JSpinner jsQtdDias;
     private javax.swing.JLabel lbBairro;
-    private javax.swing.JLabel lbBuscarId;
-    private javax.swing.JLabel lbBuscarNome;
     private javax.swing.JLabel lbComplemento;
     private javax.swing.JLabel lbDoacaoData;
     private javax.swing.JLabel lbDoacaoDoador;
@@ -2731,14 +2817,16 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel lbLogradouro5;
     private javax.swing.JLabel lbLogradouro6;
     private javax.swing.JLabel lbNome;
+    private javax.swing.JLabel lbNome1;
     private javax.swing.JLabel lbNomePaciente;
     private javax.swing.JLabel lbNomePaciente1;
+    private javax.swing.JLabel lbNomePaciente2;
     private javax.swing.JLabel lbNumero;
     private javax.swing.JLabel lbObservacao;
     private javax.swing.JLabel lbPedidoCliente;
     private javax.swing.JLabel lbPedidoDtEntrega;
     private javax.swing.JLabel lbPedidoDtPedido;
-    private javax.swing.JLabel lbPedidoId;
+    private javax.swing.JLabel lbPedidoIdPedido;
     private javax.swing.JLabel lbPedidoObservacao;
     private javax.swing.JLabel lbPedidoQtdMarmitas;
     private javax.swing.JLabel lbPedidoStatus;
@@ -2752,26 +2840,25 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel lbRelDoaTpProduto;
     private javax.swing.JLabel lbRelPedCidade;
     private javax.swing.JLabel lbRelPedCliente;
-    private javax.swing.JLabel lbRelPedDtEntrega;
-    private javax.swing.JLabel lbRelPedDtPedido;
+    private javax.swing.JLabel lbRelPedDtEntregaFim;
+    private javax.swing.JLabel lbRelPedDtEntregaInicio;
+    private javax.swing.JLabel lbRelPedDtPedidoFim;
+    private javax.swing.JLabel lbRelPedDtPedidoInicio;
     private javax.swing.JLabel lbRelPedLocal;
     private javax.swing.JLabel lbRelPedOrdenacao;
     private javax.swing.JLabel lbRelPedStatus;
-    private javax.swing.JLabel lbRelPedTipo;
     private javax.swing.JLabel lbTelefone;
     private javax.swing.JMenuBar menuBarra;
     private javax.swing.JMenu menuDoacao;
     private javax.swing.JMenuItem menuDoacaoCadastrar;
     private javax.swing.JMenu menuInicio;
     private javax.swing.JMenu menuPedido;
-    private javax.swing.JMenuItem menuPedidoAlterar;
     private javax.swing.JMenuItem menuPedidoCadastrar;
     private javax.swing.JMenu menuPessoa;
-    private javax.swing.JMenuItem menuPessoaAlterar;
     private javax.swing.JMenuItem menuPessoaCadastrar;
-    private javax.swing.JPanel pnAlterarPedido;
-    private javax.swing.JPanel pnAlterarPessoa;
-    private javax.swing.JPanel pnBuscar;
+    private javax.swing.JMenu menuRelatorio;
+    private javax.swing.JMenuItem menuRelatorioDoacao;
+    private javax.swing.JMenuItem menuRelatorioPedido;
     private javax.swing.JPanel pnCadastrarDoacao;
     private javax.swing.JPanel pnCadastrarPedido;
     private javax.swing.JPanel pnCadastroPessoa;
@@ -2783,7 +2870,6 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JPanel pnHome;
     private javax.swing.JPanel pnListBoxProd;
     private javax.swing.JPanel pnPedido;
-    private javax.swing.JPanel pnPedido1;
     private javax.swing.JPanel pnPessoaCliente;
     private javax.swing.JPanel pnRelDoa;
     private javax.swing.JPanel pnRelFiltros;
@@ -2799,20 +2885,14 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JScrollPane spRelResultado;
     private javax.swing.JTextArea taDoacaoObservacao;
     private javax.swing.JTextArea taDoacaoObservacao1;
-    private javax.swing.JTextArea taDoacaoObservacao2;
     private javax.swing.JTextArea taObservacao;
     private javax.swing.JTable tableDoacaoProdutos;
     private javax.swing.JTable tableRelatorioDoacao;
     private javax.swing.JTable tableRelatorioPedido;
-    private javax.swing.JTextField tfAltPedCliente;
-    private javax.swing.JLabel tfAltPedObs;
-    private javax.swing.JTextField tfAltPedQtdMarmitas;
-    private javax.swing.JTextField tfBuscarId;
-    private javax.swing.JTextField tfBuscarNome;
     private javax.swing.JTextField tfDoacaoDoador;
     private javax.swing.JTextField tfDoacaoIdDoacao;
+    private javax.swing.JTextField tfDoacaoIdDoacao1;
     private javax.swing.JTextField tfDoacaoIdDoador;
-    private javax.swing.JTextField tfDoacaoQuantidade;
     private javax.swing.JTextField tfDoacaoSelecionarProd;
     private javax.swing.JFormattedTextField tfDoacaoValor;
     private javax.swing.JTextField tfEmail;
@@ -2824,14 +2904,15 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfNomePaciente;
     private javax.swing.JTextField tfPedidoCliente;
-    private javax.swing.JFormattedTextField tfPedidoId;
-    private javax.swing.JTextField tfPedidoQtdMarmitas;
-    private javax.swing.JTextField tfQtdDias;
+    private javax.swing.JTextField tfPedidoIdPedido;
+    private javax.swing.JTextField tfPedidoIdPedido1;
     private javax.swing.JTextField tfRelDoaDoador;
     private javax.swing.JTextField tfRelDoaProd;
     private javax.swing.JTextField tfRelPedCliente;
-    private javax.swing.JFormattedTextField tfRelPedDtEntrega;
-    private javax.swing.JFormattedTextField tfRelPedDtPedido;
+    private javax.swing.JFormattedTextField tfRelPedDtEntregaFim;
+    private javax.swing.JFormattedTextField tfRelPedDtEntregaInicio;
+    private javax.swing.JFormattedTextField tfRelPedDtPedidoFim;
+    private javax.swing.JFormattedTextField tfRelPedDtPedidoInicio;
     private javax.swing.JTextField tfRelPedTotCancelado;
     private javax.swing.JTextField tfRelPedTotFechado;
     private javax.swing.JTextField tfRelPedTotMarmitas;
