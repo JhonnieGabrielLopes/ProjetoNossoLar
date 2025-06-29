@@ -97,6 +97,7 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="1d" green="1d" red="1d" type="rgb"/>
     </Property>
+    <Property name="extendedState" type="int" value="6"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1280, 720]"/>
     </Property>
@@ -1616,7 +1617,7 @@
                               <Component id="btPedidoSair" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="btPedidoRelatorio" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="192" max="32767" attributes="0"/>
+                          <EmptySpace pref="202" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2036,7 +2037,7 @@
                               <Component id="btRelDoacaoLimpar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="btRelDoaSair" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="57" max="32767" attributes="0"/>
+                          <EmptySpace pref="72" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2628,7 +2629,7 @@
                               <Component id="btRelPedidoLimpar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="btRelPedidoSair" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="22" max="32767" attributes="0"/>
+                          <EmptySpace pref="47" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
