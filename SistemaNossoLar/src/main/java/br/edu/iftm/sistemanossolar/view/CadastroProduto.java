@@ -8,6 +8,10 @@ import java.sql.Connection;
 
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto.TipoProd;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +27,6 @@ public class CadastroProduto extends javax.swing.JDialog {
         super(parent, modal);
         produtoController = new ProdutoController(conexao);
         this.tela = tela;
-        produtoController = new ProdutoController(conexao);
         initComponents();
     }
 
@@ -48,13 +51,23 @@ public class CadastroProduto extends javax.swing.JDialog {
 
         lbCadProdTipo.setText("Tipo");
 
-        cbCadProdTipoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimento", "Limpeza", "Outro" }));
+        cbCadProdTipoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALIMENTO", "LIMPEZA", "OUTRO" }));
 
         lbCadProdProduto.setText("Descrição");
 
         btCadProdCadastrar.setText("Cadastrar");
+        btCadProdCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadProdCadastrarActionPerformed(evt);
+            }
+        });
 
         btCadProdCancelar.setText("Cancelar");
+        btCadProdCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadProdCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnCadastrarProdutoLayout = new javax.swing.GroupLayout(pnCadastrarProduto);
         pnCadastrarProduto.setLayout(pnCadastrarProdutoLayout);
@@ -113,6 +126,28 @@ public class CadastroProduto extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btCadProdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btCadProdCancelarActionPerformed
+
+    private void btCadProdCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCadastrarActionPerformed
+        Produto produto = new Produto();
+        produto.setNome(tfCadProdProduto.getText());
+        if((String)cbCadProdTipoProduto.getSelectedItem() == "ALIMENTO"){
+            produto.setTipo(TipoProd.ALIMENTO);
+        }else if((String)cbCadProdTipoProduto.getSelectedItem() == "LIMPEZA"){
+            produto.setTipo(TipoProd.LIMPEZA);
+        }else if((String)cbCadProdTipoProduto.getSelectedItem() == "OUTRO"){
+            produto.setTipo(TipoProd.OUTRO);
+        }
+        try{
+            produtoController.cadastrarProduto(produto);
+            JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado", "Produto Cadstrado", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }catch(SQLException ex){
+        }
+    }//GEN-LAST:event_btCadProdCadastrarActionPerformed
 
     /**
      * @param args the command line arguments

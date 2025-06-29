@@ -175,9 +175,6 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="1d" green="1d" red="1d" type="rgb"/>
     </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1200, 700]"/>
-    </Property>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1280, 720]"/>
     </Property>
@@ -200,7 +197,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,101,0,0,4,-47"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-18,0,0,4,-47"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -257,11 +254,6 @@
                                   <Component id="btCadastroPessoaLimpar" min="-2" pref="103" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btCadastroPessoaRegistrar" min="-2" pref="103" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="pnPessoaCliente" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="pnEnderecoCliente" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="136" max="32767" attributes="0"/>
@@ -1077,7 +1069,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfDoacaoIdDoacao">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btDoacaoBuscarDoacao">
@@ -1100,13 +1092,16 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfDoacaoIdDoador">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoIdDoadorActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfDoacaoDoador">
+                      <Properties>
+                        <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoDoadorActionPerformed"/>
                       </Events>
@@ -1120,6 +1115,9 @@
                           <Insets value="[1, 1, 1, 1]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoBuscarDoadorActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbDoacaoTipo">
                       <Properties>
@@ -1194,6 +1192,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Gerar Recibo"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoReciboActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btDoacaoDeletar">
                       <Properties>
@@ -1286,6 +1287,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tfDoacaoSelecionarProd">
+                      <Properties>
+                        <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDoacaoSelecionarProdActionPerformed"/>
                       </Events>
@@ -1394,11 +1398,17 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Alterar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoAltProdActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btDoacaoDelProd">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Deletar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoDelProdActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1411,6 +1421,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Registrar Doa&#xe7;&#xe3;o"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoRegistrarDoacaoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btDoacaoLimpar">
                   <Properties>
@@ -1430,6 +1443,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoRelatorioActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btDoacaoVoltar">
                   <Properties>
@@ -1438,6 +1454,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Sair"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDoacaoVoltarActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -2440,8 +2459,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pnRelPed" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="pnRelPed" min="-2" pref="685" max="-2" attributes="0"/>
+                          <EmptySpace pref="9" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2461,19 +2480,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="pnRelPedFiltros" min="-2" pref="1185" max="-2" attributes="0"/>
-                                  <Component id="pnRelPedResultado" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="pnRelPedResultado" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btRelPedidoSalvar" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btRelPedidoLimpar" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btRelPedVoltar" min="-2" pref="125" max="-2" attributes="0"/>
+                              <Component id="pnRelPedFiltros" min="-2" pref="1185" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -2481,17 +2493,11 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="pnRelPedFiltros" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="pnRelPedResultado" max="32767" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btRelPedidoSalvar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="btRelPedidoLimpar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="btRelPedVoltar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="pnRelPedResultado" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2819,7 +2825,13 @@
                                           <Component id="jpRelPedTotStatus" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jpRelPedTotMarmitas" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+                                          <Component id="btRelPedidoSalvar" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btRelPedidoLimpar" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btRelPedVoltar" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -2832,14 +2844,21 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="spRelPedResultado" min="-2" pref="349" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                          <Component id="jpRelPedTotMarmitas" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jpRelPedTotStatus" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="12" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Component id="jpRelPedTotStatus" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="btRelPedidoSalvar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                                  <Component id="btRelPedidoLimpar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                                  <Component id="btRelPedVoltar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jpRelPedTotMarmitas" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -3030,23 +3049,23 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JButton" name="btRelPedidoSalvar">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Salvar Relat&#xf3;rio"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btRelPedidoLimpar">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Limpar"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btRelPedVoltar">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Voltar"/>
+                          </Properties>
+                        </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="btRelPedidoSalvar">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Salvar Relat&#xf3;rio"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btRelPedidoLimpar">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btRelPedVoltar">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Voltar"/>
-                      </Properties>
-                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto.TipoProd;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class ProdutoDAO {
@@ -54,7 +55,7 @@ public class ProdutoDAO {
 
     public List<Produto> listarProdutos(String sqlFiltro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT id AS codigo_produto, descricao AS produto ");
+        sql.append("SELECT id AS codigo_produto, descricao AS produto, tipoProduto ");
         sql.append("FROM produto ");
         sql.append("WHERE 1=1 ");
         sql.append(sqlFiltro);
@@ -73,6 +74,13 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setId(rs.getInt("codigo_produto"));
                 produto.setNome(rs.getString("produto"));
+                if(rs.getString("tipoProduto").equals("ALIMENTO")){
+                    produto.setTipo(TipoProd.ALIMENTO);
+                }else if(rs.getString("tipoProduto").equals("LIMPEZA")){
+                    produto.setTipo(TipoProd.LIMPEZA);
+                }else if(rs.getString("tipoProduto").equals("OUTRO")){
+                    produto.setTipo(TipoProd.OUTRO);
+                }
                 produtos.add(produto);
                 qtdProdutos ++;
             }
@@ -105,5 +113,42 @@ public class ProdutoDAO {
             log.registrarLog(4, "ProdutoDAO", "capturarNomeProduto", "produto", "Nome do produto não obtido");
         }
         return nome;
+    }
+    
+    public boolean atualizaProduto(int quantidade, int idProduto){
+        String sql = "UPDATE produtodoacao SET quantidade = ? WHERE produto = ?";
+        try(PreparedStatement stmt = conexaoBanco.prepareStatement(sql)){
+            stmt.setInt(1, quantidade);
+            stmt.setInt(2, idProduto);
+            stmt.executeUpdate();
+            return true;
+        }catch (SQLException e) {
+            return false;
+        }
+    }
+    
+    public boolean deletaProduto(int idProduto){
+        deletaProdutoRelacao(idProduto);
+        String sql = "DELETE FROM produto WHERE id = ?";
+        try(PreparedStatement stmt = conexaoBanco.prepareStatement(sql)){
+            stmt.setInt(1, idProduto);
+            stmt.executeUpdate();
+            return true;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deletaProdutoRelacao(int idProduto){
+        String sql = "DELETE FROM produtodoacao WHERE produto = ?";
+        try(PreparedStatement stmt = conexaoBanco.prepareStatement(sql)){
+            stmt.setInt(1, idProduto);
+            stmt.executeUpdate();
+            return true;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

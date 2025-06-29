@@ -4,18 +4,34 @@
  */
 package br.edu.iftm.sistemanossolar.view;
 
+import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author AFSOUZA
  */
 public class BuscarProduto extends javax.swing.JDialog {
-
+    private static Telas tela;
+    private static ProdutoController produtoController;
+    private Produto produto;
+    private static CadastroProduto cadastroProduto;
+    private List<Produto> produtos;
+    private DefaultTableModel modelo;
     /**
      * Creates new form BuscarPessoa
      */
-    public BuscarProduto(java.awt.Frame parent, boolean modal) {
+    public BuscarProduto(java.awt.Frame parent, boolean modal, Connection conexao, Telas tela) {
         super(parent, modal);
+        this.tela = tela;
+        produtoController = new ProdutoController(conexao);
+        cadastroProduto = new CadastroProduto(parent, true, conexao, tela);
         initComponents();
+        modelo = (DefaultTableModel) tableBuscarPessoa.getModel();
     }
 
     /**
@@ -161,8 +177,18 @@ public class BuscarProduto extends javax.swing.JDialog {
         );
 
         btBuscarProdutoSelecionar.setText("Selecionar");
+        btBuscarProdutoSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProdutoSelecionarActionPerformed(evt);
+            }
+        });
 
         btBuscarProdutoNovo.setText("Novo");
+        btBuscarProdutoNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProdutoNovoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnBuscarPessoaLayout = new javax.swing.GroupLayout(pnBuscarPessoa);
         pnBuscarPessoa.setLayout(pnBuscarPessoaLayout);
@@ -225,51 +251,41 @@ public class BuscarProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_tfBuscarProdutoNomeActionPerformed
 
     private void btBuscarProdutoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdutoBuscarActionPerformed
-        // TODO add your handling code here:
+        String descricao = tfBuscarProdutoNome.getText();
+        String tipo = (String) cbBuscarProdutoTipo.getSelectedItem();
+        modelo.setRowCount(0);
+        try {
+            produtos = produtoController.listarProdutos(descricao, tipo);
+            for(Produto produto : produtos){
+                Object[] linha = {produto.getId(), produto.getNome()};
+                modelo.addRow(linha);
+            }
+        } catch (SQLException ex) {
+            
+        }
+        
+        
     }//GEN-LAST:event_btBuscarProdutoBuscarActionPerformed
 
+    private void btBuscarProdutoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdutoNovoActionPerformed
+        cadastroProduto.setLocationRelativeTo(this);
+        cadastroProduto.setVisible(true);
+    }//GEN-LAST:event_btBuscarProdutoNovoActionPerformed
+
+    private void btBuscarProdutoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdutoSelecionarActionPerformed
+        int indice = tableBuscarPessoa.getSelectedRow();
+        produto = produtos.get(indice);
+        tela.preencheProdutoDoacao(produto);
+        dispose();
+    }//GEN-LAST:event_btBuscarProdutoSelecionarActionPerformed
+    
+    public Produto getProduto(){
+        return produto;
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                BuscarProduto dialog = new BuscarProduto(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarProdutoBuscar;

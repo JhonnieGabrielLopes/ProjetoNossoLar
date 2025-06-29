@@ -4,7 +4,9 @@
  */
 package br.edu.iftm.sistemanossolar.view;
 
+import br.edu.iftm.sistemanossolar.controller.RelatorioController;
 import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
+import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import java.awt.CardLayout;
 import java.sql.Connection;
@@ -25,6 +27,7 @@ import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
@@ -39,11 +42,16 @@ public class Telas extends javax.swing.JFrame {
     private static CadastroCidade cadastroCidade;
     private static CadastroProduto cadastroProduto;
     private static BuscarPessoa buscarPessoa;
+    private static BuscarDoacao buscarDoacao;
+    private static BuscarProduto buscarProduto;
     private static DoacaoController doacaoController;
+    private static ProdutoController produtoController;
     private static PessoaController pessoaController;
     private static EnderecoController enderecoController;
-    private static BuscarDoacao buscarDoacao;
+    private static RelatorioController relatorioController;
     private DefaultTableModel modeloTabela;
+    private int indiceTabelaProduto;
+    private boolean acaoTelaDoacao = true;
     /**
      * Creates new form Telas
      *      lb - Label
@@ -56,10 +64,13 @@ public class Telas extends javax.swing.JFrame {
         pessoaController = new PessoaController(conexao);
         enderecoController = new EnderecoController(conexao);
         doacaoController = new DoacaoController(conexao);
+        relatorioController = new RelatorioController(conexao);
+        produtoController = new ProdutoController(conexao);
         cadastroCidade = new CadastroCidade(this, true, conexao, this);
         cadastroProduto = new CadastroProduto(this, true, conexao, this);
         buscarPessoa = new BuscarPessoa(this, true, conexao, this);
         buscarDoacao = new BuscarDoacao(this, true, conexao, this);
+        buscarProduto = new BuscarProduto(this, true, conexao, this);
         initComponents();
         cl = (CardLayout) pnCard.getLayout();
         modeloTabela = (DefaultTableModel) tableDoacaoProdutos.getModel();
@@ -281,7 +292,6 @@ public class Telas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(29, 29, 29));
-        setPreferredSize(new java.awt.Dimension(1200, 700));
         setSize(new java.awt.Dimension(1280, 720));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -708,7 +718,7 @@ public class Telas extends javax.swing.JFrame {
 
         lbDoacaoIdDoacao.setText("Código");
 
-        tfDoacaoIdDoacao.setEditable(false);
+        tfDoacaoIdDoacao.setEnabled(false);
 
         btDoacaoBuscarDoacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btDoacaoBuscarDoacao.setMargin(new java.awt.Insets(1, 1, 1, 1));
@@ -720,13 +730,14 @@ public class Telas extends javax.swing.JFrame {
 
         lbDoacaoDoador.setText("Doador");
 
-        tfDoacaoIdDoador.setEditable(false);
+        tfDoacaoIdDoador.setEnabled(false);
         tfDoacaoIdDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDoacaoIdDoadorActionPerformed(evt);
             }
         });
 
+        tfDoacaoDoador.setEnabled(false);
         tfDoacaoDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDoacaoDoadorActionPerformed(evt);
@@ -735,6 +746,11 @@ public class Telas extends javax.swing.JFrame {
 
         btDoacaoBuscarDoador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btDoacaoBuscarDoador.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btDoacaoBuscarDoador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoBuscarDoadorActionPerformed(evt);
+            }
+        });
 
         lbDoacaoTipo.setText("Tipo");
 
@@ -767,6 +783,11 @@ public class Telas extends javax.swing.JFrame {
         jScrollPane2.setViewportView(taDoacaoObservacao);
 
         btDoacaoRecibo.setText("Gerar Recibo");
+        btDoacaoRecibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoReciboActionPerformed(evt);
+            }
+        });
 
         btDoacaoDeletar.setText("Deletar");
         btDoacaoDeletar.addActionListener(new java.awt.event.ActionListener() {
@@ -860,6 +881,7 @@ public class Telas extends javax.swing.JFrame {
 
         lbDoacaoSelecionarProd.setText("Descrição");
 
+        tfDoacaoSelecionarProd.setEnabled(false);
         tfDoacaoSelecionarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDoacaoSelecionarProdActionPerformed(evt);
@@ -916,8 +938,18 @@ public class Telas extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tableDoacaoProdutos);
 
         btDoacaoAltProd.setText("Alterar");
+        btDoacaoAltProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoAltProdActionPerformed(evt);
+            }
+        });
 
         btDoacaoDelProd.setText("Deletar");
+        btDoacaoDelProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoDelProdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnListBoxProdLayout = new javax.swing.GroupLayout(pnListBoxProd);
         pnListBoxProd.setLayout(pnListBoxProdLayout);
@@ -997,6 +1029,11 @@ public class Telas extends javax.swing.JFrame {
 
         btDoacaoRegistrarDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoRegistrarDoacao.setText("Registrar Doação");
+        btDoacaoRegistrarDoacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoRegistrarDoacaoActionPerformed(evt);
+            }
+        });
 
         btDoacaoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoLimpar.setText("Limpar");
@@ -1008,9 +1045,19 @@ public class Telas extends javax.swing.JFrame {
 
         btDoacaoRelatorio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoRelatorio.setText("Relatório");
+        btDoacaoRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoRelatorioActionPerformed(evt);
+            }
+        });
 
         btDoacaoVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoVoltar.setText("Sair");
+        btDoacaoVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnCadastrarDoacaoLayout = new javax.swing.GroupLayout(pnCadastrarDoacao);
         pnCadastrarDoacao.setLayout(pnCadastrarDoacaoLayout);
@@ -1907,6 +1954,12 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btRelPedidoSalvar.setText("Salvar Relatório");
+
+        btRelPedidoLimpar.setText("Limpar");
+
+        btRelPedVoltar.setText("Voltar");
+
         javax.swing.GroupLayout pnRelPedResultadoLayout = new javax.swing.GroupLayout(pnRelPedResultado);
         pnRelPedResultado.setLayout(pnRelPedResultadoLayout);
         pnRelPedResultadoLayout.setHorizontalGroup(
@@ -1919,7 +1972,13 @@ public class Telas extends javax.swing.JFrame {
                         .addComponent(jpRelPedTotStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpRelPedTotMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(166, 166, 166)
+                        .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btRelPedVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnRelPedResultadoLayout.setVerticalGroup(
@@ -1929,20 +1988,19 @@ public class Telas extends javax.swing.JFrame {
                 .addComponent(spRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jpRelPedTotMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnRelPedResultadoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jpRelPedTotStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpRelPedTotStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedResultadoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnRelPedResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btRelPedVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jpRelPedTotMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
-
-        btRelPedidoSalvar.setText("Salvar Relatório");
-
-        btRelPedidoLimpar.setText("Limpar");
-
-        btRelPedVoltar.setText("Voltar");
 
         javax.swing.GroupLayout pnRelPedLayout = new javax.swing.GroupLayout(pnRelPed);
         pnRelPed.setLayout(pnRelPedLayout);
@@ -1950,32 +2008,21 @@ public class Telas extends javax.swing.JFrame {
             pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelPedLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnRelPedFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 1185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnRelPedResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btRelPedVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnRelPedFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 1185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnRelPedLayout.setVerticalGroup(
             pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelPedLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(pnRelPedFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnRelPedResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRelPedVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnRelatorioPedidoLayout = new javax.swing.GroupLayout(pnRelatorioPedido);
@@ -1991,8 +2038,8 @@ public class Telas extends javax.swing.JFrame {
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelatorioPedidoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -2307,6 +2354,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void menuDoacaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDoacaoCadastrarActionPerformed
         cl.show(pnCard, "cdCadastrarDoacao");
+        acaoTelaDoacao = true;
     }//GEN-LAST:event_menuDoacaoCadastrarActionPerformed
 
     private void menuPedidoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPedidoCadastrarActionPerformed
@@ -2342,7 +2390,22 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDoacaoValorActionPerformed
 
     private void btDoacaoAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAddProdActionPerformed
-        // TODO add your handling code here:
+        int quantidade = Integer.parseInt(tfDoacaoQuantidade.getText());
+        String descricao = tfDoacaoSelecionarProd.getText();
+        if(acaoTelaDoacao){
+            Produto produto = buscarProduto.getProduto();
+            System.out.println(produto.getNome() + produto.getTipo());
+            Object[] linha = {produto.getTipo(), descricao, quantidade};
+            modeloTabela.addRow(linha);
+        }else{
+            Doacao doacao = buscarDoacao.getDoacao();
+            for(Produto produto : doacao.getProduto()){
+                if(descricao.equals(produto.getNome())){
+                    produtoController.atualizaProduto(quantidade, produto.getId());
+                }
+            }
+            modeloTabela.setValueAt(quantidade, indiceTabelaProduto, 2);
+        }
     }//GEN-LAST:event_btDoacaoAddProdActionPerformed
 
     private void tfDoacaoQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDoacaoQuantidadeActionPerformed
@@ -2374,7 +2437,8 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_menuRelatorioPedidoActionPerformed
 
     private void btDoacaoBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarProdActionPerformed
-        // TODO add your handling code here:
+        buscarProduto.setLocationRelativeTo(this);
+        buscarProduto.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarProdActionPerformed
 
     private void tfDoacaoSelecionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDoacaoSelecionarProdActionPerformed
@@ -2386,6 +2450,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_menuInicioMouseClicked
 
     private void btDoacaoBuscarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoacaoActionPerformed
+        acaoTelaDoacao = false;
         buscarDoacao.setLocationRelativeTo(this);
         buscarDoacao.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarDoacaoActionPerformed
@@ -2393,6 +2458,7 @@ public class Telas extends javax.swing.JFrame {
     private void tableDoacaoProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDoacaoProdutosMouseClicked
         int linhaSelecionada = tableDoacaoProdutos.getSelectedRow();
         if(linhaSelecionada != -1){
+            indiceTabelaProduto = linhaSelecionada;
             Object descricao = tableDoacaoProdutos.getValueAt(linhaSelecionada, 1);
             Object quantidade = tableDoacaoProdutos.getValueAt(linhaSelecionada, 2);
             tfDoacaoSelecionarProd.setText(descricao.toString());
@@ -2412,6 +2478,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void btDoacaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoLimparActionPerformed
         limparCamposCadastroDoacao();
+        destravaCamposDoacao();
     }//GEN-LAST:event_btDoacaoLimparActionPerformed
 
     private void cbRelPedTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedTipoActionPerformed
@@ -2421,9 +2488,52 @@ public class Telas extends javax.swing.JFrame {
     private void cbRelPedStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedStatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbRelPedStatusActionPerformed
+
+    private void btDoacaoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoReciboActionPerformed
+        try{
+            relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao());
+            JOptionPane.showMessageDialog(rootPane, "Recibo gerado.", "Concluído", JOptionPane.INFORMATION_MESSAGE);
+        }catch(IOException e){
+            
+        }
+    }//GEN-LAST:event_btDoacaoReciboActionPerformed
+
+    private void btDoacaoAltProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAltProdActionPerformed
+        tfDoacaoQuantidade.setEnabled(true);        
+    }//GEN-LAST:event_btDoacaoAltProdActionPerformed
+
+    private void btDoacaoDelProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDelProdActionPerformed
+        String descricao = tfDoacaoSelecionarProd.getText();
+        Doacao doacao = buscarDoacao.getDoacao();
+        for(Produto produto : doacao.getProduto()){
+            if(descricao.equals(produto.getNome())){
+                if(produtoController.deletaProduto(produto.getId())){
+                    modeloTabela.removeRow(indiceTabelaProduto);
+                }else{
+                JOptionPane.showMessageDialog(rootPane, "Erro ao deletar produto.", "Remoção", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btDoacaoDelProdActionPerformed
+
+    private void btDoacaoRegistrarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRegistrarDoacaoActionPerformed
+        
+    }//GEN-LAST:event_btDoacaoRegistrarDoacaoActionPerformed
+
+    private void btDoacaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoVoltarActionPerformed
+        cl.show(pnCard, "cdHome");
+        limparCamposCadastroDoacao();
+    }//GEN-LAST:event_btDoacaoVoltarActionPerformed
+
+    private void btDoacaoBuscarDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoadorActionPerformed
+        
+    }//GEN-LAST:event_btDoacaoBuscarDoadorActionPerformed
+
+    private void btDoacaoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRelatorioActionPerformed
+        
+    }//GEN-LAST:event_btDoacaoRelatorioActionPerformed
     
     public void preencheDoacao(Doacao doacao){
-        List<Produto> produtos = doacaoController.listagemDeProduto(doacao);
         tfDoacaoIdDoacao.setText(String.valueOf(doacao.getId()));
         tfDoacaoIdDoador.setText(String.valueOf(doacao.getDoador().getId()));
         tfDoacaoDoador.setText(doacao.getDoador().getNome());
@@ -2435,19 +2545,11 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoValor.setValue(doacao.getValor());
         taDoacaoObservacao.setText(doacao.getObservacao());
         modeloTabela.setRowCount(0);
-        for(Produto prod : produtos){
+        for(Produto prod : doacao.getProduto()){
             Object[] linha = {prod.getTipo(), prod.getNome(), prod.getQuantidade()};
             modeloTabela.addRow(linha);
         }
-        tfDoacaoSelecionarProd.setEnabled(false);
-        tfDoacaoQuantidade.setEnabled(false);
-        tfDoacaoIdDoacao.setEnabled(false);
-        tfDoacaoIdDoador.setEnabled(false);
-        tfDoacaoDoador.setEnabled(false);
-        ftDoacaoData.setEnabled(false);
-        cbDoacaoTipo.setEnabled(false);
-        tfDoacaoValor.setEnabled(false);
-        taDoacaoObservacao.setEnabled(false);
+        travaCamposDoacao();
     }
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
         campo.setEnabled(true);
@@ -2461,6 +2563,10 @@ public class Telas extends javax.swing.JFrame {
         }
     }
     
+    public void preencheProdutoDoacao(Produto produto){
+        tfDoacaoSelecionarProd.setText(produto.getNome());
+    }
+    
     public void carregarCidade() throws SQLException{
         cbEnderecoCidade.removeAllItems();
         Cidade cidadePadrao = new Cidade("Selecione...", null);
@@ -2469,6 +2575,27 @@ public class Telas extends javax.swing.JFrame {
         for(Cidade cidade : puxarCidade){
             cbEnderecoCidade.addItem(cidade);
         }
+    }
+    
+    public void travaCamposDoacao(){
+        tfDoacaoSelecionarProd.setEnabled(false);
+        tfDoacaoQuantidade.setEnabled(false);
+        tfDoacaoIdDoacao.setEnabled(false);
+        tfDoacaoIdDoador.setEnabled(false);
+        tfDoacaoDoador.setEnabled(false);
+        ftDoacaoData.setEnabled(false);
+        cbDoacaoTipo.setEnabled(false);
+        tfDoacaoValor.setEnabled(false);
+        taDoacaoObservacao.setEnabled(false);
+    }
+    
+    public void destravaCamposDoacao(){
+        tfDoacaoQuantidade.setEnabled(true);
+        tfDoacaoDoador.setEnabled(true);
+        ftDoacaoData.setEnabled(true);
+        cbDoacaoTipo.setEnabled(true);
+        tfDoacaoValor.setEnabled(true);
+        taDoacaoObservacao.setEnabled(true);
     }
     
     public void limparcamposCadastroUsuario(){

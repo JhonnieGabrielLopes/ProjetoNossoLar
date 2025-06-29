@@ -101,9 +101,9 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
-                <StringItem index="0" value="Alimento"/>
-                <StringItem index="1" value="Limpeza"/>
-                <StringItem index="2" value="Outro"/>
+                <StringItem index="0" value="ALIMENTO"/>
+                <StringItem index="1" value="LIMPEZA"/>
+                <StringItem index="2" value="OUTRO"/>
               </StringArray>
             </Property>
           </Properties>
@@ -122,11 +122,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadProdCadastrarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btCadProdCancelar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadProdCancelarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
