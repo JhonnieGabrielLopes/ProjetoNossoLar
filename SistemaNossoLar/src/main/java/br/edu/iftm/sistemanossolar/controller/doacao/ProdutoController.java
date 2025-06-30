@@ -44,5 +44,12 @@ public class ProdutoController {
         log.registrarLog(1, "ProdutoController", "capturarNomeProduto", "produto", "Obtendo nome do produto");
         return produtoDAO.capturarNomeProduto(idProduto);
     }
-
+    
+    public boolean atualizaProduto(int quantidade, int idProduto){
+        return produtoDAO.atualizaProduto(quantidade, idProduto);
+    }
+    
+    public boolean deletaProduto(int idProduto){
+        return produtoDAO.deletaProduto(idProduto);
+    }
 }
