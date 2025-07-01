@@ -6,6 +6,7 @@ package br.edu.iftm.sistemanossolar.view;
 
 import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
     private Doacao doacao;
     private List<Doacao> listagem = new ArrayList<>();
     private DefaultTableModel modelo;
+    private List<Produto> produtos;
     /**
      * Creates new form BuscarPessoa
      */
@@ -355,6 +357,8 @@ public class BuscarDoacao extends javax.swing.JDialog {
     private void btBuscarDoacaoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarDoacaoSelecionarActionPerformed
         int indiceDoacao = tableBuscarPessoa.getSelectedRow();
         doacao = listagem.get(indiceDoacao);
+        produtos = doacaoController.listagemDeProduto(doacao);
+        doacao.setProduto(produtos);
         tela.preencheDoacao(doacao);
         dispose();
     }//GEN-LAST:event_btBuscarDoacaoSelecionarActionPerformed
@@ -369,6 +373,10 @@ public class BuscarDoacao extends javax.swing.JDialog {
             Object[] linha = {doacao.getId(), doacao.getDoador().getNome(), doacao.getTipo(), doacao.getDataDoacao()};
             modelo.addRow(linha);
         }
+    }
+    
+    public Doacao getDoacao(){
+        return doacao;
     }
     /**
      * @param args the command line arguments

@@ -220,7 +220,7 @@ public class DoacaoDAO {
         }
     }
     public List<Produto> listagemDeProduto(Doacao doacao){
-        String sql = "select p.tipoProduto, p.descricao, pd.quantidade from produto p join produtodoacao pd on p.id = pd.produto where pd.doacao = (?)";
+        String sql = "select p. id, p.tipoProduto, p.descricao, pd.quantidade from produto p join produtodoacao pd on p.id = pd.produto where pd.doacao = (?)";
         try(PreparedStatement stmt = conexaoBanco.prepareStatement(sql)){
             stmt.setInt(1, doacao.getId());
             ResultSet rs = stmt.executeQuery();
@@ -232,6 +232,7 @@ public class DoacaoDAO {
                     case "ALIMENTO": produto.setTipo(Produto.TipoProd.ALIMENTO);break;
                     case "LIMPEZA": produto.setTipo(Produto.TipoProd.LIMPEZA);break;
                 }
+                produto.setId(rs.getInt("id"));
                 produto.setNome(rs.getString("descricao"));
                 produto.setQuantidade(rs.getInt("quantidade"));
                 produtos.add(produto);

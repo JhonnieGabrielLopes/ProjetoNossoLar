@@ -281,11 +281,17 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Selecionar"/>
       </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarProdutoSelecionarActionPerformed"/>
+          </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btBuscarProdutoNovo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Novo"/>
       </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarProdutoNovoActionPerformed"/>
+          </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btBuscarProdutoLimpar">
       <Properties>

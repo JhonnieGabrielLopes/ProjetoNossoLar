@@ -8,6 +8,10 @@ import java.sql.Connection;
 
 import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto;
+import br.edu.iftm.sistemanossolar.model.doacao.Produto.TipoProd;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +27,6 @@ public class CadastroProduto extends javax.swing.JDialog {
         super(parent, modal);
         produtoController = new ProdutoController(conexao);
         this.tela = tela;
-        produtoController = new ProdutoController(conexao);
         initComponents();
     }
 
@@ -51,7 +54,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         lbCadProdTipo.setText("Tipo:");
 
         cbCadProdTipoProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbCadProdTipoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimento", "Limpeza", "Outro" }));
+        cbCadProdTipoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALIMENTO", "LIMPEZA", "OUTRO" }));
 
         lbCadProdProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbCadProdProduto.setText("Descrição:");
@@ -60,12 +63,21 @@ public class CadastroProduto extends javax.swing.JDialog {
 
         btCadProdSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadProdSalvar.setText("Salvar");
-
+        btCadProdSalvar.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        btCadProdSalvarActionPerformed(evt);
+                    }
+                });
         btCadProdLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadProdLimpar.setText("Limpar");
 
         btCadProdSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadProdSair.setText("Sair");
+        btCadProdSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadProdSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnCadastrarProdutoLayout = new javax.swing.GroupLayout(pnCadastrarProduto);
         pnCadastrarProduto.setLayout(pnCadastrarProdutoLayout);
@@ -126,6 +138,28 @@ public class CadastroProduto extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btCadProdSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btCadProdCancelarActionPerformed
+
+    private void btCadProdSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCadastrarActionPerformed
+        Produto produto = new Produto();
+        produto.setNome(tfCadProdProduto.getText());
+        if((String)cbCadProdTipoProduto.getSelectedItem() == "ALIMENTO"){
+            produto.setTipo(TipoProd.ALIMENTO);
+        }else if((String)cbCadProdTipoProduto.getSelectedItem() == "LIMPEZA"){
+            produto.setTipo(TipoProd.LIMPEZA);
+        }else if((String)cbCadProdTipoProduto.getSelectedItem() == "OUTRO"){
+            produto.setTipo(TipoProd.OUTRO);
+        }
+        try{
+            produtoController.cadastrarProduto(produto);
+            JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado", "Produto Cadstrado", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }catch(SQLException ex){
+        }
+    }//GEN-LAST:event_btCadProdCadastrarActionPerformed
 
     /**
      * @param args the command line arguments

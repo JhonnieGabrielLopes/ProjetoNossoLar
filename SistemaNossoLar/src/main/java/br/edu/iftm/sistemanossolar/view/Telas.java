@@ -4,7 +4,9 @@
  */
 package br.edu.iftm.sistemanossolar.view;
 
+import br.edu.iftm.sistemanossolar.controller.RelatorioController;
 import br.edu.iftm.sistemanossolar.controller.doacao.DoacaoController;
+import br.edu.iftm.sistemanossolar.controller.doacao.ProdutoController;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import java.awt.CardLayout;
 import java.sql.Connection;
@@ -18,6 +20,7 @@ import javax.swing.text.MaskFormatter;
 
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.PacienteController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
@@ -25,6 +28,7 @@ import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
@@ -40,11 +44,18 @@ public class Telas extends javax.swing.JFrame {
     private static CadastroCidade cadastroCidade;
     private static CadastroProduto cadastroProduto;
     private static BuscarPessoa buscarPessoa;
+    private static BuscarDoacao buscarDoacao;
+    private static BuscarProduto buscarProduto;
     private static DoacaoController doacaoController;
+    private static ProdutoController produtoController;
     private static PessoaController pessoaController;
     private static EnderecoController enderecoController;
-    private static BuscarDoacao buscarDoacao;
+    private static RelatorioController relatorioController;
     private DefaultTableModel modeloTabela;
+    private int indiceTabelaProduto;
+    private boolean acaoTelaDoacao = true;
+    private Pessoa pessoaAntiga;
+    private PacienteController pacienteController;
 
     /**
      * Creates new form Telas lb - Label tf - TextField ta - TextArea ff -
@@ -55,13 +66,17 @@ public class Telas extends javax.swing.JFrame {
         pessoaController = new PessoaController(conexao);
         enderecoController = new EnderecoController(conexao);
         doacaoController = new DoacaoController(conexao);
+        relatorioController = new RelatorioController(conexao);
+        produtoController = new ProdutoController(conexao);
         cadastroCidade = new CadastroCidade(this, true, conexao, this);
         cadastroProduto = new CadastroProduto(this, true, conexao, this);
         buscarPessoa = new BuscarPessoa(this, true, conexao, this);
         buscarDoacao = new BuscarDoacao(this, true, conexao, this);
+        buscarProduto = new BuscarProduto(this, true, conexao, this);
         initComponents();
         cl = (CardLayout) pnCard.getLayout();
         modeloTabela = (DefaultTableModel) tableDoacaoProdutos.getModel();
+        pacienteController = new PacienteController(conexao);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -95,15 +110,15 @@ public class Telas extends javax.swing.JFrame {
         lbTelefone = new javax.swing.JLabel();
         lbNomePaciente = new javax.swing.JLabel();
         tfNomePaciente = new javax.swing.JTextField();
-        lbNomePaciente1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbTempo = new javax.swing.JLabel();
+        lbLocalInternacao = new javax.swing.JLabel();
         cbLocalInternacao = new javax.swing.JComboBox<>();
         jsQtdDias = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         cbTipoUsuario = new javax.swing.JComboBox<>();
-        tfDoacaoIdDoacao1 = new javax.swing.JTextField();
-        lbNome1 = new javax.swing.JLabel();
-        btDoacaoBuscarDoacao1 = new javax.swing.JButton();
+        tfCodigoPessoa = new javax.swing.JTextField();
+        lbCodigoPessoa = new javax.swing.JLabel();
+        btBuscarPessoa = new javax.swing.JButton();
         lbEmail = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
         lbPessoaTipo = new javax.swing.JLabel();
@@ -111,7 +126,7 @@ public class Telas extends javax.swing.JFrame {
         rbPessoaJuridica = new javax.swing.JRadioButton();
         lbDocumento = new javax.swing.JLabel();
         ffDocumento = new javax.swing.JFormattedTextField();
-        lbNomePaciente2 = new javax.swing.JLabel();
+        lbDias = new javax.swing.JLabel();
         btCadastroPessoaLimpar = new javax.swing.JButton();
         btCadastroPessoaSalvar = new javax.swing.JButton();
         btCadastroPessoaSair = new javax.swing.JButton();
@@ -142,19 +157,19 @@ public class Telas extends javax.swing.JFrame {
         pnDoacaoProduto = new javax.swing.JPanel();
         lbDoacaoSelecionarProd = new javax.swing.JLabel();
         lbDoacaoQuantidade = new javax.swing.JLabel();
+        tfDoacaoSelecionarProd = new javax.swing.JTextField();
+        btDoacaoBuscarProd = new javax.swing.JButton();
         jsDoacaoQuantidadeProduto = new javax.swing.JSpinner();
         btDoacaoAddProd = new javax.swing.JButton();
         pnListBoxProd = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableDoacaoProdutos = new javax.swing.JTable();
-        tfDoacaoSelecionarProd = new javax.swing.JTextField();
-        btDoacaoBuscarProd = new javax.swing.JButton();
         btDoacaoAltProd = new javax.swing.JButton();
         btDoacaoDelProd = new javax.swing.JButton();
         btDoacaoRegistrarDoacao = new javax.swing.JButton();
         btDoacaoLimpar = new javax.swing.JButton();
         btDoacaoRelatorio = new javax.swing.JButton();
-        btDoacaoVoltar = new javax.swing.JButton();
+        btDoacaoSair = new javax.swing.JButton();
         pnCadastrarPedido = new javax.swing.JPanel();
         pnPedido = new javax.swing.JPanel();
         tfPedidoCliente = new javax.swing.JTextField();
@@ -167,10 +182,10 @@ public class Telas extends javax.swing.JFrame {
         lbPedidoStatus = new javax.swing.JLabel();
         tfPedidoIdPedido = new javax.swing.JTextField();
         lbPedidoIdPedido = new javax.swing.JLabel();
-        tfPedidoIdPedido1 = new javax.swing.JTextField();
+        tfPedidoIdCliente = new javax.swing.JTextField();
         btPedidoBuscarCliente = new javax.swing.JButton();
         btPedidoBuscarPedido = new javax.swing.JButton();
-        jSpinner4 = new javax.swing.JSpinner();
+        jsQtdMarmitas = new javax.swing.JSpinner();
         lbPedidoDtPedido = new javax.swing.JLabel();
         lbPedidoDtEntrega = new javax.swing.JLabel();
         ffPedidoDtPedido = new javax.swing.JFormattedTextField();
@@ -200,8 +215,8 @@ public class Telas extends javax.swing.JFrame {
         lbRelDoaTpProduto = new javax.swing.JLabel();
         cbRelDoaTpProduto = new javax.swing.JComboBox<>();
         btRelDoaFiltrar = new javax.swing.JButton();
-        btPedidoBuscarCliente1 = new javax.swing.JButton();
-        btPedidoBuscarCliente2 = new javax.swing.JButton();
+        btRelBuscarDoador = new javax.swing.JButton();
+        btRelBuscarProduto = new javax.swing.JButton();
         pnRelResultado = new javax.swing.JPanel();
         spRelResultado = new javax.swing.JScrollPane();
         tableRelatorioDoacao = new javax.swing.JTable();
@@ -264,9 +279,6 @@ public class Telas extends javax.swing.JFrame {
         menuDoacaoCadastrar = new javax.swing.JMenuItem();
         menuPedido = new javax.swing.JMenu();
         menuPedidoCadastrar = new javax.swing.JMenuItem();
-        menuRelatorio = new javax.swing.JMenu();
-        menuRelatorioDoacao = new javax.swing.JMenuItem();
-        menuRelatorioPedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(29, 29, 29));
@@ -276,6 +288,8 @@ public class Telas extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+
+        pnDadosPrincipal.setPreferredSize(new java.awt.Dimension(1200, 700));
 
         pnCard.setLayout(new java.awt.CardLayout());
 
@@ -450,14 +464,14 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        lbNomePaciente1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbNomePaciente1.setText("Tempo:");
+        lbTempo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbTempo.setText("Tempo:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Local de Internação:");
+        lbLocalInternacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbLocalInternacao.setText("Local de Internação:");
 
         cbLocalInternacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", " " }));
+        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", "" }));
         cbLocalInternacao.setEnabled(false);
 
         jsQtdDias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -475,17 +489,17 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        tfDoacaoIdDoacao1.setEditable(false);
-        tfDoacaoIdDoacao1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfCodigoPessoa.setEditable(false);
+        tfCodigoPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbNome1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbNome1.setText("Código:");
+        lbCodigoPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbCodigoPessoa.setText("Código:");
 
-        btDoacaoBuscarDoacao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
-        btDoacaoBuscarDoacao1.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        btDoacaoBuscarDoacao1.addActionListener(new java.awt.event.ActionListener() {
+        btBuscarPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btBuscarPessoa.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btBuscarPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDoacaoBuscarDoacao1ActionPerformed(evt);
+                btBuscarPessoaActionPerformed(evt);
             }
         });
 
@@ -521,8 +535,8 @@ public class Telas extends javax.swing.JFrame {
         ffDocumento.setEnabled(false);
         ffDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbNomePaciente2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbNomePaciente2.setText("Dias");
+        lbDias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbDias.setText("Dias");
 
         javax.swing.GroupLayout pnPessoaClienteLayout = new javax.swing.GroupLayout(pnPessoaCliente);
         pnPessoaCliente.setLayout(pnPessoaClienteLayout);
@@ -551,21 +565,21 @@ public class Telas extends javax.swing.JFrame {
                         .addGroup(pnPessoaClienteLayout.createSequentialGroup()
                             .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))
+                                .addComponent(lbLocalInternacao))
                             .addGap(18, 18, 18)
                             .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(pnPessoaClienteLayout.createSequentialGroup()
                                     .addComponent(jsQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lbNomePaciente2))
-                                .addComponent(lbNomePaciente1)))
+                                    .addComponent(lbDias))
+                                .addComponent(lbTempo)))
                         .addGroup(pnPessoaClienteLayout.createSequentialGroup()
                             .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(pnPessoaClienteLayout.createSequentialGroup()
-                                    .addComponent(tfDoacaoIdDoacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfCodigoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btDoacaoBuscarDoacao1))
-                                .addComponent(lbNome1))
+                                    .addComponent(btBuscarPessoa))
+                                .addComponent(lbCodigoPessoa))
                             .addGap(18, 18, 18)
                             .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
@@ -578,11 +592,11 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE)
                 .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPessoaClienteLayout.createSequentialGroup()
-                        .addComponent(lbNome1)
+                        .addComponent(lbCodigoPessoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfDoacaoIdDoacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btDoacaoBuscarDoacao1)))
+                            .addComponent(tfCodigoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btBuscarPessoa)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPessoaClienteLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -598,15 +612,15 @@ public class Telas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnPessoaClienteLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lbLocalInternacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbLocalInternacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnPessoaClienteLayout.createSequentialGroup()
-                        .addComponent(lbNomePaciente1)
+                        .addComponent(lbTempo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnPessoaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jsQtdDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbNomePaciente2))))
+                            .addComponent(lbDias))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNomePaciente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -678,29 +692,30 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbObservacao)
-                            .addComponent(jScrollPane1)
-                            .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(141, Short.MAX_VALUE))
+                            .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         pnCadastroPessoaLayout.setVerticalGroup(
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
-                        .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbObservacao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnCadastroPessoaLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addComponent(pnPessoaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btCadastroPessoaSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btCadastroPessoaLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btCadastroPessoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(119, Short.MAX_VALUE))
+                            .addComponent(btCadastroPessoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnCadastroPessoaLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbObservacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastroPessoa, "beneficiario");
@@ -710,14 +725,14 @@ public class Telas extends javax.swing.JFrame {
         lbDoacaoIdDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDoacaoIdDoacao.setText("Código:");
 
-        tfDoacaoIdDoacao.setEditable(false);
         tfDoacaoIdDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDoacaoIdDoacao.setEnabled(false);
 
         lbDoacaoDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDoacaoDoador.setText("Doador:");
 
-        tfDoacaoIdDoador.setEditable(false);
         tfDoacaoIdDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDoacaoIdDoador.setEnabled(false);
         tfDoacaoIdDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDoacaoIdDoadorActionPerformed(evt);
@@ -725,6 +740,7 @@ public class Telas extends javax.swing.JFrame {
         });
 
         tfDoacaoDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDoacaoDoador.setEnabled(false);
         tfDoacaoDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDoacaoDoadorActionPerformed(evt);
@@ -800,6 +816,11 @@ public class Telas extends javax.swing.JFrame {
 
         btDoacaoBuscarDoador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btDoacaoBuscarDoador.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btDoacaoBuscarDoador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoBuscarDoadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnDoacaoLayout = new javax.swing.GroupLayout(pnDoacao);
         pnDoacao.setLayout(pnDoacaoLayout);
@@ -891,7 +912,7 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btDoacaoDeletar)
                     .addComponent(btDoacaoRecibo))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnDoacaoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
@@ -901,6 +922,16 @@ public class Telas extends javax.swing.JFrame {
 
         lbDoacaoQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDoacaoQuantidade.setText("Quantidade:");
+
+        tfDoacaoSelecionarProd.setEnabled(false);
+
+        btDoacaoBuscarProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btDoacaoBuscarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btDoacaoBuscarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoBuscarProdActionPerformed1(evt);
+            }
+        });
 
         jsDoacaoQuantidadeProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jsDoacaoQuantidadeProduto.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
@@ -958,26 +989,21 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tfDoacaoSelecionarProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfDoacaoSelecionarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDoacaoSelecionarProdActionPerformed(evt);
-            }
-        });
-
-        btDoacaoBuscarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
-        btDoacaoBuscarProd.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        btDoacaoBuscarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDoacaoBuscarProdActionPerformed(evt);
-            }
-        });
-
         btDoacaoAltProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoAltProd.setText("Alterar");
+        btDoacaoAltProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoAltProdActionPerformed(evt);
+            }
+        });
 
         btDoacaoDelProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoDelProd.setText("Deletar");
+        btDoacaoDelProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoDelProdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnDoacaoProdutoLayout = new javax.swing.GroupLayout(pnDoacaoProduto);
         pnDoacaoProduto.setLayout(pnDoacaoProdutoLayout);
@@ -1040,6 +1066,11 @@ public class Telas extends javax.swing.JFrame {
 
         btDoacaoRegistrarDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoRegistrarDoacao.setText("Salvar");
+        btDoacaoRegistrarDoacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoRegistrarDoacaoActionPerformed(evt);
+            }
+        });
 
         btDoacaoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoLimpar.setText("Limpar");
@@ -1051,9 +1082,19 @@ public class Telas extends javax.swing.JFrame {
 
         btDoacaoRelatorio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDoacaoRelatorio.setText("Relatório");
+        btDoacaoRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoRelatorioActionPerformed(evt);
+            }
+        });
 
-        btDoacaoVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btDoacaoVoltar.setText("Sair");
+        btDoacaoSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btDoacaoSair.setText("Sair");
+        btDoacaoSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoacaoSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnCadastrarDoacaoLayout = new javax.swing.GroupLayout(pnCadastrarDoacao);
         pnCadastrarDoacao.setLayout(pnCadastrarDoacaoLayout);
@@ -1064,7 +1105,7 @@ public class Telas extends javax.swing.JFrame {
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
                         .addComponent(pnDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGap(72, 72, 72)
                         .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
                         .addComponent(btDoacaoRegistrarDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1073,23 +1114,23 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btDoacaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25))
+                        .addComponent(btDoacaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(91, 91, 91))
         );
         pnCadastrarDoacaoLayout.setVerticalGroup(
             pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastrarDoacaoLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 517, Short.MAX_VALUE)
+                    .addComponent(pnDoacaoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnDoacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pnCadastrarDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btDoacaoRegistrarDoacao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDoacaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(137, Short.MAX_VALUE))
+                    .addComponent(btDoacaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarDoacao, "cdCadastrarDoacao");
@@ -1130,8 +1171,8 @@ public class Telas extends javax.swing.JFrame {
         lbPedidoIdPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbPedidoIdPedido.setText("Código:");
 
-        tfPedidoIdPedido1.setEditable(false);
-        tfPedidoIdPedido1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfPedidoIdCliente.setEditable(false);
+        tfPedidoIdCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btPedidoBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btPedidoBuscarCliente.setMargin(new java.awt.Insets(1, 1, 1, 1));
@@ -1149,9 +1190,9 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
-        jSpinner4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        jSpinner4.setToolTipText("");
+        jsQtdMarmitas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jsQtdMarmitas.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsQtdMarmitas.setToolTipText("");
 
         lbPedidoDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbPedidoDtPedido.setText("Data do Pedido:");
@@ -1207,7 +1248,7 @@ public class Telas extends javax.swing.JFrame {
                     .addGroup(pnPedidoLayout.createSequentialGroup()
                         .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnPedidoLayout.createSequentialGroup()
-                                .addComponent(tfPedidoIdPedido1)
+                                .addComponent(tfPedidoIdCliente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1226,7 +1267,7 @@ public class Telas extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnPedidoLayout.createSequentialGroup()
                                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbPedidoQtdMarmitas)
-                                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jsQtdMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lbPedidoDtPedido)
@@ -1260,7 +1301,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btPedidoBuscarCliente)
                     .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tfPedidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfPedidoIdPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfPedidoIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(pnPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbPedidoDtEntrega)
@@ -1273,7 +1314,7 @@ public class Telas extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPedidoLayout.createSequentialGroup()
                         .addComponent(lbPedidoQtdMarmitas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jsQtdMarmitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(lbPedidoObservacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1303,9 +1344,19 @@ public class Telas extends javax.swing.JFrame {
 
         btPedidoSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btPedidoSair.setText("Sair");
+        btPedidoSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoSairActionPerformed(evt);
+            }
+        });
 
         btPedidoRelatorio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btPedidoRelatorio.setText("Relatório");
+        btPedidoRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoRelatorioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnCadastrarPedidoLayout = new javax.swing.GroupLayout(pnCadastrarPedido);
         pnCadastrarPedido.setLayout(pnCadastrarPedidoLayout);
@@ -1323,7 +1374,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(595, Short.MAX_VALUE))
+                .addContainerGap(684, Short.MAX_VALUE))
         );
         pnCadastrarPedidoLayout.setVerticalGroup(
             pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1398,20 +1449,25 @@ public class Telas extends javax.swing.JFrame {
 
         btRelDoaFiltrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelDoaFiltrar.setText("Filtrar");
-
-        btPedidoBuscarCliente1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
-        btPedidoBuscarCliente1.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        btPedidoBuscarCliente1.addActionListener(new java.awt.event.ActionListener() {
+        btRelDoaFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPedidoBuscarCliente1ActionPerformed(evt);
+                btRelDoaFiltrarActionPerformed(evt);
             }
         });
 
-        btPedidoBuscarCliente2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
-        btPedidoBuscarCliente2.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        btPedidoBuscarCliente2.addActionListener(new java.awt.event.ActionListener() {
+        btRelBuscarDoador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btRelBuscarDoador.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btRelBuscarDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPedidoBuscarCliente2ActionPerformed(evt);
+                btRelBuscarDoadorActionPerformed(evt);
+            }
+        });
+
+        btRelBuscarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
+        btRelBuscarProduto.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btRelBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelBuscarProdutoActionPerformed(evt);
             }
         });
 
@@ -1446,7 +1502,7 @@ public class Telas extends javax.swing.JFrame {
                             .addGroup(pnRelFiltrosLayout.createSequentialGroup()
                                 .addComponent(tfRelDoaProd, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btPedidoBuscarCliente2))
+                                .addComponent(btRelBuscarProduto))
                             .addGroup(pnRelFiltrosLayout.createSequentialGroup()
                                 .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
@@ -1454,7 +1510,7 @@ public class Telas extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(tfRelDoaDoador))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btPedidoBuscarCliente1)))
+                                .addComponent(btRelBuscarDoador)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnRelFiltrosLayout.createSequentialGroup()
@@ -1488,7 +1544,7 @@ public class Telas extends javax.swing.JFrame {
                         .addComponent(lbRelDoaDoador)
                         .addGap(32, 32, 32))
                     .addComponent(tfRelDoaDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPedidoBuscarCliente1))
+                    .addComponent(btRelBuscarDoador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelFiltrosLayout.createSequentialGroup()
@@ -1506,7 +1562,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGroup(pnRelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btRelDoaFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbRelDoaTpProduto)))
-                    .addComponent(btPedidoBuscarCliente2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btRelBuscarProduto, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(15, 15, 15))
         );
 
@@ -1629,7 +1685,7 @@ public class Telas extends javax.swing.JFrame {
         pnRelDoaLayout.setVerticalGroup(
             pnRelDoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelDoaLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(pnRelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnRelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1638,12 +1694,27 @@ public class Telas extends javax.swing.JFrame {
 
         btRelDoacaoSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelDoacaoSalvar.setText("Salvar");
+        btRelDoacaoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelDoacaoSalvarActionPerformed(evt);
+            }
+        });
 
         btRelDoacaoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelDoacaoLimpar.setText("Limpar");
+        btRelDoacaoLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelDoacaoLimparActionPerformed(evt);
+            }
+        });
 
         btRelDoaSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelDoaSair.setText("Sair");
+        btRelDoaSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelDoaSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnRelatorioDoacaoLayout = new javax.swing.GroupLayout(pnRelatorioDoacao);
         pnRelatorioDoacao.setLayout(pnRelatorioDoacaoLayout);
@@ -1659,7 +1730,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btRelDoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         pnRelatorioDoacaoLayout.setVerticalGroup(
             pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1768,6 +1839,11 @@ public class Telas extends javax.swing.JFrame {
 
         btRelPedFiltrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelPedFiltrar.setText("Filtrar");
+        btRelPedFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelPedFiltrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnRelPedFiltrosLayout = new javax.swing.GroupLayout(pnRelPedFiltros);
         pnRelPedFiltros.setLayout(pnRelPedFiltrosLayout);
@@ -1776,7 +1852,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfRelPedDtPedidoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                    .addComponent(tfRelPedDtPedidoInicio)
                     .addComponent(lbRelPedDtPedidoInicio)
                     .addComponent(lbRelPedDtEntregaInicio)
                     .addComponent(tfRelPedDtEntregaInicio))
@@ -2048,7 +2124,7 @@ public class Telas extends javax.swing.JFrame {
         pnRelPedLayout.setVerticalGroup(
             pnRelPedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRelPedLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(pnRelPedFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnRelPedResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2057,12 +2133,27 @@ public class Telas extends javax.swing.JFrame {
 
         btRelPedidoSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelPedidoSalvar.setText("Salvar");
+        btRelPedidoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelPedidoSalvarActionPerformed(evt);
+            }
+        });
 
         btRelPedidoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelPedidoLimpar.setText("Limpar");
+        btRelPedidoLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelPedidoLimparActionPerformed(evt);
+            }
+        });
 
         btRelPedidoSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btRelPedidoSair.setText("Sair");
+        btRelPedidoSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelPedidoSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnRelatorioPedidoLayout = new javax.swing.GroupLayout(pnRelatorioPedido);
         pnRelatorioPedido.setLayout(pnRelatorioPedidoLayout);
@@ -2078,7 +2169,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
         pnRelatorioPedidoLayout.setVerticalGroup(
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2104,14 +2195,14 @@ public class Telas extends javax.swing.JFrame {
         pnHomeLayout.setHorizontalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHomeLayout.createSequentialGroup()
-                .addContainerGap(386, Short.MAX_VALUE)
+                .addContainerGap(431, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(326, 326, 326))
+                .addContainerGap(389, Short.MAX_VALUE))
         );
         pnHomeLayout.setVerticalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnHomeLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(85, 85, 85)
                 .addComponent(jLabel3)
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -2135,9 +2226,14 @@ public class Telas extends javax.swing.JFrame {
 
         getContentPane().add(pnDadosPrincipal, java.awt.BorderLayout.CENTER);
 
+        menuBarra.setBackground(new java.awt.Color(52, 52, 52));
         menuBarra.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        menuBarra.setPreferredSize(new java.awt.Dimension(458, 50));
 
+        menuInicio.setBackground(new java.awt.Color(52, 52, 52));
+        menuInicio.setForeground(new java.awt.Color(255, 255, 255));
         menuInicio.setText("Inicio");
+        menuInicio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         menuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuInicioMouseClicked(evt);
@@ -2145,8 +2241,14 @@ public class Telas extends javax.swing.JFrame {
         });
         menuBarra.add(menuInicio);
 
+        menuPessoa.setBackground(new java.awt.Color(52, 52, 52));
+        menuPessoa.setForeground(new java.awt.Color(255, 255, 255));
         menuPessoa.setText("Pessoa");
+        menuPessoa.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        menuPessoaCadastrar.setBackground(new java.awt.Color(52, 52, 52));
+        menuPessoaCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuPessoaCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         menuPessoaCadastrar.setText("Cadastrar");
         menuPessoaCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2157,8 +2259,14 @@ public class Telas extends javax.swing.JFrame {
 
         menuBarra.add(menuPessoa);
 
+        menuDoacao.setBackground(new java.awt.Color(52, 52, 52));
+        menuDoacao.setForeground(new java.awt.Color(255, 255, 255));
         menuDoacao.setText("Doação");
+        menuDoacao.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        menuDoacaoCadastrar.setBackground(new java.awt.Color(52, 52, 52));
+        menuDoacaoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuDoacaoCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         menuDoacaoCadastrar.setText("Cadastrar");
         menuDoacaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2169,8 +2277,14 @@ public class Telas extends javax.swing.JFrame {
 
         menuBarra.add(menuDoacao);
 
+        menuPedido.setBackground(new java.awt.Color(52, 52, 52));
+        menuPedido.setForeground(new java.awt.Color(255, 255, 255));
         menuPedido.setText("Pedido");
+        menuPedido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        menuPedidoCadastrar.setBackground(new java.awt.Color(52, 52, 52));
+        menuPedidoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuPedidoCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         menuPedidoCadastrar.setText("Cadastrar");
         menuPedidoCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2180,26 +2294,6 @@ public class Telas extends javax.swing.JFrame {
         menuPedido.add(menuPedidoCadastrar);
 
         menuBarra.add(menuPedido);
-
-        menuRelatorio.setText("Relatório");
-
-        menuRelatorioDoacao.setText("Doação");
-        menuRelatorioDoacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuRelatorioDoacaoActionPerformed(evt);
-            }
-        });
-        menuRelatorio.add(menuRelatorioDoacao);
-
-        menuRelatorioPedido.setText("Pedido");
-        menuRelatorioPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuRelatorioPedidoActionPerformed(evt);
-            }
-        });
-        menuRelatorio.add(menuRelatorioPedido);
-
-        menuBarra.add(menuRelatorio);
 
         setJMenuBar(menuBarra);
 
@@ -2297,12 +2391,9 @@ public class Telas extends javax.swing.JFrame {
         }
 
         novaPessoa = new Pessoa(tfNome.getText(), telefone, endereco);
-        try {
-            //if (tfQtdDias.getText() != null && !tfQtdDias.getText().trim().isEmpty()) {
-            //    paciente = new Paciente(tfNomePaciente.getText(), Integer.parseInt(tfQtdDias.getText()));
-            //}
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
+
+        if (tfNomePaciente.getText() != null && jsQtdDias.getValue() != null) {
+            paciente = new Paciente(tfNomePaciente.getText(), (Integer)jsQtdDias.getValue());
         }
 
         Object selected = cbTipoUsuario.getSelectedItem();
@@ -2326,12 +2417,12 @@ public class Telas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Selecione um tipo de usuário.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         switch (cbLocalInternacao.getSelectedIndex()) {
             case 0:
                 novaPessoa.setLocal(Pessoa.Local.HOSPITAL);
                 break;
-                
+
             case 1:
                 novaPessoa.setLocal(Pessoa.Local.PRONTOSOCORRO);
                 break;
@@ -2351,13 +2442,35 @@ public class Telas extends javax.swing.JFrame {
         novaPessoa.setPaciente(paciente);
 
         try {
-            enderecoController.cadastrarEndereco(endereco, cidadeEscolhida);
-            if (!pessoaController.cadastrarPessoa(novaPessoa, paciente)) {
-                JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar o Usuário", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+            if (tfCodigoPessoa.getText().equals("")) {
+                enderecoController.cadastrarEndereco(endereco, cidadeEscolhida);
+                if (!pessoaController.cadastrarPessoa(novaPessoa, paciente)) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar o Usuário", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar o Usuário", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                    limparcamposCadastroUsuario();
+                }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar o Usuário", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
-                limparcamposCadastroUsuario();
+                novaPessoa.setId(Integer.valueOf(tfCodigoPessoa.getText()));
+                if (!enderecoController.alterarEndereco(endereco, pessoaAntiga.getEnderecoId())) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o Endereço do usuário", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (!pacienteController.alterarPaciente(novaPessoa.getPaciente(), pessoaAntiga.getPaciente(), novaPessoa.getId())) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o paciente", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                novaPessoa.setEnderecoId(enderecoController.buscarIdEndereco(endereco, cidadeController.buscarIdCidade(new Cidade(endereco.getCidade().getNome(), endereco.getCidade().getEstado()))));
+                if (!pessoaController.alterarPessoa(novaPessoa)) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o Usuário", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(rootPane, "Sucesso ao Alterar o Usuário", "Sucesso ao Alterar", JOptionPane.INFORMATION_MESSAGE);
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -2395,6 +2508,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void menuDoacaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDoacaoCadastrarActionPerformed
         cl.show(pnCard, "cdCadastrarDoacao");
+        acaoTelaDoacao = true;
     }//GEN-LAST:event_menuDoacaoCadastrarActionPerformed
 
     private void menuPedidoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPedidoCadastrarActionPerformed
@@ -2418,7 +2532,22 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDoacaoValorActionPerformed
 
     private void btDoacaoAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAddProdActionPerformed
-        // TODO add your handling code here:
+        int quantidade = (int) jsDoacaoQuantidadeProduto.getValue();
+        String descricao = tfDoacaoSelecionarProd.getText();
+        if (acaoTelaDoacao) {
+            Produto produto = buscarProduto.getProduto();
+            System.out.println(produto.getNome() + produto.getTipo());
+            Object[] linha = {produto.getTipo(), descricao, quantidade};
+            modeloTabela.addRow(linha);
+        } else {
+            Doacao doacao = buscarDoacao.getDoacao();
+            for (Produto produto : doacao.getProduto()) {
+                if (descricao.equals(produto.getNome())) {
+                    produtoController.atualizaProduto(quantidade, produto.getId());
+                }
+            }
+            modeloTabela.setValueAt(quantidade, indiceTabelaProduto, 2);
+        }
     }//GEN-LAST:event_btDoacaoAddProdActionPerformed
 
     private void tfPedidoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPedidoClienteActionPerformed
@@ -2433,15 +2562,12 @@ public class Telas extends javax.swing.JFrame {
         cl.show(pnCard, "relatorioPedido");
     }//GEN-LAST:event_menuRelatorioPedidoActionPerformed
 
-    private void btDoacaoBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarProdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btDoacaoBuscarProdActionPerformed
-
     private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseClicked
         cl.show(pnCard, "cdHome");
     }//GEN-LAST:event_menuInicioMouseClicked
 
     private void btDoacaoBuscarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoacaoActionPerformed
+        acaoTelaDoacao = false;
         buscarDoacao.setLocationRelativeTo(this);
         buscarDoacao.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarDoacaoActionPerformed
@@ -2449,6 +2575,7 @@ public class Telas extends javax.swing.JFrame {
     private void tableDoacaoProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDoacaoProdutosMouseClicked
         int linhaSelecionada = tableDoacaoProdutos.getSelectedRow();
         if (linhaSelecionada != -1) {
+            indiceTabelaProduto = linhaSelecionada;
             Object descricao = tableDoacaoProdutos.getValueAt(linhaSelecionada, 1);
             Object quantidade = tableDoacaoProdutos.getValueAt(linhaSelecionada, 2);
             tfDoacaoSelecionarProd.setText(descricao.toString());
@@ -2468,60 +2595,78 @@ public class Telas extends javax.swing.JFrame {
 
     private void btDoacaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoLimparActionPerformed
         limparCamposCadastroDoacao();
+        destravaCamposDoacao();
     }//GEN-LAST:event_btDoacaoLimparActionPerformed
 
     private void cbRelPedStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedStatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbRelPedStatusActionPerformed
 
-    private void btPedidoBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarPedidoActionPerformed
+    private void btDoacaoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoReciboActionPerformed
+        try {
+            relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao());
+            JOptionPane.showMessageDialog(rootPane, "Recibo gerado.", "Concluído", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+
+        }
+    }//GEN-LAST:event_btDoacaoReciboActionPerformed
+
+    private void btDoacaoAltProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAltProdActionPerformed
+        jsDoacaoQuantidadeProduto.setEnabled(true);
+    }//GEN-LAST:event_btDoacaoAltProdActionPerformed
+
+    private void btDoacaoDelProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDelProdActionPerformed
+        String descricao = tfDoacaoSelecionarProd.getText();
+        Doacao doacao = buscarDoacao.getDoacao();
+        for (Produto produto : doacao.getProduto()) {
+            if (descricao.equals(produto.getNome())) {
+                if (produtoController.deletaProduto(produto.getId())) {
+                    modeloTabela.removeRow(indiceTabelaProduto);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao deletar produto.", "Remoção", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btDoacaoDelProdActionPerformed
+
+    private void btDoacaoRegistrarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRegistrarDoacaoActionPerformed
+
+    }//GEN-LAST:event_btDoacaoRegistrarDoacaoActionPerformed
+
+    private void btDoacaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoSairActionPerformed
+        cl.show(pnCard, "cdHome");
+        limparCamposCadastroDoacao();
+    }//GEN-LAST:event_btDoacaoSairActionPerformed
+
+    private void btDoacaoBuscarDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoadorActionPerformed
+
+    }//GEN-LAST:event_btDoacaoBuscarDoadorActionPerformed
+
+    private void btDoacaoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRelatorioActionPerformed
+
+    }//GEN-LAST:event_btDoacaoRelatorioActionPerformed
+
+    private void btCadastroPessoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSairActionPerformed
+        cl.show(pnCard, "cdHome");
+    }//GEN-LAST:event_btCadastroPessoaSairActionPerformed
+
+    private void btBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btPedidoBuscarPedidoActionPerformed
+        buscarPessoa.setVisible(true);
+    }//GEN-LAST:event_btBuscarPessoaActionPerformed
+
+    private void btDoacaoBuscarProdActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarProdActionPerformed1
+        buscarProduto.setLocationRelativeTo(this);
+        buscarProduto.setVisible(true);
+    }//GEN-LAST:event_btDoacaoBuscarProdActionPerformed1
 
     private void btPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btPedidoBuscarClienteActionPerformed
 
-    private void btPedidoRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoRegistrarActionPerformed
+    private void btPedidoBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarPedidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btPedidoRegistrarActionPerformed
-
-    private void tfDoacaoSelecionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDoacaoSelecionarProdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDoacaoSelecionarProdActionPerformed
-
-    private void btPedidoBuscarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btPedidoBuscarCliente1ActionPerformed
-
-    private void btPedidoBuscarCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarCliente2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btPedidoBuscarCliente2ActionPerformed
-
-    private void btRelPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoBuscarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btRelPedidoBuscarClienteActionPerformed
-
-    private void btCadastroPessoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSairActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btCadastroPessoaSairActionPerformed
-
-    private void btDoacaoBuscarDoacao1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoacao1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btDoacaoBuscarDoacao1ActionPerformed
-
-    private void btAdicionarCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarCidadeActionPerformed
-        cadastroCidade.setLocationRelativeTo(this);
-        cadastroCidade.setVisible(true);
-    }//GEN-LAST:event_btAdicionarCidadeActionPerformed
-
-    private void btPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoLimparActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btPedidoLimparActionPerformed
-
-    private void btDoacaoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoReciboActionPerformed
-        
-    }//GEN-LAST:event_btDoacaoReciboActionPerformed
+    }//GEN-LAST:event_btPedidoBuscarPedidoActionPerformed
 
     private void btPedidoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoReciboActionPerformed
         // TODO add your handling code here:
@@ -2530,9 +2675,173 @@ public class Telas extends javax.swing.JFrame {
     private void btPedidoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoDeletarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btPedidoDeletarActionPerformed
-    
-    public void preencheDoacao(Doacao doacao){
-        List<Produto> produtos = doacaoController.listagemDeProduto(doacao);
+
+    private void btPedidoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoRelatorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPedidoRelatorioActionPerformed
+
+    private void btPedidoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPedidoSairActionPerformed
+
+    private void btPedidoRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoRegistrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPedidoRegistrarActionPerformed
+
+    private void btPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoLimparActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPedidoLimparActionPerformed
+
+    private void btRelBuscarDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelBuscarDoadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelBuscarDoadorActionPerformed
+
+    private void btRelBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelBuscarProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelBuscarProdutoActionPerformed
+
+    private void btRelDoaFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelDoaFiltrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelDoaFiltrarActionPerformed
+
+    private void btRelDoacaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelDoacaoSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelDoacaoSalvarActionPerformed
+
+    private void btRelDoacaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelDoacaoLimparActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelDoacaoLimparActionPerformed
+
+    private void btRelDoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelDoaSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelDoaSairActionPerformed
+
+    private void btRelPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoBuscarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelPedidoBuscarClienteActionPerformed
+
+    private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelPedFiltrarActionPerformed
+
+    private void btRelPedidoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelPedidoSalvarActionPerformed
+
+    private void btRelPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoLimparActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelPedidoLimparActionPerformed
+
+    private void btRelPedidoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRelPedidoSairActionPerformed
+
+    private void btAdicionarCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarCidadeActionPerformed
+        cadastroCidade.setLocationRelativeTo(this);
+        cadastroCidade.setVisible(true);
+    }//GEN-LAST:event_btAdicionarCidadeActionPerformed
+
+    public void preenchePessoa(Pessoa pessoa) {
+        this.pessoaAntiga = pessoa;
+        tfCodigoPessoa.setText(String.valueOf(pessoa.getId()));
+        cbTipoUsuario.setSelectedItem(pessoa.getTipoUsuario().toString());
+        String nomeTipoUsuario = pessoa.getTipoUsuario().toString();
+        for (int i = 0; i < cbTipoUsuario.getItemCount(); i++) {
+            String item = cbTipoUsuario.getItemAt(i);
+            if (item.equalsIgnoreCase(nomeTipoUsuario)) {
+                cbTipoUsuario.setSelectedIndex(i);
+                switch (cbTipoUsuario.getSelectedItem().toString()) {
+                    case "Beneficiario":
+                        cbLocalInternacao.setEnabled(true);
+                        jsQtdDias.setEnabled(true);
+                        tfNomePaciente.setEditable(true);
+                        tfNomePaciente.setText(pessoa.getPaciente().getNome());
+                        if (pessoa.getPaciente().getPrevisaoDias() != null) {
+                            jsQtdDias.setValue(pessoa.getPaciente().getPrevisaoDias());
+                        }
+                        break;
+                    case "Doador":
+                        cbLocalInternacao.setEnabled(false);
+                        jsQtdDias.setEnabled(false);
+                        break;
+                    case "Assistente":
+                        cbLocalInternacao.setEnabled(false);
+                        jsQtdDias.setEnabled(false);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        tfNome.setText(pessoa.getNome());
+        ffTelefone.setText(pessoa.getTelefone());
+        if (pessoa.getLocal() != null) {
+            String nomeLocalInternacao = pessoa.getLocal().toString();
+            for (int i = 0; i < cbLocalInternacao.getItemCount(); i++) {
+                String item = cbLocalInternacao.getItemAt(i);
+                if (item.equalsIgnoreCase(nomeLocalInternacao)) {
+                    cbLocalInternacao.setSelectedIndex(i);
+                }
+                break;
+            }
+        }
+        tfEmail.setText(pessoa.getEmail());
+        if (pessoa.getTipoPessoa() != null) {
+            String campoTipoPessoa = pessoa.getTipoPessoa().toString();
+            switch (campoTipoPessoa) {
+                case "FISICA":
+                    rbPessoaFisica.setSelected(true);
+                    aplicarMascara(ffDocumento, "###.###.###-##");
+                    break;
+                case "JURIDICA":
+                    rbPessoaJuridica.setSelected(true);
+                    aplicarMascara(ffDocumento, "##.###.###/####-##");
+                    break;
+                default:
+                    break;
+            }
+            if (pessoa.getIdentificacao() != null) {
+                ffDocumento.setText(pessoa.getIdentificacao());
+            }
+            try {
+                if (pessoa.getEndereco().getCep() != null) {
+                    tfEnderecoCep.setText(pessoa.getEndereco().getCep());
+                }
+                if (pessoa.getEndereco().getCidade() != null) {
+                    Cidade cidadePessoa = pessoa.getEndereco().getCidade();
+
+                    for (int i = 0; i < cbEnderecoCidade.getItemCount(); i++) {
+                        Cidade cidadeCombo = cbEnderecoCidade.getItemAt(i);
+                        if (cidadeCombo.getNome().equalsIgnoreCase(cidadePessoa.getNome())) {
+                            cbEnderecoCidade.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+                    cbEnderecoUf.setSelectedItem(pessoa.getEndereco().getCidade().getEstado());
+                }
+                if (pessoa.getEndereco().getLogradouro() != null) {
+                    tfEnderecoLogradouro.setText(pessoa.getEndereco().getLogradouro());
+                }
+                tfEnderecoNumero.setText(String.valueOf(pessoa.getEndereco().getNumero()));
+                if (pessoa.getEndereco().getBairro() != null) {
+                    tfEnderecoBairro.setText(pessoa.getEndereco().getBairro());
+                }
+                if (pessoa.getEndereco().getComplemento() != null) {
+                    tfEnderecoComplemento.setText(pessoa.getEndereco().getComplemento());
+                }
+                if (pessoa.getObservacao() != null) {
+                    taObservacao.setText(pessoa.getObservacao());
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public void preencheDoacao(Doacao doacao) {
         tfDoacaoIdDoacao.setText(String.valueOf(doacao.getId()));
         tfDoacaoIdDoador.setText(String.valueOf(doacao.getDoador().getId()));
         tfDoacaoDoador.setText(doacao.getDoador().getNome());
@@ -2548,19 +2857,11 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoValor.setValue(doacao.getValor());
         taDoacaoObservacao.setText(doacao.getObservacao());
         modeloTabela.setRowCount(0);
-        for (Produto prod : produtos) {
+        for (Produto prod : doacao.getProduto()) {
             Object[] linha = {prod.getTipo(), prod.getNome(), prod.getQuantidade()};
             modeloTabela.addRow(linha);
         }
-        tfDoacaoSelecionarProd.setEnabled(false);
-        jsDoacaoQuantidadeProduto.setEnabled(false);
-        tfDoacaoIdDoacao.setEnabled(false);
-        tfDoacaoIdDoador.setEnabled(false);
-        tfDoacaoDoador.setEnabled(false);
-        ftDoacaoData.setEnabled(false);
-        cbDoacaoTipo.setEnabled(false);
-        tfDoacaoValor.setEnabled(false);
-        taDoacaoObservacao.setEnabled(false);
+        travaCamposDoacao();
     }
 
     public void aplicarMascara(JFormattedTextField campo, String mascara) {
@@ -2575,6 +2876,10 @@ public class Telas extends javax.swing.JFrame {
         }
     }
 
+    public void preencheProdutoDoacao(Produto produto) {
+        tfDoacaoSelecionarProd.setText(produto.getNome());
+    }
+
     public void carregarCidade() throws SQLException {
         cbEnderecoCidade.removeAllItems();
         Cidade cidadePadrao = new Cidade("Selecione...", null);
@@ -2583,6 +2888,26 @@ public class Telas extends javax.swing.JFrame {
         for (Cidade cidade : puxarCidade) {
             cbEnderecoCidade.addItem(cidade);
         }
+    }
+
+    public void travaCamposDoacao() {
+        jsDoacaoQuantidadeProduto.setEnabled(false);
+        tfDoacaoSelecionarProd.setEnabled(false);
+        tfDoacaoIdDoacao.setEnabled(false);
+        tfDoacaoIdDoador.setEnabled(false);
+        tfDoacaoDoador.setEnabled(false);
+        ftDoacaoData.setEnabled(false);
+        cbDoacaoTipo.setEnabled(false);
+        tfDoacaoValor.setEnabled(false);
+        taDoacaoObservacao.setEnabled(false);
+    }
+
+    public void destravaCamposDoacao() {
+        tfDoacaoDoador.setEnabled(true);
+        ftDoacaoData.setEnabled(true);
+        cbDoacaoTipo.setEnabled(true);
+        tfDoacaoValor.setEnabled(true);
+        taDoacaoObservacao.setEnabled(true);
     }
 
     public void limparcamposCadastroUsuario() {
@@ -2601,6 +2926,7 @@ public class Telas extends javax.swing.JFrame {
         cbEnderecoCidade.setSelectedIndex(0);
         cbEnderecoUf.setSelectedIndex(0);
         buttonGroupPessoaTipo.clearSelection();
+        tfCodigoPessoa.setText("");
     }
 
     public void limparCamposCadastroDoacao() {
@@ -2618,13 +2944,13 @@ public class Telas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionarCidade;
+    private javax.swing.JButton btBuscarPessoa;
     private javax.swing.JButton btCadastroPessoaLimpar;
     private javax.swing.JButton btCadastroPessoaSair;
     private javax.swing.JButton btCadastroPessoaSalvar;
     private javax.swing.JButton btDoacaoAddProd;
     private javax.swing.JButton btDoacaoAltProd;
     private javax.swing.JButton btDoacaoBuscarDoacao;
-    private javax.swing.JButton btDoacaoBuscarDoacao1;
     private javax.swing.JButton btDoacaoBuscarDoador;
     private javax.swing.JButton btDoacaoBuscarProd;
     private javax.swing.JButton btDoacaoDelProd;
@@ -2633,10 +2959,8 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JButton btDoacaoRecibo;
     private javax.swing.JButton btDoacaoRegistrarDoacao;
     private javax.swing.JButton btDoacaoRelatorio;
-    private javax.swing.JButton btDoacaoVoltar;
+    private javax.swing.JButton btDoacaoSair;
     private javax.swing.JButton btPedidoBuscarCliente;
-    private javax.swing.JButton btPedidoBuscarCliente1;
-    private javax.swing.JButton btPedidoBuscarCliente2;
     private javax.swing.JButton btPedidoBuscarPedido;
     private javax.swing.JButton btPedidoDeletar;
     private javax.swing.JButton btPedidoLimpar;
@@ -2644,6 +2968,8 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JButton btPedidoRegistrar;
     private javax.swing.JButton btPedidoRelatorio;
     private javax.swing.JButton btPedidoSair;
+    private javax.swing.JButton btRelBuscarDoador;
+    private javax.swing.JButton btRelBuscarProduto;
     private javax.swing.JButton btRelDoaFiltrar;
     private javax.swing.JButton btRelDoaSair;
     private javax.swing.JButton btRelDoacaoLimpar;
@@ -2677,14 +3003,12 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ffTelefone;
     private javax.swing.JFormattedTextField ftDoacaoData;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner4;
     private javax.swing.JLabel jbRelDoaTorIte;
     private javax.swing.JLabel jbRelDoaTotDin;
     private javax.swing.JLabel jbRelDoaTotProd;
@@ -2696,8 +3020,11 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JPanel jpRelPedTotStatus;
     private javax.swing.JSpinner jsDoacaoQuantidadeProduto;
     private javax.swing.JSpinner jsQtdDias;
+    private javax.swing.JSpinner jsQtdMarmitas;
     private javax.swing.JLabel lbBairro;
+    private javax.swing.JLabel lbCodigoPessoa;
     private javax.swing.JLabel lbComplemento;
+    private javax.swing.JLabel lbDias;
     private javax.swing.JLabel lbDoacaoData;
     private javax.swing.JLabel lbDoacaoDoador;
     private javax.swing.JLabel lbDoacaoIdDoacao;
@@ -2708,15 +3035,13 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel lbDoacaoValor;
     private javax.swing.JLabel lbDocumento;
     private javax.swing.JLabel lbEmail;
+    private javax.swing.JLabel lbLocalInternacao;
     private javax.swing.JLabel lbLogradouro;
     private javax.swing.JLabel lbLogradouro3;
     private javax.swing.JLabel lbLogradouro5;
     private javax.swing.JLabel lbLogradouro6;
     private javax.swing.JLabel lbNome;
-    private javax.swing.JLabel lbNome1;
     private javax.swing.JLabel lbNomePaciente;
-    private javax.swing.JLabel lbNomePaciente1;
-    private javax.swing.JLabel lbNomePaciente2;
     private javax.swing.JLabel lbNumero;
     private javax.swing.JLabel lbObservacao;
     private javax.swing.JLabel lbPedidoCliente;
@@ -2744,6 +3069,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel lbRelPedOrdenacao;
     private javax.swing.JLabel lbRelPedStatus;
     private javax.swing.JLabel lbTelefone;
+    private javax.swing.JLabel lbTempo;
     private javax.swing.JMenuBar menuBarra;
     private javax.swing.JMenu menuDoacao;
     private javax.swing.JMenuItem menuDoacaoCadastrar;
@@ -2752,9 +3078,6 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuPedidoCadastrar;
     private javax.swing.JMenu menuPessoa;
     private javax.swing.JMenuItem menuPessoaCadastrar;
-    private javax.swing.JMenu menuRelatorio;
-    private javax.swing.JMenuItem menuRelatorioDoacao;
-    private javax.swing.JMenuItem menuRelatorioPedido;
     private javax.swing.JPanel pnCadastrarDoacao;
     private javax.swing.JPanel pnCadastrarPedido;
     private javax.swing.JPanel pnCadastroPessoa;
@@ -2785,9 +3108,9 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JTable tableDoacaoProdutos;
     private javax.swing.JTable tableRelatorioDoacao;
     private javax.swing.JTable tableRelatorioPedido;
+    private javax.swing.JTextField tfCodigoPessoa;
     private javax.swing.JTextField tfDoacaoDoador;
     private javax.swing.JTextField tfDoacaoIdDoacao;
-    private javax.swing.JTextField tfDoacaoIdDoacao1;
     private javax.swing.JTextField tfDoacaoIdDoador;
     private javax.swing.JTextField tfDoacaoSelecionarProd;
     private javax.swing.JFormattedTextField tfDoacaoValor;
@@ -2800,8 +3123,8 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfNomePaciente;
     private javax.swing.JTextField tfPedidoCliente;
+    private javax.swing.JTextField tfPedidoIdCliente;
     private javax.swing.JTextField tfPedidoIdPedido;
-    private javax.swing.JTextField tfPedidoIdPedido1;
     private javax.swing.JTextField tfRelDoaDoador;
     private javax.swing.JTextField tfRelDoaProd;
     private javax.swing.JTextField tfRelPedCliente;
