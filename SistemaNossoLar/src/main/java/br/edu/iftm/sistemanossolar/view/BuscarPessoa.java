@@ -4,17 +4,29 @@
  */
 package br.edu.iftm.sistemanossolar.view;
 
+import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import java.sql.Connection;
 
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author AFSOUZA
  */
 public class BuscarPessoa extends javax.swing.JDialog {
+
     private static Telas tela;
     private static PessoaController pessoaController;
+    private EnderecoController enderecoController;
+    
+    private List<Pessoa> pessoas;
+
     /**
      * Creates new form BuscarPessoa
      */
@@ -23,6 +35,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
         pessoaController = new PessoaController(conexao);
         this.tela = tela;
         initComponents();
+        this.enderecoController = new EnderecoController(conexao);
     }
 
     /**
@@ -84,10 +97,15 @@ public class BuscarPessoa extends javax.swing.JDialog {
         lbBuscarPessoaCidade.setToolTipText("");
 
         cbBuscarPessoaCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbBuscarPessoaCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Ituiutaba-MG", "Paracatu-MG" }));
+        cbBuscarPessoaCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Ituiutaba", "Paracatu" }));
 
         btBuscarPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btBuscarPessoa.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btBuscarPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPessoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnBuscarPessoaFiltrosLayout = new javax.swing.GroupLayout(pnBuscarPessoaFiltros);
         pnBuscarPessoaFiltros.setLayout(pnBuscarPessoaFiltrosLayout);
@@ -209,6 +227,11 @@ public class BuscarPessoa extends javax.swing.JDialog {
 
         btBuscarPessoaSelecionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btBuscarPessoaSelecionar.setText("Selecionar");
+        btBuscarPessoaSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPessoaSelecionarActionPerformed(evt);
+            }
+        });
 
         btBuscarPessoaNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btBuscarPessoaNovo.setText("Novo");
@@ -292,6 +315,39 @@ public class BuscarPessoa extends javax.swing.JDialog {
     private void btBuscarPessoaNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaNovoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btBuscarPessoaNovoActionPerformed
+
+    private void btBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaActionPerformed
+        // TODO add your handling code here:
+        String nome = tfBuscarPessoaNome.getText();
+        String tipo = (String) cbBuscarPessoaTipo.getSelectedItem();
+        String cidade = (String) cbBuscarPessoaCidade.getSelectedItem();
+        try {
+            pessoas = pessoaController.listarPessoas(nome, tipo, cidade);
+            DefaultTableModel modelo = (DefaultTableModel) tableBuscarPessoa.getModel();
+            modelo.setRowCount(0);
+            for (Pessoa pessoa : pessoas) {
+                Object[] linha = {pessoa.getId(), pessoa.getNome(), pessoa.getCidadeCompleta()};
+                modelo.addRow(linha);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BuscarPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btBuscarPessoaActionPerformed
+
+    private void btBuscarPessoaSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaSelecionarActionPerformed
+        // TODO add your handling code here:
+        int indicePessoa = tableBuscarPessoa.getSelectedRow();
+        try {
+            Pessoa pessoa = pessoaController.buscarPessoaPorId(pessoas.get(indicePessoa).getId());
+            pessoa.setEndereco(enderecoController.buscarEndereco(pessoa.getEnderecoId()));
+            tela.preenchePessoa(pessoa);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(BuscarPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+        
+    }//GEN-LAST:event_btBuscarPessoaSelecionarActionPerformed
 
     /**
      * @param args the command line arguments

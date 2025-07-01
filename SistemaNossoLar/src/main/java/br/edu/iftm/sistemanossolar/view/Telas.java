@@ -20,6 +20,7 @@ import javax.swing.text.MaskFormatter;
 
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
+import br.edu.iftm.sistemanossolar.controller.pessoa.PacienteController;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
@@ -53,6 +54,9 @@ public class Telas extends javax.swing.JFrame {
     private DefaultTableModel modeloTabela;
     private int indiceTabelaProduto;
     private boolean acaoTelaDoacao = true;
+    private Pessoa pessoaAntiga;
+    private PacienteController pacienteController;
+
     /**
      * Creates new form Telas lb - Label tf - TextField ta - TextArea ff -
      * FormatedField
@@ -72,6 +76,7 @@ public class Telas extends javax.swing.JFrame {
         initComponents();
         cl = (CardLayout) pnCard.getLayout();
         modeloTabela = (DefaultTableModel) tableDoacaoProdutos.getModel();
+        pacienteController = new PacienteController(conexao);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -466,7 +471,7 @@ public class Telas extends javax.swing.JFrame {
         lbLocalInternacao.setText("Local de Internação:");
 
         cbLocalInternacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", " " }));
+        cbLocalInternacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital", "Pronto Socorro", "" }));
         cbLocalInternacao.setEnabled(false);
 
         jsQtdDias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1847,7 +1852,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelPedFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfRelPedDtPedidoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                    .addComponent(tfRelPedDtPedidoInicio)
                     .addComponent(lbRelPedDtPedidoInicio)
                     .addComponent(lbRelPedDtEntregaInicio)
                     .addComponent(tfRelPedDtEntregaInicio))
@@ -2387,12 +2392,9 @@ public class Telas extends javax.swing.JFrame {
         }
 
         novaPessoa = new Pessoa(tfNome.getText(), telefone, endereco);
-        try {
-            //if (tfQtdDias.getText() != null && !tfQtdDias.getText().trim().isEmpty()) {
-            //    paciente = new Paciente(tfNomePaciente.getText(), Integer.parseInt(tfQtdDias.getText()));
-            //}
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
+
+        if (tfNomePaciente.getText() != null && jsQtdDias.getValue() != null) {
+            paciente = new Paciente(tfNomePaciente.getText(), (Integer)jsQtdDias.getValue());
         }
 
         Object selected = cbTipoUsuario.getSelectedItem();
@@ -2416,12 +2418,12 @@ public class Telas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Selecione um tipo de usuário.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         switch (cbLocalInternacao.getSelectedIndex()) {
             case 0:
                 novaPessoa.setLocal(Pessoa.Local.HOSPITAL);
                 break;
-                
+
             case 1:
                 novaPessoa.setLocal(Pessoa.Local.PRONTOSOCORRO);
                 break;
@@ -2441,13 +2443,35 @@ public class Telas extends javax.swing.JFrame {
         novaPessoa.setPaciente(paciente);
 
         try {
-            enderecoController.cadastrarEndereco(endereco, cidadeEscolhida);
-            if (!pessoaController.cadastrarPessoa(novaPessoa, paciente)) {
-                JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar o Usuário", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+            if (tfCodigoPessoa.getText().equals("")) {
+                enderecoController.cadastrarEndereco(endereco, cidadeEscolhida);
+                if (!pessoaController.cadastrarPessoa(novaPessoa, paciente)) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar o Usuário", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar o Usuário", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                    limparcamposCadastroUsuario();
+                }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar o Usuário", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
-                limparcamposCadastroUsuario();
+                novaPessoa.setId(Integer.valueOf(tfCodigoPessoa.getText()));
+                if (!enderecoController.alterarEndereco(endereco, pessoaAntiga.getEnderecoId())) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o Endereço do usuário", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (!pacienteController.alterarPaciente(novaPessoa.getPaciente(), pessoaAntiga.getPaciente(), novaPessoa.getId())) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o paciente", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                novaPessoa.setEnderecoId(enderecoController.buscarIdEndereco(endereco, cidadeController.buscarIdCidade(new Cidade(endereco.getCidade().getNome(), endereco.getCidade().getEstado()))));
+                if (!pessoaController.alterarPessoa(novaPessoa)) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o Usuário", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(rootPane, "Sucesso ao Alterar o Usuário", "Sucesso ao Alterar", JOptionPane.INFORMATION_MESSAGE);
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -2509,17 +2533,17 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDoacaoValorActionPerformed
 
     private void btDoacaoAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAddProdActionPerformed
-        int quantidade = (int)jsDoacaoQuantidadeProduto.getValue();
+        int quantidade = (int) jsDoacaoQuantidadeProduto.getValue();
         String descricao = tfDoacaoSelecionarProd.getText();
-        if(acaoTelaDoacao){
+        if (acaoTelaDoacao) {
             Produto produto = buscarProduto.getProduto();
             System.out.println(produto.getNome() + produto.getTipo());
             Object[] linha = {produto.getTipo(), descricao, quantidade};
             modeloTabela.addRow(linha);
-        }else{
+        } else {
             Doacao doacao = buscarDoacao.getDoacao();
-            for(Produto produto : doacao.getProduto()){
-                if(descricao.equals(produto.getNome())){
+            for (Produto produto : doacao.getProduto()) {
+                if (descricao.equals(produto.getNome())) {
                     produtoController.atualizaProduto(quantidade, produto.getId());
                 }
             }
@@ -2551,7 +2575,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void tableDoacaoProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDoacaoProdutosMouseClicked
         int linhaSelecionada = tableDoacaoProdutos.getSelectedRow();
-        if(linhaSelecionada != -1){
+        if (linhaSelecionada != -1) {
             indiceTabelaProduto = linhaSelecionada;
             Object descricao = tableDoacaoProdutos.getValueAt(linhaSelecionada, 1);
             Object quantidade = tableDoacaoProdutos.getValueAt(linhaSelecionada, 2);
@@ -2580,34 +2604,34 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRelPedStatusActionPerformed
 
     private void btDoacaoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoReciboActionPerformed
-        try{
+        try {
             relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao());
             JOptionPane.showMessageDialog(rootPane, "Recibo gerado.", "Concluído", JOptionPane.INFORMATION_MESSAGE);
-        }catch(IOException e){
-            
+        } catch (IOException e) {
+
         }
     }//GEN-LAST:event_btDoacaoReciboActionPerformed
 
     private void btDoacaoAltProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAltProdActionPerformed
-        jsDoacaoQuantidadeProduto.setEnabled(true);        
+        jsDoacaoQuantidadeProduto.setEnabled(true);
     }//GEN-LAST:event_btDoacaoAltProdActionPerformed
 
     private void btDoacaoDelProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDelProdActionPerformed
         String descricao = tfDoacaoSelecionarProd.getText();
         Doacao doacao = buscarDoacao.getDoacao();
-        for(Produto produto : doacao.getProduto()){
-            if(descricao.equals(produto.getNome())){
-                if(produtoController.deletaProduto(produto.getId())){
+        for (Produto produto : doacao.getProduto()) {
+            if (descricao.equals(produto.getNome())) {
+                if (produtoController.deletaProduto(produto.getId())) {
                     modeloTabela.removeRow(indiceTabelaProduto);
-                }else{
-                JOptionPane.showMessageDialog(rootPane, "Erro ao deletar produto.", "Remoção", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao deletar produto.", "Remoção", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
     }//GEN-LAST:event_btDoacaoDelProdActionPerformed
 
     private void btDoacaoRegistrarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRegistrarDoacaoActionPerformed
-        
+
     }//GEN-LAST:event_btDoacaoRegistrarDoacaoActionPerformed
 
     private void btDoacaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoSairActionPerformed
@@ -2616,11 +2640,11 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btDoacaoSairActionPerformed
 
     private void btDoacaoBuscarDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoadorActionPerformed
-        
+
     }//GEN-LAST:event_btDoacaoBuscarDoadorActionPerformed
 
     private void btDoacaoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRelatorioActionPerformed
-        
+
     }//GEN-LAST:event_btDoacaoRelatorioActionPerformed
 
     private void btCadastroPessoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSairActionPerformed
@@ -2629,11 +2653,12 @@ public class Telas extends javax.swing.JFrame {
 
     private void btBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaActionPerformed
         // TODO add your handling code here:
+        buscarPessoa.setVisible(true);
     }//GEN-LAST:event_btBuscarPessoaActionPerformed
 
     private void btDoacaoBuscarProdActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarProdActionPerformed1
         buscarProduto.setLocationRelativeTo(this);
-        buscarProduto.setVisible(true);        
+        buscarProduto.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarProdActionPerformed1
 
     private void btPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarClienteActionPerformed
@@ -2716,8 +2741,108 @@ public class Telas extends javax.swing.JFrame {
         cadastroCidade.setLocationRelativeTo(this);
         cadastroCidade.setVisible(true);
     }//GEN-LAST:event_btAdicionarCidadeActionPerformed
-    
-    public void preencheDoacao(Doacao doacao){
+
+    public void preenchePessoa(Pessoa pessoa) {
+        this.pessoaAntiga = pessoa;
+        tfCodigoPessoa.setText(String.valueOf(pessoa.getId()));
+        cbTipoUsuario.setSelectedItem(pessoa.getTipoUsuario().toString());
+        String nomeTipoUsuario = pessoa.getTipoUsuario().toString();
+        for (int i = 0; i < cbTipoUsuario.getItemCount(); i++) {
+            String item = cbTipoUsuario.getItemAt(i);
+            if (item.equalsIgnoreCase(nomeTipoUsuario)) {
+                cbTipoUsuario.setSelectedIndex(i);
+                switch (cbTipoUsuario.getSelectedItem().toString()) {
+                    case "Beneficiario":
+                        cbLocalInternacao.setEnabled(true);
+                        jsQtdDias.setEnabled(true);
+                        tfNomePaciente.setEditable(true);
+                        tfNomePaciente.setText(pessoa.getPaciente().getNome());
+                        if (pessoa.getPaciente().getPrevisaoDias() != null) {
+                            jsQtdDias.setValue(pessoa.getPaciente().getPrevisaoDias());
+                        }
+                        break;
+                    case "Doador":
+                        cbLocalInternacao.setEnabled(false);
+                        jsQtdDias.setEnabled(false);
+                        break;
+                    case "Assistente":
+                        cbLocalInternacao.setEnabled(false);
+                        jsQtdDias.setEnabled(false);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        tfNome.setText(pessoa.getNome());
+        ffTelefone.setText(pessoa.getTelefone());
+        if (pessoa.getLocal() != null) {
+            String nomeLocalInternacao = pessoa.getLocal().toString();
+            for (int i = 0; i < cbLocalInternacao.getItemCount(); i++) {
+                String item = cbLocalInternacao.getItemAt(i);
+                if (item.equalsIgnoreCase(nomeLocalInternacao)) {
+                    cbLocalInternacao.setSelectedIndex(i);
+                }
+                break;
+            }
+        }
+        tfEmail.setText(pessoa.getEmail());
+        if (pessoa.getTipoPessoa() != null) {
+            String campoTipoPessoa = pessoa.getTipoPessoa().toString();
+            switch (campoTipoPessoa) {
+                case "FISICA":
+                    rbPessoaFisica.setSelected(true);
+                    aplicarMascara(ffDocumento, "###.###.###-##");
+                    break;
+                case "JURIDICA":
+                    rbPessoaJuridica.setSelected(true);
+                    aplicarMascara(ffDocumento, "##.###.###/####-##");
+                    break;
+                default:
+                    break;
+            }
+            if (pessoa.getIdentificacao() != null) {
+                ffDocumento.setText(pessoa.getIdentificacao());
+            }
+            try {
+                if (pessoa.getEndereco().getCep() != null) {
+                    tfEnderecoCep.setText(pessoa.getEndereco().getCep());
+                }
+                if (pessoa.getEndereco().getCidade() != null) {
+                    Cidade cidadePessoa = pessoa.getEndereco().getCidade();
+
+                    for (int i = 0; i < cbEnderecoCidade.getItemCount(); i++) {
+                        Cidade cidadeCombo = cbEnderecoCidade.getItemAt(i);
+                        if (cidadeCombo.getNome().equalsIgnoreCase(cidadePessoa.getNome())) {
+                            cbEnderecoCidade.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+                    cbEnderecoUf.setSelectedItem(pessoa.getEndereco().getCidade().getEstado());
+                }
+                if (pessoa.getEndereco().getLogradouro() != null) {
+                    tfEnderecoLogradouro.setText(pessoa.getEndereco().getLogradouro());
+                }
+                tfEnderecoNumero.setText(String.valueOf(pessoa.getEndereco().getNumero()));
+                if (pessoa.getEndereco().getBairro() != null) {
+                    tfEnderecoBairro.setText(pessoa.getEndereco().getBairro());
+                }
+                if (pessoa.getEndereco().getComplemento() != null) {
+                    tfEnderecoComplemento.setText(pessoa.getEndereco().getComplemento());
+                }
+                if (pessoa.getObservacao() != null) {
+                    taObservacao.setText(pessoa.getObservacao());
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public void preencheDoacao(Doacao doacao) {
         tfDoacaoIdDoacao.setText(String.valueOf(doacao.getId()));
         tfDoacaoIdDoador.setText(String.valueOf(doacao.getDoador().getId()));
         tfDoacaoDoador.setText(doacao.getDoador().getNome());
@@ -2733,7 +2858,7 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoValor.setValue(doacao.getValor());
         taDoacaoObservacao.setText(doacao.getObservacao());
         modeloTabela.setRowCount(0);
-        for(Produto prod : doacao.getProduto()){
+        for (Produto prod : doacao.getProduto()) {
             Object[] linha = {prod.getTipo(), prod.getNome(), prod.getQuantidade()};
             modeloTabela.addRow(linha);
         }
@@ -2751,12 +2876,12 @@ public class Telas extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-    public void preencheProdutoDoacao(Produto produto){
+
+    public void preencheProdutoDoacao(Produto produto) {
         tfDoacaoSelecionarProd.setText(produto.getNome());
     }
-    
-    public void carregarCidade() throws SQLException{
+
+    public void carregarCidade() throws SQLException {
         cbEnderecoCidade.removeAllItems();
         Cidade cidadePadrao = new Cidade("Selecione...", null);
         cbEnderecoCidade.addItem(cidadePadrao);
@@ -2765,8 +2890,8 @@ public class Telas extends javax.swing.JFrame {
             cbEnderecoCidade.addItem(cidade);
         }
     }
-    
-    public void travaCamposDoacao(){
+
+    public void travaCamposDoacao() {
         jsDoacaoQuantidadeProduto.setEnabled(false);
         tfDoacaoSelecionarProd.setEnabled(false);
         tfDoacaoIdDoacao.setEnabled(false);
@@ -2777,16 +2902,16 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoValor.setEnabled(false);
         taDoacaoObservacao.setEnabled(false);
     }
-    
-    public void destravaCamposDoacao(){
+
+    public void destravaCamposDoacao() {
         tfDoacaoDoador.setEnabled(true);
         ftDoacaoData.setEnabled(true);
         cbDoacaoTipo.setEnabled(true);
         tfDoacaoValor.setEnabled(true);
         taDoacaoObservacao.setEnabled(true);
     }
-    
-    public void limparcamposCadastroUsuario(){
+
+    public void limparcamposCadastroUsuario() {
         tfNome.setText("");
         ffTelefone.setText("");
         tfEmail.setText("");
@@ -2802,6 +2927,7 @@ public class Telas extends javax.swing.JFrame {
         cbEnderecoCidade.setSelectedIndex(0);
         cbEnderecoUf.setSelectedIndex(0);
         buttonGroupPessoaTipo.clearSelection();
+        tfCodigoPessoa.setText("");
     }
 
     public void limparCamposCadastroDoacao() {

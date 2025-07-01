@@ -9,6 +9,7 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PacienteDAO {
+
     private final Connection conexaoBanco;
 
     RegistrosLog log = new RegistrosLog();
@@ -36,7 +37,7 @@ public class PacienteDAO {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "PacienteDAO", "cadastrarPaciente", "paciente", "Paciente não cadastrado");            
+            log.registrarLog(4, "PacienteDAO", "cadastrarPaciente", "paciente", "Paciente não cadastrado");
             return false;
         }
     }
@@ -49,9 +50,9 @@ public class PacienteDAO {
             if (rs.next()) {
                 log.registrarLog(2, "PessoaDAO", "buscarPessoaPorId", "paciente", "Dados do Paciente obtidos");
                 return new Paciente(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getInt("previsaoDias"));
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getInt("previsaoDias"));
             } else {
                 log.registrarLog(3, "PessoaDAO", "buscarPessoaPorId", "paciente", "Dados do Paciente não encontrados");
                 return new Paciente();
@@ -61,5 +62,24 @@ public class PacienteDAO {
             log.registrarLog(4, "PessoaDAO", "buscarPessoaPorId", "paciente", "Dados do Paciente não obtidos");
             return new Paciente();
         }
+    }
+
+    public boolean alterarPaciente(Paciente paciente, int idPessoa) {
+        log.registrarLog(4, "PessoaDAO", "alterarPaciente", "paciente", "Alterando dados do Paciente");
+        String sql = "UPDATE paciente SET nome = ?, previsaoDias = ? WHERE usuario = ?;";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+
+            stmt.setString(1, paciente.getNome());
+            stmt.setInt(2, paciente.getPrevisaoDias());
+            stmt.setInt(3, idPessoa);
+
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas == 1;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.registrarLog(4, "PessoaDAO", "alterarPaciente", "paciente", "Erro ao alterar Dados do Paciente");
+        }
+        return false;
     }
 }

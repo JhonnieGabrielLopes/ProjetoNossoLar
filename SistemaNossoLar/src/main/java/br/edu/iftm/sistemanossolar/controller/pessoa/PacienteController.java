@@ -8,6 +8,7 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PacienteController {
+
     private PacienteDAO pacienteDAO;
 
     RegistrosLog log = new RegistrosLog();
@@ -17,7 +18,7 @@ public class PacienteController {
     }
 
     public boolean cadastrarPaciente(Paciente paciente, int idUsu) throws SQLException {
-        log.registrarLog(1, "PacienteController", "cadastrarPaciente", "paciente", "Cadastrando o Paciente "+ paciente.getNome());
+        log.registrarLog(1, "PacienteController", "cadastrarPaciente", "paciente", "Cadastrando o Paciente " + paciente.getNome());
         return pacienteDAO.cadastrarPaciente(paciente, idUsu);
     }
 
@@ -26,4 +27,14 @@ public class PacienteController {
         return pacienteDAO.buscarPacienteDoBeneficiario(idUsuario);
     }
 
+    public boolean alterarPaciente(Paciente novoPaciente, Paciente velhoPaciente, int idPessoa) throws SQLException {
+        log.registrarLog(1, "PacienteController", "alterarPaciente", "paciente", "Alterando Dados do Paciente vinculado ao Beneficiário");
+        if (novoPaciente.igual(velhoPaciente)) {
+            return true;
+        }
+        if (velhoPaciente.getNome() == null || velhoPaciente.getNome().trim().isEmpty() || velhoPaciente.getPrevisaoDias() == null) {
+             return cadastrarPaciente(novoPaciente, idPessoa);
+        }
+        return pacienteDAO.alterarPaciente(novoPaciente, idPessoa);
+    }
 }
