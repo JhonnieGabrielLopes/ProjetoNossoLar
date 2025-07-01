@@ -46,4 +46,11 @@ public class Paciente {
         this.previsaoDias = previsaoDias;
     }
 
+    public boolean igual(Paciente outro) {
+    if (outro == null) return false;
+    
+    if (this.id != null ? !this.id.equals(outro.getId()) : outro.getId() != null) return false;
+    if (this.nome != null ? !this.nome.equals(outro.getNome()) : outro.getNome() != null) return false;
+    return !(this.previsaoDias != null ? !this.previsaoDias.equals(outro.getPrevisaoDias()) : outro.getPrevisaoDias() != null);
+}
 }
