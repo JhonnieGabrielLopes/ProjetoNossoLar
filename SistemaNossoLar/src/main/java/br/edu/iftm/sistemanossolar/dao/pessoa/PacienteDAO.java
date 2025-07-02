@@ -65,7 +65,6 @@ public class PacienteDAO {
     }
 
     public boolean alterarPaciente(Paciente paciente, int idPessoa) {
-        log.registrarLog(4, "PessoaDAO", "alterarPaciente", "paciente", "Alterando dados do Paciente");
         String sql = "UPDATE paciente SET nome = ?, previsaoDias = ? WHERE usuario = ?;";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
 
@@ -74,6 +73,7 @@ public class PacienteDAO {
             stmt.setInt(3, idPessoa);
 
             int linhasAfetadas = stmt.executeUpdate();
+            log.registrarLog(2, "PacienteDAO", "alterarPaciente", "paciente", "Paciente alterado");
             return linhasAfetadas == 1;
 
         } catch (SQLException e) {
