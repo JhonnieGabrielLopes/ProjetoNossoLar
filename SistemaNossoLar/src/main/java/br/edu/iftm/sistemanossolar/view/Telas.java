@@ -57,6 +57,7 @@ public class Telas extends javax.swing.JFrame {
     private Pessoa pessoaAntiga;
     private PacienteController pacienteController;
     private DefaultTableModel modeloTabelaRelatorioPedido;
+    private BuscarPedido buscarPedido;
 
     /**
      * Creates new form Telas lb - Label tf - TextField ta - TextArea ff -
@@ -79,6 +80,7 @@ public class Telas extends javax.swing.JFrame {
         modeloTabela = (DefaultTableModel) tableDoacaoProdutos.getModel();
         modeloTabelaRelatorioPedido = (DefaultTableModel) tableRelatorioPedido.getModel();
         pacienteController = new PacienteController(conexao);
+        buscarPedido = new BuscarPedido(this, true, conexao);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -2678,6 +2680,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void btPedidoBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarPedidoActionPerformed
         // TODO add your handling code here:
+        buscarPedido.setVisible(true);
     }//GEN-LAST:event_btPedidoBuscarPedidoActionPerformed
 
     private void btPedidoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoReciboActionPerformed
@@ -2996,7 +2999,6 @@ public class Telas extends javax.swing.JFrame {
         jsQtdMarmitas.setValue(0);
         ffPedidoDtPedido.setText("");
         ffPedidoDtEntrega.setText("");
-        taDoacaoObservacao1.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
