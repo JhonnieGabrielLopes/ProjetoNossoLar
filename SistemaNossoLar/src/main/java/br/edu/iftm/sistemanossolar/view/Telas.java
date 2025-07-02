@@ -26,10 +26,13 @@ import br.edu.iftm.sistemanossolar.model.doacao.Doacao;
 import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
+import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
@@ -80,7 +83,7 @@ public class Telas extends javax.swing.JFrame {
         modeloTabela = (DefaultTableModel) tableDoacaoProdutos.getModel();
         modeloTabelaRelatorioPedido = (DefaultTableModel) tableRelatorioPedido.getModel();
         pacienteController = new PacienteController(conexao);
-        buscarPedido = new BuscarPedido(this, true, conexao);
+        buscarPedido = new BuscarPedido(this, true, conexao, this);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -293,8 +296,6 @@ public class Telas extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
-
-        pnDadosPrincipal.setPreferredSize(null);
 
         pnCard.setLayout(new java.awt.CardLayout());
 
@@ -699,7 +700,7 @@ public class Telas extends javax.swing.JFrame {
                             .addComponent(lbObservacao)
                             .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1))))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
         pnCadastroPessoaLayout.setVerticalGroup(
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1165,7 +1166,7 @@ public class Telas extends javax.swing.JFrame {
         lbPedidoObservacao.setText("Observação:");
 
         cbPedidoStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbPedidoStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Finalizado", "Cancelado" }));
+        cbPedidoStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Entregue", "Cancelado" }));
 
         lbPedidoStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbPedidoStatus.setText("Status:");
@@ -1385,7 +1386,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(684, Short.MAX_VALUE))
+                .addContainerGap(683, Short.MAX_VALUE))
         );
         pnCadastrarPedidoLayout.setVerticalGroup(
             pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1741,7 +1742,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btRelDoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnRelDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
         pnRelatorioDoacaoLayout.setVerticalGroup(
             pnRelatorioDoacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2196,9 +2197,9 @@ public class Telas extends javax.swing.JFrame {
         pnHomeLayout.setHorizontalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHomeLayout.createSequentialGroup()
-                .addContainerGap(431, Short.MAX_VALUE)
+                .addContainerGap(436, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addContainerGap(391, Short.MAX_VALUE))
         );
         pnHomeLayout.setVerticalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2909,6 +2910,28 @@ public class Telas extends javax.swing.JFrame {
             modeloTabela.addRow(linha);
         }
         travaCamposDoacao();
+    }
+    
+    public void preenchePedido(Pedido pedido) {
+        
+        tfPedidoIdPedido.setText(String.valueOf(pedido.getId()));
+        for (int i = 0; i < cbPedidoStatus.getItemCount(); i++) {
+            if (pedido.getStatus().toString().equalsIgnoreCase(cbPedidoStatus.getItemAt(i))) {
+                cbPedidoStatus.setSelectedIndex(i);
+            }
+        }
+        tfPedidoIdCliente.setText(String.valueOf(pedido.getCliente().getId()));
+        tfPedidoCliente.setText(pedido.getCliente().getNome());
+        jsQtdMarmitas.setValue(pedido.getQuantMarmita());
+        
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (pedido.getDataPedido() != null){
+            ffPedidoDtPedido.setText(String.valueOf(pedido.getDataPedido().format(formato)));
+        }
+        if (pedido.getDataEntrega() != null) {
+            ffPedidoDtEntrega.setText(String.valueOf(pedido.getDataEntrega().format(formato)));
+        }
+        taPedidoObservacao.setText(pedido.getObservacao());
     }
 
     public void aplicarMascara(JFormattedTextField campo, String mascara) {

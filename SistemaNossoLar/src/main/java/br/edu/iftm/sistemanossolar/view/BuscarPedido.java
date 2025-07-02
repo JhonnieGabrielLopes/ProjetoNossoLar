@@ -20,15 +20,18 @@ public class BuscarPedido extends javax.swing.JDialog {
     
     private PedidoController pedidoController;
     private DefaultTableModel modelo;
+    private static Telas tela;
+    private List<Pedido> pedidos;
 
     /**
      * Creates new form BuscarPessoa
      */
-    public BuscarPedido(java.awt.Frame parent, boolean modal, Connection conexao) {
+    public BuscarPedido(java.awt.Frame parent, boolean modal, Connection conexao, Telas tela) {
         super(parent, modal);
         initComponents();
         pedidoController = new PedidoController(conexao);
         modelo = (DefaultTableModel) tableBuscarPessoa.getModel();
+        this.tela = tela;
     }
 
     /**
@@ -318,6 +321,7 @@ public class BuscarPedido extends javax.swing.JDialog {
     private void btBuscarPedidoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoSairActionPerformed
         // TODO add your handling code here:
         limparCampos();
+        dispose();
     }//GEN-LAST:event_btBuscarPedidoSairActionPerformed
 
     private void btBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoActionPerformed
@@ -338,8 +342,8 @@ public class BuscarPedido extends javax.swing.JDialog {
             dataFim = LocalDate.parse(campoDataFim, dataFormat);
         }
         try {
-            List<Pedido> listagem = pedidoController.listarPedidos(tfBuscarPedidoPessoa.getText(), String.valueOf(cbBuscarPedidoTipoPessoa.getSelectedItem()), dataInicio, dataFim);
-            alimentaTabela(listagem);
+            pedidos = pedidoController.listarPedidos(tfBuscarPedidoPessoa.getText(), String.valueOf(cbBuscarPedidoTipoPessoa.getSelectedItem()), dataInicio, dataFim);
+            alimentaTabela(pedidos);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -347,7 +351,18 @@ public class BuscarPedido extends javax.swing.JDialog {
 
     private void btBuscarPedidoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoSelecionarActionPerformed
         // TODO add your handling code here:
+        if (tableBuscarPessoa.getSelectedRow() == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um pedido!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            Pedido pedido = pedidoController.buscarPedidoPorId(pedidos.get(tableBuscarPessoa.getSelectedRow()).getId());
+            tela.preenchePedido(pedido);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         limparCampos();
+        dispose();
     }//GEN-LAST:event_btBuscarPedidoSelecionarActionPerformed
     
     public void alimentaTabela(List<Pedido> listagem) {

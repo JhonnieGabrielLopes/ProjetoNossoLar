@@ -26,7 +26,7 @@ public class Pedido {
 
     public enum StatusPedido {
         PENDENTE, 
-        FINALIZADO, 
+        ENTREGUE, 
         CANCELADO;
         public static StatusPedido fromString(String status) {
             for (StatusPedido s : StatusPedido.values()) {

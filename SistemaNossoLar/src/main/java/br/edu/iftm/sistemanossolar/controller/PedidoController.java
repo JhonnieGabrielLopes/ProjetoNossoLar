@@ -13,6 +13,7 @@ import br.edu.iftm.sistemanossolar.model.relatorio.RetornoPedidos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class PedidoController {
+
     private PedidoDAO pedidoDAO;
 
     RegistrosLog log = new RegistrosLog();
@@ -22,7 +23,7 @@ public class PedidoController {
     }
 
     public boolean cadastrarPedido(Pedido pedido) {
-        log.registrarLog(1, "PedidoController", "cadastrarPedido", "pedido", "Cadastrando o Pedido do Usuário "+ pedido.getCliente().getNome());
+        log.registrarLog(1, "PedidoController", "cadastrarPedido", "pedido", "Cadastrando o Pedido do Usuário " + pedido.getCliente().getNome());
         return pedidoDAO.cadastrarPedido(pedido);
     }
 
@@ -33,7 +34,7 @@ public class PedidoController {
 
         if (nomePessoa != null && !nomePessoa.trim().isEmpty()) {
             sqlFiltro.append("AND u.nome LIKE ? ");
-            filtros.add("%"+ nomePessoa +"%");
+            filtros.add("%" + nomePessoa + "%");
         }
 
         if (!tipoUsuario.isEmpty() && tipoUsuario.equals("Todos")) {
@@ -123,16 +124,28 @@ public class PedidoController {
 
         StringBuilder sqlFinal = new StringBuilder();
         sqlFinal.append(sqlFiltro);
-        
+
         if (ordem != null && !ordem.isEmpty()) {
             sqlFinal.append("ORDER BY ");
             switch (ordem) {
-                case "codigo": sqlFinal.append("p.id "); break;
-                case "status": sqlFinal.append("p.status "); break;
-                case "quantidade": sqlFinal.append("p.quantidade "); break;
-                case "dataPedido": sqlFinal.append("p.dataPedido "); break;
-                case "dataEntrega": sqlFinal.append("p.dataEntrega "); break;
-                case "nome": sqlFinal.append("u.nome "); break;
+                case "codigo":
+                    sqlFinal.append("p.id ");
+                    break;
+                case "status":
+                    sqlFinal.append("p.status ");
+                    break;
+                case "quantidade":
+                    sqlFinal.append("p.quantidade ");
+                    break;
+                case "dataPedido":
+                    sqlFinal.append("p.dataPedido ");
+                    break;
+                case "dataEntrega":
+                    sqlFinal.append("p.dataEntrega ");
+                    break;
+                case "nome":
+                    sqlFinal.append("u.nome ");
+                    break;
             }
             sqlFinal.append(sentido.equals("asc") ? "ASC" : "DESC");
         }
@@ -149,5 +162,10 @@ public class PedidoController {
     public RelPedido filtrarTotalRelatorio(RelPedido totalizacao, String filtro, List<Object> filtros) throws SQLException {
         log.registrarLog(1, "PedidoController", "filtrarTotalRelatorio", "pedido, usuario", "Totalizando o relatório");
         return pedidoDAO.filtrarTotalRelatorio(totalizacao, filtro, filtros);
+    }
+
+    public Pedido buscarPedidoPorId(int id) throws SQLException {
+        log.registrarLog(1, "PedidoController", "buscarPedidoPorId", "pedido, usuario, usuarioTipo, tipoUsuario", "Buscando pedido por id");
+        return pedidoDAO.buscarPedidoPorId(id);
     }
 }
