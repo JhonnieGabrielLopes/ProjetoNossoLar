@@ -2355,6 +2355,7 @@ public class Telas extends javax.swing.JFrame {
         cl.show(pnCard, "cdHome");
         try {
             carregarCidade();
+            buscarPessoa.carregarCidade();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -2378,6 +2379,16 @@ public class Telas extends javax.swing.JFrame {
         String telefone = ffTelefone.getText().replaceAll("[^\\d]", "");
 
         Cidade cidadeEscolhida = (Cidade) cbEnderecoCidade.getSelectedItem();
+        if (tfNome.getText().isEmpty() || tfNome.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Necessário preencher o nome da Pessoa!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else if (ffTelefone.getText().replaceAll("[^\\d]", "").isEmpty() || ffTelefone.getText().replaceAll("[^\\d]", "").equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Necessário preencher o telefone da Pessoa!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else if (cidadeEscolhida.getNome().equals("Selecione...")) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma cidade válida!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         if (tfEnderecoLogradouro.getText().trim().isEmpty() || tfEnderecoLogradouro.getText().equals("")) {
             endereco = new Endereco(cidadeEscolhida);
         } else {
@@ -2457,10 +2468,13 @@ public class Telas extends javax.swing.JFrame {
                     return;
                 }
 
-                if (!pacienteController.alterarPaciente(novaPessoa.getPaciente(), pessoaAntiga.getPaciente(), novaPessoa.getId())) {
+                if (!tfNomePaciente.getText().isEmpty() || !tfNomePaciente.getText().equals("")) {
+                    if (!pacienteController.alterarPaciente(novaPessoa.getPaciente(), pessoaAntiga.getPaciente(), novaPessoa.getId())) {
                     JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o paciente", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
                     return;
-                }
+                    }
+                } 
+                
 
                 novaPessoa.setEnderecoId(enderecoController.buscarIdEndereco(endereco, cidadeController.buscarIdCidade(new Cidade(endereco.getCidade().getNome(), endereco.getCidade().getEstado()))));
                 if (!pessoaController.alterarPessoa(novaPessoa)) {
@@ -2647,6 +2661,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btDoacaoRelatorioActionPerformed
 
     private void btCadastroPessoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSairActionPerformed
+        limparcamposCadastroUsuario();
         cl.show(pnCard, "cdHome");
     }//GEN-LAST:event_btCadastroPessoaSairActionPerformed
 
@@ -2744,6 +2759,7 @@ public class Telas extends javax.swing.JFrame {
     public void preenchePessoa(Pessoa pessoa) {
         this.pessoaAntiga = pessoa;
         tfCodigoPessoa.setText(String.valueOf(pessoa.getId()));
+        cbTipoUsuario.setEnabled(false);
         cbTipoUsuario.setSelectedItem(pessoa.getTipoUsuario().toString());
         String nomeTipoUsuario = pessoa.getTipoUsuario().toString();
         for (int i = 0; i < cbTipoUsuario.getItemCount(); i++) {
@@ -2752,9 +2768,10 @@ public class Telas extends javax.swing.JFrame {
                 cbTipoUsuario.setSelectedIndex(i);
                 switch (cbTipoUsuario.getSelectedItem().toString()) {
                     case "Beneficiario":
-                        cbLocalInternacao.setEnabled(true);
+                        cbLocalInternacao.setEnabled(false);
                         jsQtdDias.setEnabled(true);
                         tfNomePaciente.setEditable(true);
+
                         tfNomePaciente.setText(pessoa.getPaciente().getNome());
                         if (pessoa.getPaciente().getPrevisaoDias() != null) {
                             jsQtdDias.setValue(pessoa.getPaciente().getPrevisaoDias());
@@ -2927,6 +2944,9 @@ public class Telas extends javax.swing.JFrame {
         cbEnderecoUf.setSelectedIndex(0);
         buttonGroupPessoaTipo.clearSelection();
         tfCodigoPessoa.setText("");
+        cbTipoUsuario.setEnabled(true);
+        cbTipoUsuario.setSelectedIndex(0);
+        cbLocalInternacao.setSelectedIndex(0);
     }
 
     public void limparCamposCadastroDoacao() {

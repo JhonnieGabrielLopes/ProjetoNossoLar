@@ -169,13 +169,19 @@ public class CadastroCidade extends javax.swing.JDialog {
     }//GEN-LAST:event_cbCadCidUfActionPerformed
 
     private void btCadCidSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadCidSairActionPerformed
+        limparTela();
         dispose();
     }//GEN-LAST:event_btCadCidSairActionPerformed
 
     private void btCadCidLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadCidLimparActionPerformed
-        // TODO add your handling code here:
+        limparTela();
     }//GEN-LAST:event_btCadCidLimparActionPerformed
 
+    public void limparTela(){
+        tfCadCidCidade.setText("");
+        cbCadCidUf.setSelectedIndex(0);
+    }
+    
     /**
      * @param args the command line arguments
      */
