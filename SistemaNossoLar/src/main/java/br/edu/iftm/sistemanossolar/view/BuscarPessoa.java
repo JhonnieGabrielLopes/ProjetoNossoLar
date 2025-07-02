@@ -8,6 +8,8 @@ import br.edu.iftm.sistemanossolar.controller.endereco.EnderecoController;
 import java.sql.Connection;
 
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
+import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
+import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,6 +26,8 @@ public class BuscarPessoa extends javax.swing.JDialog {
     private static Telas tela;
     private static PessoaController pessoaController;
     private EnderecoController enderecoController;
+    private CidadeController cidadeController;
+    private DefaultTableModel tabelaModelo;
     
     private List<Pessoa> pessoas;
 
@@ -36,6 +40,8 @@ public class BuscarPessoa extends javax.swing.JDialog {
         this.tela = tela;
         initComponents();
         this.enderecoController = new EnderecoController(conexao);
+        this.cidadeController = new CidadeController(conexao);
+        tabelaModelo = (DefaultTableModel) tableBuscarPessoa.getModel();
     }
 
     /**
@@ -97,7 +103,6 @@ public class BuscarPessoa extends javax.swing.JDialog {
         lbBuscarPessoaCidade.setToolTipText("");
 
         cbBuscarPessoaCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbBuscarPessoaCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Ituiutaba", "Paracatu" }));
 
         btBuscarPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btBuscarPessoa.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -115,7 +120,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnBuscarPessoaFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbBuscarPessoaNome)
-                    .addComponent(tfBuscarPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfBuscarPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnBuscarPessoaFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbBuscarPessoaTipo)
@@ -123,11 +128,10 @@ public class BuscarPessoa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnBuscarPessoaFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbBuscarPessoaCidade)
-                    .addGroup(pnBuscarPessoaFiltrosLayout.createSequentialGroup()
-                        .addComponent(cbBuscarPessoaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btBuscarPessoa)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbBuscarPessoaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btBuscarPessoa)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         pnBuscarPessoaFiltrosLayout.setVerticalGroup(
             pnBuscarPessoaFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,16 +159,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
         tableBuscarPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableBuscarPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Cód.", "Nome", "Cidade"
@@ -294,6 +289,16 @@ public class BuscarPessoa extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void carregarCidade() throws SQLException {
+        cbBuscarPessoaCidade.removeAllItems();
+        Cidade cidadePadrao = new Cidade("", null);
+        cbBuscarPessoaCidade.addItem(cidadePadrao);
+        List<Cidade> puxarCidade = cidadeController.listarCidade();
+        for (Cidade cidade : puxarCidade) {
+            cbBuscarPessoaCidade.addItem(cidade);
+        }
+    }
+
     private void tfBuscarPessoaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPessoaNomeKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_tfBuscarPessoaNomeKeyTyped
@@ -303,13 +308,19 @@ public class BuscarPessoa extends javax.swing.JDialog {
     }//GEN-LAST:event_tfBuscarPessoaNomeActionPerformed
 
     private void btBuscarPessoaLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaLimparActionPerformed
+        limparTela();
+    }//GEN-LAST:event_btBuscarPessoaLimparActionPerformed
+
+    public void limparTela(){
         tfBuscarPessoaNome.setText("");
         cbBuscarPessoaTipo.setSelectedIndex(0);
         cbBuscarPessoaCidade.setSelectedIndex(0);
-    }//GEN-LAST:event_btBuscarPessoaLimparActionPerformed
-
+        tabelaModelo.setRowCount(0);
+    }
+    
     private void btBuscarPessoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaSairActionPerformed
-        // TODO add your handling code here:
+        limparTela();
+        dispose();
     }//GEN-LAST:event_btBuscarPessoaSairActionPerformed
 
     private void btBuscarPessoaNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaNovoActionPerformed
@@ -320,9 +331,9 @@ public class BuscarPessoa extends javax.swing.JDialog {
         // TODO add your handling code here:
         String nome = tfBuscarPessoaNome.getText();
         String tipo = (String) cbBuscarPessoaTipo.getSelectedItem();
-        String cidade = (String) cbBuscarPessoaCidade.getSelectedItem();
+        Cidade cidade = (Cidade) cbBuscarPessoaCidade.getSelectedItem();
         try {
-            pessoas = pessoaController.listarPessoas(nome, tipo, cidade);
+            pessoas = pessoaController.listarPessoas(nome, tipo, cidade.getNome());
             DefaultTableModel modelo = (DefaultTableModel) tableBuscarPessoa.getModel();
             modelo.setRowCount(0);
             for (Pessoa pessoa : pessoas) {
@@ -336,6 +347,10 @@ public class BuscarPessoa extends javax.swing.JDialog {
 
     private void btBuscarPessoaSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaSelecionarActionPerformed
         // TODO add your handling code here:
+        if (tableBuscarPessoa.getSelectedRow() == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         int indicePessoa = tableBuscarPessoa.getSelectedRow();
         try {
             Pessoa pessoa = pessoaController.buscarPessoaPorId(pessoas.get(indicePessoa).getId());
@@ -345,6 +360,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(BuscarPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
+        limparTela();
         dispose();
         
     }//GEN-LAST:event_btBuscarPessoaSelecionarActionPerformed
@@ -359,7 +375,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
     private javax.swing.JButton btBuscarPessoaNovo;
     private javax.swing.JButton btBuscarPessoaSair;
     private javax.swing.JButton btBuscarPessoaSelecionar;
-    private javax.swing.JComboBox<String> cbBuscarPessoaCidade;
+    private javax.swing.JComboBox<Cidade> cbBuscarPessoaCidade;
     private javax.swing.JComboBox<String> cbBuscarPessoaTipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbBuscarPessoaCidade;
