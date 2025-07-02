@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author AFSOUZA
  */
 public class BuscarPedido extends javax.swing.JDialog {
-
+    
     private PedidoController pedidoController;
     private DefaultTableModel modelo;
 
@@ -247,6 +247,11 @@ public class BuscarPedido extends javax.swing.JDialog {
 
         btBuscarPedidoSelecionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btBuscarPedidoSelecionar.setText("Selecionar");
+        btBuscarPedidoSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPedidoSelecionarActionPerformed(evt);
+            }
+        });
 
         btBuscarPedidoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btBuscarPedidoLimpar.setText("Limpar");
@@ -307,14 +312,12 @@ public class BuscarPedido extends javax.swing.JDialog {
     }//GEN-LAST:event_tfBuscarPedidoPessoaKeyTyped
 
     private void btBuscarPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoLimparActionPerformed
-        tfBuscarPedidoPessoa.setText("");
-        cbBuscarPedidoTipoPessoa.setSelectedIndex(0);
-        ffBuscarPedidoDataInicio.setText("");
-        ffBuscarPedidoDataFim.setText("");
+        limparCampos();
     }//GEN-LAST:event_btBuscarPedidoLimparActionPerformed
 
     private void btBuscarPedidoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoSairActionPerformed
         // TODO add your handling code here:
+        limparCampos();
     }//GEN-LAST:event_btBuscarPedidoSairActionPerformed
 
     private void btBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoActionPerformed
@@ -335,19 +338,32 @@ public class BuscarPedido extends javax.swing.JDialog {
             dataFim = LocalDate.parse(campoDataFim, dataFormat);
         }
         try {
-            List <Pedido> listagem = pedidoController.listarPedidos(tfBuscarPedidoPessoa.getText(), String.valueOf(cbBuscarPedidoTipoPessoa.getSelectedItem()), dataInicio, dataFim);
+            List<Pedido> listagem = pedidoController.listarPedidos(tfBuscarPedidoPessoa.getText(), String.valueOf(cbBuscarPedidoTipoPessoa.getSelectedItem()), dataInicio, dataFim);
             alimentaTabela(listagem);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
+    private void btBuscarPedidoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoSelecionarActionPerformed
+        // TODO add your handling code here:
+        limparCampos();
+    }//GEN-LAST:event_btBuscarPedidoSelecionarActionPerformed
+    
     public void alimentaTabela(List<Pedido> listagem) {
         modelo.setRowCount(0);
         for (Pedido pedido : listagem) {
             Object[] linha = {pedido.getId(), pedido.getCliente().getNome(), pedido.getCliente().getTipoUsuario(), pedido.getDataPedido()};
             modelo.addRow(linha);
         }
+    }
+    
+    public void limparCampos() {
+        tfBuscarPedidoPessoa.setText("");
+        cbBuscarPedidoTipoPessoa.setSelectedIndex(0);
+        ffBuscarPedidoDataInicio.setText("");
+        ffBuscarPedidoDataFim.setText("");
+        modelo.setRowCount(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
