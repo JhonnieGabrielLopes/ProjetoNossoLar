@@ -2942,6 +2942,16 @@ public class Telas extends javax.swing.JFrame {
         cbDoacaoTipo.setSelectedIndex(0);
         modeloTabela.setRowCount(0);
     }
+    
+    public void limparCamposCadastroPedido() {
+        tfPedidoIdPedido.setText("");
+        tfPedidoIdCliente.setText("");
+        tfPedidoCliente.setText("");
+        jsQtdMarmitas.setValue(0);
+        ffPedidoDtPedido.setText("");
+        ffPedidoDtEntrega.setText("");
+        taDoacaoObservacao1.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionarCidade;
