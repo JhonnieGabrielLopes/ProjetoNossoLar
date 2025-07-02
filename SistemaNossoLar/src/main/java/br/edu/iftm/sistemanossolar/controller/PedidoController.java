@@ -31,13 +31,13 @@ public class PedidoController {
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
 
-        if (!nomePessoa.isEmpty() || !nomePessoa.equals("")) {
+        if (nomePessoa != null && !nomePessoa.trim().isEmpty()) {
             sqlFiltro.append("AND u.nome LIKE ? ");
             filtros.add("%"+ nomePessoa +"%");
         }
 
         if (!tipoUsuario.isEmpty() && tipoUsuario.equals("Todos")) {
-            sqlFiltro.append("AND tu.tipo = 'ASSISTENTE' OR tu.tipo = 'BENEFICIARIO' ");
+            sqlFiltro.append("AND (tu.tipo = 'ASSISTENTE' OR tu.tipo = 'BENEFICIARIO') ");
         } else if (!tipoUsuario.isEmpty() && !tipoUsuario.equals("Todos")) {
             sqlFiltro.append("AND tu.tipo = ? ");
             filtros.add(tipoUsuario);
