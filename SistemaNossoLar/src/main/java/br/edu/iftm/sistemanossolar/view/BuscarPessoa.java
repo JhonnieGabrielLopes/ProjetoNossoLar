@@ -28,8 +28,9 @@ public class BuscarPessoa extends javax.swing.JDialog {
     private EnderecoController enderecoController;
     private CidadeController cidadeController;
     private DefaultTableModel tabelaModelo;
-    
+    private int identificador;
     private List<Pessoa> pessoas;
+    private Pessoa pessoa;
 
     /**
      * Creates new form BuscarPessoa
@@ -43,7 +44,6 @@ public class BuscarPessoa extends javax.swing.JDialog {
         this.cidadeController = new CidadeController(conexao);
         tabelaModelo = (DefaultTableModel) tableBuscarPessoa.getModel();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -298,7 +298,18 @@ public class BuscarPessoa extends javax.swing.JDialog {
             cbBuscarPessoaCidade.addItem(cidade);
         }
     }
-
+    
+    public void identificaTelas(int identificador){
+        this.identificador = identificador;
+        if(identificador == 2){
+            cbBuscarPessoaTipo.setSelectedIndex(2);
+            cbBuscarPessoaTipo.setEnabled(false);
+        }else{
+            cbBuscarPessoaTipo.setSelectedIndex(0);
+            cbBuscarPessoaTipo.setEnabled(true);
+        }
+    }
+    
     private void tfBuscarPessoaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPessoaNomeKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_tfBuscarPessoaNomeKeyTyped
@@ -324,7 +335,9 @@ public class BuscarPessoa extends javax.swing.JDialog {
     }//GEN-LAST:event_btBuscarPessoaSairActionPerformed
 
     private void btBuscarPessoaNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaNovoActionPerformed
-        // TODO add your handling code here:
+        tela.direcionaCadastroPessoa();
+        limparTela();
+        dispose();
     }//GEN-LAST:event_btBuscarPessoaNovoActionPerformed
 
     private void btBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaActionPerformed
@@ -353,10 +366,13 @@ public class BuscarPessoa extends javax.swing.JDialog {
         }
         int indicePessoa = tableBuscarPessoa.getSelectedRow();
         try {
-            Pessoa pessoa = pessoaController.buscarPessoaPorId(pessoas.get(indicePessoa).getId());
+            pessoa = pessoaController.buscarPessoaPorId(pessoas.get(indicePessoa).getId());
             pessoa.setEndereco(enderecoController.buscarEndereco(pessoa.getEnderecoId()));
-            tela.preenchePessoa(pessoa);
-            
+            if(identificador == 1){
+                tela.preenchePessoa(pessoa);
+            }else{
+                tela.preencheDoador(pessoa);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BuscarPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -364,7 +380,10 @@ public class BuscarPessoa extends javax.swing.JDialog {
         dispose();
         
     }//GEN-LAST:event_btBuscarPessoaSelecionarActionPerformed
-
+    
+    public Pessoa getPessoa(){
+        return pessoa;
+    }
     /**
      * @param args the command line arguments
      */
