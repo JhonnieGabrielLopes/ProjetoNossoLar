@@ -10,6 +10,7 @@ import java.sql.Connection;
 import br.edu.iftm.sistemanossolar.controller.pessoa.PessoaController;
 import br.edu.iftm.sistemanossolar.controller.endereco.CidadeController;
 import br.edu.iftm.sistemanossolar.model.endereco.Cidade;
+import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,6 +29,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
     private EnderecoController enderecoController;
     private CidadeController cidadeController;
     private DefaultTableModel tabelaModelo;
+    private int origem;  // 1 == Alterar pessoa e 2 == Tela de Pedido
     
     private List<Pessoa> pessoas;
 
@@ -42,6 +44,10 @@ public class BuscarPessoa extends javax.swing.JDialog {
         this.enderecoController = new EnderecoController(conexao);
         this.cidadeController = new CidadeController(conexao);
         tabelaModelo = (DefaultTableModel) tableBuscarPessoa.getModel();
+    }
+    
+    public void setOrigem(int origem) {
+        this.origem = origem;
     }
 
     /**
@@ -355,14 +361,19 @@ public class BuscarPessoa extends javax.swing.JDialog {
         try {
             Pessoa pessoa = pessoaController.buscarPessoaPorId(pessoas.get(indicePessoa).getId());
             pessoa.setEndereco(enderecoController.buscarEndereco(pessoa.getEnderecoId()));
-            tela.preenchePessoa(pessoa);
+            if(origem == 1) {
+                tela.preenchePessoa(pessoa);
+            } else {
+                Pedido pedido = new Pedido();
+                pedido.setCliente(pessoa);
+                tela.preenchePedido(pedido);
+            }
             
         } catch (SQLException ex) {
             Logger.getLogger(BuscarPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
         limparTela();
         dispose();
-        
     }//GEN-LAST:event_btBuscarPessoaSelecionarActionPerformed
 
     /**

@@ -168,4 +168,9 @@ public class PedidoController {
         log.registrarLog(1, "PedidoController", "buscarPedidoPorId", "pedido, usuario, usuarioTipo, tipoUsuario", "Buscando pedido por id");
         return pedidoDAO.buscarPedidoPorId(id);
     }
+    
+    public boolean alterarPedido(Pedido pedido) throws SQLException {
+        log.registrarLog(1, "PedidoController", "alterarPessoa", "pedido", "Alterando pedido");
+        return pedidoDAO.alterarPedido(pedido);
+    }
 }

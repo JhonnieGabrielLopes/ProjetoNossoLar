@@ -13,8 +13,10 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
+import java.sql.Date;
 
 public class PedidoDAO {
+
     private final Connection conexaoBanco;
 
     RegistrosLog log = new RegistrosLog();
@@ -239,5 +241,43 @@ public class PedidoDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean alterarPedido(Pedido pedido) throws SQLException {
+        String sql = "UPDATE pedido SET pessoa = ?, quantidade = ?, status = ?, observacao = ?, dataPedido = ?, dataEntrega = ? WHERE id = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            if (pedido.getCliente() != null && pedido.getCliente().getId() != null) {
+                stmt.setInt(1, pedido.getCliente().getId());
+            } else {
+                stmt.setNull(1, java.sql.Types.INTEGER);
+            }
+            if (pedido.getQuantMarmita() != null) {
+                stmt.setInt(2, pedido.getQuantMarmita());
+            } else {
+                stmt.setNull(2, java.sql.Types.INTEGER);
+            }
+            if (pedido.getStatus() != null) {
+                stmt.setString(3, pedido.getStatus().name());
+            } else {
+                stmt.setNull(3, java.sql.Types.VARCHAR);
+            }
+            stmt.setString(4, pedido.getObservacao() != null ? pedido.getObservacao() : "");
+            if (pedido.getDataPedido() != null) {
+                stmt.setDate(5, Date.valueOf(pedido.getDataPedido()));
+            } else {
+                stmt.setNull(5, java.sql.Types.DATE);
+            }
+            if (pedido.getDataEntrega() != null) {
+                stmt.setDate(6, Date.valueOf(pedido.getDataEntrega()));
+            } else {
+                stmt.setNull(6, java.sql.Types.DATE);
+            }
+            if (pedido.getId() != null) {
+                stmt.setInt(7, pedido.getId());
+            } else {
+                stmt.setNull(7, java.sql.Types.INTEGER); // ou lance erro se for obrigatório
+            }
+            return stmt.executeUpdate() == 1;
+        }
     }
 }
