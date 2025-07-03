@@ -2481,6 +2481,10 @@ public class Telas extends javax.swing.JFrame {
                 }
 
                 novaPessoa.setEnderecoId(enderecoController.buscarIdEndereco(endereco, cidadeController.buscarIdCidade(new Cidade(endereco.getCidade().getNome(), endereco.getCidade().getEstado()))));
+                if (novaPessoa.camposIguais(pessoaAntiga)) {
+                    JOptionPane.showMessageDialog(this, "Nenhum campo alterado", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 if (!pessoaController.alterarPessoa(novaPessoa)) {
                     JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o Usuário", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
                     return;
