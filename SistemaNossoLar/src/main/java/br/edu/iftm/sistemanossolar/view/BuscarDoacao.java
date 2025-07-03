@@ -368,9 +368,10 @@ public class BuscarDoacao extends javax.swing.JDialog {
     }//GEN-LAST:event_btBuscarDoacaoSairActionPerformed
     
     public void alimentaTabela(List<Doacao> listagem){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         modelo.setRowCount(0);
         for(Doacao doacao : listagem){
-            Object[] linha = {doacao.getId(), doacao.getDoador().getNome(), doacao.getTipo(), doacao.getDataDoacao()};
+            Object[] linha = {doacao.getId(), doacao.getDoador().getNome(), doacao.getTipo(), doacao.getDataDoacao().format(formatter)};
             modelo.addRow(linha);
         }
     }
