@@ -34,6 +34,9 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,10 +62,11 @@ public class Telas extends javax.swing.JFrame {
     private static RelatorioController relatorioController;
     private DefaultTableModel modeloTabela;
     private int indiceTabelaProduto;
-    private boolean acaoTelaDoacao = true;
     private Pessoa pessoaAntiga;
     private PacienteController pacienteController;
     private DefaultTableModel modeloTabelaRelatorioPedido;
+    private DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private List<Produto> produtosDoacao = new ArrayList<>();
     private BuscarPedido buscarPedido;
     private PedidoController pedidoController;
 
@@ -286,11 +290,11 @@ public class Telas extends javax.swing.JFrame {
         menuBarra = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuPessoa = new javax.swing.JMenu();
-        menuPessoaCadastrar = new javax.swing.JMenuItem();
         menuDoacao = new javax.swing.JMenu();
-        menuDoacaoCadastrar = new javax.swing.JMenuItem();
         menuPedido = new javax.swing.JMenu();
-        menuPedidoCadastrar = new javax.swing.JMenuItem();
+        menuRelatorio = new javax.swing.JMenu();
+        jmRelDoacao = new javax.swing.JMenuItem();
+        jmRelPedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(29, 29, 29));
@@ -1749,7 +1753,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
         pnRelatorioPedidoLayout.setVerticalGroup(
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2234,6 +2238,7 @@ public class Telas extends javax.swing.JFrame {
         getContentPane().add(pnDadosPrincipal, java.awt.BorderLayout.CENTER);
 
         menuBarra.setBackground(new java.awt.Color(52, 52, 52));
+        menuBarra.setForeground(new java.awt.Color(255, 255, 255));
         menuBarra.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         menuBarra.setPreferredSize(new java.awt.Dimension(458, 50));
 
@@ -2252,55 +2257,63 @@ public class Telas extends javax.swing.JFrame {
         menuPessoa.setForeground(new java.awt.Color(255, 255, 255));
         menuPessoa.setText("Pessoa");
         menuPessoa.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
-        menuPessoaCadastrar.setBackground(new java.awt.Color(52, 52, 52));
-        menuPessoaCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuPessoaCadastrar.setForeground(new java.awt.Color(255, 255, 255));
-        menuPessoaCadastrar.setText("Cadastrar");
-        menuPessoaCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPessoaCadastrarActionPerformed(evt);
+        menuPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuPessoaMouseClicked(evt);
             }
         });
-        menuPessoa.add(menuPessoaCadastrar);
-
         menuBarra.add(menuPessoa);
 
         menuDoacao.setBackground(new java.awt.Color(52, 52, 52));
         menuDoacao.setForeground(new java.awt.Color(255, 255, 255));
         menuDoacao.setText("Doação");
         menuDoacao.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
-        menuDoacaoCadastrar.setBackground(new java.awt.Color(52, 52, 52));
-        menuDoacaoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuDoacaoCadastrar.setForeground(new java.awt.Color(255, 255, 255));
-        menuDoacaoCadastrar.setText("Cadastrar");
-        menuDoacaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuDoacaoCadastrarActionPerformed(evt);
+        menuDoacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuDoacaoMouseClicked(evt);
             }
         });
-        menuDoacao.add(menuDoacaoCadastrar);
-
         menuBarra.add(menuDoacao);
 
         menuPedido.setBackground(new java.awt.Color(52, 52, 52));
         menuPedido.setForeground(new java.awt.Color(255, 255, 255));
         menuPedido.setText("Pedido");
         menuPedido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
-        menuPedidoCadastrar.setBackground(new java.awt.Color(52, 52, 52));
-        menuPedidoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuPedidoCadastrar.setForeground(new java.awt.Color(255, 255, 255));
-        menuPedidoCadastrar.setText("Cadastrar");
-        menuPedidoCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPedidoCadastrarActionPerformed(evt);
+        menuPedido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuPedidoMouseClicked(evt);
             }
         });
-        menuPedido.add(menuPedidoCadastrar);
-
         menuBarra.add(menuPedido);
+
+        menuRelatorio.setBackground(new java.awt.Color(52, 52, 52));
+        menuRelatorio.setForeground(new java.awt.Color(255, 255, 255));
+        menuRelatorio.setText("Relatórios");
+        menuRelatorio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jmRelDoacao.setBackground(new java.awt.Color(52, 52, 52));
+        jmRelDoacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jmRelDoacao.setForeground(new java.awt.Color(255, 255, 255));
+        jmRelDoacao.setText("Doações");
+        jmRelDoacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRelDoacaoActionPerformed(evt);
+            }
+        });
+        menuRelatorio.add(jmRelDoacao);
+
+        jmRelPedido.setBackground(new java.awt.Color(52, 52, 52));
+        jmRelPedido.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jmRelPedido.setForeground(new java.awt.Color(255, 255, 255));
+        jmRelPedido.setText("Pedidos");
+        jmRelPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRelPedidoActionPerformed(evt);
+            }
+        });
+        menuRelatorio.add(jmRelPedido);
+
+        menuBarra.add(menuRelatorio);
 
         setJMenuBar(menuBarra);
     }// </editor-fold>//GEN-END:initComponents
@@ -2524,19 +2537,6 @@ public class Telas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbTipoUsuarioActionPerformed
 
-    private void menuPessoaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPessoaCadastrarActionPerformed
-        cl.show(pnCard, "beneficiario");
-    }//GEN-LAST:event_menuPessoaCadastrarActionPerformed
-
-    private void menuDoacaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDoacaoCadastrarActionPerformed
-        cl.show(pnCard, "cdCadastrarDoacao");
-        acaoTelaDoacao = true;
-    }//GEN-LAST:event_menuDoacaoCadastrarActionPerformed
-
-    private void menuPedidoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPedidoCadastrarActionPerformed
-        cl.show(pnCard, "cdCadastrarPedido");
-    }//GEN-LAST:event_menuPedidoCadastrarActionPerformed
-
     private void tfDoacaoDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDoacaoDoadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfDoacaoDoadorActionPerformed
@@ -2555,21 +2555,17 @@ public class Telas extends javax.swing.JFrame {
 
     private void btDoacaoAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAddProdActionPerformed
         int quantidade = (int) jsDoacaoQuantidadeProduto.getValue();
-        String descricao = tfDoacaoSelecionarProd.getText();
-        if (acaoTelaDoacao) {
+        if(tfDoacaoIdDoacao.getText().equals("")){
             Produto produto = buscarProduto.getProduto();
-            System.out.println(produto.getNome() + produto.getTipo());
-            Object[] linha = {produto.getTipo(), descricao, quantidade};
+            produto.setQuantidade(quantidade);
+            produtosDoacao.add(produto);
+            Object[] linha = {produto.getTipo(), produto.getNome(), produto.getQuantidade()};
             modeloTabela.addRow(linha);
-        } else {
-            Doacao doacao = buscarDoacao.getDoacao();
-            for (Produto produto : doacao.getProduto()) {
-                if (descricao.equals(produto.getNome())) {
-                    produtoController.atualizaProduto(quantidade, produto.getId());
-                }
-            }
+        }else{
             modeloTabela.setValueAt(quantidade, indiceTabelaProduto, 2);
         }
+        jsDoacaoQuantidadeProduto.setEnabled(false);
+        
     }//GEN-LAST:event_btDoacaoAddProdActionPerformed
 
     private void tfPedidoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPedidoClienteActionPerformed
@@ -2589,7 +2585,6 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_menuInicioMouseClicked
 
     private void btDoacaoBuscarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoacaoActionPerformed
-        acaoTelaDoacao = false;
         buscarDoacao.setLocationRelativeTo(this);
         buscarDoacao.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarDoacaoActionPerformed
@@ -2606,12 +2601,16 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_tableDoacaoProdutosMouseClicked
 
     private void btDoacaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDeletarActionPerformed
-        int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
-        if (doacaoController.removeDoacao(idDoacao)) {
-            JOptionPane.showMessageDialog(rootPane, "Doação deletada com sucesso.", "Deleção", JOptionPane.INFORMATION_MESSAGE);
-            limparCamposCadastroDoacao();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Não foi possivel deletar a Doação!", "Deleção", JOptionPane.ERROR_MESSAGE);
+        if(!tfDoacaoIdDoacao.getText().equals("")){
+            int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
+            if (doacaoController.removeDoacao(idDoacao)) {
+                JOptionPane.showMessageDialog(rootPane, "Doação deletada com sucesso.", "Sucesso ao Deletar", JOptionPane.INFORMATION_MESSAGE);
+                limparCamposCadastroDoacao();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Não foi possivel deletar a Doação!", "Aviso", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma Doação!", "Aviso", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btDoacaoDeletarActionPerformed
 
@@ -2625,34 +2624,54 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRelPedStatusActionPerformed
 
     private void btDoacaoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoReciboActionPerformed
-        try {
-            relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao());
-            JOptionPane.showMessageDialog(rootPane, "Recibo gerado.", "Concluído", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException e) {
+        if(!tfDoacaoIdDoacao.getText().equals("")){
+            try {
+                relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao());
+                JOptionPane.showMessageDialog(rootPane, "Recibo gerado.", "Concluído", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
 
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione uma Doação!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btDoacaoReciboActionPerformed
 
     private void btDoacaoAltProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAltProdActionPerformed
-        jsDoacaoQuantidadeProduto.setEnabled(true);
+        if(!tfDoacaoSelecionarProd.equals("")){
+            jsDoacaoQuantidadeProduto.setEnabled(true);
+        }
     }//GEN-LAST:event_btDoacaoAltProdActionPerformed
 
     private void btDoacaoDelProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDelProdActionPerformed
-        String descricao = tfDoacaoSelecionarProd.getText();
-        Doacao doacao = buscarDoacao.getDoacao();
-        for (Produto produto : doacao.getProduto()) {
-            if (descricao.equals(produto.getNome())) {
-                if (produtoController.deletaProduto(produto.getId())) {
-                    modeloTabela.removeRow(indiceTabelaProduto);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Erro ao deletar produto.", "Remoção", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+        if(!tfDoacaoSelecionarProd.getText().equals("")){
+            modeloTabela.removeRow(indiceTabelaProduto);
+            produtosDoacao.remove(indiceTabelaProduto);
         }
     }//GEN-LAST:event_btDoacaoDelProdActionPerformed
 
     private void btDoacaoRegistrarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRegistrarDoacaoActionPerformed
-
+        Doacao doacao = new Doacao();
+        doacao.setDoador(buscarPessoa.getPessoa());
+        doacao.setDataDoacao(LocalDate.parse(ftDoacaoData.getText(), dataFormat));
+        if(cbDoacaoTipo.getSelectedIndex()==0){
+            doacao.setTipo(Doacao.TipoDoa.DINHEIRO);
+        }else{
+            doacao.setTipo(Doacao.TipoDoa.PRODUTO);
+        }
+        Number temp = (Number)tfDoacaoValor.getValue();
+        doacao.setValor(temp.doubleValue());
+        doacao.setObservacao(taDoacaoObservacao.getText());
+        doacao.setProduto(produtosDoacao);
+        try{
+            if(doacaoController.cadastrarDoacao(doacao)){
+                JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar Doação", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                limparCamposCadastroDoacao();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar Doação", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btDoacaoRegistrarDoacaoActionPerformed
 
     private void btDoacaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoSairActionPerformed
@@ -2661,7 +2680,9 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btDoacaoSairActionPerformed
 
     private void btDoacaoBuscarDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarDoadorActionPerformed
-
+        buscarPessoa.identificaTelas(2);
+        buscarPessoa.setLocationRelativeTo(this);
+        buscarPessoa.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarDoadorActionPerformed
 
     private void btDoacaoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRelatorioActionPerformed
@@ -2674,8 +2695,8 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadastroPessoaSairActionPerformed
 
     private void btBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaActionPerformed
-        // TODO add your handling code here:
-        buscarPessoa.setOrigem(1);
+        buscarPessoa.identificaTelas(1);
+        buscarPessoa.setLocationRelativeTo(this);
         buscarPessoa.setVisible(true);
     }//GEN-LAST:event_btBuscarPessoaActionPerformed
 
@@ -2826,6 +2847,26 @@ public class Telas extends javax.swing.JFrame {
         cadastroCidade.setVisible(true);
     }//GEN-LAST:event_btAdicionarCidadeActionPerformed
 
+    private void jmRelDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRelDoacaoActionPerformed
+        cl.show(pnCard, "relatorioDoacao");
+    }//GEN-LAST:event_jmRelDoacaoActionPerformed
+
+    private void jmRelPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRelPedidoActionPerformed
+        cl.show(pnCard, "relatorioPedido");
+    }//GEN-LAST:event_jmRelPedidoActionPerformed
+
+    private void menuDoacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDoacaoMouseClicked
+        cl.show(pnCard, "cdCadastrarDoacao");
+    }//GEN-LAST:event_menuDoacaoMouseClicked
+
+    private void menuPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPessoaMouseClicked
+        cl.show(pnCard, "beneficiario");
+    }//GEN-LAST:event_menuPessoaMouseClicked
+
+    private void menuPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPedidoMouseClicked
+        cl.show(pnCard, "cdCadastrarPedido");
+    }//GEN-LAST:event_menuPedidoMouseClicked
+
     public void preenchePessoa(Pessoa pessoa) {
         this.pessoaAntiga = pessoa;
         tfCodigoPessoa.setText(String.valueOf(pessoa.getId()));
@@ -2919,7 +2960,6 @@ public class Telas extends javax.swing.JFrame {
                 if (pessoa.getObservacao() != null) {
                     taObservacao.setText(pessoa.getObservacao());
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -2932,7 +2972,7 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoIdDoacao.setText(String.valueOf(doacao.getId()));
         tfDoacaoIdDoador.setText(String.valueOf(doacao.getDoador().getId()));
         tfDoacaoDoador.setText(doacao.getDoador().getNome());
-        ftDoacaoData.setText(String.valueOf(doacao.getDataDoacao()));
+        ftDoacaoData.setText(String.valueOf(doacao.getDataDoacao().format(dataFormat)));
         switch (String.valueOf(doacao.getTipo())) {
             case "DINHEIRO":
                 cbDoacaoTipo.setSelectedIndex(0);
@@ -2950,7 +2990,18 @@ public class Telas extends javax.swing.JFrame {
         }
         travaCamposDoacao();
     }
-
+    
+    public void preencheDoador(Pessoa doador){
+        btDoacaoBuscarDoacao.setEnabled(false);
+        jsDoacaoQuantidadeProduto.setEnabled(false);
+        tfDoacaoIdDoador.setText(String.valueOf(doador.getId()));
+        tfDoacaoDoador.setText(doador.getNome());
+    }
+    
+    public void direcionaCadastroPessoa(){
+        cl.show(pnCard, "beneficiario");
+    }
+    
     public void preenchePedido(Pedido pedido) {
 
         if (pedido != null) {
@@ -3011,6 +3062,7 @@ public class Telas extends javax.swing.JFrame {
 
     public void preencheProdutoDoacao(Produto produto) {
         tfDoacaoSelecionarProd.setText(produto.getNome());
+        jsDoacaoQuantidadeProduto.setEnabled(true);
     }
 
     public void carregarCidade() throws SQLException {
@@ -3022,10 +3074,38 @@ public class Telas extends javax.swing.JFrame {
             cbEnderecoCidade.addItem(cidade);
         }
     }
-
+    
+    public void limparTela(){
+        tfPedidoIdPedido.setText("");
+        cbPedidoStatus.setSelectedIndex(0);
+        tfPedidoIdCliente.setText("");
+        tfPedidoCliente.setText("");
+        jsQtdMarmitas.setValue(0);
+        ffPedidoDtPedido.setText("");
+        ffPedidoDtEntrega.setText("");
+        taPedidoObservacao.setText("");
+    }
+    
+    public void limparTelaRelPed(){
+        tfRelPedDtPedidoInicio.setText("");
+        tfRelPedDtPedidoFim.setText("");
+        tfRelPedDtEntregaInicio.setText("");
+        tfRelPedDtEntregaFim.setText("");
+        tfRelPedCliente.setText("");
+        tfRelPedTotMarmitas.setText("0");
+        tfRelPedTotPendente.setText("0");
+        tfRelPedTotFechado.setText("0");
+        tfRelPedTotCancelado.setText("0");
+        cbPedidoStatus.setSelectedIndex(0);
+        cbRelPedCidade.setSelectedIndex(0);
+        cbRelPedLocal.setSelectedIndex(0);
+        cbRelPedOrdenacao.setSelectedIndex(0);
+        cbRelPedSentido.setSelectedIndex(0);
+        modeloTabelaRelatorioPedido.setRowCount(0);
+    }
+    
     public void travaCamposDoacao() {
         jsDoacaoQuantidadeProduto.setEnabled(false);
-        tfDoacaoSelecionarProd.setEnabled(false);
         tfDoacaoIdDoacao.setEnabled(false);
         tfDoacaoIdDoador.setEnabled(false);
         tfDoacaoDoador.setEnabled(false);
@@ -3033,6 +3113,12 @@ public class Telas extends javax.swing.JFrame {
         cbDoacaoTipo.setEnabled(false);
         tfDoacaoValor.setEnabled(false);
         taDoacaoObservacao.setEnabled(false);
+        btDoacaoAddProd.setEnabled(false);
+        btDoacaoAltProd.setEnabled(false);
+        btDoacaoBuscarProd.setEnabled(false);
+        btDoacaoDelProd.setEnabled(false);
+        btDoacaoRegistrarDoacao.setEnabled(false);
+        btDoacaoBuscarDoador.setEnabled(false);
     }
 
     public void destravaCamposDoacao() {
@@ -3041,6 +3127,12 @@ public class Telas extends javax.swing.JFrame {
         cbDoacaoTipo.setEnabled(true);
         tfDoacaoValor.setEnabled(true);
         taDoacaoObservacao.setEnabled(true);
+        btDoacaoAddProd.setEnabled(true);
+        btDoacaoAltProd.setEnabled(true);
+        btDoacaoBuscarProd.setEnabled(true);
+        btDoacaoDelProd.setEnabled(true);
+        btDoacaoRegistrarDoacao.setEnabled(true);
+        btDoacaoBuscarDoador.setEnabled(true);
     }
 
     public void limparcamposCadastroUsuario() {
@@ -3161,6 +3253,8 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel jbRelPedTotFechado;
     private javax.swing.JLabel jbRelPedTotMarmitas;
     private javax.swing.JLabel jbRelPedTotPendente;
+    private javax.swing.JMenuItem jmRelDoacao;
+    private javax.swing.JMenuItem jmRelPedido;
     private javax.swing.JPanel jpRelPedTotMarmitas;
     private javax.swing.JPanel jpRelPedTotStatus;
     private javax.swing.JSpinner jsDoacaoQuantidadeProduto;
@@ -3217,12 +3311,10 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel lbTempo;
     private javax.swing.JMenuBar menuBarra;
     private javax.swing.JMenu menuDoacao;
-    private javax.swing.JMenuItem menuDoacaoCadastrar;
     private javax.swing.JMenu menuInicio;
     private javax.swing.JMenu menuPedido;
-    private javax.swing.JMenuItem menuPedidoCadastrar;
     private javax.swing.JMenu menuPessoa;
-    private javax.swing.JMenuItem menuPessoaCadastrar;
+    private javax.swing.JMenu menuRelatorio;
     private javax.swing.JPanel pnCadastrarDoacao;
     private javax.swing.JPanel pnCadastrarPedido;
     private javax.swing.JPanel pnCadastroPessoa;
