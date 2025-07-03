@@ -2555,17 +2555,17 @@ public class Telas extends javax.swing.JFrame {
 
     private void btDoacaoAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAddProdActionPerformed
         int quantidade = (int) jsDoacaoQuantidadeProduto.getValue();
-        if(tfDoacaoIdDoacao.getText().equals("")){
+        if (tfDoacaoIdDoacao.getText().equals("")) {
             Produto produto = buscarProduto.getProduto();
             produto.setQuantidade(quantidade);
             produtosDoacao.add(produto);
             Object[] linha = {produto.getTipo(), produto.getNome(), produto.getQuantidade()};
             modeloTabela.addRow(linha);
-        }else{
+        } else {
             modeloTabela.setValueAt(quantidade, indiceTabelaProduto, 2);
         }
         jsDoacaoQuantidadeProduto.setEnabled(false);
-        
+
     }//GEN-LAST:event_btDoacaoAddProdActionPerformed
 
     private void tfPedidoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPedidoClienteActionPerformed
@@ -2601,7 +2601,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_tableDoacaoProdutosMouseClicked
 
     private void btDoacaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDeletarActionPerformed
-        if(!tfDoacaoIdDoacao.getText().equals("")){
+        if (!tfDoacaoIdDoacao.getText().equals("")) {
             int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
             if (doacaoController.removeDoacao(idDoacao)) {
                 JOptionPane.showMessageDialog(rootPane, "Doação deletada com sucesso.", "Sucesso ao Deletar", JOptionPane.INFORMATION_MESSAGE);
@@ -2609,7 +2609,7 @@ public class Telas extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Não foi possivel deletar a Doação!", "Aviso", JOptionPane.ERROR_MESSAGE);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma Doação!", "Aviso", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btDoacaoDeletarActionPerformed
@@ -2624,26 +2624,26 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRelPedStatusActionPerformed
 
     private void btDoacaoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoReciboActionPerformed
-        if(!tfDoacaoIdDoacao.getText().equals("")){
+        if (!tfDoacaoIdDoacao.getText().equals("")) {
             try {
                 relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao());
                 JOptionPane.showMessageDialog(rootPane, "Recibo gerado.", "Concluído", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
 
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Selecione uma Doação!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btDoacaoReciboActionPerformed
 
     private void btDoacaoAltProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAltProdActionPerformed
-        if(!tfDoacaoSelecionarProd.equals("")){
+        if (!tfDoacaoSelecionarProd.equals("")) {
             jsDoacaoQuantidadeProduto.setEnabled(true);
         }
     }//GEN-LAST:event_btDoacaoAltProdActionPerformed
 
     private void btDoacaoDelProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDelProdActionPerformed
-        if(!tfDoacaoSelecionarProd.getText().equals("")){
+        if (!tfDoacaoSelecionarProd.getText().equals("")) {
             modeloTabela.removeRow(indiceTabelaProduto);
             produtosDoacao.remove(indiceTabelaProduto);
         }
@@ -2653,23 +2653,23 @@ public class Telas extends javax.swing.JFrame {
         Doacao doacao = new Doacao();
         doacao.setDoador(buscarPessoa.getPessoa());
         doacao.setDataDoacao(LocalDate.parse(ftDoacaoData.getText(), dataFormat));
-        if(cbDoacaoTipo.getSelectedIndex()==0){
+        if (cbDoacaoTipo.getSelectedIndex() == 0) {
             doacao.setTipo(Doacao.TipoDoa.DINHEIRO);
-        }else{
+        } else {
             doacao.setTipo(Doacao.TipoDoa.PRODUTO);
         }
-        Number temp = (Number)tfDoacaoValor.getValue();
+        Number temp = (Number) tfDoacaoValor.getValue();
         doacao.setValor(temp.doubleValue());
         doacao.setObservacao(taDoacaoObservacao.getText());
         doacao.setProduto(produtosDoacao);
-        try{
-            if(doacaoController.cadastrarDoacao(doacao)){
+        try {
+            if (doacaoController.cadastrarDoacao(doacao)) {
                 JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar Doação", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
                 limparCamposCadastroDoacao();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar Doação", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btDoacaoRegistrarDoacaoActionPerformed
@@ -2707,15 +2707,15 @@ public class Telas extends javax.swing.JFrame {
 
     private void btPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarClienteActionPerformed
         // TODO add your handling code here:
-        buscarPessoa.setOrigem(2);
+        buscarPessoa.identificaTelas(3);
         buscarPessoa.setVisible(true);
         limparCamposCadastroPedido();
     }//GEN-LAST:event_btPedidoBuscarClienteActionPerformed
 
     private void btPedidoBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarPedidoActionPerformed
         // TODO add your handling code here:
-        buscarPedido.setVisible(true);
         limparCamposCadastroPedido();
+        buscarPedido.setVisible(true);
     }//GEN-LAST:event_btPedidoBuscarPedidoActionPerformed
 
     private void btPedidoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoReciboActionPerformed
@@ -2990,20 +2990,19 @@ public class Telas extends javax.swing.JFrame {
         }
         travaCamposDoacao();
     }
-    
-    public void preencheDoador(Pessoa doador){
+
+    public void preencheDoador(Pessoa doador) {
         btDoacaoBuscarDoacao.setEnabled(false);
         jsDoacaoQuantidadeProduto.setEnabled(false);
         tfDoacaoIdDoador.setText(String.valueOf(doador.getId()));
         tfDoacaoDoador.setText(doador.getNome());
     }
-    
-    public void direcionaCadastroPessoa(){
+
+    public void direcionaCadastroPessoa() {
         cl.show(pnCard, "beneficiario");
     }
-    
-    public void preenchePedido(Pedido pedido) {
 
+    public void preenchePedido(Pedido pedido) {
         if (pedido != null) {
             if (pedido.getId() != null) {
                 tfPedidoIdPedido.setText(String.valueOf(pedido.getId()));
@@ -3019,7 +3018,10 @@ public class Telas extends javax.swing.JFrame {
             }
 
             if (pedido.getCliente() != null) {
+                System.out.println("aqui");
+                System.out.println(pedido.getCliente().getId());
                 if (pedido.getCliente().getId() != null) {
+                    System.out.println("dwivud");
                     tfPedidoIdCliente.setText(String.valueOf(pedido.getCliente().getId()));
                 }
 
@@ -3074,36 +3076,7 @@ public class Telas extends javax.swing.JFrame {
             cbEnderecoCidade.addItem(cidade);
         }
     }
-    
-    public void limparTela(){
-        tfPedidoIdPedido.setText("");
-        cbPedidoStatus.setSelectedIndex(0);
-        tfPedidoIdCliente.setText("");
-        tfPedidoCliente.setText("");
-        jsQtdMarmitas.setValue(0);
-        ffPedidoDtPedido.setText("");
-        ffPedidoDtEntrega.setText("");
-        taPedidoObservacao.setText("");
-    }
-    
-    public void limparTelaRelPed(){
-        tfRelPedDtPedidoInicio.setText("");
-        tfRelPedDtPedidoFim.setText("");
-        tfRelPedDtEntregaInicio.setText("");
-        tfRelPedDtEntregaFim.setText("");
-        tfRelPedCliente.setText("");
-        tfRelPedTotMarmitas.setText("0");
-        tfRelPedTotPendente.setText("0");
-        tfRelPedTotFechado.setText("0");
-        tfRelPedTotCancelado.setText("0");
-        cbPedidoStatus.setSelectedIndex(0);
-        cbRelPedCidade.setSelectedIndex(0);
-        cbRelPedLocal.setSelectedIndex(0);
-        cbRelPedOrdenacao.setSelectedIndex(0);
-        cbRelPedSentido.setSelectedIndex(0);
-        modeloTabelaRelatorioPedido.setRowCount(0);
-    }
-    
+
     public void travaCamposDoacao() {
         jsDoacaoQuantidadeProduto.setEnabled(false);
         tfDoacaoIdDoacao.setEnabled(false);

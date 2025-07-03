@@ -338,12 +338,23 @@ public class BuscarPessoa extends javax.swing.JDialog {
 
     public void identificaTelas(int identificador) {
         this.identificador = identificador;
-        if (identificador == 2) {
-            cbBuscarPessoaTipo.setSelectedIndex(2);
-            cbBuscarPessoaTipo.setEnabled(false);
-        } else {
-            cbBuscarPessoaTipo.setSelectedIndex(0);
-            cbBuscarPessoaTipo.setEnabled(true);
+        switch (identificador) {
+            case 1:
+                cbBuscarPessoaTipo.setSelectedIndex(0);
+                cbBuscarPessoaTipo.setEnabled(true);
+                break;
+
+            case 2:
+                cbBuscarPessoaTipo.setSelectedIndex(2);
+                cbBuscarPessoaTipo.setEnabled(false);
+                break;
+
+            case 3:
+                cbBuscarPessoaTipo.setSelectedIndex(0);
+                cbBuscarPessoaTipo.setEnabled(true);
+                break;
+            default:
+                throw new AssertionError();
         }
     }
 
@@ -387,7 +398,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
             DefaultTableModel modelo = (DefaultTableModel) tableBuscarPessoa.getModel();
             modelo.setRowCount(0);
             for (Pessoa pessoa : pessoas) {
-                Object[] linha = { pessoa.getId(), pessoa.getNome(), pessoa.getCidadeCompleta() };
+                Object[] linha = {pessoa.getId(), pessoa.getNome(), pessoa.getCidadeCompleta()};
                 modelo.addRow(linha);
             }
         } catch (SQLException ex) {
@@ -395,7 +406,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
         }
     }// GEN-LAST:event_btBuscarPessoaActionPerformed
 
-    private void btBuscarPessoaSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPessoaSelecionarActionPerformed
+    private void btBuscarPessoaSelecionarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (tableBuscarPessoa.getSelectedRow() == -1) {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -404,33 +415,30 @@ public class BuscarPessoa extends javax.swing.JDialog {
         int indicePessoa = tableBuscarPessoa.getSelectedRow();
         try {
             pessoa = pessoaController.buscarPessoaPorId(pessoas.get(indicePessoa).getId());
+            pessoa.setId(pessoas.get(indicePessoa).getId());
             pessoa.setEndereco(enderecoController.buscarEndereco(pessoa.getEnderecoId()));
-                            Pedido pedido = new Pedido();
-                pedido.setCliente(pessoa);
+
+            System.out.println(identificador);
             switch (identificador) {
                 case 1:
                     tela.preenchePessoa(pessoa);
                     break;
 
-                    case 2:
-                tela.preencheDoador(pessoa);
+                case 2:
+                    tela.preencheDoador(pessoa);
                     break;
 
-                    case 3:
-                tela.preenchePedido(pessoa);
-                    break
-            
+                case 3:
+                    System.out.println("teste");
+                    Pedido pedido = new Pedido();
+                    pedido.setCliente(pessoa);
+                    tela.preenchePedido(pedido);
+                    break;
+
                 default:
                     break;
             }
-            
-            if(origem == 1) {
-                tela.preenchePessoa(pessoa);
-            } else {
 
-                tela.preenchePedido(pedido);
-            }
-            
         } catch (SQLException ex) {
             Logger.getLogger(BuscarPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
