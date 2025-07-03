@@ -13,8 +13,10 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
+import java.sql.Date;
 
 public class PedidoDAO {
+
     private final Connection conexaoBanco;
 
     RegistrosLog log = new RegistrosLog();
@@ -55,7 +57,8 @@ public class PedidoDAO {
 
     public List<Pedido> listarPedidos(String sqlFiltro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT p.id AS codigo_pedido, u.nome AS pessoa, tu.tipo AS tipo_pessoa, p.datapedido AS data_pedido ");
+        sql.append(
+                "SELECT p.id AS codigo_pedido, u.nome AS pessoa, tu.tipo AS tipo_pessoa, p.datapedido AS data_pedido ");
         sql.append("FROM pedido p ");
         sql.append("JOIN usuario u ON p.pessoa = u.id ");
         sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
@@ -71,7 +74,7 @@ public class PedidoDAO {
 
             ResultSet rs = stmt.executeQuery();
             List<Pedido> pedidos = new ArrayList<>();
-            int qtdPedidos= 0;
+            int qtdPedidos = 0;
 
             while (rs.next()) {
                 Pedido pedido = new Pedido();
@@ -87,25 +90,29 @@ public class PedidoDAO {
                 LocalDate data = rs.getObject("data_pedido", LocalDate.class);
                 pedido.setDataPedido(data);
                 pedidos.add(pedido);
-                qtdPedidos ++;
+                qtdPedidos++;
             }
             if (!pedidos.isEmpty()) {
-                log.registrarLog(2, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Pedidos listados - foram encontrados "+ qtdPedidos +" registros");    
+                log.registrarLog(2, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo",
+                        "Pedidos listados - foram encontrados " + qtdPedidos + " registros");
             } else {
-                log.registrarLog(3, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Não foram encontrados registros");
+                log.registrarLog(3, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo",
+                        "Não foram encontrados registros");
             }
             return pedidos;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Erro ao consultar os pedidos");
+            log.registrarLog(4, "PedidoDAO", "consultarPedidos", "pedido, usuario, tipousuario, usuariotipo",
+                    "Erro ao consultar os pedidos");
             return null;
         }
     }
 
     public List<RelPedido> filtrarRegistrosRelatorio(String filtro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT p.id AS codigo_pedido, p.status, u.id AS codigo_cliente, u.nome AS nome_cliente, p.quantidade AS marmitas, u.local, p.observacao, p.dataPedido, p.dataEntrega, c.nome AS cidade ");
+        sql.append(
+                "SELECT p.id AS codigo_pedido, p.status, u.id AS codigo_cliente, u.nome AS nome_cliente, p.quantidade AS marmitas, u.local, p.observacao, p.dataPedido, p.dataEntrega, c.nome AS cidade ");
         sql.append("FROM pedido p ");
         sql.append("JOIN usuario u ON p.pessoa = u.id ");
         sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
@@ -129,16 +136,16 @@ public class PedidoDAO {
                 pedido.setStatus(rs.getString("status"));
                 pedido.setIdCliente(rs.getInt("codigo_cliente"));
                 pedido.setNomeCliente(rs.getString("nome_cliente"));
-                
+
                 String local = rs.getString("local");
                 if (local.equals("HOSPITAL")) {
                     pedido.setLocal("Hospital");
                 } else if (local.equals("PRONTOSOCORRO")) {
                     pedido.setLocal("Pronto Socorro");
                 } else {
-                    pedido.setLocal("");   
+                    pedido.setLocal("");
                 }
-                
+
                 pedido.setQtdMarmitas(rs.getInt("marmitas"));
                 LocalDate dataPedido = rs.getObject("dataPedido", LocalDate.class);
                 pedido.setDataPedido(dataPedido);
@@ -151,17 +158,21 @@ public class PedidoDAO {
                 }
                 pedidos.add(pedido);
             }
-            log.registrarLog(2, "PedidoDAO", "filtrarRegistrosRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Filtragem dos dados finalizada");
+            log.registrarLog(2, "PedidoDAO", "filtrarRegistrosRelatorio",
+                    "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Filtragem dos dados finalizada");
             return pedidos;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "PedidoDAO", "filtrarRegistrosRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Erro ao filtrar os dados do relatório");
+            log.registrarLog(4, "PedidoDAO", "filtrarRegistrosRelatorio",
+                    "pedido, usuario, usuariotipo, tipousuario, endereco, cidade",
+                    "Erro ao filtrar os dados do relatório");
             return null;
         }
     }
 
-    public RelPedido filtrarTotalRelatorio(RelPedido totalizacao, String filtro, List<Object> filtros) throws SQLException {
+    public RelPedido filtrarTotalRelatorio(RelPedido totalizacao, String filtro, List<Object> filtros)
+            throws SQLException {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ");
         sql.append("COALESCE(SUM(p.quantidade), 0) AS total_marmitas, ");
@@ -189,13 +200,84 @@ public class PedidoDAO {
                 totalizacao.setTotalFechado(rs.getInt("total_entregues"));
                 totalizacao.setTotalCancelado(rs.getInt("total_cancelados"));
             }
-            log.registrarLog(2, "PedidoDAO", "filtrarTotalRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Totalização finalizada");
+            log.registrarLog(2, "PedidoDAO", "filtrarTotalRelatorio",
+                    "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Totalização finalizada");
             return totalizacao;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            log.registrarLog(4, "PedidoDAO", "filtrarTotalRelatorio", "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Erro ao totalizar o relatório");
+            log.registrarLog(4, "PedidoDAO", "filtrarTotalRelatorio",
+                    "pedido, usuario, usuariotipo, tipousuario, endereco, cidade", "Erro ao totalizar o relatório");
             return null;
+        }
+    }
+
+    public Pedido buscarPedidoPorId(int idPedido) {
+        try {
+            String sql = "select p.id, p.status, u.id as idCliente, u.nome, tu.tipo,p.quantidade, p.observacao, p.dataPedido, p.dataEntrega from pedido p left join usuario u on u.id = p.pessoa left join usuarioTipo ut on ut.usuario = u.id left join tipoUsuario tu on tu.id = ut.tipoUsuario where p.id = ?";
+            PreparedStatement stmt = conexaoBanco.prepareStatement(sql);
+            stmt.setInt(1, idPedido);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Pedido pedido = new Pedido();
+                Pessoa cliente = new Pessoa();
+                cliente.setId(rs.getInt("idCliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setTipoUsuario(TipoCad.fromString(rs.getString("tu.tipo")));
+                pedido.setId(rs.getInt("id"));
+                pedido.setStatus(Pedido.StatusPedido.fromString(rs.getString("status")));
+                pedido.setCliente(cliente);
+                pedido.setQuantMarmita(rs.getInt("quantidade"));
+                pedido.setObservacao(rs.getString("observacao"));
+                if (rs.getDate("dataPedido") != null) {
+                    pedido.setDataPedido(rs.getDate("dataPedido").toLocalDate());
+                }
+                if (rs.getDate("dataEntrega") != null) {
+                    pedido.setDataEntrega(rs.getDate("dataEntrega").toLocalDate());
+                }
+                return pedido;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean alterarPedido(Pedido pedido) throws SQLException {
+        String sql = "UPDATE pedido SET pessoa = ?, quantidade = ?, status = ?, observacao = ?, dataPedido = ?, dataEntrega = ? WHERE id = ?";
+        try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql)) {
+            if (pedido.getCliente() != null && pedido.getCliente().getId() != null) {
+                stmt.setInt(1, pedido.getCliente().getId());
+            } else {
+                stmt.setNull(1, java.sql.Types.INTEGER);
+            }
+            if (pedido.getQuantMarmita() != null) {
+                stmt.setInt(2, pedido.getQuantMarmita());
+            } else {
+                stmt.setNull(2, java.sql.Types.INTEGER);
+            }
+            if (pedido.getStatus() != null) {
+                stmt.setString(3, pedido.getStatus().name());
+            } else {
+                stmt.setNull(3, java.sql.Types.VARCHAR);
+            }
+            stmt.setString(4, pedido.getObservacao() != null ? pedido.getObservacao() : "");
+            if (pedido.getDataPedido() != null) {
+                stmt.setDate(5, Date.valueOf(pedido.getDataPedido()));
+            } else {
+                stmt.setNull(5, java.sql.Types.DATE);
+            }
+            if (pedido.getDataEntrega() != null) {
+                stmt.setDate(6, Date.valueOf(pedido.getDataEntrega()));
+            } else {
+                stmt.setNull(6, java.sql.Types.DATE);
+            }
+            if (pedido.getId() != null) {
+                stmt.setInt(7, pedido.getId());
+            } else {
+                stmt.setNull(7, java.sql.Types.INTEGER); // ou lance erro se for obrigatório
+            }
+            return stmt.executeUpdate() == 1;
         }
     }
 }

@@ -4,18 +4,34 @@
  */
 package br.edu.iftm.sistemanossolar.view;
 
+import br.edu.iftm.sistemanossolar.controller.PedidoController;
+import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
+import java.sql.Connection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author AFSOUZA
  */
 public class BuscarPedido extends javax.swing.JDialog {
+    
+    private PedidoController pedidoController;
+    private DefaultTableModel modelo;
+    private static Telas tela;
+    private List<Pedido> pedidos;
 
     /**
      * Creates new form BuscarPessoa
      */
-    public BuscarPedido(java.awt.Frame parent, boolean modal) {
+    public BuscarPedido(java.awt.Frame parent, boolean modal, Connection conexao, Telas tela) {
         super(parent, modal);
         initComponents();
+        pedidoController = new PedidoController(conexao);
+        modelo = (DefaultTableModel) tableBuscarPessoa.getModel();
+        this.tela = tela;
     }
 
     /**
@@ -96,6 +112,11 @@ public class BuscarPedido extends javax.swing.JDialog {
 
         btBuscarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btBuscarPedido.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btBuscarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnBuscarPedidoFiltrosLayout = new javax.swing.GroupLayout(pnBuscarPedidoFiltros);
         pnBuscarPedidoFiltros.setLayout(pnBuscarPedidoFiltrosLayout);
@@ -104,12 +125,9 @@ public class BuscarPedido extends javax.swing.JDialog {
             .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
-                        .addComponent(tfBuscarPedidoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
-                        .addComponent(lbBuscarPedidoPessoa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(tfBuscarPedidoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbBuscarPedidoPessoa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbBuscarPedidoTipoPessoa)
                     .addComponent(cbBuscarPedidoTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,11 +164,11 @@ public class BuscarPedido extends javax.swing.JDialog {
                     .addGroup(pnBuscarPedidoFiltrosLayout.createSequentialGroup()
                         .addComponent(lbBuscarPedidoTipoPessoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbBuscarPedidoTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnBuscarPedidoFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(ffBuscarPedidoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ffBuscarPedidoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(ffBuscarPedidoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbBuscarPedidoTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btBuscarPedido))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -232,6 +250,11 @@ public class BuscarPedido extends javax.swing.JDialog {
 
         btBuscarPedidoSelecionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btBuscarPedidoSelecionar.setText("Selecionar");
+        btBuscarPedidoSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPedidoSelecionarActionPerformed(evt);
+            }
+        });
 
         btBuscarPedidoLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btBuscarPedidoLimpar.setText("Limpar");
@@ -292,59 +315,70 @@ public class BuscarPedido extends javax.swing.JDialog {
     }//GEN-LAST:event_tfBuscarPedidoPessoaKeyTyped
 
     private void btBuscarPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoLimparActionPerformed
-        tfBuscarPedidoPessoa.setText("");
-        cbBuscarPedidoTipoPessoa.setSelectedIndex(0);
-        ffBuscarPedidoDataInicio.setText("");
-        ffBuscarPedidoDataFim.setText("");
+        limparCampos();
     }//GEN-LAST:event_btBuscarPedidoLimparActionPerformed
 
     private void btBuscarPedidoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoSairActionPerformed
         // TODO add your handling code here:
+        limparCampos();
+        dispose();
     }//GEN-LAST:event_btBuscarPedidoSairActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuscarPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuscarPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuscarPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscarPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoActionPerformed
+        // TODO add your handling code here:
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String campoDataInicio = ffBuscarPedidoDataInicio.getText().trim();
+        String campoDataFim = ffBuscarPedidoDataFim.getText().trim();
+        LocalDate dataInicio;
+        if (campoDataInicio.contains(" ") || campoDataInicio.equals("//")) {
+            dataInicio = null;
+        } else {
+            dataInicio = LocalDate.parse(campoDataInicio, dataFormat);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        LocalDate dataFim;
+        if (campoDataFim.contains(" ") || campoDataFim.equals("//")) {
+            dataFim = null;
+        } else {
+            dataFim = LocalDate.parse(campoDataFim, dataFormat);
+        }
+        try {
+            pedidos = pedidoController.listarPedidos(tfBuscarPedidoPessoa.getText(), String.valueOf(cbBuscarPedidoTipoPessoa.getSelectedItem()), dataInicio, dataFim);
+            alimentaTabela(pedidos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                BuscarPedido dialog = new BuscarPedido(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    private void btBuscarPedidoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoSelecionarActionPerformed
+        // TODO add your handling code here:
+        if (tableBuscarPessoa.getSelectedRow() == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um pedido!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            Pedido pedido = pedidoController.buscarPedidoPorId(pedidos.get(tableBuscarPessoa.getSelectedRow()).getId());
+            tela.preenchePedido(pedido);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        limparCampos();
+        dispose();
+    }//GEN-LAST:event_btBuscarPedidoSelecionarActionPerformed
+    
+    public void alimentaTabela(List<Pedido> listagem) {
+        modelo.setRowCount(0);
+        for (Pedido pedido : listagem) {
+            Object[] linha = {pedido.getId(), pedido.getCliente().getNome(), pedido.getCliente().getTipoUsuario(), pedido.getDataPedido()};
+            modelo.addRow(linha);
+        }
+    }
+    
+    public void limparCampos() {
+        tfBuscarPedidoPessoa.setText("");
+        cbBuscarPedidoTipoPessoa.setSelectedIndex(0);
+        ffBuscarPedidoDataInicio.setText("");
+        ffBuscarPedidoDataFim.setText("");
+        modelo.setRowCount(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
