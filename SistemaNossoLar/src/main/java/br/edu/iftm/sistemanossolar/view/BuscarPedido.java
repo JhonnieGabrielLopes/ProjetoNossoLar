@@ -178,16 +178,7 @@ public class BuscarPedido extends javax.swing.JDialog {
         tableBuscarPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableBuscarPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Cód.", "Pessoa", "Tipo", "Data"
