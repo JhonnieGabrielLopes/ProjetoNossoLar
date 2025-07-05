@@ -30,16 +30,14 @@ import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
+import br.edu.iftm.sistemanossolar.model.relatorio.RetornoPedidos;
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -1755,7 +1753,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -2801,14 +2799,188 @@ public class Telas extends javax.swing.JFrame {
 
     private void btRelPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoBuscarClienteActionPerformed
         // TODO add your handling code here:
+        buscarPessoa.identificaTelas(4);
+        buscarPessoa.setVisible(true);
     }//GEN-LAST:event_btRelPedidoBuscarClienteActionPerformed
 
     private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
         // TODO add your handling code here:
+        try {
+            String dataInicio = tfRelPedDtPedidoInicio.getText().trim();
+            LocalDate dataPedidoInicioData = null;
+            if (!dataInicio.contains(" ") || !dataInicio.equals("/  /")) {
+                dataPedidoInicioData = LocalDate.parse(dataInicio, dataFormat);
+            }
+
+            String dataFim = tfRelPedDtPedidoFim.getText().trim();
+            LocalDate dataPedidoFimData = null;
+            if (!dataFim.contains(" ") || !dataFim.equals("/  /")) {
+                dataPedidoFimData = LocalDate.parse(dataFim, dataFormat);
+            }
+
+            String dataEntregaInicio = tfRelPedDtEntregaInicio.getText().trim();
+            LocalDate dataEntregaInicioData = null;
+            if (!dataEntregaInicio.contains(" ") || !dataEntregaInicio.equals("/  /")) {
+                dataEntregaInicioData = LocalDate.parse(dataEntregaInicio, dataFormat);
+            }
+
+            String dataEntregaFim = tfRelPedDtEntregaFim.getText().trim();
+            LocalDate dataEntregaFimData = null;
+            if (!dataEntregaFim.contains(" ") || !dataEntregaFim.equals("/  /")) {
+                dataEntregaFimData = LocalDate.parse(dataEntregaFim, dataFormat);
+            }
+
+            Integer idCliente = null;
+            String textoCliente = tfRelPedCliente.getText();
+            if (textoCliente != null && !textoCliente.isEmpty() && textoCliente.contains("-")) {
+                String[] partes = textoCliente.split("-", 2);
+                idCliente = Integer.valueOf(partes[0].trim());
+            }
+
+            String status = null;
+            if (cbRelPedStatus.getSelectedItem() != null) {
+                status = cbRelPedStatus.getSelectedItem().toString();
+            }
+
+            String local = null;
+            if (cbRelPedLocal.getSelectedItem() != null) {
+                local = cbRelPedLocal.getSelectedItem().toString();
+            }
+
+            String cidade = null;
+            if (cbRelPedCidade.getSelectedItem() != null) {
+                cidade = cbRelPedCidade.getSelectedItem().toString();
+            }
+
+            String ordem = null;
+            if (cbRelPedOrdenacao.getSelectedItem() != null) {
+                ordem = cbRelPedOrdenacao.getSelectedItem().toString();
+            }
+
+            String sentido = null;
+            if (cbRelPedSentido.getSelectedItem() != null) {
+                sentido = cbRelPedSentido.getSelectedItem().toString();
+            }
+
+            RetornoPedidos relPedidos = pedidoController.filtrarRelatorio(dataPedidoInicioData, dataPedidoFimData, dataEntregaInicioData, dataEntregaFimData, status, idCliente, local, cidade, ordem, sentido);
+
+            DefaultTableModel model = (DefaultTableModel) tableRelatorioPedido.getModel();
+            model.setRowCount(0);
+            int qttTotalMarmita = 0;
+            int qttTotalPendente = 0;
+            int qttTotalCancelado = 0;
+            int qttTotalEntregue = 0;
+
+            for (RelPedido relPedido : relPedidos.getPedidos()) {
+                String dataPedido = null;
+                if (relPedido.getDataPedido() != null) {
+                    dataPedido = relPedido.getDataPedido().format(dataFormat);
+                }
+                String dataEntrega = null;
+                if (relPedido.getDataEntrega() != null) {
+                    dataEntrega = relPedido.getDataEntrega().format(dataFormat);
+                }
+                Object[] novaLinha = {
+                    relPedido.getIdPedido(),
+                    relPedido.getStatus(),
+                    relPedido.getNomeCliente(),
+                    relPedido.getLocal(),
+                    relPedido.getQtdMarmitas(),
+                    relPedido.getObservacao(),
+                    dataPedido,
+                    dataEntrega
+                };
+                model.addRow(novaLinha);
+                qttTotalMarmita += relPedido.getQtdMarmitas();
+                switch (relPedido.getStatus()) {
+                    case "PENDENTE":
+                        qttTotalPendente++;
+                        break;
+
+                    case "CANCELADO":
+                        qttTotalCancelado++;
+                        break;
+                    case "ENTREGUE":
+                        qttTotalEntregue++;
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            }
+            tfRelPedTotMarmitas.setText(String.valueOf(qttTotalMarmita));
+            tfRelPedTotPendente.setText(String.valueOf(qttTotalPendente));
+            tfRelPedTotFechado.setText(String.valueOf(qttTotalEntregue));
+            tfRelPedTotCancelado.setText(String.valueOf(qttTotalCancelado));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_btRelPedFiltrarActionPerformed
 
     private void btRelPedidoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoSalvarActionPerformed
         // TODO add your handling code here:
+        try {
+            String dataInicio = tfRelPedDtPedidoInicio.getText().trim();
+            LocalDate dataPedidoInicioData = null;
+            if (!dataInicio.contains(" ") || !dataInicio.equals("/  /")) {
+                dataPedidoInicioData = LocalDate.parse(dataInicio, dataFormat);
+            }
+
+            String dataFim = tfRelPedDtPedidoFim.getText().trim();
+            LocalDate dataPedidoFimData = null;
+            if (!dataFim.contains(" ") || !dataFim.equals("/  /")) {
+                dataPedidoFimData = LocalDate.parse(dataFim, dataFormat);
+            }
+
+            String dataEntregaInicio = tfRelPedDtEntregaInicio.getText().trim();
+            LocalDate dataEntregaInicioData = null;
+            if (!dataEntregaInicio.contains(" ") || !dataEntregaInicio.equals("/  /")) {
+                dataEntregaInicioData = LocalDate.parse(dataEntregaInicio, dataFormat);
+            }
+
+            String dataEntregaFim = tfRelPedDtEntregaFim.getText().trim();
+            LocalDate dataEntregaFimData = null;
+            if (!dataEntregaFim.contains(" ") || !dataEntregaFim.equals("/  /")) {
+                dataEntregaFimData = LocalDate.parse(dataEntregaFim, dataFormat);
+            }
+
+            Integer idCliente = null;
+            String textoCliente = tfRelPedCliente.getText();
+            if (textoCliente != null && !textoCliente.isEmpty() && textoCliente.contains("-")) {
+                String[] partes = textoCliente.split("-", 2);
+                idCliente = Integer.valueOf(partes[0].trim());
+            }
+
+            String status = null;
+            if (cbRelPedStatus.getSelectedItem() != null) {
+                status = cbRelPedStatus.getSelectedItem().toString();
+            }
+
+            String local = null;
+            if (cbRelPedLocal.getSelectedItem() != null) {
+                local = cbRelPedLocal.getSelectedItem().toString();
+            }
+
+            String cidade = null;
+            if (cbRelPedCidade.getSelectedItem() != null) {
+                cidade = cbRelPedCidade.getSelectedItem().toString();
+            }
+
+            String ordem = null;
+            if (cbRelPedOrdenacao.getSelectedItem() != null) {
+                ordem = cbRelPedOrdenacao.getSelectedItem().toString();
+            }
+
+            String sentido = null;
+            if (cbRelPedSentido.getSelectedItem() != null) {
+                sentido = cbRelPedSentido.getSelectedItem().toString();
+            }
+
+            RetornoPedidos relPedidos = pedidoController.filtrarRelatorio(dataPedidoInicioData, dataPedidoFimData, dataEntregaInicioData, dataEntregaFimData, status, idCliente, local, cidade, ordem, sentido);
+            relatorioController.gerarRelatorioPedidos(relPedidos.getPedidos(), relPedidos.getTotalizacao(), relPedidos.getFiltros());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }      
     }//GEN-LAST:event_btRelPedidoSalvarActionPerformed
 
     private void btRelPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoLimparActionPerformed
@@ -3067,6 +3239,10 @@ public class Telas extends javax.swing.JFrame {
         for (Cidade cidade : puxarCidade) {
             cbEnderecoCidade.addItem(cidade);
         }
+    }
+
+    public void preenchePessoaRelatorioPedido(Pessoa pessoa) {
+        tfRelPedCliente.setText(pessoa.getId() + "-" + pessoa.getNome());
     }
 
     public void travaCamposDoacao() {

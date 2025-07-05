@@ -64,13 +64,18 @@ public class PedidoController {
     }
 
     public RetornoPedidos filtrarRelatorio(LocalDate dataPedidoInicio, LocalDate dataPedidoFim, LocalDate dataEntregaInicio, LocalDate dataEntregaFim, String status, Integer idCliente, String local, String cidade, String ordem, String sentido) throws SQLException {
-        log.registrarLog(1, "PedidoController", "filtrarRelatorio", "pedido, usuario", "Filtrando dados do relatório");
+        log.registrarLog(1, "PedidoController", "filtrarRelatorio", "pedido, usuario", "Filtrando dados do relatório"); 
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
 
-        if (dataPedidoInicio != null && dataPedidoFim == null) {
+        if (dataPedidoInicio != null) {
             sqlFiltro.append("AND p.dataPedido >= ? ");
             filtros.add(dataPedidoInicio);
+        }
+        
+        if (dataPedidoFim != null) {
+            sqlFiltro.append("AND p.dataPedido <= ? ");
+            filtros.add(dataPedidoFim);
         }
 
         if (dataPedidoInicio != null && dataPedidoFim != null) {
@@ -79,9 +84,14 @@ public class PedidoController {
             filtros.add(dataPedidoFim);
         }
 
-        if (dataEntregaInicio != null && dataEntregaFim == null) {
+        if (dataEntregaInicio != null) {
             sqlFiltro.append("AND p.dataEntrega >= ? ");
             filtros.add(dataEntregaInicio);
+        }
+        
+        if (dataEntregaFim != null) {
+            sqlFiltro.append("AND p.dataEntrega >= ? ");
+            filtros.add(dataEntregaFim);
         }
 
         if (dataEntregaInicio != null && dataEntregaFim != null) {
@@ -128,32 +138,32 @@ public class PedidoController {
         if (ordem != null && !ordem.isEmpty()) {
             sqlFinal.append("ORDER BY ");
             switch (ordem) {
-                case "codigo":
+                case "Código":
                     sqlFinal.append("p.id ");
                     break;
-                case "status":
+                case "Status":
                     sqlFinal.append("p.status ");
                     break;
-                case "quantidade":
+                case "Marmitas":
                     sqlFinal.append("p.quantidade ");
                     break;
-                case "dataPedido":
+                case "Data do Pedido":
                     sqlFinal.append("p.dataPedido ");
                     break;
-                case "dataEntrega":
+                case "Data da Entrega":
                     sqlFinal.append("p.dataEntrega ");
                     break;
-                case "nome":
+                case "Cliente":
                     sqlFinal.append("u.nome ");
                     break;
             }
-            sqlFinal.append(sentido.equals("asc") ? "ASC" : "DESC");
+            sqlFinal.append(sentido.equals("Crescente") ? "ASC" : "DESC");
         }
 
-        List<RelPedido> pedidos = new ArrayList<>();
+        List<RelPedido> pedidos;
         pedidos = pedidoDAO.filtrarRegistrosRelatorio(sqlFinal.toString(), filtros);
 
-        RelPedido totalizacao = new RelPedido();
+        RelPedido totalizacao;
         totalizacao = filtrarTotalRelatorio(new RelPedido(), sqlFiltro.toString(), filtros);
 
         return new RetornoPedidos(pedidos, totalizacao, filtrosRelatorio);
