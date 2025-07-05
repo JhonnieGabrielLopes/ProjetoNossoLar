@@ -30,16 +30,14 @@ import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
+import br.edu.iftm.sistemanossolar.model.relatorio.RetornoPedidos;
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -218,7 +216,7 @@ public class Telas extends javax.swing.JFrame {
         tfRelPedDtEntregaFim = new javax.swing.JFormattedTextField();
         lbRelPedOrdenacao = new javax.swing.JLabel();
         cbRelPedOrdenacao = new javax.swing.JComboBox<>();
-        cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao = new javax.swing.JComboBox<>();
+        cbRelPedSentido = new javax.swing.JComboBox<>();
         lbRelPedLocal = new javax.swing.JLabel();
         cbRelPedLocal = new javax.swing.JComboBox<>();
         btRelPedFiltrar = new javax.swing.JButton();
@@ -1412,8 +1410,8 @@ public class Telas extends javax.swing.JFrame {
         cbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelPedOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Cliente", "Data do Pedido", "Data da Entrega", "Status", "Marmitas" }));
 
-        cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crescente", "Decrescente" }));
+        cbRelPedSentido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbRelPedSentido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crescente", "Decrescente" }));
 
         lbRelPedLocal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelPedLocal.setText("Local:");
@@ -1451,7 +1449,7 @@ public class Telas extends javax.swing.JFrame {
                             .addComponent(lbRelPedOrdenacao)
                             .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbRelPedSentido, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1517,7 +1515,7 @@ public class Telas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfRelPedDtEntregaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRelPedSentido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfRelPedDtEntregaFim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
                         .addComponent(lbRelPedOrdenacao)
@@ -2801,25 +2799,188 @@ public class Telas extends javax.swing.JFrame {
 
     private void btRelPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoBuscarClienteActionPerformed
         // TODO add your handling code here:
+        buscarPessoa.identificaTelas(4);
+        buscarPessoa.setVisible(true);
     }//GEN-LAST:event_btRelPedidoBuscarClienteActionPerformed
 
     private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
         // TODO add your handling code here:
-        LocalDate dataPedidoInicio = LocalDate.parse(tfRelPedDtPedidoInicio.getText(), dataFormat);
-        LocalDate dataPedidoFim = LocalDate.parse(tfRelPedDtPedidoFim.getText(), dataFormat);
-        LocalDate dataEntregaInicio = LocalDate.parse(tfRelPedDtEntregaInicio.getText(), dataFormat);
-        LocalDate dataEntregaFim = LocalDate.parse(tfRelPedDtEntregaFim.getText(), dataFormat);
-        String status = cbRelPedStatus.getSelectedItem().toString();
-        Integer idCliente
-        String local = String.valueOf(cbRelPedLocal.getSelectedObjects());
-        String cidade = String.valueOf(cbRelPedCidade.getSelectedItem());
-        String ordem = String.valueOf(cbRelPedOrdenacao.getSelectedItem());
-        String sentido = String.valueOf(cbRelPedOrdenacao.getSelectedItem());
+        try {
+            String dataInicio = tfRelPedDtPedidoInicio.getText().trim();
+            LocalDate dataPedidoInicioData = null;
+            if (!dataInicio.contains(" ") || !dataInicio.equals("/  /")) {
+                dataPedidoInicioData = LocalDate.parse(dataInicio, dataFormat);
+            }
+
+            String dataFim = tfRelPedDtPedidoFim.getText().trim();
+            LocalDate dataPedidoFimData = null;
+            if (!dataFim.contains(" ") || !dataFim.equals("/  /")) {
+                dataPedidoFimData = LocalDate.parse(dataFim, dataFormat);
+            }
+
+            String dataEntregaInicio = tfRelPedDtEntregaInicio.getText().trim();
+            LocalDate dataEntregaInicioData = null;
+            if (!dataEntregaInicio.contains(" ") || !dataEntregaInicio.equals("/  /")) {
+                dataEntregaInicioData = LocalDate.parse(dataEntregaInicio, dataFormat);
+            }
+
+            String dataEntregaFim = tfRelPedDtEntregaFim.getText().trim();
+            LocalDate dataEntregaFimData = null;
+            if (!dataEntregaFim.contains(" ") || !dataEntregaFim.equals("/  /")) {
+                dataEntregaFimData = LocalDate.parse(dataEntregaFim, dataFormat);
+            }
+
+            Integer idCliente = null;
+            String textoCliente = tfRelPedCliente.getText();
+            if (textoCliente != null && !textoCliente.isEmpty() && textoCliente.contains("-")) {
+                String[] partes = textoCliente.split("-", 2);
+                idCliente = Integer.valueOf(partes[0].trim());
+            }
+
+            String status = null;
+            if (cbRelPedStatus.getSelectedItem() != null) {
+                status = cbRelPedStatus.getSelectedItem().toString();
+            }
+
+            String local = null;
+            if (cbRelPedLocal.getSelectedItem() != null) {
+                local = cbRelPedLocal.getSelectedItem().toString();
+            }
+
+            String cidade = null;
+            if (cbRelPedCidade.getSelectedItem() != null) {
+                cidade = cbRelPedCidade.getSelectedItem().toString();
+            }
+
+            String ordem = null;
+            if (cbRelPedOrdenacao.getSelectedItem() != null) {
+                ordem = cbRelPedOrdenacao.getSelectedItem().toString();
+            }
+
+            String sentido = null;
+            if (cbRelPedSentido.getSelectedItem() != null) {
+                sentido = cbRelPedSentido.getSelectedItem().toString();
+            }
+
+            RetornoPedidos relPedidos = pedidoController.filtrarRelatorio(dataPedidoInicioData, dataPedidoFimData, dataEntregaInicioData, dataEntregaFimData, status, idCliente, local, cidade, ordem, sentido);
+
+            DefaultTableModel model = (DefaultTableModel) tableRelatorioPedido.getModel();
+            model.setRowCount(0);
+            int qttTotalMarmita = 0;
+            int qttTotalPendente = 0;
+            int qttTotalCancelado = 0;
+            int qttTotalEntregue = 0;
+
+            for (RelPedido relPedido : relPedidos.getPedidos()) {
+                String dataPedido = null;
+                if (relPedido.getDataPedido() != null) {
+                    dataPedido = relPedido.getDataPedido().format(dataFormat);
+                }
+                String dataEntrega = null;
+                if (relPedido.getDataEntrega() != null) {
+                    dataEntrega = relPedido.getDataEntrega().format(dataFormat);
+                }
+                Object[] novaLinha = {
+                    relPedido.getIdPedido(),
+                    relPedido.getStatus(),
+                    relPedido.getNomeCliente(),
+                    relPedido.getLocal(),
+                    relPedido.getQtdMarmitas(),
+                    relPedido.getObservacao(),
+                    dataPedido,
+                    dataEntrega
+                };
+                model.addRow(novaLinha);
+                qttTotalMarmita += relPedido.getQtdMarmitas();
+                switch (relPedido.getStatus()) {
+                    case "PENDENTE":
+                        qttTotalPendente++;
+                        break;
+
+                    case "CANCELADO":
+                        qttTotalCancelado++;
+                        break;
+                    case "ENTREGUE":
+                        qttTotalEntregue++;
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            }
+            tfRelPedTotMarmitas.setText(String.valueOf(qttTotalMarmita));
+            tfRelPedTotPendente.setText(String.valueOf(qttTotalPendente));
+            tfRelPedTotFechado.setText(String.valueOf(qttTotalEntregue));
+            tfRelPedTotCancelado.setText(String.valueOf(qttTotalCancelado));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_btRelPedFiltrarActionPerformed
 
     private void btRelPedidoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoSalvarActionPerformed
         // TODO add your handling code here:
+        try {
+            String dataInicio = tfRelPedDtPedidoInicio.getText().trim();
+            LocalDate dataPedidoInicioData = null;
+            if (!dataInicio.contains(" ") || !dataInicio.equals("/  /")) {
+                dataPedidoInicioData = LocalDate.parse(dataInicio, dataFormat);
+            }
+
+            String dataFim = tfRelPedDtPedidoFim.getText().trim();
+            LocalDate dataPedidoFimData = null;
+            if (!dataFim.contains(" ") || !dataFim.equals("/  /")) {
+                dataPedidoFimData = LocalDate.parse(dataFim, dataFormat);
+            }
+
+            String dataEntregaInicio = tfRelPedDtEntregaInicio.getText().trim();
+            LocalDate dataEntregaInicioData = null;
+            if (!dataEntregaInicio.contains(" ") || !dataEntregaInicio.equals("/  /")) {
+                dataEntregaInicioData = LocalDate.parse(dataEntregaInicio, dataFormat);
+            }
+
+            String dataEntregaFim = tfRelPedDtEntregaFim.getText().trim();
+            LocalDate dataEntregaFimData = null;
+            if (!dataEntregaFim.contains(" ") || !dataEntregaFim.equals("/  /")) {
+                dataEntregaFimData = LocalDate.parse(dataEntregaFim, dataFormat);
+            }
+
+            Integer idCliente = null;
+            String textoCliente = tfRelPedCliente.getText();
+            if (textoCliente != null && !textoCliente.isEmpty() && textoCliente.contains("-")) {
+                String[] partes = textoCliente.split("-", 2);
+                idCliente = Integer.valueOf(partes[0].trim());
+            }
+
+            String status = null;
+            if (cbRelPedStatus.getSelectedItem() != null) {
+                status = cbRelPedStatus.getSelectedItem().toString();
+            }
+
+            String local = null;
+            if (cbRelPedLocal.getSelectedItem() != null) {
+                local = cbRelPedLocal.getSelectedItem().toString();
+            }
+
+            String cidade = null;
+            if (cbRelPedCidade.getSelectedItem() != null) {
+                cidade = cbRelPedCidade.getSelectedItem().toString();
+            }
+
+            String ordem = null;
+            if (cbRelPedOrdenacao.getSelectedItem() != null) {
+                ordem = cbRelPedOrdenacao.getSelectedItem().toString();
+            }
+
+            String sentido = null;
+            if (cbRelPedSentido.getSelectedItem() != null) {
+                sentido = cbRelPedSentido.getSelectedItem().toString();
+            }
+
+            RetornoPedidos relPedidos = pedidoController.filtrarRelatorio(dataPedidoInicioData, dataPedidoFimData, dataEntregaInicioData, dataEntregaFimData, status, idCliente, local, cidade, ordem, sentido);
+            relatorioController.gerarRelatorioPedidos(relPedidos.getPedidos(), relPedidos.getTotalizacao(), relPedidos.getFiltros());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }      
     }//GEN-LAST:event_btRelPedidoSalvarActionPerformed
 
     private void btRelPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoLimparActionPerformed
@@ -2840,7 +3001,7 @@ public class Telas extends javax.swing.JFrame {
         cbRelPedCidade.setSelectedIndex(0);
         cbRelPedLocal.setSelectedIndex(0);
         cbRelPedOrdenacao.setSelectedIndex(0);
-        cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao.setSelectedIndex(0);
+        cbRelPedSentido.setSelectedIndex(0);
         modeloTabelaRelatorioPedido.setRowCount(0);
     }
 
@@ -3080,6 +3241,10 @@ public class Telas extends javax.swing.JFrame {
         }
     }
 
+    public void preenchePessoaRelatorioPedido(Pessoa pessoa) {
+        tfRelPedCliente.setText(pessoa.getId() + "-" + pessoa.getNome());
+    }
+
     public void travaCamposDoacao() {
         jsDoacaoQuantidadeProduto.setEnabled(false);
         tfDoacaoIdDoacao.setEnabled(false);
@@ -3205,7 +3370,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbRelPedCidade;
     private javax.swing.JComboBox<String> cbRelPedLocal;
     private javax.swing.JComboBox<String> cbRelPedOrdenacao;
-    private javax.swing.JComboBox<String> cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao;
+    private javax.swing.JComboBox<String> cbRelPedSentido;
     private javax.swing.JComboBox<String> cbRelPedStatus;
     private javax.swing.JComboBox<String> cbTipoUsuario;
     private javax.swing.JFormattedTextField ffDocumento;
