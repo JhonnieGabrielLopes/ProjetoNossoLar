@@ -180,16 +180,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
         tableBuscarPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableBuscarPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Cód.", "Doador", "Tipo", "Data"
@@ -347,24 +338,35 @@ public class BuscarDoacao extends javax.swing.JDialog {
     }//GEN-LAST:event_tfBuscarDoacaoDoadorKeyTyped
 
     private void btBuscarDoacaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarDoacaoLimparActionPerformed
+        limparTela();
+    }//GEN-LAST:event_btBuscarDoacaoLimparActionPerformed
+
+    public void limparTela(){
         tfBuscarDoacaoDoador.setText("");
         cbBuscarDocaoTipo.setSelectedIndex(0);
         ffBuscarDoacaoDataInicio.setText("");
         ffBuscarDoacaoDataFim.setText("");
         modelo.setRowCount(0);
-    }//GEN-LAST:event_btBuscarDoacaoLimparActionPerformed
-
+    }
+    
     private void btBuscarDoacaoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarDoacaoSelecionarActionPerformed
-        int indiceDoacao = tableBuscarPessoa.getSelectedRow();
-        doacao = listagem.get(indiceDoacao);
-        produtos = doacaoController.listagemDeProduto(doacao);
-        doacao.setProduto(produtos);
-        tela.preencheDoacao(doacao);
-        dispose();
+        if (tableBuscarPessoa.getSelectedRow() == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            int indiceDoacao = tableBuscarPessoa.getSelectedRow();
+            doacao = listagem.get(indiceDoacao);
+            produtos = doacaoController.listagemDeProduto(doacao);
+            doacao.setProduto(produtos);
+            tela.preencheDoacao(doacao);
+            limparTela();
+            dispose();
+        }
     }//GEN-LAST:event_btBuscarDoacaoSelecionarActionPerformed
 
     private void btBuscarDoacaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarDoacaoSairActionPerformed
-        // TODO add your handling code here:
+        limparTela();
+        dispose();
     }//GEN-LAST:event_btBuscarDoacaoSairActionPerformed
     
     public void alimentaTabela(List<Doacao> listagem){

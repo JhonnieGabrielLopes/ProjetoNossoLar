@@ -372,8 +372,12 @@ public class BuscarPessoa extends javax.swing.JDialog {
 
     public void limparTela() {
         tfBuscarPessoaNome.setText("");
-        cbBuscarPessoaTipo.setSelectedIndex(0);
         cbBuscarPessoaCidade.setSelectedIndex(0);
+        if (identificador==2) {
+            cbBuscarPessoaTipo.setSelectedIndex(2);
+        } else {
+            cbBuscarPessoaTipo.setSelectedIndex(0);
+        }
         tabelaModelo.setRowCount(0);
     }
 
@@ -418,7 +422,6 @@ public class BuscarPessoa extends javax.swing.JDialog {
             pessoa.setId(pessoas.get(indicePessoa).getId());
             pessoa.setEndereco(enderecoController.buscarEndereco(pessoa.getEnderecoId()));
 
-            System.out.println(identificador);
             switch (identificador) {
                 case 1:
                     tela.preenchePessoa(pessoa);
