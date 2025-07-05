@@ -64,7 +64,7 @@ public class PedidoController {
     }
 
     public RetornoPedidos filtrarRelatorio(LocalDate dataPedidoInicio, LocalDate dataPedidoFim, LocalDate dataEntregaInicio, LocalDate dataEntregaFim, String status, Integer idCliente, String local, String cidade, String ordem, String sentido) throws SQLException {
-        log.registrarLog(1, "PedidoController", "filtrarRelatorio", "pedido, usuario", "Filtrando dados do relatório");
+        log.registrarLog(1, "PedidoController", "filtrarRelatorio", "pedido, usuario", "Filtrando dados do relatório"); 
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
 

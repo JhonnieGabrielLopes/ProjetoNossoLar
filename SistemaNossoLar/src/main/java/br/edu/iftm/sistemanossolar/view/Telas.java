@@ -218,7 +218,7 @@ public class Telas extends javax.swing.JFrame {
         tfRelPedDtEntregaFim = new javax.swing.JFormattedTextField();
         lbRelPedOrdenacao = new javax.swing.JLabel();
         cbRelPedOrdenacao = new javax.swing.JComboBox<>();
-        cbRelPedSentido = new javax.swing.JComboBox<>();
+        cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao = new javax.swing.JComboBox<>();
         lbRelPedLocal = new javax.swing.JLabel();
         cbRelPedLocal = new javax.swing.JComboBox<>();
         btRelPedFiltrar = new javax.swing.JButton();
@@ -1422,8 +1422,8 @@ public class Telas extends javax.swing.JFrame {
         cbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbRelPedOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Cliente", "Data do Pedido", "Data da Entrega", "Status", "Marmitas" }));
 
-        cbRelPedSentido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbRelPedSentido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crescente", "Decrescente" }));
+        cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crescente", "Decrescente" }));
 
         lbRelPedLocal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelPedLocal.setText("Local:");
@@ -1461,7 +1461,7 @@ public class Telas extends javax.swing.JFrame {
                             .addComponent(lbRelPedOrdenacao)
                             .addComponent(cbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbRelPedSentido, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnRelPedFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbRelPedLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1527,7 +1527,7 @@ public class Telas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfRelPedDtEntregaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btRelPedFiltrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbRelPedSentido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfRelPedDtEntregaFim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelPedFiltrosLayout.createSequentialGroup()
                         .addComponent(lbRelPedOrdenacao)
@@ -1765,7 +1765,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -2810,6 +2810,17 @@ public class Telas extends javax.swing.JFrame {
 
     private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
         // TODO add your handling code here:
+        LocalDate dataPedidoInicio = LocalDate.parse(tfRelPedDtPedidoInicio.getText(), dataFormat);
+        LocalDate dataPedidoFim = LocalDate.parse(tfRelPedDtPedidoFim.getText(), dataFormat);
+        LocalDate dataEntregaInicio = LocalDate.parse(tfRelPedDtEntregaInicio.getText(), dataFormat);
+        LocalDate dataEntregaFim = LocalDate.parse(tfRelPedDtEntregaFim.getText(), dataFormat);
+        String status = cbRelPedStatus.getSelectedItem().toString();
+        Integer idCliente
+        String local = String.valueOf(cbRelPedLocal.getSelectedObjects());
+        String cidade = String.valueOf(cbRelPedCidade.getSelectedItem());
+        String ordem = String.valueOf(cbRelPedOrdenacao.getSelectedItem());
+        String sentido = String.valueOf(cbRelPedOrdenacao.getSelectedItem());
+
     }//GEN-LAST:event_btRelPedFiltrarActionPerformed
 
     private void btRelPedidoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoSalvarActionPerformed
@@ -2834,7 +2845,7 @@ public class Telas extends javax.swing.JFrame {
         cbRelPedCidade.setSelectedIndex(0);
         cbRelPedLocal.setSelectedIndex(0);
         cbRelPedOrdenacao.setSelectedIndex(0);
-        cbRelPedSentido.setSelectedIndex(0);
+        cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao.setSelectedIndex(0);
         modeloTabelaRelatorioPedido.setRowCount(0);
     }
 
@@ -3202,7 +3213,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbRelPedCidade;
     private javax.swing.JComboBox<String> cbRelPedLocal;
     private javax.swing.JComboBox<String> cbRelPedOrdenacao;
-    private javax.swing.JComboBox<String> cbRelPedSentido;
+    private javax.swing.JComboBox<String> cbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacaocbRelPedOrdenacao;
     private javax.swing.JComboBox<String> cbRelPedStatus;
     private javax.swing.JComboBox<String> cbTipoUsuario;
     private javax.swing.JFormattedTextField ffDocumento;
