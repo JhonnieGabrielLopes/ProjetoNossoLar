@@ -1,5 +1,6 @@
 package br.edu.iftm.sistemanossolar.controller;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -27,16 +29,13 @@ import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
-import br.edu.iftm.sistemanossolar.model.relatorio.RetornoPedidos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 
 public class RelatorioController {
     private DoacaoController doacaoController;
-    private PedidoController pedidoController;
 
     public RelatorioController(Connection conexao) {
         this.doacaoController = new DoacaoController(conexao);
-        this.pedidoController = new PedidoController(conexao);
     }
 
     RegistrosLog log = new RegistrosLog();
@@ -95,6 +94,24 @@ public class RelatorioController {
             e.printStackTrace();
             log.registrarLog(4, "RelatorioController", "montarArquivo", "", "Arquivo '.pdf' não foi montado");
             throw new IOException();
+        }
+    }
+
+    public void abrirPDF(String caminhoArquivo) {
+        try {
+            File arquivo = new File(caminhoArquivo);
+            if (!arquivo.exists()) {
+                log.registrarLog(3, "RelatorioController", "abrirPDF", "", "O arquivo não existe: " + caminhoArquivo);
+                System.out.println("O arquivo não existe: " + caminhoArquivo);
+                return;
+            } else {
+                log.registrarLog(2, "RelatorioController", "abrirPDF", "", "Abrindo o arquivo: " + caminhoArquivo);
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(arquivo);
+            }
+
+        } catch (IOException e) {
+            log.registrarLog(4, "RelatorioController", "abrirPDF", "", "Erro ao tentar abrir o arquivo: " + e.getMessage());
         }
     }
 
@@ -272,7 +289,7 @@ public class RelatorioController {
         criarArquivo(diretorio, arquivo, templatePreenchido);
     }
 
-    public void gerarReciboPedido(Pedido pedido) throws IOException {
+    public boolean gerarReciboPedido(Pedido pedido, AtomicReference<String> diretorioArquivo) throws IOException {
         log.registrarLog(1, "Metodos", "gerarReciboPedido", "", "Gerando recibo da Abertura do Pedido");
 
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -318,20 +335,16 @@ public class RelatorioController {
 
         String diretorio = "C:\\SistemaNossoLar\\Recibos\\Pedidos";
         String arquivo = diretorio + "\\Pedido " +pedido.getId().toString()+ ".pdf";
-        criarArquivo(diretorio, arquivo, templatePreenchido);
+        try {
+            criarArquivo(diretorio, arquivo, templatePreenchido);
+            diretorioArquivo.set(arquivo);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public void relatorioPedido() throws SQLException, IOException {
-        //METODO PARA TESTES NO TERMINAL
-        String data1 = "2023-06-01";
-        LocalDate dataTeste1 = LocalDate.parse(data1);
-        String data2 = "2023-06-15"; 
-        LocalDate dataTeste2 = LocalDate.parse(data2);
-        RetornoPedidos relatorio = pedidoController.filtrarRelatorio(null, null, null, null, "Todos", null, "Todos", "Todas", "dataPedido", "asc");
-        gerarRelatorioPedidos(relatorio.getPedidos(), relatorio.getTotalizacao(), relatorio.getFiltros());
-    }
-
-    public boolean gerarRelatorioPedidos(List<RelPedido> dados, RelPedido totalizacao, List<Object> filtros) throws IOException {
+    public boolean gerarRelatorioPedidos(List<RelPedido> dados, RelPedido totalizacao, List<Object> filtros, AtomicReference<String> diretorioArquivo) throws IOException {
         log.registrarLog(1, "RelatorioController", "gerarRelatorioPedidos", "", "Gerando relatorio de Pedidos");
 
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -458,6 +471,7 @@ public class RelatorioController {
             template = template.replace("{{sentido}}", sentido);
         }
 
+        formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime agora = LocalDateTime.now();
         template = template.replace("{{resultados}}", resultado.toString())
                            .replace("{{qtdPedidos}}", String.valueOf(qtdRegistros))
@@ -474,6 +488,7 @@ public class RelatorioController {
         String arquivo = diretorio + "\\Pedidos " +dataHoraAgora+ ".pdf";
         try {
             criarArquivo(diretorio, arquivo, templatePreenchido);
+            diretorioArquivo.set(arquivo);
             return true;
         } catch (Exception e) {
             return false;

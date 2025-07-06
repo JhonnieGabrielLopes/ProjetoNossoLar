@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
+import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
@@ -217,20 +219,24 @@ public class PedidoDAO {
 
     public Pedido buscarPedidoPorId(int idPedido) {
         try {
-            String sql = "select p.id, p.status, u.id as idCliente, u.nome, tu.tipo,p.quantidade, p.observacao, p.dataPedido, p.dataEntrega from pedido p left join usuario u on u.id = p.pessoa left join usuarioTipo ut on ut.usuario = u.id left join tipoUsuario tu on tu.id = ut.tipoUsuario where p.id = ?";
+            String sql = "select p.id, p.status, u.id as idCliente, u.nome, tu.tipo, p.quantidade, pa.nome AS paciente, u.local, p.observacao, p.dataPedido, p.dataEntrega from pedido p left join usuario u on u.id = p.pessoa left join usuarioTipo ut on ut.usuario = u.id left join tipoUsuario tu on tu.id = ut.tipoUsuario left join paciente pa on pa.usuario = p.pessoa where p.id = ?";
             PreparedStatement stmt = conexaoBanco.prepareStatement(sql);
             stmt.setInt(1, idPedido);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Pedido pedido = new Pedido();
                 Pessoa cliente = new Pessoa();
+                Paciente paciente = new Paciente();
                 cliente.setId(rs.getInt("idCliente"));
                 cliente.setNome(rs.getString("nome"));
                 cliente.setTipoUsuario(TipoCad.fromString(rs.getString("tu.tipo")));
+                cliente.setLocal(Local.fromString(rs.getString("local")));
+                paciente.setNome(rs.getString("paciente"));
+                cliente.setPaciente(paciente);
                 pedido.setId(rs.getInt("id"));
+                pedido.setQuantMarmita(rs.getInt("quantidade"));
                 pedido.setStatus(Pedido.StatusPedido.fromString(rs.getString("status")));
                 pedido.setCliente(cliente);
-                pedido.setQuantMarmita(rs.getInt("quantidade"));
                 pedido.setObservacao(rs.getString("observacao"));
                 if (rs.getDate("dataPedido") != null) {
                     pedido.setDataPedido(rs.getDate("dataPedido").toLocalDate());

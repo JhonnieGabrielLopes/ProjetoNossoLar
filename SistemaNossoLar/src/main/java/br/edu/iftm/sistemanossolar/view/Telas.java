@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -2706,7 +2708,19 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btPedidoBuscarPedidoActionPerformed
 
     private void btPedidoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoReciboActionPerformed
-        // TODO add your handling code here:
+        AtomicReference<String> diretorioArquivo = new AtomicReference<>();
+        try {
+            if (relatorioController.gerarReciboPedido(pedidoController.buscarPedidoPorId(Integer.parseInt(tfPedidoIdPedido.getText())), diretorioArquivo)) {
+                String arquivo = diretorioArquivo.get();    
+                if (JOptionPane.showConfirmDialog(rootPane, "Recibo gerado!\nDeseja visualizar agora?", "Recibo Pedido", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    relatorioController.abrirPDF(arquivo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btPedidoReciboActionPerformed
 
     private void btPedidoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoRelatorioActionPerformed
@@ -2768,10 +2782,13 @@ public class Telas extends javax.swing.JFrame {
             if (pedidoController.cadastrarPedido(novoPedido)) {
                 int opcao = JOptionPane.showConfirmDialog(rootPane, "Pedido cadastrado com sucesso!\nDeseja gerar o recibo agora?", "Cadastro de Pedido", JOptionPane.YES_NO_OPTION);
                 if (opcao == JOptionPane.YES_OPTION) {
+                    AtomicReference<String> diretorioArquivo = new AtomicReference<>();
                     try {
-                        relatorioController.gerarReciboPedido(novoPedido);
-                        if (JOptionPane.showConfirmDialog(rootPane, "Recibo gerado!\nDeseja visualizar agora?", "Recibo Doação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            // lógica para abrir PDF
+                        if (relatorioController.gerarReciboPedido(novoPedido, diretorioArquivo)) {
+                            String arquivo = diretorioArquivo.get();    
+                            if (JOptionPane.showConfirmDialog(rootPane, "Recibo gerado!\nDeseja visualizar agora?", "Recibo Pedido", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                relatorioController.abrirPDF(arquivo);
+                            }
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -3030,12 +3047,14 @@ public class Telas extends javax.swing.JFrame {
             }
 
             RetornoPedidos relPedidos = pedidoController.filtrarRelatorio(dataPedidoInicioData, dataPedidoFimData, dataEntregaInicioData, dataEntregaFimData, status, idCliente, local, cidade, ordem, sentido);
-            if (relatorioController.gerarRelatorioPedidos(relPedidos.getPedidos(), relPedidos.getTotalizacao(), relPedidos.getFiltros())) {
+            AtomicReference<String> diretorioArquivo = new AtomicReference<>();
+            if (relatorioController.gerarRelatorioPedidos(relPedidos.getPedidos(), relPedidos.getTotalizacao(), relPedidos.getFiltros(), diretorioArquivo)) {
+                String arquivo = diretorioArquivo.get();    
                 if (JOptionPane.showConfirmDialog(rootPane, "Relatório gerado!\nDeseja visualizar agora?", "Relatório Pedidos", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    // lógica para abrir PDF
-                }    
+                    relatorioController.abrirPDF(arquivo);
+                }
             }
-            
+            limparTelaRelPed();
         } catch (Exception e) {
             e.printStackTrace();
         }      
