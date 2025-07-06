@@ -8,6 +8,7 @@ import java.util.List;
 
 import br.edu.iftm.sistemanossolar.dao.PedidoDAO;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.model.relatorio.RetornoPedidos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
@@ -27,7 +28,7 @@ public class PedidoController {
         return pedidoDAO.cadastrarPedido(pedido);
     }
 
-    public List<Pedido> listarPedidos(String nomePessoa, String tipoUsuario, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+    public List<Pedido> listarPedidos(String nomePessoa, String status, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
         log.registrarLog(1, "PedidoController", "buscarPedidos", "pedido, usuario, tipousuario, usuariotipo", "Listando pedidos para seleção");
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
@@ -37,11 +38,9 @@ public class PedidoController {
             filtros.add("%" + nomePessoa + "%");
         }
 
-        if (!tipoUsuario.isEmpty() && tipoUsuario.equals("Todos")) {
-            sqlFiltro.append("AND (tu.tipo = 'ASSISTENTE' OR tu.tipo = 'BENEFICIARIO') ");
-        } else if (!tipoUsuario.isEmpty() && !tipoUsuario.equals("Todos")) {
-            sqlFiltro.append("AND tu.tipo = ? ");
-            filtros.add(tipoUsuario);
+        if (!status.isEmpty() && !status.equals("Todos")) {
+            sqlFiltro.append("AND p.status = ? ");
+            filtros.add(status);
         }
 
         if (dataInicio != null && dataFim == null) {
@@ -67,37 +66,38 @@ public class PedidoController {
         log.registrarLog(1, "PedidoController", "filtrarRelatorio", "pedido, usuario", "Filtrando dados do relatório"); 
         StringBuilder sqlFiltro = new StringBuilder();
         List<Object> filtros = new ArrayList<>();
-
-        if (dataPedidoInicio != null) {
-            sqlFiltro.append("AND p.dataPedido >= ? ");
-            filtros.add(dataPedidoInicio);
-        }
-        
-        if (dataPedidoFim != null) {
-            sqlFiltro.append("AND p.dataPedido <= ? ");
-            filtros.add(dataPedidoFim);
-        }
+        String localSemEspaco = local.replaceAll("\\s+", "");
 
         if (dataPedidoInicio != null && dataPedidoFim != null) {
             sqlFiltro.append("AND p.dataPedido BETWEEN ? AND ? ");
             filtros.add(dataPedidoInicio);
             filtros.add(dataPedidoFim);
-        }
-
-        if (dataEntregaInicio != null) {
-            sqlFiltro.append("AND p.dataEntrega >= ? ");
-            filtros.add(dataEntregaInicio);
-        }
+        } else {
+            if (dataPedidoInicio != null) {
+                sqlFiltro.append("AND p.dataPedido >= ? ");
+                filtros.add(dataPedidoInicio);
+            }
         
-        if (dataEntregaFim != null) {
-            sqlFiltro.append("AND p.dataEntrega >= ? ");
-            filtros.add(dataEntregaFim);
+            if (dataPedidoFim != null) {
+                sqlFiltro.append("AND p.dataPedido <= ? ");
+                filtros.add(dataPedidoFim);
+            }
         }
 
         if (dataEntregaInicio != null && dataEntregaFim != null) {
             sqlFiltro.append("AND p.dataEntrega BETWEEN ? AND ? ");
             filtros.add(dataEntregaInicio);
             filtros.add(dataEntregaFim);
+        } else {
+            if (dataEntregaInicio != null) {
+                sqlFiltro.append("AND p.dataEntrega >= ? ");
+                filtros.add(dataEntregaInicio);
+            }
+        
+            if (dataEntregaFim != null) {
+                sqlFiltro.append("AND p.dataEntrega <= ? ");
+                filtros.add(dataEntregaFim);
+            }
         }
 
         if (status != null && !status.equals("Todos")) {
@@ -105,9 +105,15 @@ public class PedidoController {
             filtros.add(status);
         }
 
-        if (local != null && !local.isEmpty() && !local.equals("Todos")) {
-            sqlFiltro.append("AND u.local LIKE ? ");
-            filtros.add("%" + local + "%");
+        if (localSemEspaco != null && !localSemEspaco.isEmpty() && !localSemEspaco.equals("Todos")) {
+            try {
+                Pessoa.Local localEnum = Pessoa.Local.fromString(localSemEspaco);
+                sqlFiltro.append("AND u.local = ? ");
+                filtros.add(localEnum.name()); 
+            } catch (IllegalArgumentException e) {
+                log.registrarLog(3, "PedidoController", "filtrarRelatorio", "pedido, usuario", "Local inválido: " + localSemEspaco);
+                throw new SQLException("Local inválido: " + localSemEspaco);
+            }
         }
 
         if (idCliente != null) {

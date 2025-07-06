@@ -33,12 +33,10 @@ public class Cidade {
 
     public boolean igual(Cidade outro) {
         if (this.nome == null ? outro.getNome() != null : !this.nome.equals(outro.getNome())) {
-            System.out.println("Nome cidade diferente");
             return false;
         }
         
         if (this.estado == null ? outro.getEstado() != null : !this.estado.equals(outro.getEstado())) {
-            System.out.println("Estado cidade diferente");
             return false;
         }
 

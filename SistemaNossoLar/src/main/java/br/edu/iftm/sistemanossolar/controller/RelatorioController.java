@@ -294,10 +294,11 @@ public class RelatorioController {
         }
 
         String paciente = "";
-        if (pedido.getCliente() != null && 
-            pedido.getCliente().getPaciente() != null && 
-            pedido.getCliente().getPaciente().getNome() != null) {
-            paciente = pedido.getCliente().getPaciente().getNome();
+        if (pedido.getCliente() != null &&
+            pedido.getCliente().getPaciente() != null &&
+            pedido.getCliente().getPaciente().getNome() != null &&
+            !pedido.getCliente().getPaciente().getNome().trim().isEmpty()) {
+                paciente = pedido.getCliente().getPaciente().getNome();
         }
 
         String observacao = "";
@@ -330,7 +331,7 @@ public class RelatorioController {
         gerarRelatorioPedidos(relatorio.getPedidos(), relatorio.getTotalizacao(), relatorio.getFiltros());
     }
 
-    public void gerarRelatorioPedidos(List<RelPedido> dados, RelPedido totalizacao, List<Object> filtros) throws IOException {
+    public boolean gerarRelatorioPedidos(List<RelPedido> dados, RelPedido totalizacao, List<Object> filtros) throws IOException {
         log.registrarLog(1, "RelatorioController", "gerarRelatorioPedidos", "", "Gerando relatorio de Pedidos");
 
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -471,6 +472,12 @@ public class RelatorioController {
         formatador = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
         String dataHoraAgora = agora.format(formatador);
         String arquivo = diretorio + "\\Pedidos " +dataHoraAgora+ ".pdf";
-        criarArquivo(diretorio, arquivo, templatePreenchido);
+        try {
+            criarArquivo(diretorio, arquivo, templatePreenchido);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        
     }
 }
