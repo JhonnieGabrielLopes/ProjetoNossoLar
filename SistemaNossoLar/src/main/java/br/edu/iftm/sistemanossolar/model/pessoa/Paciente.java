@@ -1,21 +1,20 @@
 package br.edu.iftm.sistemanossolar.model.pessoa;
 
+import java.util.Objects;
+
 public class Paciente {
     private Integer id;
     private String nome;
     private Integer previsaoDias;
 
-    // Contrutor vazio
     public Paciente() {
     }
 
-    // Construtor mínimo para cadastrar Paciente
     public Paciente(String nome, Integer previsaoDias) {
         this.nome = nome;
         this.previsaoDias = previsaoDias;
     }
 
-    // Construtor completo de Paciente
     public Paciente (Integer id, String nome, Integer previsaoDias) {
         this.id = id;
         this.nome = nome;
@@ -47,10 +46,24 @@ public class Paciente {
     }
 
     public boolean igual(Paciente outro) {
-    if (outro == null) return false;
+        if (outro == null) {
+            return false;
+        }
     
-    if (this.id != null ? !this.id.equals(outro.getId()) : outro.getId() != null) return false;
-    if (this.nome != null ? !this.nome.equals(outro.getNome()) : outro.getNome() != null) return false;
-    return !(this.previsaoDias != null ? !this.previsaoDias.equals(outro.getPrevisaoDias()) : outro.getPrevisaoDias() != null);
-}
+        if (!iguais(this.nome, outro.getNome())) {
+            return false;
+        }
+    
+        if (!Objects.equals(this.previsaoDias, outro.getPrevisaoDias())) {
+            return false;
+        }
+    
+        return true;
+    }
+
+    private boolean iguais(String a, String b) {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+        return a.trim().equalsIgnoreCase(b.trim());
+    }
 }
