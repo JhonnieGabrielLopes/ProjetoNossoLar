@@ -404,7 +404,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
 
     private void btBuscarPessoaSelecionarActionPerformed(java.awt.event.ActionEvent evt) {  // GEN-FIRST:event_btBuscarPessoaSelecionarActionPerformed
         if (tableBuscarPessoa.getSelectedRow() == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Busca Pessoa", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         } else {
             int indicePessoa = tableBuscarPessoa.getSelectedRow();

@@ -303,6 +303,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
         String nomeDoador = tfBuscarDoacaoDoador.getText();
         String tipoDoacao = (String) cbBuscarDocaoTipo.getSelectedItem();
         
+
         String campoDataInicio = ffBuscarDoacaoDataInicio.getText().trim();
         String campoDataFim = ffBuscarDoacaoDataFim.getText().trim();
         DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -351,7 +352,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
     
     private void btBuscarDoacaoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarDoacaoSelecionarActionPerformed
         if (tableBuscarPessoa.getSelectedRow() == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma Doação!", "Busca Doação", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         } else {
             int indiceDoacao = tableBuscarPessoa.getSelectedRow();

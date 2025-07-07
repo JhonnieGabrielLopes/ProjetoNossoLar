@@ -102,7 +102,6 @@ public class RelatorioController {
             File arquivo = new File(caminhoArquivo);
             if (!arquivo.exists()) {
                 log.registrarLog(3, "RelatorioController", "abrirPDF", "", "O arquivo não existe: " + caminhoArquivo);
-                System.out.println("O arquivo não existe: " + caminhoArquivo);
                 return;
             } else {
                 log.registrarLog(2, "RelatorioController", "abrirPDF", "", "Abrindo o arquivo: " + caminhoArquivo);

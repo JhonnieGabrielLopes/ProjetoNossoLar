@@ -794,6 +794,11 @@ public class Telas extends javax.swing.JFrame {
 
         cbDoacaoTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbDoacaoTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DINHEIRO", "PRODUTO" }));
+        cbDoacaoTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDoacaoTipoActionPerformed(evt);
+            }
+        });
 
         lbDoacaoData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDoacaoData.setText("Data:");
@@ -2604,8 +2609,8 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btDoacaoDeletarActionPerformed
 
     private void btDoacaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoLimparActionPerformed
+        cbDoacaoTipo.setSelectedIndex(0);
         limparCamposCadastroDoacao();
-        destravaCamposDoacao();
     }//GEN-LAST:event_btDoacaoLimparActionPerformed
 
     private void cbRelPedStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRelPedStatusActionPerformed
@@ -2677,7 +2682,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btDoacaoBuscarDoadorActionPerformed
 
     private void btDoacaoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRelatorioActionPerformed
-
+        cl.show(pnCard, "relatorioDoacao");
     }//GEN-LAST:event_btDoacaoRelatorioActionPerformed
 
     private void btCadastroPessoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSairActionPerformed
@@ -2694,6 +2699,7 @@ public class Telas extends javax.swing.JFrame {
     private void btDoacaoBuscarProdActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarProdActionPerformed1
         buscarProduto.setLocationRelativeTo(this);
         buscarProduto.setVisible(true);
+        
     }//GEN-LAST:event_btDoacaoBuscarProdActionPerformed1
 
     private void btPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarClienteActionPerformed
@@ -3103,6 +3109,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void menuDoacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDoacaoMouseClicked
         cl.show(pnCard, "cdCadastrarDoacao");
+        travaCamposTipoDoacao(1);
     }//GEN-LAST:event_menuDoacaoMouseClicked
 
     private void menuPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPessoaMouseClicked
@@ -3122,6 +3129,50 @@ public class Telas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbRelPedLocalActionPerformed
 
+    private void cbDoacaoTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDoacaoTipoActionPerformed
+        travaCamposTipoDoacao(2);
+    }//GEN-LAST:event_cbDoacaoTipoActionPerformed
+
+    public void travaCamposTipoDoacao(int local) {
+        if (local == 1) {
+            tfDoacaoSelecionarProd.setEnabled(false);
+            btDoacaoBuscarProd.setEnabled(false);
+            jsDoacaoQuantidadeProduto.setEnabled(false);
+            btDoacaoAddProd.setEnabled(false);
+            btDoacaoAltProd.setEnabled(false);
+            btDoacaoDelProd.setEnabled(false);
+            btDoacaoDeletar.setEnabled(false);
+            btDoacaoRecibo.setEnabled(false);
+            return;
+        } else if (local == 2) {
+            if (cbDoacaoTipo.getSelectedItem() != null && cbDoacaoTipo.getSelectedItem().toString().equals("PRODUTO")) {
+            tfDoacaoSelecionarProd.setEnabled(false);
+            btDoacaoBuscarProd.setEnabled(true);
+            tfDoacaoValor.setEnabled(false);
+            jsDoacaoQuantidadeProduto.setEnabled(true);
+            btDoacaoAddProd.setEnabled(true);
+            btDoacaoAltProd.setEnabled(true);
+            btDoacaoDelProd.setEnabled(true);
+            } else {
+                cbDoacaoTipo.setEnabled(true);
+                btDoacaoBuscarDoador.setEnabled(true);
+                btDoacaoRegistrarDoacao.setEnabled(true);
+                tfDoacaoValor.setEnabled(true);
+                taDoacaoObservacao.setEnabled(true);
+                ftDoacaoData.setEnabled(true);
+                btDoacaoDeletar.setEnabled(false);
+                btDoacaoRecibo.setEnabled(false);
+                tfDoacaoSelecionarProd.setEnabled(false);
+                btDoacaoBuscarProd.setEnabled(false);
+                jsDoacaoQuantidadeProduto.setEnabled(false);
+                btDoacaoAddProd.setEnabled(false);
+                btDoacaoAltProd.setEnabled(false);
+                btDoacaoDelProd.setEnabled(false);
+            }
+            return;
+        }
+    }
+    
     public void preenchePessoa(Pessoa pessoa) {
         this.pessoaAntiga = pessoa;
         tfCodigoPessoa.setText(String.valueOf(pessoa.getId()));
@@ -3350,6 +3401,8 @@ public class Telas extends javax.swing.JFrame {
         btDoacaoDelProd.setEnabled(false);
         btDoacaoRegistrarDoacao.setEnabled(false);
         btDoacaoBuscarDoador.setEnabled(false);
+        btDoacaoDeletar.setEnabled(true);
+        btDoacaoRecibo.setEnabled(true);
     }
 
     public void destravaCamposDoacao() {

@@ -51,7 +51,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lbCadProdTipo" min="-2" max="-2" attributes="0"/>
                       <Component id="cbCadProdTipoProduto" max="32767" attributes="0"/>
-                      <Component id="btCadProdSalvar" alignment="0" pref="100" max="32767" attributes="0"/>
+                      <Component id="btCadProdSalvar" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -143,6 +143,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadProdSalvarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btCadProdLimpar">
           <Properties>
@@ -151,6 +154,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Limpar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadProdLimparActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btCadProdSair">
           <Properties>
@@ -160,7 +166,7 @@
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadProdCancelarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadProdSairActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
