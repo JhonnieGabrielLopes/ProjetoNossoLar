@@ -30,6 +30,8 @@ import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
+import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.time.LocalDate;
@@ -60,11 +62,13 @@ public class Telas extends javax.swing.JFrame {
     private static PessoaController pessoaController;
     private static EnderecoController enderecoController;
     private static RelatorioController relatorioController;
-    private DefaultTableModel modeloTabela;
+    private DefaultTableModel modeloTabelaDoacaoProdutos;
     private int indiceTabelaProduto;
+    private int identificadorRetorno;
     private Pessoa pessoaAntiga;
     private PacienteController pacienteController;
     private DefaultTableModel modeloTabelaRelatorioPedido;
+    private DefaultTableModel modeloTabelaRelatorioDoacao;
     private DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private List<Produto> produtosDoacao = new ArrayList<>();
     private BuscarPedido buscarPedido;
@@ -88,8 +92,9 @@ public class Telas extends javax.swing.JFrame {
         buscarProduto = new BuscarProduto(this, true, conexao, this);
         initComponents();
         cl = (CardLayout) pnCard.getLayout();
-        modeloTabela = (DefaultTableModel) tableDoacaoProdutos.getModel();
+        modeloTabelaDoacaoProdutos = (DefaultTableModel) tableDoacaoProdutos.getModel();
         modeloTabelaRelatorioPedido = (DefaultTableModel) tableRelatorioPedido.getModel();
+        modeloTabelaRelatorioDoacao = (DefaultTableModel) tableRelatorioDoacao.getModel();
         pacienteController = new PacienteController(conexao);
         buscarPedido = new BuscarPedido(this, true, conexao, this);
         pedidoController = new PedidoController(conexao);
@@ -190,11 +195,15 @@ public class Telas extends javax.swing.JFrame {
         spRelResultado = new javax.swing.JScrollPane();
         tableRelatorioDoacao = new javax.swing.JTable();
         jbRelDoaTotDin = new javax.swing.JLabel();
-        tfRelTotDin = new javax.swing.JTextField();
         jbRelDoaTotProd = new javax.swing.JLabel();
         tfRelTotProd = new javax.swing.JTextField();
         jbRelDoaTorIte = new javax.swing.JLabel();
         tfRelTotIte = new javax.swing.JTextField();
+        NumberFormat nfRel = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        tfRelTotDin = new javax.swing.JFormattedTextField(nfRel);
+        tfRelTotDin.setColumns(10);
+        tfRelTotDin.setValue(0.00);
+        tfRelTotDin = new javax.swing.JFormattedTextField();
         btRelDoacaoSalvar = new javax.swing.JButton();
         btRelDoacaoLimpar = new javax.swing.JButton();
         btRelDoaSair = new javax.swing.JButton();
@@ -968,7 +977,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(683, Short.MAX_VALUE))
+                .addContainerGap(692, Short.MAX_VALUE))
         );
         pnCadastrarPedidoLayout.setVerticalGroup(
             pnCadastrarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1201,10 +1210,6 @@ public class Telas extends javax.swing.JFrame {
         jbRelDoaTotDin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelDoaTotDin.setText("Valor Total:");
 
-        tfRelTotDin.setEditable(false);
-        tfRelTotDin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfRelTotDin.setText("R$ 0,00");
-
         jbRelDoaTotProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelDoaTotProd.setText("Total Produtos:");
 
@@ -1219,6 +1224,9 @@ public class Telas extends javax.swing.JFrame {
         tfRelTotIte.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelTotIte.setText("0");
 
+        tfRelTotDin.setEditable(false);
+        tfRelTotDin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout pnRelResultadoLayout = new javax.swing.GroupLayout(pnRelResultado);
         pnRelResultado.setLayout(pnRelResultadoLayout);
         pnRelResultadoLayout.setHorizontalGroup(
@@ -1226,7 +1234,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnRelResultadoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spRelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
+                    .addComponent(spRelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
                     .addGroup(pnRelResultadoLayout.createSequentialGroup()
                         .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbRelDoaTotDin)
@@ -1253,11 +1261,12 @@ public class Telas extends javax.swing.JFrame {
                         .addGroup(pnRelResultadoLayout.createSequentialGroup()
                             .addComponent(jbRelDoaTotProd)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tfRelTotProd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnRelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tfRelTotProd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfRelTotDin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRelResultadoLayout.createSequentialGroup()
                             .addComponent(jbRelDoaTotDin)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tfRelTotDin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(46, 46, 46)))
                     .addGroup(pnRelResultadoLayout.createSequentialGroup()
                         .addComponent(jbRelDoaTorIte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1336,7 +1345,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelDoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioDoacao, "relatorioDoacao");
@@ -1753,7 +1762,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnRelPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         pnRelatorioPedidoLayout.setVerticalGroup(
             pnRelatorioPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1772,7 +1781,7 @@ public class Telas extends javax.swing.JFrame {
 
         pnHome.setBackground(new java.awt.Color(245, 245, 246));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NossoLarMenor.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NossoLar_512x512_fundo_branco.png"))); // NOI18N
 
         javax.swing.GroupLayout pnHomeLayout = new javax.swing.GroupLayout(pnHome);
         pnHome.setLayout(pnHomeLayout);
@@ -1788,7 +1797,7 @@ public class Telas extends javax.swing.JFrame {
             .addGroup(pnHomeLayout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(jLabel3)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnCard.add(pnHome, "cdHome");
@@ -2194,7 +2203,7 @@ public class Telas extends javax.swing.JFrame {
                             .addComponent(lbObservacao)
                             .addComponent(pnEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1))))
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
         pnCadastroPessoaLayout.setVerticalGroup(
             pnCadastroPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2560,9 +2569,9 @@ public class Telas extends javax.swing.JFrame {
             produto.setQuantidade(quantidade);
             produtosDoacao.add(produto);
             Object[] linha = {produto.getTipo(), produto.getNome(), produto.getQuantidade()};
-            modeloTabela.addRow(linha);
+            modeloTabelaDoacaoProdutos.addRow(linha);
         } else {
-            modeloTabela.setValueAt(quantidade, indiceTabelaProduto, 2);
+            modeloTabelaDoacaoProdutos.setValueAt(quantidade, indiceTabelaProduto, 2);
         }
         jsDoacaoQuantidadeProduto.setEnabled(false);
 
@@ -2644,7 +2653,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void btDoacaoDelProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDelProdActionPerformed
         if (!tfDoacaoSelecionarProd.getText().equals("")) {
-            modeloTabela.removeRow(indiceTabelaProduto);
+            modeloTabelaDoacaoProdutos.removeRow(indiceTabelaProduto);
             produtosDoacao.remove(indiceTabelaProduto);
         }
     }//GEN-LAST:event_btDoacaoDelProdActionPerformed
@@ -2686,7 +2695,8 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btDoacaoBuscarDoadorActionPerformed
 
     private void btDoacaoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRelatorioActionPerformed
-
+        identificadorRetorno = 1;
+        cl.show(pnCard, "relatorioDoacao");
     }//GEN-LAST:event_btDoacaoRelatorioActionPerformed
 
     private void btCadastroPessoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroPessoaSairActionPerformed
@@ -2701,6 +2711,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btBuscarPessoaActionPerformed
 
     private void btDoacaoBuscarProdActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoBuscarProdActionPerformed1
+        buscarProduto.identificaProduto(1);
         buscarProduto.setLocationRelativeTo(this);
         buscarProduto.setVisible(true);
     }//GEN-LAST:event_btDoacaoBuscarProdActionPerformed1
@@ -2781,27 +2792,109 @@ public class Telas extends javax.swing.JFrame {
     }
 
     private void btRelBuscarDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelBuscarDoadorActionPerformed
-        // TODO add your handling code here:
+        buscarPessoa.identificaTelas(5);
+        buscarPessoa.setLocationRelativeTo(this);
+        buscarPessoa.setVisible(true);
     }//GEN-LAST:event_btRelBuscarDoadorActionPerformed
 
     private void btRelBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelBuscarProdutoActionPerformed
-        // TODO add your handling code here:
+        buscarProduto.identificaProduto(2);
+        buscarProduto.setLocationRelativeTo(this);
+        buscarProduto.setVisible(true);
     }//GEN-LAST:event_btRelBuscarProdutoActionPerformed
 
     private void btRelDoaFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelDoaFiltrarActionPerformed
-        // TODO add your handling code here:
+        try{
+            String dataInicio = ffRelDoaDtInicial.getText().trim();
+            LocalDate dataDoacaoInicioData = null;
+            if (!dataInicio.contains(" ") || !dataInicio.equals("/  /")) {
+                dataDoacaoInicioData = LocalDate.parse(dataInicio, dataFormat);
+            }
+            String dataFim = ffRelDoaDtFinal.getText().trim();
+            LocalDate dataDoacaoFimData = null;
+            if (!dataFim.contains(" ") || !dataFim.equals("/  /")) {
+                dataDoacaoFimData = LocalDate.parse(dataFim, dataFormat);
+            }
+            Integer idDoador = null;
+            String textoDoador = tfRelDoaDoador.getText();
+            if (textoDoador != null && !textoDoador.isEmpty() && textoDoador.contains("-")){
+                String[] partes = textoDoador.split("-", 2);
+                idDoador = Integer.valueOf(partes[0].trim());
+            }
+            Integer idProduto = null;
+            String textoProduto = tfRelDoaProd.getText();
+            if (textoProduto != null && !textoProduto.isEmpty() && textoProduto.contains("-")){
+                String[] partes = textoProduto.split("-", 2);
+                idProduto = Integer.valueOf(partes[0].trim());
+            }
+            String ordem = null;
+            if(cbRelDoaOrdenacao.getSelectedItem() != null){
+                ordem = cbRelDoaOrdenacao.getSelectedItem().toString();
+            }
+            String sentido = null;
+            if(cbRelDoaSentido.getSelectedItem() != null){
+                sentido = cbRelDoaSentido.getSelectedItem().toString();
+            }
+            String tipoDoacao = null;
+            if(cbRelDoaTpDoacao.getSelectedItem() != null){
+                tipoDoacao = cbRelDoaTpDoacao.getSelectedItem().toString();
+            }
+            String tipoProduto = null;
+            if(cbRelDoaTpProduto.getSelectedItem() != null){
+                tipoProduto = cbRelDoaTpProduto.getSelectedItem().toString();
+            }
+            RetornoDoacoes relDoacoes = doacaoController.filtrarRelatorio(dataDoacaoInicioData, dataDoacaoFimData, tipoDoacao, tipoProduto, idDoador, idProduto, ordem, sentido);
+            DefaultTableModel modelo = (DefaultTableModel) tableRelatorioDoacao.getModel();
+            modelo.setRowCount(0);
+            int totalProdutos = 0;
+            int totalItens = 0;
+            double valorTotal = 0;
+            
+            for(RelDoacao relDoacao : relDoacoes.getDoacoes()){
+                String dataDoacao = null;
+                if(relDoacao.getData() != null){
+                    dataDoacao = relDoacao.getData().format(dataFormat);
+                }
+                Object[] novaLinha = {
+                    relDoacao.getIdDoacao(),
+                    relDoacao.getNomeDoador(),
+                    relDoacao.getTipo(),
+                    relDoacao.getValor(),
+                    relDoacao.getProdutos(),
+                    relDoacao.getObservacao(),
+                    dataDoacao
+                };
+                modelo.addRow(novaLinha);
+                if(relDoacao.getProdutos() != null){
+                    totalProdutos++;
+                }
+                if(relDoacao.getValor() != null){
+                    valorTotal += relDoacao.getValor();
+                }
+                totalItens++;
+            }
+            tfRelTotDin.setValue(valorTotal);
+            tfRelTotIte.setText(String.valueOf(totalItens));
+            tfRelTotProd.setText(String.valueOf(totalProdutos));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btRelDoaFiltrarActionPerformed
 
     private void btRelDoacaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelDoacaoSalvarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btRelDoacaoSalvarActionPerformed
 
     private void btRelDoacaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelDoacaoLimparActionPerformed
-        // TODO add your handling code here:
+        limparTelaRelDoa();
     }//GEN-LAST:event_btRelDoacaoLimparActionPerformed
 
     private void btRelDoaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelDoaSairActionPerformed
-        // TODO add your handling code here:
+        if(identificadorRetorno == 1){
+            cl.show(pnCard, "cdCadastrarDoacao");
+        }else{
+            cl.show(pnCard, "cdHome");
+        }
     }//GEN-LAST:event_btRelDoaSairActionPerformed
 
     private void btRelPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoBuscarClienteActionPerformed
@@ -2819,7 +2912,22 @@ public class Telas extends javax.swing.JFrame {
     private void btRelPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoLimparActionPerformed
         limparTelaRelPed();
     }//GEN-LAST:event_btRelPedidoLimparActionPerformed
-
+    
+    public void limparTelaRelDoa() {
+        ffRelDoaDtInicial.setText("");
+        ffRelDoaDtFinal.setText("");
+        tfRelDoaDoador.setText("");
+        tfRelDoaProd.setText("");
+        cbRelDoaOrdenacao.setSelectedIndex(0);
+        cbRelDoaSentido.setSelectedIndex(0);
+        cbRelDoaTpDoacao.setSelectedIndex(0);
+        cbRelDoaTpProduto.setSelectedIndex(0);
+        tfRelTotDin.setText("0");
+        tfRelTotIte.setText("0");
+        tfRelTotProd.setText("0");
+        modeloTabelaRelatorioDoacao.setRowCount(0);
+    }
+    
     public void limparTelaRelPed() {
         tfRelPedDtPedidoInicio.setText("");
         tfRelPedDtPedidoFim.setText("");
@@ -2848,6 +2956,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btAdicionarCidadeActionPerformed
 
     private void jmRelDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRelDoacaoActionPerformed
+        identificadorRetorno = 2;
         cl.show(pnCard, "relatorioDoacao");
     }//GEN-LAST:event_jmRelDoacaoActionPerformed
 
@@ -2967,7 +3076,15 @@ public class Telas extends javax.swing.JFrame {
         }
 
     }
-
+    
+    public void preencheDoadorRelatorio(Pessoa doador){
+        tfRelDoaDoador.setText(doador.getId() + " | " + doador.getNome());
+    }
+    
+    public void preencheProdutoRelatorio(Produto produto){
+        tfRelDoaProd.setText(produto.getId() + " | " + produto.getNome());
+    }
+    
     public void preencheDoacao(Doacao doacao) {
         tfDoacaoIdDoacao.setText(String.valueOf(doacao.getId()));
         tfDoacaoIdDoador.setText(String.valueOf(doacao.getDoador().getId()));
@@ -2983,10 +3100,10 @@ public class Telas extends javax.swing.JFrame {
         }
         tfDoacaoValor.setValue(doacao.getValor());
         taDoacaoObservacao.setText(doacao.getObservacao());
-        modeloTabela.setRowCount(0);
+        modeloTabelaDoacaoProdutos.setRowCount(0);
         for (Produto prod : doacao.getProduto()) {
             Object[] linha = {prod.getTipo(), prod.getNome(), prod.getQuantidade()};
-            modeloTabela.addRow(linha);
+            modeloTabelaDoacaoProdutos.addRow(linha);
         }
         travaCamposDoacao();
     }
@@ -3140,7 +3257,7 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoSelecionarProd.setText("");
         jsDoacaoQuantidadeProduto.setValue(0);
         cbDoacaoTipo.setSelectedIndex(0);
-        modeloTabela.setRowCount(0);
+        modeloTabelaDoacaoProdutos.setRowCount(0);
     }
 
     public void limparCamposCadastroPedido() {
@@ -3346,7 +3463,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JTextField tfRelPedTotFechado;
     private javax.swing.JTextField tfRelPedTotMarmitas;
     private javax.swing.JTextField tfRelPedTotPendente;
-    private javax.swing.JTextField tfRelTotDin;
+    private javax.swing.JFormattedTextField tfRelTotDin;
     private javax.swing.JTextField tfRelTotIte;
     private javax.swing.JTextField tfRelTotProd;
     // End of variables declaration//GEN-END:variables

@@ -340,18 +340,32 @@ public class BuscarPessoa extends javax.swing.JDialog {
         this.identificador = identificador;
         switch (identificador) {
             case 1:
+                cbBuscarPessoaTipo.removeAllItems();
+                cbBuscarPessoaTipo.addItem("Beneficiário");
+                cbBuscarPessoaTipo.addItem("Assistente");
+                cbBuscarPessoaTipo.addItem("Doador");
                 cbBuscarPessoaTipo.setSelectedIndex(0);
                 cbBuscarPessoaTipo.setEnabled(true);
                 break;
-
             case 2:
+                cbBuscarPessoaTipo.removeAllItems();
+                cbBuscarPessoaTipo.addItem("Beneficiário");
+                cbBuscarPessoaTipo.addItem("Assistente");
+                cbBuscarPessoaTipo.addItem("Doador");
                 cbBuscarPessoaTipo.setSelectedIndex(2);
                 cbBuscarPessoaTipo.setEnabled(false);
                 break;
-
             case 3:
+                cbBuscarPessoaTipo.removeAllItems();
+                cbBuscarPessoaTipo.addItem("Beneficiário");
+                cbBuscarPessoaTipo.addItem("Assistente");
                 cbBuscarPessoaTipo.setSelectedIndex(0);
                 cbBuscarPessoaTipo.setEnabled(true);
+                break;
+            case 4:
+                cbBuscarPessoaTipo.removeAllItems();
+                cbBuscarPessoaTipo.addItem("Assistente");
+                cbBuscarPessoaTipo.addItem("Beneficiário");
                 break;
             default:
                 throw new AssertionError();
@@ -429,12 +443,12 @@ public class BuscarPessoa extends javax.swing.JDialog {
                     break;
 
                 case 3:
-                    System.out.println("teste");
                     Pedido pedido = new Pedido();
                     pedido.setCliente(pessoa);
                     tela.preenchePedido(pedido);
                     break;
-
+                case 5:
+                    tela.preencheDoadorRelatorio(pessoa);
                 default:
                     break;
             }

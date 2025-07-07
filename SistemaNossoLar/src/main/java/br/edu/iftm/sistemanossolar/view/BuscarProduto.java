@@ -22,6 +22,7 @@ public class BuscarProduto extends javax.swing.JDialog {
     private static CadastroProduto cadastroProduto;
     private List<Produto> produtos;
     private DefaultTableModel modelo;
+    private int identificador;
     /**
      * Creates new form BuscarPessoa
      */
@@ -277,7 +278,10 @@ public class BuscarProduto extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void identificaProduto(int identificador){
+        this.identificador = identificador;
+    }
     private void tfBuscarProdutoNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarProdutoNomeKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_tfBuscarProdutoNomeKeyTyped
@@ -301,14 +305,14 @@ public class BuscarProduto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btBuscarProdutoBuscarActionPerformed
 
-    private void btBuscarProdutoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdutoLimparActionPerformed
+    private void btBuscarProdutoLimparActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         tfBuscarProdutoNome.setText("");
         cbBuscarProdutoTipo.setSelectedIndex(0);
     }
 
     private void btBuscarProdutoSairActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }//GEN-LAST:event_btBuscarProdutoSairActionPerformed
+    }                                                   
     
     private void btBuscarProdutoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdutoNovoActionPerformed
         cadastroProduto.setLocationRelativeTo(this);
@@ -318,7 +322,11 @@ public class BuscarProduto extends javax.swing.JDialog {
     private void btBuscarProdutoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdutoSelecionarActionPerformed
         int indice = tableBuscarPessoa.getSelectedRow();
         produto = produtos.get(indice);
-        tela.preencheProdutoDoacao(produto);
+        if(identificador == 1){
+            tela.preencheProdutoDoacao(produto);
+        }else{
+            tela.preencheProdutoRelatorio(produto);
+        }
         dispose();
     }//GEN-LAST:event_btBuscarProdutoSelecionarActionPerformed
     
