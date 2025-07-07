@@ -103,7 +103,7 @@ public class DoacaoDAO {
             for (int i = 0; i < filtros.size(); i++) {
                 stmt.setObject(i + 1, filtros.get(i));
             }
-
+            
             ResultSet rs = stmt.executeQuery();
             List<RelDoacao> doacoes = new ArrayList<>();
 

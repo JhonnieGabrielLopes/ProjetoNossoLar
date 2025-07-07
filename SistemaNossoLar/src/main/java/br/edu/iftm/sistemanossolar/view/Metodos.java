@@ -46,7 +46,6 @@ public class Metodos {
 
     public void relatorioDoacao() throws SQLException, IOException {
         //METODO PARA TESTES NO TERMINAL
-        relatorioController.relatorioDoacao();
     }
 
 }

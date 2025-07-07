@@ -91,13 +91,13 @@ public class DoacaoController {
         if (ordem != null && !ordem.isEmpty()) {
             sqlFinal.append("ORDER BY ");
             switch (ordem) {
-                case "data": sqlFinal.append("d.data "); break;
-                case "codigo": sqlFinal.append("d.id "); break;
-                case "nome": sqlFinal.append("u.nome "); break;
-                case "valor": sqlFinal.append("d.valor "); break;
-                case "quantidade": sqlFinal.append("pd.quantidade "); break;
+                case "Data": sqlFinal.append("d.data "); break;
+                case "Codigo": sqlFinal.append("d.id "); break;
+                case "Nome": sqlFinal.append("u.nome "); break;
+                case "Valor": sqlFinal.append("d.valor "); break;
+                case "Quantidade": sqlFinal.append("pd.quantidade "); break;
             }
-            sqlFinal.append(sentido.equals("asc") ? "ASC" : "DESC");
+            sqlFinal.append(sentido.equals("Crescente") ? "ASC" : "DESC");
         }
 
         List<RelDoacao> doacoes = new ArrayList<>();

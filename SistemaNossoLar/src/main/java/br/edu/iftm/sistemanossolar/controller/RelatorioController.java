@@ -168,18 +168,7 @@ public class RelatorioController {
         }
     }
 
-    public void relatorioDoacao() throws SQLException, IOException {
-        //METODO PARA TESTES NO TERMINAL
-        String data1 = "2023-01-01";
-        LocalDate dataTeste1 = LocalDate.parse(data1);
-        String data2 = "2023-12-30"; 
-        LocalDate dataTeste2 = LocalDate.parse(data2);
-        RetornoDoacoes relatorio = doacaoController.filtrarRelatorio(null, null, "Todos", "Todos", null, null, "data", "asc");
-        //Situação: quando preenchido o codigo do produto, o resultado não retorna todos os produtos da doação.
-        gerarRelatorioDoacoes(relatorio.getDoacoes(), relatorio.getTotalizacao(), relatorio.getFiltros());
-    }
-
-    public void gerarRelatorioDoacoes(List<RelDoacao> dados, RelDoacao totalizacao, List<Object> filtros) throws IOException {
+    public boolean gerarRelatorioDoacoes(List<RelDoacao> dados, RelDoacao totalizacao, List<Object> filtros, AtomicReference<String> diretorioArquivo) throws IOException {
         log.registrarLog(1, "RelatorioController", "gerarRelatorioDoacoes", "", "Gerando relatorio de Doações");
 
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -299,7 +288,13 @@ public class RelatorioController {
         formatador = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
         String dataHoraAgora = agora.format(formatador);
         String arquivo = diretorio + "\\Doacoes " +dataHoraAgora+ ".pdf";
-        criarArquivo(diretorio, arquivo, templatePreenchido);
+        try{
+            criarArquivo(diretorio, arquivo, templatePreenchido);
+            diretorioArquivo.set(arquivo);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 
     public boolean gerarReciboPedido(Pedido pedido, AtomicReference<String> diretorioArquivo) throws IOException {
