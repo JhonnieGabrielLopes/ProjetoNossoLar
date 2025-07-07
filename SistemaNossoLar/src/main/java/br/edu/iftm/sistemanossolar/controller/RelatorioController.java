@@ -114,9 +114,8 @@ public class RelatorioController {
         }
     }
 
-    public void gerarReciboDoacao(Doacao doacao) throws IOException {
+    public boolean gerarReciboDoacao(Doacao doacao, AtomicReference<String> diretorioArquivoDoa) throws IOException {
         log.registrarLog(1, "RelatorioController", "gerarReciboDoacao", "", "Gerando recibo da Doação");
-
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         if (doacao.getProduto().isEmpty()) {
             String template = RelatorioController.templateDoacaoDinheiro();
@@ -128,7 +127,15 @@ public class RelatorioController {
 
             String diretorio = "C:\\SistemaNossoLar\\Recibos\\Doacao";
             String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ ".pdf";
-            criarArquivo(diretorio, arquivo, templatePreenchido);
+            try {
+                criarArquivo(diretorio, arquivo, templatePreenchido);
+                diretorioArquivoDoa.set(arquivo);
+                return true;
+            } catch (Exception e) {
+                e.getStackTrace();
+                return false;
+            }
+            
         } else {
             String template = RelatorioController.templateDoacaoProduto();
 
@@ -150,7 +157,14 @@ public class RelatorioController {
 
             String diretorio = "C:\\SistemaNossoLar\\Recibos\\Doacao";
             String arquivo = diretorio+ "\\Doacao " +doacao.getId().toString()+ ".pdf";
-            criarArquivo(diretorio, arquivo, templatePreenchido);
+            try {
+                criarArquivo(diretorio, arquivo, templatePreenchido);
+                diretorioArquivoDoa.set(arquivo);
+                return true;
+            } catch (Exception e) {
+                e.getStackTrace();
+                return false;
+            }
         }
     }
 

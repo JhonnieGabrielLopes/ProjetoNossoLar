@@ -26,12 +26,16 @@ public class DoacaoDAO {
     }
 
     public boolean cadastrarDoacao(Doacao doacao) throws SQLException {
-        String sql = "INSERT INTO doacao (tipoDoacao, pessoa, valor, data) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO doacao (tipoDoacao, pessoa, valor, data, observacao) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, doacao.getTipo().toString());
             stmt.setInt(2, doacao.getDoador().getId());
             stmt.setDouble(3, doacao.getValor());
             stmt.setObject(4, doacao.getDataDoacao());
+            if (doacao.getObservacao().isEmpty()) {
+                doacao.setObservacao(null);
+            }
+            stmt.setString(5, doacao.getObservacao());
             stmt.executeUpdate();
             log.registrarLog(2, "DoacaoDAO", "cadastrarDoacao", "doacao", "Doação cadastrada");
 

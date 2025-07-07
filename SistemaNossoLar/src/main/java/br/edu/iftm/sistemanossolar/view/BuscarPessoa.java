@@ -385,7 +385,6 @@ public class BuscarPessoa extends javax.swing.JDialog {
     }// GEN-LAST:event_btBuscarPessoaNovoActionPerformed
 
     private void btBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btBuscarPessoaActionPerformed
-        // TODO add your handling code here:
         String nome = tfBuscarPessoaNome.getText();
         String tipo = (String) cbBuscarPessoaTipo.getSelectedItem();
         Cidade cidade = (Cidade) cbBuscarPessoaCidade.getSelectedItem();

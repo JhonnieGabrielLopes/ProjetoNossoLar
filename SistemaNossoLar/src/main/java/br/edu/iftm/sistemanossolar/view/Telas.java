@@ -2547,7 +2547,15 @@ public class Telas extends javax.swing.JFrame {
 
     private void btDoacaoAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAddProdActionPerformed
         int quantidade = (int) jsDoacaoQuantidadeProduto.getValue();
-        if (tfDoacaoIdDoacao.getText().equals("")) {
+        if (buscarProduto.getProduto() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um produto!", "Produto Doação", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (quantidade <= 0) {
+            JOptionPane.showMessageDialog(rootPane, "Informe uma Quantidade válida!", "Produto Doação", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (tfDoacaoIdDoacao.getText().equals("") && quantidade != 0) {
             Produto produto = buscarProduto.getProduto();
             produto.setQuantidade(quantidade);
             produtosDoacao.add(produto);
@@ -2556,8 +2564,9 @@ public class Telas extends javax.swing.JFrame {
         } else {
             modeloTabela.setValueAt(quantidade, indiceTabelaProduto, 2);
         }
+        jsDoacaoQuantidadeProduto.setValue(0);
+        tfDoacaoSelecionarProd.setText("");
         jsDoacaoQuantidadeProduto.setEnabled(false);
-
     }//GEN-LAST:event_btDoacaoAddProdActionPerformed
 
     private void tfPedidoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPedidoClienteActionPerformed
@@ -2618,23 +2627,25 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRelPedStatusActionPerformed
 
     private void btDoacaoReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoReciboActionPerformed
-        if (!tfDoacaoIdDoacao.getText().equals("")) {
-            try {
-                relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao());
+        AtomicReference<String> diretorioArquivoDoa = new AtomicReference<>();
+        try {
+            if (relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao(), diretorioArquivoDoa)) {
+                String arquivo = diretorioArquivoDoa.get();
                 if (JOptionPane.showConfirmDialog(rootPane, "Recibo gerado!\nDeseja visualizar agora?", "Recibo Doação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    //adicionar lógica para abrir o arquivo PDF gerado
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+                    relatorioController.abrirPDF(arquivo);
+                }    
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione uma Doação!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btDoacaoReciboActionPerformed
 
     private void btDoacaoAltProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoAltProdActionPerformed
-        if (!tfDoacaoSelecionarProd.equals("")) {
+        if (!tfDoacaoSelecionarProd.getText().equals("")) {
             jsDoacaoQuantidadeProduto.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Produto para alteração!", "Produto Doação", JOptionPane.WARNING_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_btDoacaoAltProdActionPerformed
 
@@ -2642,12 +2653,36 @@ public class Telas extends javax.swing.JFrame {
         if (!tfDoacaoSelecionarProd.getText().equals("")) {
             modeloTabela.removeRow(indiceTabelaProduto);
             produtosDoacao.remove(indiceTabelaProduto);
+            tfDoacaoSelecionarProd.setText("");
+            jsDoacaoQuantidadeProduto.setValue(0);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Produto para deleção!", "Produto Doação", JOptionPane.WARNING_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_btDoacaoDelProdActionPerformed
 
     private void btDoacaoRegistrarDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoRegistrarDoacaoActionPerformed
         Doacao doacao = new Doacao();
-        doacao.setDoador(buscarPessoa.getPessoa());
+        if (buscarPessoa.getPessoa() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Doador!", "Cadastro Doação", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            doacao.setDoador(buscarPessoa.getPessoa());
+        }
+        if (ftDoacaoData.getText().isEmpty() || ftDoacaoData.getText().equals("  /  /    ")) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha a Data da Doação!", "Cadastro Doação", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else if (cbDoacaoTipo.getSelectedIndex() == 0) { //DINHEIRO
+            if (tfDoacaoValor.getText().isEmpty() || tfDoacaoValor.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Preencha o Valor da Doação!", "Cadastro Doação", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } else if (cbDoacaoTipo.getSelectedIndex() == 1) { //PRODUTO
+            if (produtosDoacao.isEmpty() && cbDoacaoTipo.getSelectedIndex() == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Adicione pelo menos um Produto na Doação!", "Cadastro Doação", JOptionPane.WARNING_MESSAGE);
+            return;
+            }
+        }
         doacao.setDataDoacao(LocalDate.parse(ftDoacaoData.getText(), dataFormat));
         if (cbDoacaoTipo.getSelectedIndex() == 0) {
             doacao.setTipo(Doacao.TipoDoa.DINHEIRO);
@@ -2658,15 +2693,30 @@ public class Telas extends javax.swing.JFrame {
         doacao.setValor(temp.doubleValue());
         doacao.setObservacao(taDoacaoObservacao.getText());
         doacao.setProduto(produtosDoacao);
-        try {
-            if (doacaoController.cadastrarDoacao(doacao)) {
-                JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar Doação", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
-                limparCamposCadastroDoacao();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar Doação", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+        if (tfDoacaoIdDoacao.getText().isEmpty()) { //CADASTRO NOVO
+            try {
+                if (doacaoController.cadastrarDoacao(doacao)) {
+                    int opcao = JOptionPane.showConfirmDialog(rootPane, "Doação cadastrada com sucesso!\nDeseja gerar o recibo agora?", "Cadastro de Doação", JOptionPane.YES_NO_OPTION);
+                    if (opcao == JOptionPane.YES_OPTION) {
+                            AtomicReference<String> diretorioArquivo = new AtomicReference<>();
+                            try {
+                                if (relatorioController.gerarReciboDoacao(doacao, diretorioArquivo)) {
+                                    String arquivo = diretorioArquivo.get();    
+                                    if (JOptionPane.showConfirmDialog(rootPane, "Recibo gerado!\nDeseja visualizar agora?", "Recibo Doação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                        relatorioController.abrirPDF(arquivo);
+                                    }
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    limparCamposCadastroDoacao();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar Doação", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_btDoacaoRegistrarDoacaoActionPerformed
 
@@ -3286,12 +3336,12 @@ public class Telas extends javax.swing.JFrame {
                 break;
         }
         tfDoacaoValor.setValue(doacao.getValor());
-        taDoacaoObservacao.setText(doacao.getObservacao());
         modeloTabela.setRowCount(0);
         for (Produto prod : doacao.getProduto()) {
             Object[] linha = {prod.getTipo(), prod.getNome(), prod.getQuantidade()};
             modeloTabela.addRow(linha);
         }
+        taDoacaoObservacao.setText(doacao.getObservacao());
         travaCamposDoacao();
     }
 
@@ -3485,6 +3535,7 @@ public class Telas extends javax.swing.JFrame {
     }
 
     public void limparCamposCadastroDoacao() {
+        btDoacaoBuscarDoacao.setEnabled(true);
         tfDoacaoIdDoacao.setText("");
         tfDoacaoIdDoador.setText("");
         tfDoacaoDoador.setText("");
