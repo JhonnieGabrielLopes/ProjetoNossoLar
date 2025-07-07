@@ -342,6 +342,14 @@ public class BuscarPessoa extends javax.swing.JDialog {
                 cbBuscarPessoaTipo.addItem("Assistente");
                 cbBuscarPessoaTipo.addItem("Beneficiário");
                 break;
+            case 5:
+                cbBuscarPessoaTipo.removeAllItems();
+                cbBuscarPessoaTipo.addItem("Beneficiário");
+                cbBuscarPessoaTipo.addItem("Assistente");
+                cbBuscarPessoaTipo.addItem("Doador");
+                cbBuscarPessoaTipo.setSelectedIndex(2);
+                cbBuscarPessoaTipo.setEnabled(false);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -413,23 +421,22 @@ public class BuscarPessoa extends javax.swing.JDialog {
                     case 1:
                         tela.preenchePessoa(pessoa);
                         break;
-
                     case 2:
                         tela.preencheDoador(pessoa);
                         break;
-
-                case 3:
-                    Pedido pedido = new Pedido();
-                    pedido.setCliente(pessoa);
-                    tela.preenchePedido(pedido);
-                    break;
-                case 4:
-                    tela.preenchePessoaRelatorioPedido(pessoa);
-                    break;
-                case 5:
-                    tela.preencheDoadorRelatorio(pessoa);
-                default:
-                    break;
+                    case 3:
+                        Pedido pedido = new Pedido();
+                        pedido.setCliente(pessoa);
+                        tela.preenchePedido(pedido);
+                        break;
+                    case 4:
+                        tela.preenchePessoaRelatorioPedido(pessoa);
+                        break;
+                    case 5:
+                        tela.preencheDoadorRelatorio(pessoa);
+                        break;
+                    default:
+                        break;
             }
 
             } catch (SQLException ex) {

@@ -314,6 +314,10 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
+        pnDadosPrincipal.setBackground(new java.awt.Color(245, 245, 246));
+        pnDadosPrincipal.setPreferredSize(null);
+
+        pnCard.setBackground(new java.awt.Color(245, 245, 246));
         pnCard.setLayout(new java.awt.CardLayout());
 
         pnHome.setBackground(new java.awt.Color(245, 245, 246));
@@ -325,16 +329,16 @@ public class Telas extends javax.swing.JFrame {
         pnHomeLayout.setHorizontalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHomeLayout.createSequentialGroup()
-                .addContainerGap(443, Short.MAX_VALUE)
+                .addContainerGap(629, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addGap(223, 223, 223))
         );
         pnHomeLayout.setVerticalGroup(
             pnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnHomeLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHomeLayout.createSequentialGroup()
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(90, 90, 90))
         );
 
         pnCard.add(pnHome, "cdHome");
@@ -342,6 +346,8 @@ public class Telas extends javax.swing.JFrame {
         pnEnderecoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         tfEnderecoLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfEnderecoLogradouro.setForeground(new java.awt.Color(0, 0, 0));
+        tfEnderecoLogradouro.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         lbLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbLogradouro.setText("Logradouro:");
@@ -350,6 +356,8 @@ public class Telas extends javax.swing.JFrame {
         lbNumero.setText("Número:");
 
         tfEnderecoNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfEnderecoNumero.setForeground(new java.awt.Color(0, 0, 0));
+        tfEnderecoNumero.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfEnderecoNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfEnderecoNumeroKeyTyped(evt);
@@ -357,6 +365,8 @@ public class Telas extends javax.swing.JFrame {
         });
 
         tfEnderecoBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfEnderecoBairro.setForeground(new java.awt.Color(0, 0, 0));
+        tfEnderecoBairro.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         lbBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbBairro.setText("Bairro:");
@@ -365,6 +375,8 @@ public class Telas extends javax.swing.JFrame {
         lbLogradouro3.setText("Cidade:");
 
         tfEnderecoComplemento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfEnderecoComplemento.setForeground(new java.awt.Color(0, 0, 0));
+        tfEnderecoComplemento.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         lbComplemento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbComplemento.setText("Complemento:");
@@ -377,6 +389,8 @@ public class Telas extends javax.swing.JFrame {
         });
 
         tfEnderecoCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfEnderecoCep.setForeground(new java.awt.Color(0, 0, 0));
+        tfEnderecoCep.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfEnderecoCep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfEnderecoCepKeyTyped(evt);
@@ -482,6 +496,8 @@ public class Telas extends javax.swing.JFrame {
         pnPessoaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         tfNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfNome.setForeground(new java.awt.Color(0, 0, 0));
+        tfNome.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNomeKeyTyped(evt);
@@ -491,11 +507,13 @@ public class Telas extends javax.swing.JFrame {
         lbNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbNome.setText("Nome:");
 
+        ffTelefone.setForeground(new java.awt.Color(0, 0, 0));
         try {
             ffTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ffTelefone.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         ffTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -505,6 +523,8 @@ public class Telas extends javax.swing.JFrame {
         lbNomePaciente.setText("Nome do Paciente:");
 
         tfNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfNomePaciente.setForeground(new java.awt.Color(0, 0, 0));
+        tfNomePaciente.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfNomePaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNomePacienteKeyTyped(evt);
@@ -538,6 +558,8 @@ public class Telas extends javax.swing.JFrame {
 
         tfCodigoPessoa.setEditable(false);
         tfCodigoPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfCodigoPessoa.setForeground(new java.awt.Color(0, 0, 0));
+        tfCodigoPessoa.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         lbCodigoPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbCodigoPessoa.setText("Código:");
@@ -555,6 +577,8 @@ public class Telas extends javax.swing.JFrame {
         lbEmail.setText("E-mail:");
 
         tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfEmail.setForeground(new java.awt.Color(0, 0, 0));
+        tfEmail.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         lbPessoaTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbPessoaTipo.setText("Tipo Pessoa:");
@@ -580,6 +604,8 @@ public class Telas extends javax.swing.JFrame {
         lbDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDocumento.setText("Nº do Documento:");
 
+        ffDocumento.setForeground(new java.awt.Color(0, 0, 0));
+        ffDocumento.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         ffDocumento.setEnabled(false);
         ffDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -721,8 +747,10 @@ public class Telas extends javax.swing.JFrame {
 
         taObservacao.setColumns(20);
         taObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        taObservacao.setForeground(new java.awt.Color(0, 0, 0));
         taObservacao.setLineWrap(true);
         taObservacao.setRows(5);
+        taObservacao.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(taObservacao);
 
         javax.swing.GroupLayout pnCadastroPessoaLayout = new javax.swing.GroupLayout(pnCadastroPessoa);
@@ -766,7 +794,7 @@ public class Telas extends javax.swing.JFrame {
                         .addComponent(lbObservacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastroPessoa, "beneficiario");
@@ -777,6 +805,7 @@ public class Telas extends javax.swing.JFrame {
         lbDoacaoIdDoacao.setText("Código:");
 
         tfDoacaoIdDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDoacaoIdDoacao.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfDoacaoIdDoacao.setEnabled(false);
         tfDoacaoIdDoacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -788,6 +817,7 @@ public class Telas extends javax.swing.JFrame {
         lbDoacaoDoador.setText("Doador:");
 
         tfDoacaoIdDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDoacaoIdDoador.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfDoacaoIdDoador.setEnabled(false);
         tfDoacaoIdDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -796,6 +826,7 @@ public class Telas extends javax.swing.JFrame {
         });
 
         tfDoacaoDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDoacaoDoador.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfDoacaoDoador.setEnabled(false);
         tfDoacaoDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -822,6 +853,7 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ftDoacaoData.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         ftDoacaoData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ftDoacaoData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -835,6 +867,7 @@ public class Telas extends javax.swing.JFrame {
         tfDoacaoValor.setColumns(10);
         tfDoacaoValor.setValue(0.00);
         tfDoacaoValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        tfDoacaoValor.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfDoacaoValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfDoacaoValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -849,6 +882,7 @@ public class Telas extends javax.swing.JFrame {
         taDoacaoObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         taDoacaoObservacao.setRows(5);
         taDoacaoObservacao.setWrapStyleWord(true);
+        taDoacaoObservacao.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane2.setViewportView(taDoacaoObservacao);
 
         btDoacaoRecibo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -989,6 +1023,7 @@ public class Telas extends javax.swing.JFrame {
         lbDoacaoQuantidade.setText("Quantidade:");
 
         tfDoacaoSelecionarProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDoacaoSelecionarProd.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfDoacaoSelecionarProd.setEnabled(false);
 
         btDoacaoBuscarProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1203,7 +1238,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarDoacao, "cdCadastrarDoacao");
@@ -1211,6 +1246,7 @@ public class Telas extends javax.swing.JFrame {
         pnPedido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         tfPedidoCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfPedidoCliente.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfPedidoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPedidoClienteActionPerformed(evt);
@@ -1227,6 +1263,7 @@ public class Telas extends javax.swing.JFrame {
         taPedidoObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         taPedidoObservacao.setRows(5);
         taPedidoObservacao.setWrapStyleWord(true);
+        taPedidoObservacao.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane4.setViewportView(taPedidoObservacao);
 
         lbPedidoObservacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1240,12 +1277,14 @@ public class Telas extends javax.swing.JFrame {
 
         tfPedidoIdPedido.setEditable(false);
         tfPedidoIdPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfPedidoIdPedido.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         lbPedidoIdPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbPedidoIdPedido.setText("Código:");
 
         tfPedidoIdCliente.setEditable(false);
         tfPedidoIdCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfPedidoIdCliente.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         btPedidoBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btPedidoBuscarCliente.setFocusPainted(false);
@@ -1280,6 +1319,7 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ffPedidoDtPedido.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         ffPedidoDtPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         try {
@@ -1287,6 +1327,7 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ffPedidoDtEntrega.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         ffPedidoDtEntrega.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btPedidoRecibo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1478,6 +1519,7 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ffRelDoaDtInicial.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         ffRelDoaDtInicial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbRelDoaDtFinal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1488,12 +1530,14 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ffRelDoaDtFinal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         ffRelDoaDtFinal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbRelDoaDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelDoaDoador.setText("Doador:");
 
         tfRelDoaDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfRelDoaDoador.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         lbRelDoaTpDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelDoaTpDoacao.setText("Tipo Doação:");
@@ -1514,6 +1558,7 @@ public class Telas extends javax.swing.JFrame {
         lbRelDoaProd.setText("Produto:");
 
         tfRelDoaProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfRelDoaProd.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         lbRelDoaTpProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbRelDoaTpProduto.setText("Tipo Produto:");
@@ -1680,6 +1725,7 @@ public class Telas extends javax.swing.JFrame {
         tfRelTotProd.setEditable(false);
         tfRelTotProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelTotProd.setText("0");
+        tfRelTotProd.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         jbRelDoaTorIte.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelDoaTorIte.setText("Total Itens:");
@@ -1687,8 +1733,10 @@ public class Telas extends javax.swing.JFrame {
         tfRelTotIte.setEditable(false);
         tfRelTotIte.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelTotIte.setText("0");
+        tfRelTotIte.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         tfRelTotDin.setEditable(false);
+        tfRelTotDin.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfRelTotDin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout pnRelResultadoLayout = new javax.swing.GroupLayout(pnRelResultado);
@@ -1812,7 +1860,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btRelDoacaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelDoaSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioDoacao, "relatorioDoacao");
@@ -1830,6 +1878,7 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        tfRelPedDtPedidoInicio.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfRelPedDtPedidoInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbRelPedDtPedidoFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1840,6 +1889,7 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        tfRelPedDtPedidoFim.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfRelPedDtPedidoFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbRelPedStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1863,6 +1913,7 @@ public class Telas extends javax.swing.JFrame {
         lbRelPedCliente.setText("Assistente/Beneficiário:");
 
         tfRelPedCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfRelPedCliente.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         btRelPedidoBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btRelPedidoBuscarCliente.setFocusPainted(false);
@@ -1881,6 +1932,7 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        tfRelPedDtEntregaInicio.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfRelPedDtEntregaInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbRelPedDtEntregaFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1891,6 +1943,7 @@ public class Telas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        tfRelPedDtEntregaFim.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tfRelPedDtEntregaFim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbRelPedOrdenacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -2059,6 +2112,7 @@ public class Telas extends javax.swing.JFrame {
         tfRelPedTotPendente.setEditable(false);
         tfRelPedTotPendente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelPedTotPendente.setText("0");
+        tfRelPedTotPendente.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         jbRelPedTotFechado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelPedTotFechado.setText("Fechado:");
@@ -2066,6 +2120,7 @@ public class Telas extends javax.swing.JFrame {
         tfRelPedTotFechado.setEditable(false);
         tfRelPedTotFechado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelPedTotFechado.setText("0");
+        tfRelPedTotFechado.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         jbRelPedTotCancelado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbRelPedTotCancelado.setText("Cancelado:");
@@ -2073,6 +2128,7 @@ public class Telas extends javax.swing.JFrame {
         tfRelPedTotCancelado.setEditable(false);
         tfRelPedTotCancelado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelPedTotCancelado.setText("0");
+        tfRelPedTotCancelado.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jpRelPedTotStatusLayout = new javax.swing.GroupLayout(jpRelPedTotStatus);
         jpRelPedTotStatus.setLayout(jpRelPedTotStatusLayout);
@@ -2128,6 +2184,7 @@ public class Telas extends javax.swing.JFrame {
         tfRelPedTotMarmitas.setEditable(false);
         tfRelPedTotMarmitas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfRelPedTotMarmitas.setText("0");
+        tfRelPedTotMarmitas.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jpRelPedTotMarmitasLayout = new javax.swing.GroupLayout(jpRelPedTotMarmitas);
         jpRelPedTotMarmitas.setLayout(jpRelPedTotMarmitasLayout);
@@ -2251,7 +2308,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -2267,7 +2324,7 @@ public class Telas extends javax.swing.JFrame {
         pnDadosPrincipalLayout.setVerticalGroup(
             pnDadosPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDadosPrincipalLayout.createSequentialGroup()
-                .addComponent(pnCard, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
