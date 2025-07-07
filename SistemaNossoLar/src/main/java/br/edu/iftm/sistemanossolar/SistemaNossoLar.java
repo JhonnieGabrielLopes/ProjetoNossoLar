@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import br.edu.iftm.sistemanossolar.dao.ConexaoDAO;
-import br.edu.iftm.sistemanossolar.model.doacao.Produto;
 import br.edu.iftm.sistemanossolar.view.Metodos;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
 import br.edu.iftm.sistemanossolar.view.Telas;
@@ -29,72 +28,9 @@ public class SistemaNossoLar {
                 scan.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        metodos.cadastrarUsuario(scan);
-                        //ERRO 1:
-                        //AO SELECIONE O LOCAL PRONTO SOCORRO ESTA SENDO SEMPRE GRAVADO COMO HOSPITAL NO BANCO
-                        controle = false;
-                        break;
-
-                    case 2:
-                        metodos.cadastrarEndereco(scan);
-                        controle = false;
-                        break;
-
-                    case 3:
-                        metodos.cadastrarCidade(scan);
-                        controle = false;
-                        break;
-                    
-                    case 4:
-                        metodos.cadastrarDoacao(scan);
-                        controle = false;
-                        break;
-
-                    case 5:
-                        metodos.cadastrarPedido(scan);
-                        //ERRO 2:
-                        //AO CADASTRAR O PEDIDO NAO ESTA SENDO CRIADA A PASTA PEDIDO DENTRO DO DIRETORIO RECIBO, QUANDO O MESMO NÃO EXISTE
-                        controle = false;
-                        break;
-
-                    case 6:
-                        metodos.cadastrarProduto(scan, new Produto());
-                        controle = false;
-                        break;
-
-                    case 7:
-                        metodos.listarPessoas();
-                        controle = false;
-                        break;
-                    
-                    case 10:
-                        metodos.listarDoacoes();
-                        controle = false;
-                        break;
-
-                    case 11:
-                        metodos.listarPedidos();
-                        controle = false;
-                        break;
-                    
-                    case 12:
-                        metodos.listarProdutos();
-                        controle = false;
-                        break;
-
-                    case 13:
-                        metodos.alterarUsuario(scan);
-                        controle = false;
-                        break;
                         
                     case 20:
                         metodos.relatorioDoacao();
-                        controle = false;
-                        break;
-
-                    case 21:
-                        metodos.relatorioPedido();
                         controle = false;
                         break;
 
@@ -115,5 +51,4 @@ public class SistemaNossoLar {
             log.registrarLog(4, "SistemaNossoLar", "main", "", "Erro ao conectar com o Banco de Dados");
         }
     }
-
 }

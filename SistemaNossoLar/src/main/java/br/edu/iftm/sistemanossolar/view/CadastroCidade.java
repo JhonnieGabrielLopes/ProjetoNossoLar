@@ -147,15 +147,24 @@ public class CadastroCidade extends javax.swing.JDialog {
             (String)cbCadCidUf.getSelectedItem()
         );
         try {
-            if(!cidadeController.existeCidade(cidade)){
-                if(cidadeController.cadastrarCidade(cidade)){
-                    JOptionPane.showMessageDialog(rootPane, "Cidade cadastrada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    tela.carregarCidade();
-                }else{
-                    JOptionPane.showMessageDialog(rootPane, "Não foi possível cadastrar a cidade!", "Erro", JOptionPane.ERROR_MESSAGE);
+
+            if (cidade.getNome().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Preencha o Nome da Cidade!", "Cadastro de Cidade", JOptionPane.WARNING_MESSAGE);
+                return;
+            } else if (cidade.getEstado().equals("Selecione")) {
+                JOptionPane.showMessageDialog(rootPane, "Selecione a UF da Cidade!", "Cadastro de Cidade", JOptionPane.WARNING_MESSAGE);
+                return;
+            } else {
+                if (!cidadeController.existeCidade(cidade)){
+                    if (cidadeController.cadastrarCidade(cidade)){
+                        JOptionPane.showMessageDialog(rootPane, "Cidade cadastrada!", "Cadastro de Cidade", JOptionPane.INFORMATION_MESSAGE);
+                        tela.carregarCidade();
+                    } else{
+                        JOptionPane.showMessageDialog(rootPane, "Não foi possível cadastrar a cidade!", "Cadastro de Cidade", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Cidade já cadastrada!", "Cadastro de Cidade", JOptionPane.INFORMATION_MESSAGE);
                 }
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Cidade já cadastrada!", "Erro", JOptionPane.INFORMATION_MESSAGE);
             }
             dispose();
         } catch (SQLException ex) {

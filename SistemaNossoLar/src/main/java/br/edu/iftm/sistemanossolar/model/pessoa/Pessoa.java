@@ -1,6 +1,8 @@
 package br.edu.iftm.sistemanossolar.model.pessoa;
 
 import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
+
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 public class Pessoa {
@@ -38,7 +40,7 @@ public class Pessoa {
 
     public enum Local {
         HOSPITAL,
-        PRONTOSOCORRO,;
+        PRONTOSOCORRO;
 
         public static Local fromString(String opcao) {
             if (opcao == null) {
@@ -204,87 +206,97 @@ public class Pessoa {
 
     public boolean camposIguais(Pessoa outro) {
         if (outro == null) {
-            System.out.println("0 - Objeto comparado é null");
+            //System.out.println("0 - Objeto comparado é null");
             return false;
         }
 
-        if (this.id != null ? !this.id.equals(outro.getId()) : outro.getId() != null) {
-            System.out.println("1 - id diferente");
+        if (!objetosIguais(this.id, outro.getId())) {
+            //System.out.println("1 - id diferente");
             return false;
         }
 
-        if (this.tipoCadastro != null ? !this.tipoCadastro.equals(outro.getTipoUsuario()) : outro.getTipoUsuario() != null) {
-            System.out.println("2 - tipoCadastro diferente");
+        if (!objetosIguais(this.tipoCadastro, outro.getTipoUsuario())) {
+            //System.out.println("2 - tipoCadastro diferente");
             return false;
         }
 
-        if (this.nome != null
-                ? (this.nome.trim().isEmpty() || !this.nome.equals(outro.getNome()))
-                : (outro.getNome() != null && !outro.getNome().trim().isEmpty())) {
-            System.out.println("3 - nome diferente ou vazio");
+        if (!iguais(this.nome, outro.getNome())) {
+            //System.out.println("3 - nome diferente");
             return false;
         }
 
-        if (this.paciente.igual(outro.getPaciente())) {
-            System.out.println("4 - paciente diferente ou vazio");
+        if (!objetosComMetodoIgual(this.paciente, outro.getPaciente())) {
+            //System.out.println("4 - paciente diferente");
             return false;
         }
 
-        if (this.local != null ? !this.local.equals(outro.getLocal()) : outro.getLocal() != null) {
-            System.out.println("5 - local diferente");
+        if (!objetosIguais(this.local, outro.getLocal())) {
+            //System.out.println("5 - local diferente");
             return false;
         }
 
-        if (this.tipoPessoa != null ? !this.tipoPessoa.equals(outro.getTipoPessoa()) : outro.getTipoPessoa() != null) {
-            System.out.println("6 - tipoPessoa diferente");
+        if (!objetosIguais(this.tipoPessoa, outro.getTipoPessoa())) {
+            //System.out.println("6 - tipoPessoa diferente");
             return false;
         }
 
-        if (this.identificacao != null
-                ? (this.identificacao.trim().isEmpty() || !this.identificacao.equals(outro.getIdentificacao()))
-                : (outro.getIdentificacao() != null && !outro.getIdentificacao().trim().isEmpty())) {
-            System.out.println("7 - identificacao diferente ou vazia");
+        if (!iguais(this.identificacao, outro.getIdentificacao())) {
+            //System.out.println("7 - identificacao diferente");
             return false;
         }
 
-        if (this.telefone != null
-                ? (this.telefone.trim().isEmpty() || !this.telefone.equals(outro.getTelefone()))
-                : (outro.getTelefone() != null && !outro.getTelefone().trim().isEmpty())) {
-            System.out.println("8 - telefone diferente ou vazio");
+        if (!iguais(this.telefone, outro.getTelefone())) {
+           //System.out.println("8 - telefone diferente");
             return false;
         }
 
-        if (this.enderecoId != null ? !this.enderecoId.equals(outro.getEnderecoId()) : outro.getEnderecoId() != null) {
-            System.out.println("9 - enderecoId diferente");
+        if (!objetosIguais(this.enderecoId, outro.getEnderecoId())) {
+            //System.out.println("9 - enderecoId diferente");
             return false;
         }
 
-        if (!this.endereco.igual(outro.getEndereco())) {
-            System.out.println("10 - endereco diferente");
+        if (!objetosComMetodoIgual(this.endereco, outro.getEndereco())) {
+            //System.out.println("10 - endereco diferente");
             return false;
         }
 
-        if (this.email != null
-                ? (this.email.trim().isEmpty() || !this.email.equals(outro.getEmail()))
-                : (outro.getEmail() != null && !outro.getEmail().trim().isEmpty())) {
-            System.out.println("11 - email diferente ou vazio");
+        if (!iguais(this.email, outro.getEmail())) {
+            //System.out.println("11 - email diferente");
             return false;
         }
 
-        if (!(this.observacao == null && outro.getObservacao() == null)
-                && !Objects.equals(this.observacao, outro.getObservacao())) {
-            System.out.println("observação diferente");
+        if (!iguais(this.observacao, outro.getObservacao())) {
+            //System.out.println("12 - observação diferente");
             return false;
         }
 
-        if (this.cidadeCompleta != null
-                ? (this.cidadeCompleta.trim().isEmpty() || !this.cidadeCompleta.equals(outro.getCidadeCompleta()))
-                : (outro.getCidadeCompleta() != null && !outro.getCidadeCompleta().trim().isEmpty())) {
-            System.out.println("13 - cidadeCompleta diferente ou vazia");
+        if (!iguais(this.cidadeCompleta, outro.getCidadeCompleta())) {
+            //System.out.println("13 - cidadeCompleta diferente");
             return false;
         }
 
-        System.out.println("Todos os campos são iguais.");
+        //System.out.println("Todos os campos são iguais.");
         return true;
+    }
+
+    private boolean iguais(String a, String b) {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+        return a.trim().equalsIgnoreCase(b.trim());
+    }
+
+    private boolean objetosIguais(Object a, Object b) {
+        return Objects.equals(a, b);
+    }
+
+    private boolean objetosComMetodoIgual(Object a, Object b) {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+        try {
+            Method m = a.getClass().getMethod("igual", b.getClass());
+            return (boolean) m.invoke(a, b);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -34,7 +34,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
         doacaoController = new DoacaoController(conexao);
         initComponents();
         this.tela = tela;
-        modelo = (DefaultTableModel) tableBuscarPessoa.getModel();
+        modelo = (DefaultTableModel) tableBuscarDoacao.getModel();
     }
 
     /**
@@ -59,7 +59,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
         btBuscarDoacao = new javax.swing.JButton();
         pnBuscarDoacaoResultado = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableBuscarPessoa = new javax.swing.JTable();
+        tableBuscarDoacao = new javax.swing.JTable();
         btBuscarDoacaoSair = new javax.swing.JButton();
         btBuscarDoacaoLimpar = new javax.swing.JButton();
         btBuscarDoacaoSelecionar = new javax.swing.JButton();
@@ -177,8 +177,8 @@ public class BuscarDoacao extends javax.swing.JDialog {
         pnBuscarDoacaoResultado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         pnBuscarDoacaoResultado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        tableBuscarPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tableBuscarPessoa.setModel(new javax.swing.table.DefaultTableModel(
+        tableBuscarDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableBuscarDoacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -201,7 +201,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableBuscarPessoa);
+        jScrollPane1.setViewportView(tableBuscarDoacao);
 
         javax.swing.GroupLayout pnBuscarDoacaoResultadoLayout = new javax.swing.GroupLayout(pnBuscarDoacaoResultado);
         pnBuscarDoacaoResultado.setLayout(pnBuscarDoacaoResultadoLayout);
@@ -303,6 +303,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
         String nomeDoador = tfBuscarDoacaoDoador.getText();
         String tipoDoacao = (String) cbBuscarDocaoTipo.getSelectedItem();
         
+
         String campoDataInicio = ffBuscarDoacaoDataInicio.getText().trim();
         String campoDataFim = ffBuscarDoacaoDataFim.getText().trim();
         DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -350,11 +351,11 @@ public class BuscarDoacao extends javax.swing.JDialog {
     }
     
     private void btBuscarDoacaoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarDoacaoSelecionarActionPerformed
-        if (tableBuscarPessoa.getSelectedRow() == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (tableBuscarDoacao.getSelectedRow() == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma Doação!", "Busca Doação", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         } else {
-            int indiceDoacao = tableBuscarPessoa.getSelectedRow();
+            int indiceDoacao = tableBuscarDoacao.getSelectedRow();
             doacao = listagem.get(indiceDoacao);
             produtos = doacaoController.listagemDeProduto(doacao);
             doacao.setProduto(produtos);
@@ -402,7 +403,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
     private javax.swing.JPanel pnBuscarDoacaoFiltros;
     private javax.swing.JPanel pnBuscarDoacaoResultado;
     private javax.swing.JPanel pnBuscarPessoa;
-    private javax.swing.JTable tableBuscarPessoa;
+    private javax.swing.JTable tableBuscarDoacao;
     private javax.swing.JTextField tfBuscarDoacaoDoador;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
 package br.edu.iftm.sistemanossolar.model.pedido;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
 
@@ -13,6 +14,9 @@ public class Pedido {
     private LocalDate dataPedido;
     private LocalDate dataEntrega;
 
+    public Pedido() {
+    }
+
     public Pedido(Pessoa cliente, Integer quantMarmita, StatusPedido status, LocalDate dataPedido) {
         this.cliente = cliente;
         this.quantMarmita = quantMarmita;
@@ -20,14 +24,11 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public Pedido() {
-        
-    }
-
     public enum StatusPedido {
-        PENDENTE, 
-        ENTREGUE, 
+        PENDENTE,
+        ENTREGUE,
         CANCELADO;
+
         public static StatusPedido fromString(String status) {
             for (StatusPedido s : StatusPedido.values()) {
                 if (s.name().equalsIgnoreCase(status)) {
@@ -36,6 +37,14 @@ public class Pedido {
             }
             throw new IllegalArgumentException("Status inválido: " + status);
         }
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Pessoa getCliente() {
@@ -86,12 +95,45 @@ public class Pedido {
         this.dataEntrega = dataEntrega;
     }
 
-    public Integer getId() {
-        return id;
+    public boolean camposIguais(Pedido outro) {
+        if (outro == null) {
+            return false;
+        }
+        if (!objetosIguais(this.id, outro.getId())) {
+            //System.out.println("0 - Objeto comparado é null");
+            return false;
+        }
+        if (!objetosIguais(this.quantMarmita, outro.getQuantMarmita())) {
+            //System.out.println("1 - Quantidade de marmitas é diferente");
+            return false;
+        }
+        if (!objetosIguais(this.status, outro.getStatus())) {
+            //System.out.println("2 - Status do pedido é diferente");
+            return false;
+        }
+        if (!iguais(this.observacao, outro.getObservacao())) {
+            //System.out.println("3 - Observação é diferente");
+            return false;
+        }
+        if (!objetosIguais(this.dataPedido, outro.getDataPedido())) {
+            //System.out.println("4 - Data do pedido é diferente");
+            return false;
+        }
+        if (!objetosIguais(this.dataEntrega, outro.getDataEntrega())) {
+            //System.out.println("5 - Data de entrega é diferente");
+            return false;
+        }
+        //System.out.println("6 - Campos são iguais");
+        return true;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    private boolean iguais(String a, String b) {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+        return a.trim().equalsIgnoreCase(b.trim());
     }
 
+    private boolean objetosIguais(Object a, Object b) {
+        return Objects.equals(a, b);
+    }
 }

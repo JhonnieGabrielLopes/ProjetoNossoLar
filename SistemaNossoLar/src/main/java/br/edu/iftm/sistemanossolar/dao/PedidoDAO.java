@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
+import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.Local;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa.TipoCad;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
 import br.edu.iftm.sistemanossolar.view.RegistrosLog;
@@ -26,13 +28,18 @@ public class PedidoDAO {
     }
 
     public boolean cadastrarPedido(Pedido pedido) {
-        String sql = "INSERT INTO pedido (pessoa, quantidade, status, observacao, dataPedido) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pedido (pessoa, quantidade, status, observacao, dataPedido, dataEntrega) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, pedido.getCliente().getId());
             stmt.setInt(2, pedido.getQuantMarmita());
             stmt.setString(3, pedido.getStatus().name());
             stmt.setString(4, pedido.getObservacao());
             stmt.setDate(5, java.sql.Date.valueOf(pedido.getDataPedido()));
+            if (pedido.getDataEntrega() == null) {
+                stmt.setNull(6, java.sql.Types.DATE);
+            } else {
+                stmt.setDate(6, java.sql.Date.valueOf(pedido.getDataEntrega())); 
+            }
             stmt.executeUpdate();
             log.registrarLog(2, "PedidoDAO", "cadastrarPedido", "pedido", "Pedido cadastrado");
             log.registrarLog(1, "PedidoDAO", "cadastrarPedido", "pedido", "Obtendo o ID do Pedido");
@@ -65,7 +72,7 @@ public class PedidoDAO {
         sql.append("JOIN tipoUsuario tu ON ut.tipoUsuario = tu.id ");
         sql.append("WHERE 1=1 ");
         sql.append(sqlFiltro);
-        sql.append("ORDER BY p.datapedido DESC");
+        sql.append("ORDER BY p.datapedido DESC, p.id DESC");
 
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
             for (int i = 0; i < filtros.size(); i++) {
@@ -111,8 +118,7 @@ public class PedidoDAO {
 
     public List<RelPedido> filtrarRegistrosRelatorio(String filtro, List<Object> filtros) throws SQLException {
         StringBuilder sql = new StringBuilder();
-        sql.append(
-                "SELECT p.id AS codigo_pedido, p.status, u.id AS codigo_cliente, u.nome AS nome_cliente, p.quantidade AS marmitas, u.local, p.observacao, p.dataPedido, p.dataEntrega, c.nome AS cidade ");
+        sql.append("SELECT p.id AS codigo_pedido, p.status, u.id AS codigo_cliente, u.nome AS nome_cliente, p.quantidade AS marmitas, u.local, p.observacao, p.dataPedido, p.dataEntrega, c.nome AS cidade ");
         sql.append("FROM pedido p ");
         sql.append("JOIN usuario u ON p.pessoa = u.id ");
         sql.append("JOIN usuarioTipo ut ON u.id = ut.usuario ");
@@ -121,7 +127,6 @@ public class PedidoDAO {
         sql.append("JOIN cidade c ON e.cidade = c.id ");
         sql.append("WHERE 1=1 ");
         sql.append(filtro);
-
         try (PreparedStatement stmt = conexaoBanco.prepareStatement(sql.toString())) {
             for (int i = 0; i < filtros.size(); i++) {
                 stmt.setObject(i + 1, filtros.get(i));
@@ -214,20 +219,24 @@ public class PedidoDAO {
 
     public Pedido buscarPedidoPorId(int idPedido) {
         try {
-            String sql = "select p.id, p.status, u.id as idCliente, u.nome, tu.tipo,p.quantidade, p.observacao, p.dataPedido, p.dataEntrega from pedido p left join usuario u on u.id = p.pessoa left join usuarioTipo ut on ut.usuario = u.id left join tipoUsuario tu on tu.id = ut.tipoUsuario where p.id = ?";
+            String sql = "select p.id, p.status, u.id as idCliente, u.nome, tu.tipo, p.quantidade, pa.nome AS paciente, u.local, p.observacao, p.dataPedido, p.dataEntrega from pedido p left join usuario u on u.id = p.pessoa left join usuarioTipo ut on ut.usuario = u.id left join tipoUsuario tu on tu.id = ut.tipoUsuario left join paciente pa on pa.usuario = p.pessoa where p.id = ?";
             PreparedStatement stmt = conexaoBanco.prepareStatement(sql);
             stmt.setInt(1, idPedido);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Pedido pedido = new Pedido();
                 Pessoa cliente = new Pessoa();
+                Paciente paciente = new Paciente();
                 cliente.setId(rs.getInt("idCliente"));
                 cliente.setNome(rs.getString("nome"));
                 cliente.setTipoUsuario(TipoCad.fromString(rs.getString("tu.tipo")));
+                cliente.setLocal(Local.fromString(rs.getString("local")));
+                paciente.setNome(rs.getString("paciente"));
+                cliente.setPaciente(paciente);
                 pedido.setId(rs.getInt("id"));
+                pedido.setQuantMarmita(rs.getInt("quantidade"));
                 pedido.setStatus(Pedido.StatusPedido.fromString(rs.getString("status")));
                 pedido.setCliente(cliente);
-                pedido.setQuantMarmita(rs.getInt("quantidade"));
                 pedido.setObservacao(rs.getString("observacao"));
                 if (rs.getDate("dataPedido") != null) {
                     pedido.setDataPedido(rs.getDate("dataPedido").toLocalDate());

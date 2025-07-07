@@ -106,6 +106,11 @@ public class BuscarPessoa extends javax.swing.JDialog {
         lbBuscarPessoaCidade.setToolTipText("");
 
         cbBuscarPessoaCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbBuscarPessoaCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBuscarPessoaCidadeActionPerformed(evt);
+            }
+        });
 
         btBuscarPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loupe.png"))); // NOI18N
         btBuscarPessoa.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -292,6 +297,10 @@ public class BuscarPessoa extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbBuscarPessoaCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBuscarPessoaCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbBuscarPessoaCidadeActionPerformed
+
     public void carregarCidade() throws SQLException {
         cbBuscarPessoaCidade.removeAllItems();
         Cidade cidadePadrao = new Cidade("", null);
@@ -373,7 +382,6 @@ public class BuscarPessoa extends javax.swing.JDialog {
     }// GEN-LAST:event_btBuscarPessoaNovoActionPerformed
 
     private void btBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btBuscarPessoaActionPerformed
-        // TODO add your handling code here:
         String nome = tfBuscarPessoaNome.getText();
         String tipo = (String) cbBuscarPessoaTipo.getSelectedItem();
         Cidade cidade = (Cidade) cbBuscarPessoaCidade.getSelectedItem();
@@ -390,26 +398,25 @@ public class BuscarPessoa extends javax.swing.JDialog {
         }
     }// GEN-LAST:event_btBuscarPessoaActionPerformed
 
-    private void btBuscarPessoaSelecionarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void btBuscarPessoaSelecionarActionPerformed(java.awt.event.ActionEvent evt) {  // GEN-FIRST:event_btBuscarPessoaSelecionarActionPerformed
         if (tableBuscarPessoa.getSelectedRow() == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma pessoa!", "Busca Pessoa", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
-        }
-        int indicePessoa = tableBuscarPessoa.getSelectedRow();
-        try {
-            pessoa = pessoaController.buscarPessoaPorId(pessoas.get(indicePessoa).getId());
-            pessoa.setId(pessoas.get(indicePessoa).getId());
-            pessoa.setEndereco(enderecoController.buscarEndereco(pessoa.getEnderecoId()));
+        } else {
+            int indicePessoa = tableBuscarPessoa.getSelectedRow();
+            try {
+                pessoa = pessoaController.buscarPessoaPorId(pessoas.get(indicePessoa).getId());
+                pessoa.setId(pessoas.get(indicePessoa).getId());
+                pessoa.setEndereco(enderecoController.buscarEndereco(pessoa.getEnderecoId()));
 
-            switch (identificador) {
-                case 1:
-                    tela.preenchePessoa(pessoa);
-                    break;
+                switch (identificador) {
+                    case 1:
+                        tela.preenchePessoa(pessoa);
+                        break;
 
-                case 2:
-                    tela.preencheDoador(pessoa);
-                    break;
+                    case 2:
+                        tela.preencheDoador(pessoa);
+                        break;
 
                 case 3:
                     Pedido pedido = new Pedido();
@@ -425,8 +432,9 @@ public class BuscarPessoa extends javax.swing.JDialog {
                     break;
             }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(BuscarPessoa.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(BuscarPessoa.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         limparTela();
         dispose();

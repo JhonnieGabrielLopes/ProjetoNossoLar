@@ -37,7 +37,9 @@ public class PessoaController {
         int pessoaId = pessoaDAO.cadastrarPessoa(pessoa, paciente, cidadeController.buscarIdCidade(cidade), enderecoController.buscarIdEndereco(pessoa.getEndereco(), cidadeController.buscarIdCidade(cidade)), tipoController.buscarIdTipo(pessoa.getTipoUsuario().toString(), "tipoUsuario"));
         if (pessoaId != 0) {
             if (paciente != null) {
-                pacienteController.cadastrarPaciente(paciente, pessoaId);
+                if (paciente.getNome() != null || !paciente.getNome().isEmpty() && paciente.getPrevisaoDias() != null || paciente.getPrevisaoDias() > 0) {
+                    pacienteController.cadastrarPaciente(paciente, pessoaId);
+                }
             }
             return true;
         } else {
