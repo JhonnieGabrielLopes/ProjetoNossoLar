@@ -274,7 +274,8 @@ public class RelatorioController {
             sentido.append(filtros.get(7).equals("asc") ? "Crescente" : "Decrescente");
             template = template.replace("{{sentido}}", sentido);
         }
-
+        
+        formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime agora = LocalDateTime.now();
         template = template.replace("{{resultados}}", resultado.toString())
                            .replace("{{qtdDoacoes}}", String.valueOf(qtdRegistros))

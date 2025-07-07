@@ -87,15 +87,15 @@ public class DoacaoController {
         StringBuilder sqlFinal = new StringBuilder();
         sqlFinal.append(sqlFiltro);
         
-        sqlFinal.append("GROUP BY d.id ");
+        sqlFinal.append("GROUP BY d.id, pd.quantidade ");
         if (ordem != null && !ordem.isEmpty()) {
             sqlFinal.append("ORDER BY ");
             switch (ordem) {
                 case "Data": sqlFinal.append("d.data "); break;
-                case "Codigo": sqlFinal.append("d.id "); break;
-                case "Nome": sqlFinal.append("u.nome "); break;
+                case "Código": sqlFinal.append("d.id "); break;
+                case "Nome do Doador": sqlFinal.append("u.nome "); break;
                 case "Valor": sqlFinal.append("d.valor "); break;
-                case "Quantidade": sqlFinal.append("pd.quantidade "); break;
+                case "Quantidade de Produtos": sqlFinal.append("pd.quantidade "); break;
             }
             sqlFinal.append(sentido.equals("Crescente") ? "ASC" : "DESC");
         }
