@@ -315,7 +315,6 @@ public class Telas extends javax.swing.JFrame {
         });
 
         pnDadosPrincipal.setBackground(new java.awt.Color(245, 245, 246));
-        pnDadosPrincipal.setPreferredSize(null);
 
         pnCard.setBackground(new java.awt.Color(245, 245, 246));
         pnCard.setLayout(new java.awt.CardLayout());
@@ -2883,6 +2882,7 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btPedidoReciboActionPerformed
 
     private void btPedidoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoRelatorioActionPerformed
+        identificadorRetorno = 1;
         cl.show(pnCard, "relatorioPedido");
     }//GEN-LAST:event_btPedidoRelatorioActionPerformed
 
@@ -3160,6 +3160,7 @@ public class Telas extends javax.swing.JFrame {
         }else{
             cl.show(pnCard, "cdHome");
         }
+        limparTelaRelDoa();
     }//GEN-LAST:event_btRelDoaSairActionPerformed
 
     private void btRelPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoBuscarClienteActionPerformed
@@ -3395,7 +3396,11 @@ public class Telas extends javax.swing.JFrame {
     }
 
     private void btRelPedidoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoSairActionPerformed
-        cl.show(pnCard, "cdCadastrarPedido");
+        if(identificadorRetorno == 1){
+            cl.show(pnCard, "cdCadastrarPedido");
+        }else{
+            cl.show(pnCard, "cdHome");
+        }
         limparTelaRelPed();
     }//GEN-LAST:event_btRelPedidoSairActionPerformed
 
@@ -3407,10 +3412,13 @@ public class Telas extends javax.swing.JFrame {
     private void jmRelDoacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRelDoacaoActionPerformed
         identificadorRetorno = 2;
         cl.show(pnCard, "relatorioDoacao");
+        limparTelaRelDoa();
     }//GEN-LAST:event_jmRelDoacaoActionPerformed
 
     private void jmRelPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRelPedidoActionPerformed
+        identificadorRetorno = 2;
         cl.show(pnCard, "relatorioPedido");
+        limparTelaRelPed();
     }//GEN-LAST:event_jmRelPedidoActionPerformed
 
     private void menuDoacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDoacaoMouseClicked
