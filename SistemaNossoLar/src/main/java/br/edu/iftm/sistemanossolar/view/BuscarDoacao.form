@@ -52,7 +52,7 @@
                   <Component id="btBuscarDoacaoLimpar" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="btBuscarDoacaoSair" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="11" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -178,6 +178,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lbBuscarDoacaoDoador">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Doador:"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -195,6 +198,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lbBuscarDoacaoTipo">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Tipo:"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -218,6 +224,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lbBuscarDoacaoData1">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Data Inicio:"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -235,6 +244,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lbBuscarDoacaoData2">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Data Fim:"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>

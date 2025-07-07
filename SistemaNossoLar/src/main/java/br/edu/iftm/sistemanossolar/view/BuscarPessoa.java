@@ -341,6 +341,7 @@ public class BuscarPessoa extends javax.swing.JDialog {
                 cbBuscarPessoaTipo.removeAllItems();
                 cbBuscarPessoaTipo.addItem("Assistente");
                 cbBuscarPessoaTipo.addItem("Beneficiário");
+                cbBuscarPessoaTipo.setEnabled(true);
                 break;
             case 5:
                 cbBuscarPessoaTipo.removeAllItems();

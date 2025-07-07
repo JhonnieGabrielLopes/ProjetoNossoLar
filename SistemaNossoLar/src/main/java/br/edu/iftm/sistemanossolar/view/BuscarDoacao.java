@@ -70,6 +70,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
 
         pnBuscarDoacaoFiltros.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
+        lbBuscarDoacaoDoador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbBuscarDoacaoDoador.setText("Doador:");
         lbBuscarDoacaoDoador.setToolTipText("");
 
@@ -85,12 +86,14 @@ public class BuscarDoacao extends javax.swing.JDialog {
             }
         });
 
+        lbBuscarDoacaoTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbBuscarDoacaoTipo.setText("Tipo:");
         lbBuscarDoacaoTipo.setToolTipText("");
 
         cbBuscarDocaoTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbBuscarDocaoTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Dinheiro", "Produto" }));
 
+        lbBuscarDoacaoData1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbBuscarDoacaoData1.setText("Data Inicio:");
         lbBuscarDoacaoData1.setToolTipText("");
 
@@ -102,6 +105,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
         ffBuscarDoacaoDataInicio.setText("");
         ffBuscarDoacaoDataInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        lbBuscarDoacaoData2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbBuscarDoacaoData2.setText("Data Fim:");
         lbBuscarDoacaoData2.setToolTipText("");
 
@@ -293,7 +297,7 @@ public class BuscarDoacao extends javax.swing.JDialog {
                     .addComponent(btBuscarDoacaoSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btBuscarDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btBuscarDoacaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
