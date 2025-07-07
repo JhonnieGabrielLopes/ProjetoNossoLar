@@ -76,7 +76,7 @@ public class DoacaoController {
         filtrosRelatorio.add(tipoDoacao);
         filtrosRelatorio.add(tipoProduto);
         filtrosRelatorio.add(idDoador);
-        if (idDoador != null) {
+        if (idProduto != null) {
             filtrosRelatorio.add(produtoController.capturarNomeProduto(idProduto));    
         } else {
             filtrosRelatorio.add(null);    

@@ -3585,11 +3585,11 @@ public class Telas extends javax.swing.JFrame {
     }
     
     public void preencheDoadorRelatorio(Pessoa doador){
-        tfRelDoaDoador.setText(doador.getId() + " | " + doador.getNome());
+        tfRelDoaDoador.setText(doador.getId() + " - " + doador.getNome());
     }
     
     public void preencheProdutoRelatorio(Produto produto){
-        tfRelDoaProd.setText(produto.getId() + " | " + produto.getNome());
+        tfRelDoaProd.setText(produto.getId() + " - " + produto.getNome());
     }
     
     public void preencheDoacao(Doacao doacao) {
@@ -3703,7 +3703,7 @@ public class Telas extends javax.swing.JFrame {
     }
 
     public void preenchePessoaRelatorioPedido(Pessoa pessoa) {
-        tfRelPedCliente.setText(pessoa.getId() + " | " + pessoa.getNome());
+        tfRelPedCliente.setText(pessoa.getId() + " - " + pessoa.getNome());
     }
 
     public void travaCamposDoacao() {
