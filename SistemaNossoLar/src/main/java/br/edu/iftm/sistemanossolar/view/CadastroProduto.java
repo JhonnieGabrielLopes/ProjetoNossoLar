@@ -60,16 +60,27 @@ public class CadastroProduto extends javax.swing.JDialog {
         lbCadProdProduto.setText("Descrição:");
 
         tfCadProdProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfCadProdProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadProdSalvarActionPerformed(evt);
+            }
+        });
 
         btCadProdSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadProdSalvar.setText("Salvar");
         btCadProdSalvar.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        btCadProdSalvarActionPerformed(evt);
-                    }
-                });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadProdSalvarActionPerformed(evt);
+            }
+        });
+
         btCadProdLimpar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadProdLimpar.setText("Limpar");
+        btCadProdLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadProdLimparActionPerformed(evt);
+            }
+        });
 
         btCadProdSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadProdSair.setText("Sair");
@@ -88,7 +99,7 @@ public class CadastroProduto extends javax.swing.JDialog {
                 .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbCadProdTipo)
                     .addComponent(cbCadProdTipoProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btCadProdSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(btCadProdSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbCadProdProduto)
@@ -139,11 +150,16 @@ public class CadastroProduto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCadProdSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCancelarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btCadProdCancelarActionPerformed
+    private void btCadProdLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdLimparActionPerformed
+        limparTela();
+    }//GEN-LAST:event_btCadProdLimparActionPerformed
 
-    private void btCadProdSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdCadastrarActionPerformed
+    private void btCadProdSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdSairActionPerformed
+        limparTela();
+        dispose();
+    }//GEN-LAST:event_btCadProdSairActionPerformed
+
+    private void btCadProdSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdSalvarActionPerformed
         Produto produto = new Produto();
         produto.setNome(tfCadProdProduto.getText());
         if((String)cbCadProdTipoProduto.getSelectedItem() == "ALIMENTO"){
@@ -153,14 +169,28 @@ public class CadastroProduto extends javax.swing.JDialog {
         }else if((String)cbCadProdTipoProduto.getSelectedItem() == "OUTRO"){
             produto.setTipo(TipoProd.OUTRO);
         }
+        
+        if (tfCadProdProduto.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha a Descrição do Produto!", "Cadastro Produto", JOptionPane.WARNING_MESSAGE);
+            tfCadProdProduto.requestFocus();
+            return;
+            
+        }
+        
         try{
             produtoController.cadastrarProduto(produto);
-            JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado", "Produto Cadstrado", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado!", "Cadastro Produto", JOptionPane.INFORMATION_MESSAGE);
+            limparTela();
             dispose();
         }catch(SQLException ex){
         }
-    }//GEN-LAST:event_btCadProdCadastrarActionPerformed
+    }//GEN-LAST:event_btCadProdSalvarActionPerformed
 
+    public void limparTela() {
+        tfCadProdProduto.setText("");
+        cbCadProdTipoProduto.setSelectedIndex(0);
+    }
+    
     /**
      * @param args the command line arguments
      */

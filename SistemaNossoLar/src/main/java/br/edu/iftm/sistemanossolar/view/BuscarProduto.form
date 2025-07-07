@@ -55,7 +55,7 @@
                   <Component id="btBuscarProdutoSair" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="btBuscarProdutoNovo" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -115,22 +115,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lbBuscarProdutoNome" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="tfBuscarProdutoNome" max="32767" attributes="0"/>
+                          <Component id="lbBuscarProdutoNome" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfBuscarProdutoNome" min="-2" pref="570" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="cbBuscarProdutoTipo" min="-2" pref="107" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbBuscarProdutoTipo" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btBuscarDoacao" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lbBuscarProdutoTipo" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -138,17 +135,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lbBuscarProdutoNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbBuscarProdutoTipo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbBuscarProdutoTipo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfBuscarProdutoNome" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbBuscarProdutoNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbBuscarProdutoTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tfBuscarProdutoNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbBuscarProdutoTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="btBuscarDoacao" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -213,6 +208,9 @@
                   <Insets value="[2, 2, 2, 2]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarDoacaoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -232,7 +230,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="736" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -281,17 +279,20 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Selecionar"/>
       </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarProdutoSelecionarActionPerformed"/>
-          </Events>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarProdutoSelecionarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btBuscarProdutoNovo">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Novo"/>
       </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarProdutoNovoActionPerformed"/>
-          </Events>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarProdutoNovoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btBuscarProdutoLimpar">
       <Properties>
