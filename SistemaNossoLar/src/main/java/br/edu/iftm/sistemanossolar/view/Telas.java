@@ -30,18 +30,16 @@ import br.edu.iftm.sistemanossolar.model.endereco.Endereco;
 import br.edu.iftm.sistemanossolar.model.pedido.Pedido;
 import br.edu.iftm.sistemanossolar.model.pessoa.Paciente;
 import br.edu.iftm.sistemanossolar.model.pessoa.Pessoa;
+import br.edu.iftm.sistemanossolar.model.relatorio.RelPedido;
+import br.edu.iftm.sistemanossolar.model.relatorio.RetornoPedidos;
 import br.edu.iftm.sistemanossolar.model.relatorio.RelDoacao;
 import br.edu.iftm.sistemanossolar.model.relatorio.RetornoDoacoes;
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -520,6 +518,7 @@ public class Telas extends javax.swing.JFrame {
         lbDoacaoQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDoacaoQuantidade.setText("Quantidade:");
 
+        tfDoacaoSelecionarProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfDoacaoSelecionarProd.setEnabled(false);
 
         btDoacaoBuscarProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -618,7 +617,7 @@ public class Telas extends javax.swing.JFrame {
                         .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbDoacaoSelecionarProd)
                             .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
-                                .addComponent(tfDoacaoSelecionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfDoacaoSelecionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btDoacaoBuscarProd)))
                         .addGap(12, 12, 12)
@@ -643,16 +642,15 @@ public class Telas extends javax.swing.JFrame {
                                 .addComponent(jsDoacaoQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDoacaoProdutoLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(btDoacaoAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(22, 22, 22))
+                                .addComponent(btDoacaoAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pnDoacaoProdutoLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(lbDoacaoSelecionarProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfDoacaoSelecionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btDoacaoBuscarProd))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btDoacaoBuscarProd))))
+                .addGap(22, 22, 22)
                 .addComponent(pnListBoxProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnDoacaoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -727,7 +725,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btDoacaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDoacaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pnCard.add(pnCadastrarDoacao, "cdCadastrarDoacao");
@@ -1174,17 +1172,7 @@ public class Telas extends javax.swing.JFrame {
         tableRelatorioDoacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableRelatorioDoacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Cód.", "Doador", "Tipo", "Valor", "Produtos", "Observação", "Data"
@@ -1774,7 +1762,7 @@ public class Telas extends javax.swing.JFrame {
                     .addComponent(btRelPedidoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btRelPedidoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pnCard.add(pnRelatorioPedido, "relatorioPedido");
@@ -2407,13 +2395,13 @@ public class Telas extends javax.swing.JFrame {
 
         Cidade cidadeEscolhida = (Cidade) cbEnderecoCidade.getSelectedItem();
         if (tfNome.getText().isEmpty() || tfNome.getText().equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Necessário preencher o nome da Pessoa!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Necessário preencher o nome da Pessoa!", "Cadastro", JOptionPane.WARNING_MESSAGE);
             return;
         } else if (ffTelefone.getText().replaceAll("[^\\d]", "").isEmpty() || ffTelefone.getText().replaceAll("[^\\d]", "").equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Necessário preencher o telefone da Pessoa!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Necessário preencher o telefone da Pessoa!", "Cadastro", JOptionPane.WARNING_MESSAGE);
             return;
         } else if (cidadeEscolhida.getNome().equals("Selecione...")) {
-            JOptionPane.showMessageDialog(rootPane, "Selecione uma cidade válida!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma cidade válida!", "Cadastro", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (tfEnderecoLogradouro.getText().trim().isEmpty() || tfEnderecoLogradouro.getText().equals("")) {
@@ -2448,11 +2436,11 @@ public class Telas extends javax.swing.JFrame {
                     novaPessoa.setTipoUsuario(TipoCad.DOADOR);
                     break;
                 default:
-                    JOptionPane.showMessageDialog(rootPane, "Tipo de usuário inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Tipo de usuário inválido!", "Cadastro", JOptionPane.ERROR_MESSAGE);
                     return; // evita continuar com tipoUsuario nulo
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um tipo de usuário.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Necessário selecionar o tipo de usuário!", "Cadastro", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -2483,9 +2471,9 @@ public class Telas extends javax.swing.JFrame {
             if (tfCodigoPessoa.getText().equals("")) {
                 enderecoController.cadastrarEndereco(endereco, cidadeEscolhida);
                 if (!pessoaController.cadastrarPessoa(novaPessoa, paciente)) {
-                    JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar o Usuário", "Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar o usuário", "Cadastro", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Sucesso ao Cadastrar o Usuário", "Sucesso no Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Usuário cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
                     limparcamposCadastroUsuario();
                 }
             } else {
@@ -2504,15 +2492,16 @@ public class Telas extends javax.swing.JFrame {
 
                 novaPessoa.setEnderecoId(enderecoController.buscarIdEndereco(endereco, cidadeController.buscarIdCidade(new Cidade(endereco.getCidade().getNome(), endereco.getCidade().getEstado()))));
                 if (novaPessoa.camposIguais(pessoaAntiga)) {
-                    JOptionPane.showMessageDialog(this, "Nenhum campo alterado", "Erro", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                if (!pessoaController.alterarPessoa(novaPessoa)) {
-                    JOptionPane.showMessageDialog(rootPane, "Erro ao Alterar o Usuário", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Nenhum campo alterado!", "Alteração no Cadastro", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                JOptionPane.showMessageDialog(rootPane, "Sucesso ao Alterar o Usuário", "Sucesso ao Alterar", JOptionPane.INFORMATION_MESSAGE);
+                if (!pessoaController.alterarPessoa(novaPessoa)) {
+                    JOptionPane.showMessageDialog(rootPane, "Não foi possivel alterar o usuário!", "Alteração no Cadastro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(rootPane, "Usuário alterado com sucesso!", "Alteração no Cadastro", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (SQLException ex) {
@@ -2611,12 +2600,14 @@ public class Telas extends javax.swing.JFrame {
 
     private void btDoacaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoacaoDeletarActionPerformed
         if (!tfDoacaoIdDoacao.getText().equals("")) {
-            int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
-            if (doacaoController.removeDoacao(idDoacao)) {
-                JOptionPane.showMessageDialog(rootPane, "Doação deletada com sucesso.", "Sucesso ao Deletar", JOptionPane.INFORMATION_MESSAGE);
-                limparCamposCadastroDoacao();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Não foi possivel deletar a Doação!", "Aviso", JOptionPane.ERROR_MESSAGE);
+            if (JOptionPane.showConfirmDialog(rootPane, "Deseja realmente deletar a Doação?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                int idDoacao = Integer.parseInt(tfDoacaoIdDoacao.getText());
+                if (doacaoController.removeDoacao(idDoacao)) {
+                    JOptionPane.showMessageDialog(rootPane, "Doação deletada com sucesso.", "Sucesso ao Deletar", JOptionPane.INFORMATION_MESSAGE);
+                    limparCamposCadastroDoacao();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Não foi possivel deletar a Doação!", "Aviso", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma Doação!", "Aviso", JOptionPane.ERROR_MESSAGE);
@@ -2636,12 +2627,14 @@ public class Telas extends javax.swing.JFrame {
         if (!tfDoacaoIdDoacao.getText().equals("")) {
             try {
                 relatorioController.gerarReciboDoacao(buscarDoacao.getDoacao());
-                JOptionPane.showMessageDialog(rootPane, "Recibo gerado.", "Concluído", JOptionPane.INFORMATION_MESSAGE);
+                if (JOptionPane.showConfirmDialog(rootPane, "Recibo gerado!\nDeseja visualizar agora?", "Recibo Doação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    //adicionar lógica para abrir o arquivo PDF gerado
+                }
             } catch (IOException e) {
 
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Selecione uma Doação!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma Doação!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btDoacaoReciboActionPerformed
 
@@ -2717,14 +2710,14 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btDoacaoBuscarProdActionPerformed1
 
     private void btPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarClienteActionPerformed
-        // TODO add your handling code here:
+        buscarPessoa.setLocationRelativeTo(this);
         buscarPessoa.identificaTelas(3);
         buscarPessoa.setVisible(true);
         limparCamposCadastroPedido();
     }//GEN-LAST:event_btPedidoBuscarClienteActionPerformed
 
     private void btPedidoBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoBuscarPedidoActionPerformed
-        // TODO add your handling code here:
+        buscarPedido.setLocationRelativeTo(this);
         limparCamposCadastroPedido();
         buscarPedido.setVisible(true);
     }//GEN-LAST:event_btPedidoBuscarPedidoActionPerformed
@@ -2899,14 +2892,188 @@ public class Telas extends javax.swing.JFrame {
 
     private void btRelPedidoBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoBuscarClienteActionPerformed
         // TODO add your handling code here:
+        buscarPessoa.identificaTelas(4);
+        buscarPessoa.setVisible(true);
     }//GEN-LAST:event_btRelPedidoBuscarClienteActionPerformed
 
     private void btRelPedFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedFiltrarActionPerformed
         // TODO add your handling code here:
+        try {
+            String dataInicio = tfRelPedDtPedidoInicio.getText().trim();
+            LocalDate dataPedidoInicioData = null;
+            if (!dataInicio.contains(" ") || !dataInicio.equals("/  /")) {
+                dataPedidoInicioData = LocalDate.parse(dataInicio, dataFormat);
+            }
+
+            String dataFim = tfRelPedDtPedidoFim.getText().trim();
+            LocalDate dataPedidoFimData = null;
+            if (!dataFim.contains(" ") || !dataFim.equals("/  /")) {
+                dataPedidoFimData = LocalDate.parse(dataFim, dataFormat);
+            }
+
+            String dataEntregaInicio = tfRelPedDtEntregaInicio.getText().trim();
+            LocalDate dataEntregaInicioData = null;
+            if (!dataEntregaInicio.contains(" ") || !dataEntregaInicio.equals("/  /")) {
+                dataEntregaInicioData = LocalDate.parse(dataEntregaInicio, dataFormat);
+            }
+
+            String dataEntregaFim = tfRelPedDtEntregaFim.getText().trim();
+            LocalDate dataEntregaFimData = null;
+            if (!dataEntregaFim.contains(" ") || !dataEntregaFim.equals("/  /")) {
+                dataEntregaFimData = LocalDate.parse(dataEntregaFim, dataFormat);
+            }
+
+            Integer idCliente = null;
+            String textoCliente = tfRelPedCliente.getText();
+            if (textoCliente != null && !textoCliente.isEmpty() && textoCliente.contains("-")) {
+                String[] partes = textoCliente.split("-", 2);
+                idCliente = Integer.valueOf(partes[0].trim());
+            }
+
+            String status = null;
+            if (cbRelPedStatus.getSelectedItem() != null) {
+                status = cbRelPedStatus.getSelectedItem().toString();
+            }
+
+            String local = null;
+            if (cbRelPedLocal.getSelectedItem() != null) {
+                local = cbRelPedLocal.getSelectedItem().toString();
+            }
+
+            String cidade = null;
+            if (cbRelPedCidade.getSelectedItem() != null) {
+                cidade = cbRelPedCidade.getSelectedItem().toString();
+            }
+
+            String ordem = null;
+            if (cbRelPedOrdenacao.getSelectedItem() != null) {
+                ordem = cbRelPedOrdenacao.getSelectedItem().toString();
+            }
+
+            String sentido = null;
+            if (cbRelPedSentido.getSelectedItem() != null) {
+                sentido = cbRelPedSentido.getSelectedItem().toString();
+            }
+
+            RetornoPedidos relPedidos = pedidoController.filtrarRelatorio(dataPedidoInicioData, dataPedidoFimData, dataEntregaInicioData, dataEntregaFimData, status, idCliente, local, cidade, ordem, sentido);
+
+            DefaultTableModel model = (DefaultTableModel) tableRelatorioPedido.getModel();
+            model.setRowCount(0);
+            int qttTotalMarmita = 0;
+            int qttTotalPendente = 0;
+            int qttTotalCancelado = 0;
+            int qttTotalEntregue = 0;
+
+            for (RelPedido relPedido : relPedidos.getPedidos()) {
+                String dataPedido = null;
+                if (relPedido.getDataPedido() != null) {
+                    dataPedido = relPedido.getDataPedido().format(dataFormat);
+                }
+                String dataEntrega = null;
+                if (relPedido.getDataEntrega() != null) {
+                    dataEntrega = relPedido.getDataEntrega().format(dataFormat);
+                }
+                Object[] novaLinha = {
+                    relPedido.getIdPedido(),
+                    relPedido.getStatus(),
+                    relPedido.getNomeCliente(),
+                    relPedido.getLocal(),
+                    relPedido.getQtdMarmitas(),
+                    relPedido.getObservacao(),
+                    dataPedido,
+                    dataEntrega
+                };
+                model.addRow(novaLinha);
+                qttTotalMarmita += relPedido.getQtdMarmitas();
+                switch (relPedido.getStatus()) {
+                    case "PENDENTE":
+                        qttTotalPendente++;
+                        break;
+
+                    case "CANCELADO":
+                        qttTotalCancelado++;
+                        break;
+                    case "ENTREGUE":
+                        qttTotalEntregue++;
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            }
+            tfRelPedTotMarmitas.setText(String.valueOf(qttTotalMarmita));
+            tfRelPedTotPendente.setText(String.valueOf(qttTotalPendente));
+            tfRelPedTotFechado.setText(String.valueOf(qttTotalEntregue));
+            tfRelPedTotCancelado.setText(String.valueOf(qttTotalCancelado));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_btRelPedFiltrarActionPerformed
 
     private void btRelPedidoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoSalvarActionPerformed
         // TODO add your handling code here:
+        try {
+            String dataInicio = tfRelPedDtPedidoInicio.getText().trim();
+            LocalDate dataPedidoInicioData = null;
+            if (!dataInicio.contains(" ") || !dataInicio.equals("/  /")) {
+                dataPedidoInicioData = LocalDate.parse(dataInicio, dataFormat);
+            }
+
+            String dataFim = tfRelPedDtPedidoFim.getText().trim();
+            LocalDate dataPedidoFimData = null;
+            if (!dataFim.contains(" ") || !dataFim.equals("/  /")) {
+                dataPedidoFimData = LocalDate.parse(dataFim, dataFormat);
+            }
+
+            String dataEntregaInicio = tfRelPedDtEntregaInicio.getText().trim();
+            LocalDate dataEntregaInicioData = null;
+            if (!dataEntregaInicio.contains(" ") || !dataEntregaInicio.equals("/  /")) {
+                dataEntregaInicioData = LocalDate.parse(dataEntregaInicio, dataFormat);
+            }
+
+            String dataEntregaFim = tfRelPedDtEntregaFim.getText().trim();
+            LocalDate dataEntregaFimData = null;
+            if (!dataEntregaFim.contains(" ") || !dataEntregaFim.equals("/  /")) {
+                dataEntregaFimData = LocalDate.parse(dataEntregaFim, dataFormat);
+            }
+
+            Integer idCliente = null;
+            String textoCliente = tfRelPedCliente.getText();
+            if (textoCliente != null && !textoCliente.isEmpty() && textoCliente.contains("-")) {
+                String[] partes = textoCliente.split("-", 2);
+                idCliente = Integer.valueOf(partes[0].trim());
+            }
+
+            String status = null;
+            if (cbRelPedStatus.getSelectedItem() != null) {
+                status = cbRelPedStatus.getSelectedItem().toString();
+            }
+
+            String local = null;
+            if (cbRelPedLocal.getSelectedItem() != null) {
+                local = cbRelPedLocal.getSelectedItem().toString();
+            }
+
+            String cidade = null;
+            if (cbRelPedCidade.getSelectedItem() != null) {
+                cidade = cbRelPedCidade.getSelectedItem().toString();
+            }
+
+            String ordem = null;
+            if (cbRelPedOrdenacao.getSelectedItem() != null) {
+                ordem = cbRelPedOrdenacao.getSelectedItem().toString();
+            }
+
+            String sentido = null;
+            if (cbRelPedSentido.getSelectedItem() != null) {
+                sentido = cbRelPedSentido.getSelectedItem().toString();
+            }
+
+            RetornoPedidos relPedidos = pedidoController.filtrarRelatorio(dataPedidoInicioData, dataPedidoFimData, dataEntregaInicioData, dataEntregaFimData, status, idCliente, local, cidade, ordem, sentido);
+            relatorioController.gerarRelatorioPedidos(relPedidos.getPedidos(), relPedidos.getTotalizacao(), relPedidos.getFiltros());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }      
     }//GEN-LAST:event_btRelPedidoSalvarActionPerformed
 
     private void btRelPedidoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelPedidoLimparActionPerformed
@@ -3135,10 +3302,7 @@ public class Telas extends javax.swing.JFrame {
             }
 
             if (pedido.getCliente() != null) {
-                System.out.println("aqui");
-                System.out.println(pedido.getCliente().getId());
                 if (pedido.getCliente().getId() != null) {
-                    System.out.println("dwivud");
                     tfPedidoIdCliente.setText(String.valueOf(pedido.getCliente().getId()));
                 }
 
@@ -3192,6 +3356,10 @@ public class Telas extends javax.swing.JFrame {
         for (Cidade cidade : puxarCidade) {
             cbEnderecoCidade.addItem(cidade);
         }
+    }
+
+    public void preenchePessoaRelatorioPedido(Pessoa pessoa) {
+        tfRelPedCliente.setText(pessoa.getId() + "-" + pessoa.getNome());
     }
 
     public void travaCamposDoacao() {
