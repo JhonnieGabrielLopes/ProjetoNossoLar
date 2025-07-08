@@ -63,7 +63,7 @@ public class Telas extends javax.swing.JFrame {
     private static EnderecoController enderecoController;
     private static RelatorioController relatorioController;
     private DefaultTableModel modeloTabelaDoacaoProdutos;
-    private int indiceTabelaProduto;
+    private Integer indiceTabelaProduto = null;
     private int identificadorRetorno;
     private Pessoa pessoaAntiga;
     private PacienteController pacienteController;
@@ -2655,7 +2655,7 @@ public class Telas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Informe uma Quantidade válida!", "Produto Doação", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (tfDoacaoIdDoacao.getText().equals("") && quantidade != 0) {
+        if (tfDoacaoIdDoacao.getText().equals("") && indiceTabelaProduto == null) {
             Produto produto = buscarProduto.getProduto();
             produto.setQuantidade(quantidade);
             produtosDoacao.add(produto);
@@ -2663,6 +2663,7 @@ public class Telas extends javax.swing.JFrame {
             modeloTabelaDoacaoProdutos.addRow(linha);
         } else {
             modeloTabelaDoacaoProdutos.setValueAt(quantidade, indiceTabelaProduto, 2);
+            indiceTabelaProduto = null;
         }
         jsDoacaoQuantidadeProduto.setValue(0);
         tfDoacaoSelecionarProd.setText("");
